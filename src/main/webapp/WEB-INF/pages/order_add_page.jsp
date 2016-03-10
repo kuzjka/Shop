@@ -9,7 +9,7 @@
 <body>
 <div class="container">
     <form role="form" enctype="multipart/form-data" class="form-horizontal" action="/orderAdd" method="post">
-        <h3>New device</h3>
+        <h3>New order</h3>
         <select class="selectpicker form-control form-type" name="cart">
             <c:forEach items="${carts}" var="cart">
                 <option value="${cart.id}">${cart.device.name}</option>

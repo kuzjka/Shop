@@ -12,7 +12,7 @@
             <form role="form"   enctype="multipart/form-data" class="form-horizontal" action="/device/add" method="post">
                         <h3>New device</h3>
                         <select class="selectpicker form-control form-type" name="type">
-                            <option value="-1">Default</option>
+
                             <c:forEach items="${types}" var="type">
                                 <option value="${type.id}">${type.name}</option>
                             </c:forEach>

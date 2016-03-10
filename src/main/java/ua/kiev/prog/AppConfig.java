@@ -59,14 +59,23 @@ public class AppConfig {
         ds.setDriverClassName("com.mysql.jdbc.Driver");
         String host=System.getenv("OPENSHIFT_MYSQL_DB_HOST");
         String port=System.getenv("OPENSHIFT_MYSQL_DB_PORT");
-        String url=String.format("jdbc:mysql://%s:%s/jbossews", host, port);
+        String url;
+        if (host == null || port == null) {
+            url = "jdbc:mysql://localhost:3306/comp";
+            ds.setUrl(url);
+            ds.setUsername("root");
+            ds.setPassword("ilovejava");
+            return ds;
+        } else {
+
+         url=String.format("jdbc:mysql://%s:%s/jbossews", host, port);
 
         ds.setUrl(url);
 
         ds.setUsername("admin1WWLPVW");
         ds.setPassword("TSpSsBFwazlV");
 
-        return ds;
+        return ds;}
     }
 
     @Bean
