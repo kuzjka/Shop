@@ -11,7 +11,7 @@
 
 
 <div class="container">
-    <h3><a href="/">Devices List</a></h3>
+    <h3><a href="/WEB-INF.pages">Devices List</a></h3>
 
     <nav class="navbar navbar-default">
         <div class="container-fluid">

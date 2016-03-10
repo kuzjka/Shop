@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/Shop-1.0-SNAPSHOT/")
+@RequestMapping("/")
 public class MyController {
     static final int DEFAULT_TYPE_ID = -1;
 

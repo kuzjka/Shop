@@ -37,7 +37,7 @@
 
 </div><script>
     $('#main').click(function(){
-        window.location.href='/';
+        window.location.href='/WEB-INF.pages';
     })
 $('#add_order').click(function(){
 window.location.href='/order_add_page';
