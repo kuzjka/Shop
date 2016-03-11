@@ -24,7 +24,7 @@
             <td>${order.name}</td>
             <td>${order.address}</td>
             <td>${order.phone}</td>
-            <td>${order.device}</td>
+            <td>${order.cart.device.name}</td>
 
 
             </td>

@@ -15,7 +15,7 @@
         <td><b>Name</b></td>
         <td><b>Address</b></td>
         <td><b>Phone</b></td>
-        <td><b>Total Price</b></td>
+        <td><b>Device</b></td>
 
     </tr>
     </thead>
@@ -27,7 +27,7 @@
             <td>${order.name}</td>
             <td>${order.address}</td>
             <td>${order.phone}</td>
-            <td>${total}</td>
+            <td>${order.cart.device.name}</td>
 
         </tr>
     </c:forEach>
