@@ -14,7 +14,7 @@
             <a class="navbar-brand" href="/">Shop</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
+            <li class="active"><a href="/">All</a></li>
             <li><a href="/searchByType/desctop">Desctops</a></li>
             <li><a href="/searchByType/laptop">Laptops</a></li>
             <li><a href="/searchByType/tablet">Tablets</a></li>

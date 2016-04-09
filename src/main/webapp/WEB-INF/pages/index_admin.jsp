@@ -74,12 +74,7 @@
                 </c:choose>
 
 
-                <td>
 
-                    <a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a>
-
-
-                </td>
             </tr>
         </c:forEach>
     </table>
