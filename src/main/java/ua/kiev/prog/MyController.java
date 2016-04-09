@@ -24,6 +24,14 @@ public class MyController {
 
 
         return "index";
+    } @RequestMapping("/admin")
+    public String index_admin(Model model) {
+
+        model.addAttribute("types", deviceService.listTypes());
+        model.addAttribute("devices", deviceService.listDevices(null));
+
+
+        return "index_admin";
     }
 
 
