@@ -26,15 +26,15 @@ public class MyController {
         return "index";
     }
 
-    @Secured("ADMIN")
-    @RequestMapping("/device_add_page")
+
+    @RequestMapping("/device_add_page/admin")
 
     public String contactAddPage(Model model) {
         model.addAttribute("types", deviceService.listTypes());
         return "device_add_page";
     }
 
-    @Secured("ADMIN")
+
     @RequestMapping("/type_add_page")
     public String groupAddPage() {
         return "type_add_page";
@@ -61,7 +61,7 @@ public class MyController {
         return "index";
     }
 
-    @Secured("ADMIN")
+
     @RequestMapping(value = "/device/delete/{id}", method = RequestMethod.GET)
     public String search(@PathVariable(value = "id") int toDelete, Model model) {
 
