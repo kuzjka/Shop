@@ -89,7 +89,7 @@
     $('.dropdown-toggle').dropdown();
 
     $('#add_device').click(function () {
-        window.location.href = "/device_add_page/admin";
+        window.location.href = "/device_add_page/";
     })
 
     $('#add_type').click(function () {

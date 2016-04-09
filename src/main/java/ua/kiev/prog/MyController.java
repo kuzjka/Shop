@@ -27,7 +27,7 @@ public class MyController {
     }
 
 
-    @RequestMapping("/device_add_page/admin")
+    @RequestMapping("/device_add_page/")
 
     public String contactAddPage(Model model) {
         model.addAttribute("types", deviceService.listTypes());
