@@ -8,6 +8,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Shop</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+
+            <li><a href="/cart_add_page">Cart</a></li>
+            <li><a href="/result_page">Order</a></li>
+        </ul>
+    </div>
+</nav>
 <div><table class="table table-default">
     <thead>
     <tr>
@@ -17,7 +30,7 @@
     </tr>
     </thead>
     <c:forEach items="${devices}" var="device">
-        <tr>
+
             <td>${device.name}</td>
             <td>${device.price}</td>
             <c:choose>
@@ -30,12 +43,13 @@
             </c:choose>
 
 
-            <td>
-
-                <a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a>
 
 
-            </td>
+
+                <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
+
+
+
         </tr>
     </c:forEach>
 </table>

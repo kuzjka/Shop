@@ -164,6 +164,10 @@ public class MyController {
         model.addAttribute("total", deviceService.totalPrice());
         return "cart_add_page";
 
+    }@RequestMapping(value="/result_page")
+    public String result (Model model){
+        model.addAttribute("orders", deviceService.listOrders());
+        return "result_page";
     }
 
 

@@ -7,6 +7,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Shop</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+
+            <li><a href="/cart_add_page">Cart</a></li>
+            <li><a href="/result_page">Order</a></li>
+        </ul>
+    </div>
+</nav>
 <div class="container">
     <form role="form" enctype="multipart/form-data" class="form-horizontal" action="/orderAdd" method="post">
         <h3>New order</h3>
