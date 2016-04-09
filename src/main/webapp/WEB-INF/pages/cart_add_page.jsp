@@ -17,13 +17,13 @@
             <li class="active"><a href="/">Home</a></li>
 
             <li><a href="/cart_add_page">Cart</a></li>
-            <li><a href="/result_page">Order</a></li>
+            <li><a href="/order_add_page">Order</a></li>
         </ul>
     </div>
 </nav>
 <div class="container">
 
-    <button type="button" id="add_order" class="btn btn-success navbar-btn">Add Order</button>
+
 <table class="table table-striped">
     <thead>
     <tr><td><b></b></td>
@@ -48,10 +48,6 @@
 
 </table>
 
-</div><script>
-
-$('#add_order').click(function(){
-window.location.href='/order_add_page';
-})</script>
+</div>
 </body>
 </html>
