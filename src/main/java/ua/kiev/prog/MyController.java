@@ -53,7 +53,7 @@ public class MyController {
     public String search(@RequestParam String pattern, Model model) {
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.searchDevices(pattern));
-        return "index";
+        return "index_admin";
     }
 
     @RequestMapping(value = "/searchByType/{type}", method = RequestMethod.GET)
@@ -66,7 +66,7 @@ public class MyController {
         } else {
             model.addAttribute("devices", deviceService.listDevices(type));
         }
-        return "index";
+        return "index_admin";
     }
 
 
@@ -77,7 +77,7 @@ public class MyController {
 
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices(null));
-        return "index";
+        return "index_admin";
     }
 
     @RequestMapping(value = "/device/add", method = RequestMethod.POST)
@@ -93,7 +93,7 @@ public class MyController {
 
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices(null));
-        return "index";
+        return "index_admin";
     }
 
     @RequestMapping(value = "/type/add", method = RequestMethod.POST)
@@ -102,7 +102,7 @@ public class MyController {
 
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices(null));
-        return "index";
+        return "index_admin";
     }
 
     @RequestMapping(value = "/{id}/{n}", method = RequestMethod.GET)
