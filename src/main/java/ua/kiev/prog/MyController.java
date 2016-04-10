@@ -101,7 +101,7 @@ public class MyController {
 
 
 
-        Device device = new Device(type,new Photo(name, photo.getBytes()) , name, manufactor, price);
+        Device device = new Device(type,new Photo(photo.getOriginalFilename(), photo.getBytes()) , name, manufactor, price);
         deviceService.addDevice(device);
 
         model.addAttribute("types", deviceService.listTypes());
@@ -191,8 +191,8 @@ public class MyController {
         return "result_page";
     }@RequestMapping(value = "/photo/{id}", method = RequestMethod.GET)
     public void onPhoto(HttpServletRequest request, HttpServletResponse response, @PathVariable int id){
-        byte[] content= deviceService.getPhoto(id).getBody();
-        response.setContentType("image/png");
+        byte[] content= deviceService.getPhoto(id);
+        response.setContentType("image/gif");
         try {
             response.getOutputStream().write(content);
         } catch (IOException e) {

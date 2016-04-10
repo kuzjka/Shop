@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface PhotoDao {
     void add(Photo photo);
-    Photo get(int id);
+    byte[] getPhoto (int id);
 
 }

@@ -19,10 +19,11 @@ public class PhotoDAOImpl implements PhotoDao {
     }
 
     @Override
-    public Photo get(int id) {
-            Photo p=entityManager.getReference(Photo.class, id);
+    public byte[] getPhoto (int id) {
+            Photo p=entityManager.find(Photo.class, id);
+            return p.getBody();
 
-            return p;
+
     }
 
 

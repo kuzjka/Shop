@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
@@ -41,7 +41,7 @@
         </tr>
         </thead>
         <c:forEach items="${devices}" var="device">
-            <td><img height="40" width="40" src="/photo/${device.photo.id}" /></td>
+            <td><img height="400" width="200" src="/photo/${device.photo.id}" /></td>
 
             <td>${device.name}</td>
             <td>${device.name}</td>
