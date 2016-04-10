@@ -16,8 +16,8 @@ public class Device {
     @OneToMany(mappedBy = "device" ,  cascade = CascadeType.ALL , fetch = FetchType.LAZY)
 
     private List<Cart> carts;
-    @OneToOne
-    @JoinColumn(name="id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="photo_id")
     private Photo photo;
 
     private String name;
