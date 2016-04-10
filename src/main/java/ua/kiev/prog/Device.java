@@ -15,9 +15,9 @@ public class Device {
     private Type type;
     @OneToMany(mappedBy = "device" ,  cascade = CascadeType.ALL , fetch = FetchType.LAZY)
 
-
     private List<Cart> carts;
-    private byte[] photo;
+    private byte[]photo;
+
     private String name;
     private String manufactor;
     private int price;

@@ -83,12 +83,14 @@ public class MyController {
     @RequestMapping(value = "/device/add", method = RequestMethod.POST)
     public String contactAdd(@RequestParam(value = "type") int typeId,
                              @RequestParam String name,
+                             @RequestParam String manufactor,
                              @RequestParam int price,
+                             @RequestParam byte[]photo,
 
                              Model model) {
         Type type = (typeId != DEFAULT_TYPE_ID) ? deviceService.findType(typeId) : null;
 
-        Device device = new Device(type, name, price);
+        Device device = new Device(type, photo, name,manufactor, price);
         deviceService.addDevice(device);
 
         model.addAttribute("types", deviceService.listTypes());
