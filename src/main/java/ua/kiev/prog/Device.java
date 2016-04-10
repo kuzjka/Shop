@@ -16,7 +16,9 @@ public class Device {
     @OneToMany(mappedBy = "device" ,  cascade = CascadeType.ALL , fetch = FetchType.LAZY)
 
     private List<Cart> carts;
-    private byte[]photo;
+    @OneToOne
+    @JoinColumn(name="id")
+    private Photo photo;
 
     private String name;
     private String manufactor;
@@ -28,7 +30,7 @@ public class Device {
     public Device() {
     }
 
-    public Device(Type type, byte[] photo, String name, String manufactor, int price) {
+    public Device(Type type, Photo photo, String name, String manufactor, int price) {
         this.type = type;
         this.photo = photo;
         this.name = name;
@@ -60,11 +62,11 @@ public class Device {
         this.carts = carts;
     }
 
-    public byte[] getPhoto() {
+    public Photo getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(Photo photo) {
         this.photo = photo;
     }
 

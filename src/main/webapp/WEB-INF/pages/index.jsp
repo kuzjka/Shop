@@ -32,16 +32,17 @@
 <div>
     <table class="table table-default">
         <thead>
-        <tr>
+        <tr><td>
             <td><b>Name</b></td>
             <td><b>Price</b></td>
             <td><b>Type</b></td>
         </tr>
         </thead>
         <c:forEach items="${devices}" var="device">
-
+            <img height="40" width="40" src="${device.photo}" /></td>
             <td>${device.name}</td>
-            <td>${device.price}</td>
+            <td>${device.name}</td>
+            <td>${device.manufactor}</td>
             <c:choose>
                 <c:when test="${device.type ne null}">
                     <td>${device.type.name}</td>

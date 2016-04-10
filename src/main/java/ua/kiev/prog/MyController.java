@@ -5,7 +5,9 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -85,12 +87,12 @@ public class MyController {
                              @RequestParam String name,
                              @RequestParam String manufactor,
                              @RequestParam int price,
-                             @RequestParam byte[]photo,
+                             @RequestParam (value="photo")MultipartFile photo,
 
-                             Model model) {
+                             Model model) throws IOException {
         Type type = (typeId != DEFAULT_TYPE_ID) ? deviceService.findType(typeId) : null;
 
-        Device device = new Device(type, photo, name,manufactor, price);
+        Device device = new Device(type, new Photo(photo.getOriginalFilename(), photo.getBytes()), name, manufactor, price);
         deviceService.addDevice(device);
 
         model.addAttribute("types", deviceService.listTypes());
