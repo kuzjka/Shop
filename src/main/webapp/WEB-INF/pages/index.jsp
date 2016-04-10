@@ -34,7 +34,7 @@
     <table class="table table-default">
         <thead>
 
-        <tr><td>Photo</td>
+        <tr><td><b>Photo</b></td>
             <td><b>Name</b></td>
             <td><b>Price</b></td>
             <td><b>Type</b></td>
