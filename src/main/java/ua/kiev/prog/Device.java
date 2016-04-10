@@ -17,8 +17,9 @@ public class Device {
 
 
     private List<Cart> carts;
+    private byte[] photo;
     private String name;
-
+    private String manufactor;
     private int price;
 
 
@@ -27,12 +28,11 @@ public class Device {
     public Device() {
     }
 
-
-
-
-    public Device(Type type, String name, int price) {
+    public Device(Type type, byte[] photo, String name, String manufactor, int price) {
         this.type = type;
+        this.photo = photo;
         this.name = name;
+        this.manufactor = manufactor;
         this.price = price;
     }
 
@@ -52,6 +52,22 @@ public class Device {
         this.type = type;
     }
 
+    public List<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(List<Cart> carts) {
+        this.carts = carts;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
     public String getName() {
         return name;
     }
@@ -60,7 +76,13 @@ public class Device {
         this.name = name;
     }
 
+    public String getManufactor() {
+        return manufactor;
+    }
 
+    public void setManufactor(String manufactor) {
+        this.manufactor = manufactor;
+    }
 
     public int getPrice() {
         return price;
@@ -68,14 +90,6 @@ public class Device {
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public List<Cart> getCarts() {
-        return carts;
-    }
-
-    public void setCarts(List<Cart> carts) {
-        this.carts = carts;
     }
 }
 

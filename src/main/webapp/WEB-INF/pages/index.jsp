@@ -29,15 +29,16 @@
         </ul>
     </div>
 </nav>
-<div><table class="table table-default">
-    <thead>
-    <tr>
-        <td><b>Name</b></td>
-        <td><b>Price</b></td>
-        <td><b>Type</b></td>
-    </tr>
-    </thead>
-    <c:forEach items="${devices}" var="device">
+<div>
+    <table class="table table-default">
+        <thead>
+        <tr>
+            <td><b>Name</b></td>
+            <td><b>Price</b></td>
+            <td><b>Type</b></td>
+        </tr>
+        </thead>
+        <c:forEach items="${devices}" var="device">
 
             <td>${device.name}</td>
             <td>${device.price}</td>
@@ -51,16 +52,12 @@
             </c:choose>
 
 
+            <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
 
 
-
-                <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
-
-
-
-        </tr>
-    </c:forEach>
-</table>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
 </body>
 </html>
