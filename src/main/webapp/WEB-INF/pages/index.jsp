@@ -32,7 +32,7 @@
 <div>
     <table class="table table-default">
         <thead>
-        <tr><td>
+        <tr>Photo<td>
             <td><b>Name</b></td>
             <td><b>Price</b></td>
             <td><b>Type</b></td>

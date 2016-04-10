@@ -91,8 +91,12 @@ public class MyController {
 
                              Model model) throws IOException {
         Type type = (typeId != DEFAULT_TYPE_ID) ? deviceService.findType(typeId) : null;
+            deviceService.addPhoto(new Photo(name, photo.getBytes()));
 
-        Device device = new Device(type, new Photo(photo.getOriginalFilename(), photo.getBytes()), name, manufactor, price);
+           =deviceService.get();
+
+
+        Device device = new Device(type,ph , name, manufactor, price);
         deviceService.addDevice(device);
 
         model.addAttribute("types", deviceService.listTypes());

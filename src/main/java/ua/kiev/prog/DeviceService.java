@@ -16,6 +16,8 @@ public class DeviceService {
     private CartDAO cartDAO;
     @Autowired
     private OrderDAO orderDAO;
+    @Autowired
+    private  PhotoDao photoDao;
 
     @Transactional
     public void addDevice(Device device) {
@@ -101,4 +103,11 @@ public class DeviceService {
     public void addOrder(Order order) {
         orderDAO.add(order);
     }
-}
+    @Transactional
+    public void addPhoto(Photo photo){photoDao.add(photo);}
+    @Transactional
+    public void deletePhoto(int id){photoDao.delete(id);}
+    @Transactional
+    public byte[] get() {
+        return photoDao.get();
+}}
