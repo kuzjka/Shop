@@ -106,8 +106,6 @@ public class DeviceService {
     @Transactional
     public void addPhoto(Photo photo){photoDao.add(photo);}
     @Transactional
-    public void deletePhoto(int id){photoDao.delete(id);}
-    @Transactional
-    public byte[] get() {
-        return photoDao.get();
-}}
+    public Photo getPhoto(int id){ return photoDao.get(id);}
+
+}

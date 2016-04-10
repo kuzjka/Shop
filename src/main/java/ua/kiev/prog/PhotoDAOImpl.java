@@ -1,5 +1,6 @@
 package ua.kiev.prog;
 
+import javassist.bytecode.ByteArray;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -18,18 +19,11 @@ public class PhotoDAOImpl implements PhotoDao {
     }
 
     @Override
-    public void delete(int id) {
+    public Photo get(int id) {
             Photo p=entityManager.getReference(Photo.class, id);
-            entityManager.remove(p);
+
+            return p;
     }
 
-    @Override
-    public byte[] get() {
-        Query query=entityManager.createQuery("select p from Photo p", Photo.class);
-        List<Photo>l=query.getResultList();
-        Photo ph=l.get(l.size()-1);
-        return ph.getBody();
 
-
-    }
 }

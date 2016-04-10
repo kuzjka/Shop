@@ -1,12 +1,16 @@
 package ua.kiev.prog;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -20,6 +24,7 @@ public class MyController {
 
     @RequestMapping("/")
     public String index(Model model) {
+
 
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices(null));
@@ -184,6 +189,17 @@ public class MyController {
     public String result (Model model){
         model.addAttribute("orders", deviceService.listOrders());
         return "result_page";
+    }@RequestMapping(value = "/photo/{id}", method = RequestMethod.GET)
+    public void onPhoto(HttpServletRequest request, HttpServletResponse response, @PathVariable int id){
+        byte[] content= deviceService.getPhoto(id).getBody();
+        response.setContentType("image/png");
+        try {
+            response.getOutputStream().write(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 

@@ -29,17 +29,20 @@
         </ul>
     </div>
 </nav>
+
 <div>
     <table class="table table-default">
         <thead>
-        <tr>Photo<td>
+
+        <tr><td>Photo</td>
             <td><b>Name</b></td>
             <td><b>Price</b></td>
             <td><b>Type</b></td>
         </tr>
         </thead>
         <c:forEach items="${devices}" var="device">
-            <img height="40" width="40" src="${device.photo}" /></td>
+            <td><img height="40" width="40" src="/photo/${device.photo.id}" /></td>
+
             <td>${device.name}</td>
             <td>${device.name}</td>
             <td>${device.manufactor}</td>
