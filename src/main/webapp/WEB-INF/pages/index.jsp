@@ -36,16 +36,17 @@
         <tr>
             <td><b>Photo</b></td>
             <td><b>Name</b></td>
+            <td><b>Manufactor</b></td>
             <td><b>Price</b></td>
             <td><b>Type</b></td>
         </tr>
         </thead>
         <c:forEach items="${devices}" var="device">
-            <td><img height="400" width="200" src="/photo/${device.photo.id}"/></td>
+            <td><img height="200" width="100" src="/photo/${device.photo.id}"/></td>
 
             <td>${device.name}</td>
-            <td>${device.name}</td>
             <td>${device.manufactor}</td>
+            <td>${device.price}</td>
             <c:choose>
                 <c:when test="${device.type ne null}">
                     <td>${device.type.name}</td>
