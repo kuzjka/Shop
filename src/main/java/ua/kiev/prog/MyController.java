@@ -31,6 +31,12 @@ public class MyController {
 
 
         return "index";
+
+    }
+    @RequestMapping("/register")
+
+    public String register(){
+        return "register";
     }
     @RequestMapping("/user" )
     public String user_index (Model model) {
