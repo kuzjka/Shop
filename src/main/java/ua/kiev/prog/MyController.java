@@ -22,7 +22,7 @@ public class MyController {
     @Autowired
     private DeviceService deviceService;
 
-    @RequestMapping("/")
+    @RequestMapping("/" )
     public String index(Model model) {
 
 
@@ -31,7 +31,19 @@ public class MyController {
 
 
         return "index";
-    } @RequestMapping("/admin")
+    }
+    @RequestMapping("/user" )
+    public String user_index (Model model) {
+
+
+        model.addAttribute("types", deviceService.listTypes());
+        model.addAttribute("devices", deviceService.listDevices(null));
+
+
+        return "index";
+    }
+
+    @RequestMapping("/admin")
     public String index_admin(Model model) {
 
         model.addAttribute("types", deviceService.listTypes());
