@@ -6,8 +6,8 @@
 </head>
 <body>
 <div align="center"><form action="/index" method="post">
-    <input type="text" value="Enter login">
-    <input type="password" value="Enter password">
+    Enter login<input type="text" >
+    Enter password<input type="password" >
     <input type="submit" value="Submit"></form>
 
 </div>
