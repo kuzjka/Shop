@@ -33,10 +33,17 @@ public class MyController {
         return "index";
 
     }
-    @RequestMapping("/register")
+    @RequestMapping("/register_page")
 
-    public String register(){
-        return "register";
+    public String register_page(){
+        return "register_page";
+    }
+
+    @RequestMapping(value="/register", method = RequestMethod.POST)
+    public String register(@RequestParam String name, @RequestParam String password, Model model){
+        String role="USER";
+        deviceService.addLogin(new Login(name, password, role));
+        return "index";
     }
     @RequestMapping("/user" )
     public String user_index (Model model) {

@@ -13,13 +13,14 @@ public class Login {
     private  int id;
     private String login;
     private String password;
-
+    private String role;
     public Login() {
     }
 
-    public Login(String login, String password) {
+    public Login(String login, String password, String role) {
         this.login = login;
         this.password = password;
+        this.role = role;
     }
 
     public int getId() {
@@ -44,5 +45,13 @@ public class Login {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

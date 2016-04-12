@@ -7,16 +7,19 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+    @Autowired
+    DataSource dataSource;
 
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("anton").password("lucky").roles("USER");
-        auth.inMemoryAuthentication().withUser("anton").password("buffy").roles(
-
-                "ADMIN");
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery("SELECT login, password FROM login WHERE login=?")
+                .authoritiesByUsernameQuery("Select role FROM login WHERE login=?");
 
 
     }

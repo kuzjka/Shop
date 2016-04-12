@@ -25,7 +25,7 @@
             <li><a href="/admin">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="/user"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
         </ul>
