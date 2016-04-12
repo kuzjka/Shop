@@ -6,17 +6,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Repository
-public class LoginDAOImpl implements LoginDAO {
+public class UserDAOImpl implements UserDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public void add(Login login) {
-        entityManager.merge(login);
+    public void add(User user) {
+        entityManager.merge(user);
     }
 
     @Override
-    public void delete(Login login) {
-        entityManager.remove(login);
+    public void delete(User user) {
+        entityManager.remove(user);
     }
 }

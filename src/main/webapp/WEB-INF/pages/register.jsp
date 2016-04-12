@@ -6,7 +6,7 @@
 </head>
 <body>
 <div align="center"><form action="/register" method="post">
-    Enter login: <input type="text" name="text" >
+    Enter user: <input type="text" name="user" >
     Enter password: <input type="password" name="password" >
     <input type="submit" value="Submit"></form>
 

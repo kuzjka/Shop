@@ -6,18 +6,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
-public class Login {
-    @Id
-    @GeneratedValue
-    private  int id;
+@Table(name="Users")
+public class User {
+
     private String login;
     private String password;
     private String role;
-    public Login() {
+    @Id
+    @GeneratedValue
+    private  int id;
+    public User() {
     }
 
-    public Login(String login, String password, String role) {
+    public User(String login, String password, String role) {
         this.login = login;
         this.password = password;
         this.role = role;

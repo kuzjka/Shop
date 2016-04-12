@@ -1,14 +1,11 @@
 package ua.kiev.prog;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -36,13 +33,15 @@ public class MyController {
     @RequestMapping("/register_page")
 
     public String register_page(){
-        return "register_page";
+        return "register";
     }
 
     @RequestMapping(value="/register", method = RequestMethod.POST)
-    public String register(@RequestParam String name, @RequestParam String password, Model model){
+    public String register(@RequestParam String user, @RequestParam String password, Model model){
         String role="USER";
-        deviceService.addLogin(new Login(name, password, role));
+        deviceService.addUser(new User(user, password, role));
+        model.addAttribute("types", deviceService.listTypes());
+        model.addAttribute("devices", deviceService.listDevices(null));
         return "index";
     }
     @RequestMapping("/user" )
