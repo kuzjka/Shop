@@ -56,7 +56,7 @@
                     <td>Default</td>
                 </c:otherwise>
             </c:choose>
-            <sec:authorize url="/user"> <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td></sec:authorize>
+            <sec:authorize access="hasRole('ADMIN')"> <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td></sec:authorize>
             </tr>
         </c:forEach>
     </table>

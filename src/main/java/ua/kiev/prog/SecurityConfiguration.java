@@ -12,14 +12,14 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Autowired
-    DataSource dataSource;
+   @Autowired
+   DataSource dataSource;
 
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("SELECT  * FROM users WHERE login=?")
-                .authoritiesByUsernameQuery("Select  * FROM users WHERE login=?");
+                .usersByUsernameQuery("SELECT  login, password, role  FROM users WHERE login=?")
+                .authoritiesByUsernameQuery("Select role from users where login=?");
 
 
     }
@@ -29,7 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-
+                .antMatchers("/user").hasAnyAuthority()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .and()
                 .formLogin()

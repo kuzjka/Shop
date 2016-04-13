@@ -52,7 +52,7 @@ public class AppConfig {
         return adapter;
     }
 
-    @Bean
+    @Bean(name="dataSource")
     public DataSource dataSource()
     {
         DriverManagerDataSource ds = new DriverManagerDataSource();
