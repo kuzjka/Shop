@@ -26,7 +26,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="/user"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
         </ul>
     </div>
@@ -56,7 +56,7 @@
                     <td>Default</td>
                 </c:otherwise>
             </c:choose>
-            <sec:authorize access="hasRole('ADMIN')"> <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td></sec:authorize>
+            <sec:authorize url="/login" > <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td></sec:authorize>
             </tr>
         </c:forEach>
     </table>

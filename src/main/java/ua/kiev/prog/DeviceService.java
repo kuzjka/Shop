@@ -20,6 +20,8 @@ public class DeviceService {
     private  PhotoDao photoDao;
     @Autowired
     private UserDAO userDAO;
+    @Autowired
+    private RoleDAO roleDAO;
 
     @Transactional
     public void addDevice(Device device) {
@@ -38,6 +40,8 @@ public class DeviceService {
     @Transactional
     public void addUser(User user){
         userDAO.add(user);}
+    @Transactional
+    public void addRole(Role role){roleDAO.add(role);}
     @Transactional
     public void deleteCart(int id) {
         cartDAO.delete(id);

@@ -6,11 +6,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Users")
+@Table(name="users")
 public class User {
     @Id
-    private String login;
+    private String username;
     private String password;
+    boolean enabled;
 
 
 
@@ -18,20 +19,18 @@ public class User {
     public User() {
     }
 
-    public User(String login, String password ) {
-        this.login = login;
+    public User(String username, String password, boolean enabled) {
+        this.username = username;
         this.password = password;
-
+        this.enabled = enabled;
     }
 
-
-
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

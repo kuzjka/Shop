@@ -19,7 +19,7 @@ public class MyController {
     @Autowired
     private DeviceService deviceService;
 
-    @RequestMapping("/" )
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
 
 
@@ -39,23 +39,23 @@ public class MyController {
     @RequestMapping(value="/register", method = RequestMethod.POST)
     public String register(@RequestParam String user, @RequestParam String password, Model model){
         String role="USER";
-        deviceService.addUser(new User(user, password, role));
+        deviceService.addUser(new User(user, password, true));
+        deviceService.addRole(new Role(user,role));
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices(null));
         return "index";
     }
-    @RequestMapping("/user" )
-    public String user_index (Model model) {
+    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    public String user_index () {
 
 
-        model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices(null));
 
 
-        return "index";
+
+        return "cart_add_page";
     }
 
-    @RequestMapping("/admin")
+    @RequestMapping(value = "/admin" )
     public String index_admin(Model model) {
 
         model.addAttribute("types", deviceService.listTypes());

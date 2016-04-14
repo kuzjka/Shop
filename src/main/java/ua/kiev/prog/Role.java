@@ -1,22 +1,34 @@
 package ua.kiev.prog;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name="Roles")
+@Table(name="user_roles")
 public class Role {
     @Id
-    private  String role;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_role_id")
+    private int id;
     private String username;
+    private  String role;
+
+
 
     public Role() {
     }
 
-    public Role(String role, String username) {
-        this.role = role;
+    public Role(String username, String role) {
         this.username = username;
+        this.role = role;
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getRole() {
