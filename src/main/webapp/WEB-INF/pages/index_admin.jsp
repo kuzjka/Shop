@@ -53,7 +53,9 @@
         <thead>
         <tr>
             <td></td>
+            <td><b>Photo</b></td>
             <td><b>Name</b></td>
+            <td><b>Manufactor</b></td>
             <td><b>Price</b></td>
             <td><b>Type</b></td>
         </tr>
@@ -61,9 +63,10 @@
         <c:forEach items="${devices}" var="device">
             <tr>
                 <td><a href="/device/delete/${device.id}" class="btn btn-info" role="button">Delete</a></td>
+                <td><img class="img-responsive" height="200" width="200" src="/photo/${device.photo.id}"/></td>
                 <td>${device.name}</td>
+                <td>${device.manufactor}</td>
                 <td>${device.price}</td>
-
                 <c:choose>
                     <c:when test="${device.type ne null}">
                         <td>${device.type.name}</td>

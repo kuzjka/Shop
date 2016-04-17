@@ -34,7 +34,7 @@
         <td><b>device</b></td>
         <td><b>price</b></td>
         <td><b>items</b></td>
-        <td><b>total:${total}</b></td>
+        <td><b>total price:${total}</b></td>
 
 
     </tr>
