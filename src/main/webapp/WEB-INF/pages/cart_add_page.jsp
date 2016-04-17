@@ -31,10 +31,10 @@
 <table class="table table-striped">
     <thead>
     <tr><td><b></b></td>
-        <td><b>device</b></td>
-        <td><b>price</b></td>
-        <td><b>items</b></td>
-        <td><b>total price:${total}</b></td>
+        <td><b>Device</b></td>
+        <td><b>Price</b></td>
+        <td><b>Items</b></td>
+        <td><b>Total price:${total}</b></td>
 
 
     </tr>
