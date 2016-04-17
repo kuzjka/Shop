@@ -19,7 +19,7 @@
         </select>
         <input class="form-control form-type" type="text"   name="name" placeholder="Name">
 
-        <input  type="file"   name="photo" value="Add Photo">
+        <input  type="file"   name="photo">
         <input type="submit" class="btn btn-primary" value="Add">
     </form>
 </div>

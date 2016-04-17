@@ -20,6 +20,9 @@
                 <ul id="groupList" class="nav navbar-nav">
 
                     <li>
+                        <button type="button" id="add_photo" class="btn btn-primary navbar-btn">Add Photo</button>
+                    </li>
+                    <li>
                         <button type="button" id="add_device" class="btn btn-primary navbar-btn">Add Device</button>
                     </li>
                     <li>
@@ -93,7 +96,9 @@
     $('#add_type').click(function () {
         window.location.href = '/type_add_page';
     })
-
+    $('#add_photo').click(function () {
+        window.location.href = '/photo_add_page';
+    })
 
     $("li .searchterm").click(function () {
         console.log('testing');

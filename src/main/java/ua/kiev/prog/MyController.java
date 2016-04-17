@@ -30,6 +30,11 @@ public class MyController {
         return "index";
 
     }
+    @RequestMapping("/onedevice")
+    public String oneDevice(Model model){
+        model.addAttribute("photos", deviceService.getPhoto(null));
+        return "one_device_page";
+    }
 
     @RequestMapping("/photo_add_page")
     public String photoAddPage(Model model){
@@ -39,12 +44,13 @@ public class MyController {
 
     @RequestMapping(value = "/addphoto" , method = RequestMethod.POST)
     public String addPhoto(@RequestParam (value="device")int id, @RequestParam String name,
-                           @RequestParam MultipartFile photo, Model model) throws IOException {
+                           @RequestParam(value = "photo") MultipartFile photo, Model model) throws IOException {
+
+        Device d= deviceService.findDevice(id);
+        deviceService.addPhoto(new Photo(d, photo.getOriginalFilename(), photo.getBytes()));
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices(null));
-        Device d= deviceService.findDevice(id);
-        deviceService.addPhoto(new Photo(d, name, photo.getBytes()));
-        return "index";
+        return "index_admin";
     }
 
     @RequestMapping("/register_page")
@@ -235,11 +241,11 @@ public class MyController {
         Device d= deviceService.findDevice(id);
         List <Photo>p=deviceService.getPhoto(d);
 
+        byte [] res=p.get(0).getBody();
 
-
-        response.setContentType("image/gif");
+        response.setContentType("image/jpg");
         try {
-            response.getOutputStream().write(p.get(0).getBody());
+            response.getOutputStream().write(res);
         } catch (IOException e) {
             e.printStackTrace();
         }
