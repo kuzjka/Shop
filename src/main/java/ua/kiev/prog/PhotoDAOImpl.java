@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -19,12 +20,17 @@ public class PhotoDAOImpl implements PhotoDao {
     }
 
     @Override
-    public byte[] getPhoto (int id) {
-            Photo p=entityManager.find(Photo.class, id);
-            return p.getBody();
+    public List<Photo> getPhoto (Device device) {
+            Query query= entityManager.createQuery("select p from Photo p where p.device =:device", Photo.class);
+        List<Photo>l=query.getResultList();
+        return l;}}
 
 
-    }
 
 
-}
+
+
+
+
+
+

@@ -43,7 +43,7 @@
         </tr>
         </thead>
         <c:forEach items="${devices}" var="device">
-            <td><img class="img-responsive" height="200" width="200" src="/photo/${device.photo.id}"/></td>
+            <td><img class="img-responsive" height="200" width="200" src="/photo/${device.id}"/></td>
             <td>${device.name}</td>
             <td>${device.manufactor}</td>
             <td>${device.price}</td>

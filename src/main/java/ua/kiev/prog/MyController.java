@@ -30,6 +30,23 @@ public class MyController {
         return "index";
 
     }
+
+    @RequestMapping("/photo_add_page")
+    public String photoAddPage(Model model){
+        model.addAttribute("devices", deviceService.listDevices(null));
+        return "photo_add_page";
+    }
+
+    @RequestMapping(value = "/addphoto" , method = RequestMethod.POST)
+    public String addPhoto(@RequestParam (value="device")int id, @RequestParam String name,
+                           @RequestParam MultipartFile photo, Model model) throws IOException {
+        model.addAttribute("types", deviceService.listTypes());
+        model.addAttribute("devices", deviceService.listDevices(null));
+        Device d= deviceService.findDevice(id);
+        deviceService.addPhoto(new Photo(d, name, photo.getBytes()));
+        return "index";
+    }
+
     @RequestMapping("/register_page")
 
     public String register_page(){
@@ -116,7 +133,7 @@ public class MyController {
                              @RequestParam String name,
                              @RequestParam String manufactor,
                              @RequestParam int price,
-                             @RequestParam (value="photo")MultipartFile photo,
+
 
                              Model model) throws IOException {
         Type type = (typeId != DEFAULT_TYPE_ID) ? deviceService.findType(typeId) : null;
@@ -125,7 +142,7 @@ public class MyController {
 
 
 
-        Device device = new Device(type,new Photo(photo.getOriginalFilename(), photo.getBytes()) , name, manufactor, price);
+        Device device = new Device(type,  name, manufactor, price);
         deviceService.addDevice(device);
 
         model.addAttribute("types", deviceService.listTypes());
@@ -213,12 +230,16 @@ public class MyController {
     public String result (Model model){
         model.addAttribute("orders", deviceService.listOrders());
         return "result_page";
-    }@RequestMapping(value = "/photo/{id}", method = RequestMethod.GET)
+    }@RequestMapping(value = "/device/{id}", method = RequestMethod.GET)
     public void onPhoto(HttpServletRequest request, HttpServletResponse response, @PathVariable int id){
-        byte[] content= deviceService.getPhoto(id);
+        Device d= deviceService.findDevice(id);
+        List <Photo>p=deviceService.getPhoto(d);
+
+
+
         response.setContentType("image/gif");
         try {
-            response.getOutputStream().write(content);
+            response.getOutputStream().write(p.get(0).getBody());
         } catch (IOException e) {
             e.printStackTrace();
         }

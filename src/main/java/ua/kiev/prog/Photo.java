@@ -8,17 +8,27 @@ public class Photo {
     @Id
     @GeneratedValue
     private int id;
-
-
+    @ManyToOne
+    @JoinColumn(name="device_id")
+    private Device device;
     private String name;
     private byte[]body;
 
     public Photo() {
     }
 
-    public Photo(String name, byte[] body) {
+    public Photo(Device device, String name, byte[] body) {
+        this.device = device;
         this.name = name;
         this.body = body;
+    }
+
+    public Device getDevice() {
+        return device;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
     }
 
     public int getId() {
