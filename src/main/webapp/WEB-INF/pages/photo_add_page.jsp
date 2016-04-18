@@ -17,7 +17,7 @@
                 <option value="${device.id}">${device.name}</option>
             </c:forEach>
         </select>
-        <input class="form-control form-type" type="text"   name="name" placeholder="Name">
+
 
         <input  type="file"   name="photo">
         <input type="submit" class="btn btn-primary" value="Add">

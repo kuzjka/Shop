@@ -30,9 +30,12 @@ public class MyController {
         return "index";
 
     }
-    @RequestMapping("/onedevice")
-    public String oneDevice(Model model){
-        model.addAttribute("photos", deviceService.getPhoto(null));
+    @RequestMapping("/onedevice/{id}")
+    public String oneDevice(Model model, @PathVariable int id){
+        Device d= deviceService.findDevice(id);
+
+        model.addAttribute("id" , id );
+        model.addAttribute("name", d.getName());
         return "one_device_page";
     }
 
@@ -43,7 +46,7 @@ public class MyController {
     }
 
     @RequestMapping(value = "/addphoto" , method = RequestMethod.POST)
-    public String addPhoto(@RequestParam (value="device")int id, @RequestParam String name,
+    public String addPhoto(@RequestParam (value = "device") int id,
                            @RequestParam(value = "photo") MultipartFile photo, Model model) throws IOException {
 
         Device d= deviceService.findDevice(id);
@@ -149,6 +152,7 @@ public class MyController {
 
 
         Device device = new Device(type,  name, manufactor, price);
+
         deviceService.addDevice(device);
 
         model.addAttribute("types", deviceService.listTypes());
@@ -236,12 +240,13 @@ public class MyController {
     public String result (Model model){
         model.addAttribute("orders", deviceService.listOrders());
         return "result_page";
-    }@RequestMapping(value = "/device/{id}", method = RequestMethod.GET)
-    public void onPhoto(HttpServletRequest request, HttpServletResponse response, @PathVariable int id){
+    }@RequestMapping(value = "/device/{id}/{n}", method = RequestMethod.GET)
+    public void onPhoto(HttpServletRequest request, HttpServletResponse response, @PathVariable int id,
+                        @PathVariable int n){
         Device d= deviceService.findDevice(id);
         List <Photo>p=deviceService.getPhoto(d);
 
-        byte [] res=p.get(0).getBody();
+        byte [] res=p.get(n).getBody();
 
         response.setContentType("image/jpg");
         try {

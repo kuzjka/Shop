@@ -66,7 +66,7 @@
         <c:forEach items="${devices}" var="device">
             <tr>
                 <td><a href="/device/delete/${device.id}" class="btn btn-info" role="button">Delete</a></td>
-                <td><img class="img-responsive" height="200" width="200" src="/device/${device.id}"/></td>
+                <td><img class="img-responsive" height="200" width="200" src="/device/${device.id}/0"/></td>
                 <td>${device.name}</td>
                 <td>${device.manufactor}</td>
                 <td>${device.price}</td>

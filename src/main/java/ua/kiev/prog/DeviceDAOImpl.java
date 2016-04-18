@@ -69,7 +69,12 @@ public class DeviceDAOImpl implements DeviceDAO {
 
     @Override
     public Device findOne(int id) {
-        return entityManager.getReference(Device.class, id);
+
+        Query query=entityManager.createQuery("select d from Device d where d.id=:id", Device.class);
+        query.setParameter("id" , id);
+        Device d= (Device) query.getSingleResult();
+
+        return d;
     }
 
     @Override
