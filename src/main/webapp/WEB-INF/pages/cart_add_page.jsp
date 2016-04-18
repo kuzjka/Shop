@@ -14,21 +14,24 @@
             <a class="navbar-brand" href="/">Shop</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
+            <li class="active"><a href="/">All</a></li>
 
+
+            <li><a href="/cart_add_page">Cart</a></li>
             <li><a href="/order_add_page">Order</a></li>
             <li><a href="/admin">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
         </ul>
     </div>
 </nav>
-<div class="container">
 
 
-<table class="table table-striped">
+
+<table class="table table-default">
     <thead>
     <tr><td><b></b></td>
         <td><b>Device</b></td>

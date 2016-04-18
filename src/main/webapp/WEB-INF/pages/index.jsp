@@ -9,6 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
+
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -16,10 +17,8 @@
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="/">All</a></li>
-            <li><a href="/searchByType/desctop">Desctops</a></li>
-            <li><a href="/searchByType/laptop">Laptops</a></li>
-            <li><a href="/searchByType/tablet">Tablets</a></li>
-            <li><a href="/searchByType/smartphone">Smartphones</a></li>
+
+
             <li><a href="/cart_add_page">Cart</a></li>
             <li><a href="/order_add_page">Order</a></li>
             <li><a href="/admin">Admin</a></li>
@@ -59,6 +58,6 @@
             </tr>
         </c:forEach>
     </table>
-</div>
+</div></div>
 </body>
 </html>
