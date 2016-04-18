@@ -47,6 +47,7 @@
         <td>${cart.items}</td>
         <td><a href="/${cart.device.id}/-1" class="btn btn-info" role="button">-</a>
         <a href="/${cart.device.id}/1" class="btn btn-info" role="button">+</a> </td>
+        <td><a href="/order_add_page" class="btn btn-info" role="button">Make Order</a></td>
     </tr>
     </c:forEach>
 
