@@ -30,18 +30,28 @@
         </ul>
     </div>
 </nav>
-<form class="form-inline" action="/price_filter" method="post" role="form">
-    <div class="form-group">
-        <label  >Min price:</label>
-        <input type="text" class="form-control" name="min_price">
-    </div>
-    <div class="form-group">
-        <label  >Max price:</label>
-        <input type="text" class="form-control" name="max_price">
-    </div>
+<button data-toggle="collapse" class="btn btn-info" data-target="#demo">Filters</button>
 
-    <button type="submit" class="btn btn-info">Submit</button>
-</form>
+<div id="demo" align="center" class="collapse">
+    <form class="form-inline" action="/price_filter" method="post" role="form">
+        <div class="form-group">
+            <label  >Min price:</label>
+            <input type="text" class="form-control" name="min_price">
+        </div>
+        <div class="form-group">
+            <label  >Max price:</label>
+            <input type="text" class="form-control" name="max_price">
+        </div>
+
+        <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+    <div  class="btn-group">
+        <button type="/smartphones" class="btn btn-primary btn btn-lg">Smartphones</button>
+        <button type="button" class="btn btn-primary btn btn-lg">Tablets</button>
+        <button type="button" class="btn btn-primary btn btn-lg">Laptops</button>
+    </div>
+</div>
+
 <div>
     <table class="table table-default">
         <thead>
@@ -51,6 +61,7 @@
             <td><b>Manufactor</b></td>
             <td><b>Price</b></td>
             <td><b>Type</b></td>
+            <td><b>Login to by online or administrate site</b></td>
         </tr>
         </thead>
         <c:forEach items="${devices}" var="device">

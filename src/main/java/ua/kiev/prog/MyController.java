@@ -29,6 +29,10 @@ public class MyController {
 
         return "index";
 
+    }@RequestMapping("/smartphones")
+    public String smarphones(Model model){
+        model.addAttribute("device" , deviceService.listDevices("smartphone"));
+        return "index";
     }
     @RequestMapping("/onedevice/{id}")
     public String oneDevice(Model model, @PathVariable int id){
@@ -39,12 +43,12 @@ public class MyController {
         return "one_device_page";
     }
     @RequestMapping(value = "/price_filter", method = RequestMethod.POST)
-    public String priceFilter(Model model, @RequestParam(value ="min_price") String min,
-                              @RequestParam(value="max_price") String max){
-        int a= Integer.parseInt(min);
-        int b= Integer.parseInt(max);
+    public String priceFilter(Model model, @RequestParam String min_price,
+                              @RequestParam String max_price){
+        int min= Integer.parseInt(min_price);
+        int max= Integer.parseInt(max_price);
         model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.priceFilter(a,b ));
+        model.addAttribute("devices", deviceService.priceFilter(min,max ));
 
         return "index";
     }
