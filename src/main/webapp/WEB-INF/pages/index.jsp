@@ -30,6 +30,18 @@
         </ul>
     </div>
 </nav>
+<form class="form-inline" action="/price_filter" method="post" role="form">
+    <div class="form-group">
+        <label  >Min price:</label>
+        <input type="text" class="form-control" name="min_price">
+    </div>
+    <div class="form-group">
+        <label  >Max price:</label>
+        <input type="text" class="form-control" name="max_price">
+    </div>
+
+    <button type="submit" class="btn btn-info">Submit</button>
+</form>
 <div>
     <table class="table table-default">
         <thead>

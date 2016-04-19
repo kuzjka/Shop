@@ -38,6 +38,16 @@ public class MyController {
         model.addAttribute("name", d.getName());
         return "one_device_page";
     }
+    @RequestMapping(value = "/price_filter", method = RequestMethod.POST)
+    public String priceFilter(Model model, @RequestParam(value ="min_price") String min,
+                              @RequestParam(value="max_price") String max){
+        int a= Integer.parseInt(min);
+        int b= Integer.parseInt(max);
+        model.addAttribute("types", deviceService.listTypes());
+        model.addAttribute("devices", deviceService.priceFilter(a,b ));
+
+        return "index";
+    }
 
     @RequestMapping("/photo_add_page")
     public String photoAddPage(Model model){

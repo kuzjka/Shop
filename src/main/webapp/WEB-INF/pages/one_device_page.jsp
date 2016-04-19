@@ -23,19 +23,19 @@
 
     <div class="carousel-inner" role="listbox">
         <div class="item active" >
-            <img src="/device/${id}/0"    >
+            <img src="/device/${id}/0">
         </div>
 
         <div class="item">
-            <img src="/device/${id}/1"      >
+            <img src="/device/${id}/1">
         </div>
 
         <div class="item">
-            <img src="/device/${id}/2"      >
+            <img src="/device/${id}/2">
         </div>
 
         <div class="item">
-            <img src="/device/${id}/3"      >
+            <img src="/device/${id}/3">
         </div>
     </div>
 

@@ -91,6 +91,16 @@ public class DeviceDAOImpl implements DeviceDAO {
 
 
     }
+
+    @Override
+    public List<Device> priceFilter(int min, int max) {
+
+        Query query= entityManager.createQuery("select d from Device d where  d.price<=:max", Device.class);
+
+        query.setParameter("max", max);
+        List<Device>l=query.getResultList();
+        return l;
+    }
 }
 
 

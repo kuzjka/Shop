@@ -96,7 +96,10 @@ public class DeviceService {
     public List<Device> searchDevices(String pattern) {
         return deviceDAO.list(pattern);
     }
-
+    @Transactional(readOnly = true)
+    public List<Device> priceFilter(int min, int max) {
+        return deviceDAO.priceFilter(min, max);
+    }
     @Transactional(readOnly = true)
     public int totalPrice() {
         return deviceDAO.total();

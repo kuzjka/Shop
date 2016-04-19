@@ -11,4 +11,5 @@ public interface DeviceDAO {
     List<Device> list(String pattern);
     Device findOne(int id);
     int total();
+    List<Device> priceFilter(int min, int max);
 }
