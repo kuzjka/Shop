@@ -8,8 +8,8 @@ import ua.kiev.prog.Classes.Device;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -103,13 +103,30 @@ public class DeviceDAOImpl implements DeviceDAO {
         return l;
     }
 
-    public List<Device> ramFilter(int ram) {
-        Query query = entityManager.createQuery("select d from Device d where d.ram=:ram ", Device.class);
-        query.setParameter("ram", ram);
-        List<Device> l = query.getResultList();
-        return l;
+    public List<Device> ramFilter(List<Integer> ram) {
+        if (ram == null) {
+            Query query = entityManager.createQuery("select d from Device d", Device.class);
+            return query.getResultList();
+        } else {
+
+            Query query = entityManager.createQuery("select d from Device d", Device.class);
+            List<Device> a = query.getResultList();
+            List<Device> b = new ArrayList<>();
+            int count = 0;
+            for (Device d : a) {
+                if (ram.contains(d.getRam())) {
+                    b.add(d);
+                    count++;
+
+                }
+            }
+            return b;
+
+
+        }
     }
 }
+
 
 
 

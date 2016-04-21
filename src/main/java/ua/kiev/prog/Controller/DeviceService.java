@@ -119,7 +119,7 @@ public class DeviceService {
     public List<Photo> getPhoto(Device device){ return photoDao.getPhoto(device);}
 
     @Transactional
-    public List<Device> ramFilter(int ram) {
+    public List<Device> ramFilter(List<Integer> ram) {
         return deviceDAO.ramFilter(ram);
     }
 }

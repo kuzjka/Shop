@@ -54,11 +54,11 @@
     </div>
 </div>
 <div align="center">
-    <form action="/ramfilter" method="post"></form>
-    <input type="checkbox" name="ram[]" value="2" checked>2</input>
-    <input type="checkbox" name="ram[]" value="4">4</input>
-    <input type="checkbox" name="ram[]" value="8">8</input>
-    <input type=submit>Submit</input>
+    <form action="/ramfilter" method="get">
+        <input type="checkbox" name="ram" value="2">2</input>
+        <input type="checkbox" name="ram" value="4">4</input>
+        <input type="checkbox" name="ram" value="8">8</input>
+        <input type="submit">
     </form>
 </div>
 <div>

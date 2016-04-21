@@ -20,8 +20,7 @@
                         <input class="form-control form-type" type="text"   name="name" placeholder="Name">
                 <input class="form-control form-type" type="text" name="manufacturer" placeholder="Manufacturer">
                         <input class="form-control form-type" type="text" name="price" placeholder="Price">
-                <input class="form-control form-type" type="text" name="ram" placeholder="RAM"> <input
-                    class="form-control form-type" type="text" name="ram" placeholder="RAM">
+                <input class="form-control form-type" type="text" name="ram" placeholder="RAM">
                 <input class="form-control form-type" type="text" name="processor" placeholder="Processor">
                         <input type="submit" class="btn btn-primary" value="Add">
             </form>

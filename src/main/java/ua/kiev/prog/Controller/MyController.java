@@ -6,13 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ua.kiev.prog.Classes.*;
-import ua.kiev.prog.Controller.DeviceService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 @RequestMapping("/")
@@ -82,6 +80,23 @@ public class MyController {
         return "index";
     }
 
+    @RequestMapping(value = "/ramfilter", method = RequestMethod.GET)
+    public String ramFilter(@RequestParam(value = "ram") int a, @RequestParam(value = "ram") int b,
+                            @RequestParam(value = "ram")
+                            int c, Model model) {
+
+        List<Integer> ram = new ArrayList<>();
+
+        ram.add(c);
+
+        ram.add(b);
+
+        ram.add(a);
+
+        model.addAttribute("types", deviceService.listTypes());
+        model.addAttribute("devices", deviceService.ramFilter(ram));
+        return "index";
+    }
 
     @RequestMapping("/photo_add_page")
     public String photoAddPage(Model model){

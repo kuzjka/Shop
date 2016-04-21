@@ -1,6 +1,5 @@
 package ua.kiev.prog.DAO;
 
-import ua.kiev.prog.Classes.Cart;
 import ua.kiev.prog.Classes.Device;
 
 import java.util.List;
@@ -17,5 +16,5 @@ public interface DeviceDAO {
     int total();
     List<Device> priceFilter(int min, int max);
 
-    List<Device> ramFilter(int ram);
+    List<Device> ramFilter(List<Integer> ram);
 }
