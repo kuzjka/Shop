@@ -46,9 +46,9 @@
         <button type="submit" class="btn btn-info">Submit</button>
     </form>
     <div  class="btn-group">
-        <button type="/smartphones" class="btn btn-primary btn btn-lg">Smartphones</button>
-        <button type="button" class="btn btn-primary btn btn-lg">Tablets</button>
-        <button type="button" class="btn btn-primary btn btn-lg">Laptops</button>
+        <a href="/type/smartphone" class="btn btn-primary btn btn-lg" role="button">Smartphones</a>
+        <a href="/type/tablet" class="btn btn-primary btn btn-lg" role="button">Tablets</a>
+        <a href="/type/laptop" class="btn btn-primary btn btn-lg" role="button">Laptops</a>
     </div>
 </div>
 
@@ -77,7 +77,13 @@
                     <td>Default</td>
                 </c:otherwise>
             </c:choose>
-            <sec:authorize url="/login" > <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td></sec:authorize>
+            <sec:authorize url="/login">
+
+                <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a>
+
+                </td>
+
+            </sec:authorize>
             </tr>
         </c:forEach>
     </table>

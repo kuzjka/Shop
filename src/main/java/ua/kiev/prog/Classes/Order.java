@@ -1,7 +1,7 @@
-package ua.kiev.prog;
+package ua.kiev.prog.Classes;
 
 
-
+import ua.kiev.prog.Classes.Cart;
 
 import javax.persistence.*;
 

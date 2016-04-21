@@ -1,8 +1,10 @@
-package ua.kiev.prog;
+package ua.kiev.prog.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.kiev.prog.Classes.*;
+import ua.kiev.prog.DAO.*;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class DeviceService {
     @Autowired
     private OrderDAO orderDAO;
     @Autowired
-    private  PhotoDao photoDao;
+    private PhotoDao photoDao;
     @Autowired
     private UserDAO userDAO;
     @Autowired

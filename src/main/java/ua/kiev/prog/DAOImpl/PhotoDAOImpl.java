@@ -1,12 +1,13 @@
-package ua.kiev.prog;
+package ua.kiev.prog.DAOImpl;
 
-import javassist.bytecode.ByteArray;
 import org.springframework.stereotype.Repository;
+import ua.kiev.prog.DAO.PhotoDao;
+import ua.kiev.prog.Classes.Device;
+import ua.kiev.prog.Classes.Photo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository

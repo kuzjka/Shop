@@ -1,4 +1,4 @@
-package ua.kiev.prog;
+package ua.kiev.prog.Config;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

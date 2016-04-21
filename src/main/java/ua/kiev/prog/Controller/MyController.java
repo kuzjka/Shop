@@ -1,15 +1,18 @@
-package ua.kiev.prog;
+package ua.kiev.prog.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ua.kiev.prog.Classes.*;
+import ua.kiev.prog.Controller.DeviceService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/")
@@ -29,10 +32,23 @@ public class MyController {
 
         return "index";
 
-    }@RequestMapping("/smartphones")
-    public String smarphones(Model model){
-        model.addAttribute("device" , deviceService.listDevices("smartphone"));
-        return "index";
+    }
+
+    @RequestMapping("/type/{type}")
+    public String type(Model model, @PathVariable String type) {
+        List<Device> l = deviceService.listDevices(type);
+        Random rn = new Random();
+        Device d1 = l.get(rn.nextInt(l.size()));
+        Device d2 = l.get(rn.nextInt(l.size()));
+        Device d3 = l.get(rn.nextInt(l.size()));
+        Device d4 = l.get(rn.nextInt(l.size()));
+        model.addAttribute("d1", d1);
+        model.addAttribute("d2", d2);
+        model.addAttribute("d3", d3);
+        model.addAttribute("d4", d4);
+        model.addAttribute("type", type);
+
+        return "type";
     }
     @RequestMapping("/onedevice/{id}")
     public String oneDevice(Model model, @PathVariable int id){
@@ -260,7 +276,9 @@ public class MyController {
         Device d= deviceService.findDevice(id);
         List <Photo>p=deviceService.getPhoto(d);
 
-        byte [] res=p.get(n).getBody();
+
+        byte res[] = p.get(n).getBody();
+
 
         response.setContentType("image/jpg");
         try {
@@ -272,8 +290,10 @@ public class MyController {
 
     }
 
-
 }
+
+
+
 
 
 

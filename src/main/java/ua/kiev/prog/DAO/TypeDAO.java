@@ -1,4 +1,6 @@
-package ua.kiev.prog;
+package ua.kiev.prog.DAO;
+
+import ua.kiev.prog.Classes.Type;
 
 import java.util.List;
 
