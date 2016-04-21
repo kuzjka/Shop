@@ -54,10 +54,7 @@ public class DeviceService {
         deviceDAO.delete(id);
     }
 
-    @Transactional
-    public void deleteType(Type type) {
-        typeDAO.delete(type);
-    }
+
 
     @Transactional(readOnly = true)
     public List<Type> listTypes() {
@@ -70,8 +67,8 @@ public class DeviceService {
     }
 
     @Transactional(readOnly = true)
-    public List<Device> listDevicesByCart(Cart cart) {
-        return deviceDAO.list(cart);
+    public List<Integer> list2() {
+        return deviceDAO.list2();
     }
 
     @Transactional(readOnly = true)

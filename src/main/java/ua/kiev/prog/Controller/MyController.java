@@ -25,7 +25,20 @@ public class MyController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
 
+        List<Device> l1 = deviceService.listDevices(null);
+        List<Integer> l2 = deviceService.list2();
+        int count = 0;
 
+        for (Device d : l1) {
+            if (l2.contains(d.getId())) {
+
+                count++;
+
+            }
+        }
+        List<Cart> l3 = deviceService.listCarts();
+        model.addAttribute("carts", deviceService.listCarts());
+        model.addAttribute("count", count);
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices(null));
 

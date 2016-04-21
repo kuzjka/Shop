@@ -65,6 +65,7 @@
         </tr>
         </thead>
         <c:forEach items="${devices}" var="device">
+
             <td><a href="/onedevice/${device.id}"><img class="img-responsive" height="100" width="100" src="/device/${device.id}/0"/></a></td>
             <td>${device.name}</td>
             <td>${device.manufactor}</td>
@@ -77,15 +78,21 @@
                     <td>Default</td>
                 </c:otherwise>
             </c:choose>
-            <sec:authorize url="/login">
 
-                <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a>
 
-                </td>
+            <c:choose>
+                <c:when test="${count ==0}">
+                    <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
+                </c:when>
+                <c:otherwise>
+                    <td><a href="/cart_add_page">In cart</a></td>
+                </c:otherwise>
+            </c:choose>
 
-            </sec:authorize>
+
             </tr>
         </c:forEach>
+
     </table>
 </div></div>
 </body>

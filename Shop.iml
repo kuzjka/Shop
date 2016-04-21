@@ -4,8 +4,8 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/main/java/ua/kiev/prog/AppConfig.java</file>
-          <file>file://$MODULE_DIR$/src/main/java/ua/kiev/prog/SecurityConfiguration.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/ua/kiev/prog/Config/AppConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/ua/kiev/prog/Config/SecurityConfiguration.java</file>
         </fileset>
       </configuration>
     </facet>

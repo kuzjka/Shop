@@ -23,10 +23,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
 
-    @Override
-    public void delete(Device device) {
-        entityManager.remove(device);
-    }
+
 
     @Override
     public void delete(int id) {
@@ -38,15 +35,14 @@ public class DeviceDAOImpl implements DeviceDAO {
 
 
     @Override
-    public List<Device> list(Cart cart) {
+    public List<Integer> list2() {
         Query query;
 
 
-        query = entityManager.createQuery("SELECT d FROM Device d WHERE d.cart = :cart", Device.class);
-        query.setParameter("cart", cart);
+        query = entityManager.createQuery("select c.device.id from Cart c", Integer.class);
 
 
-        return (List<Device>) query.getResultList();
+        return (List<Integer>) query.getResultList();
     }
 
     @Override
