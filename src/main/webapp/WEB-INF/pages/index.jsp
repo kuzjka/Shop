@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn"
+           uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
@@ -51,25 +53,36 @@
         <a href="/type/laptop" class="btn btn-primary btn btn-lg" role="button">Laptops</a>
     </div>
 </div>
-
+<div align="center">
+    <form action="/ramfilter" method="post"></form>
+    <input type="checkbox" name="ram[]" value="2" checked>2</input>
+    <input type="checkbox" name="ram[]" value="4">4</input>
+    <input type="checkbox" name="ram[]" value="8">8</input>
+    <input type=submit>Submit</input>
+    </form>
+</div>
 <div>
     <table class="table table-default">
         <thead>
         <tr>
             <td><b>Photo</b></td>
             <td><b>Name</b></td>
-            <td><b>Manufactor</b></td>
+            <td><b>Manufacturer</b></td>
             <td><b>Price</b></td>
+            <td><b>RAM</b></td>
+            <td><b>Processor</b></td>
             <td><b>Type</b></td>
             <td><b>Login to by online or administrate site</b></td>
         </tr>
         </thead>
         <c:forEach items="${devices}" var="device">
-
+            <tr>
             <td><a href="/onedevice/${device.id}"><img class="img-responsive" height="100" width="100" src="/device/${device.id}/0"/></a></td>
             <td>${device.name}</td>
-            <td>${device.manufactor}</td>
+                <td>${device.manufacturer}</td>
             <td>${device.price}</td>
+                <td>${device.ram}</td>
+                <td>${device.processor}</td>
             <c:choose>
                 <c:when test="${device.type ne null}">
                     <td>${device.type.name}</td>
@@ -80,19 +93,11 @@
             </c:choose>
 
 
-            <c:choose>
-                <c:when test="${count ==0}">
-                    <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
-                </c:when>
-                <c:otherwise>
-                    <td><a href="/cart_add_page">In cart</a></td>
-                </c:otherwise>
-            </c:choose>
+                <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
 
 
             </tr>
         </c:forEach>
-
     </table>
 </div></div>
 </body>

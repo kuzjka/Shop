@@ -36,9 +36,9 @@ public class MyController {
 
             }
         }
-        List<Cart> l3 = deviceService.listCarts();
+
+
         model.addAttribute("carts", deviceService.listCarts());
-        model.addAttribute("count", count);
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices(null));
 
@@ -82,6 +82,7 @@ public class MyController {
         return "index";
     }
 
+
     @RequestMapping("/photo_add_page")
     public String photoAddPage(Model model){
         model.addAttribute("devices", deviceService.listDevices(null));
@@ -114,15 +115,7 @@ public class MyController {
         model.addAttribute("devices", deviceService.listDevices(null));
         return "index";
     }
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public String user_index () {
 
-
-
-
-
-        return "cart_add_page";
-    }
 
     @RequestMapping(value = "/admin" )
     public String index_admin(Model model) {
@@ -183,18 +176,17 @@ public class MyController {
     @RequestMapping(value = "/device/add", method = RequestMethod.POST)
     public String contactAdd(@RequestParam(value = "type") int typeId,
                              @RequestParam String name,
-                             @RequestParam String manufactor,
+                             @RequestParam String manufacturer,
                              @RequestParam int price,
+                             @RequestParam int ram,
+                             @RequestParam String processor,
 
 
                              Model model) throws IOException {
         Type type = (typeId != DEFAULT_TYPE_ID) ? deviceService.findType(typeId) : null;
 
 
-
-
-
-        Device device = new Device(type,  name, manufactor, price);
+        Device device = new Device(type, name, manufacturer, price, ram, processor);
 
         deviceService.addDevice(device);
 

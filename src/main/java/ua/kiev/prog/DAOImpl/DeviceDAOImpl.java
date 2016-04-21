@@ -8,6 +8,8 @@ import ua.kiev.prog.Classes.Device;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -98,6 +100,13 @@ public class DeviceDAOImpl implements DeviceDAO {
 
         query.setParameter("max", max);
         List<Device>l=query.getResultList();
+        return l;
+    }
+
+    public List<Device> ramFilter(int ram) {
+        Query query = entityManager.createQuery("select d from Device d where d.ram=:ram ", Device.class);
+        query.setParameter("ram", ram);
+        List<Device> l = query.getResultList();
         return l;
     }
 }

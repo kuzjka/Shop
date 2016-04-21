@@ -21,8 +21,10 @@ public class Device {
     private List<Photo> photos;
 
     private String name;
-    private String manufactor;
+    private String manufacturer;
     private int price;
+    private int ram;
+    private String processor;
 
 
 
@@ -30,13 +32,17 @@ public class Device {
     public Device() {
     }
 
-    public Device(Type type, String name, String manufactor, int price) {
+
+    public Device(Type type,
+                  String name, String manufacturer, int price, int ram, String processor) {
         this.type = type;
         this.carts = carts;
         this.photos = photos;
         this.name = name;
-        this.manufactor = manufactor;
+        this.manufacturer = manufacturer;
         this.price = price;
+        this.ram = ram;
+        this.processor = processor;
     }
 
     public int getId() {
@@ -73,12 +79,36 @@ public class Device {
         this.name = name;
     }
 
-    public String getManufactor() {
-        return manufactor;
+    public List<Photo> getPhotos() {
+        return photos;
     }
 
-    public void setManufactor(String manufactor) {
-        this.manufactor = manufactor;
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public int getRam() {
+        return ram;
+    }
+
+    public void setRam(int ram) {
+        this.ram = ram;
+    }
+
+    public String getProcessor() {
+        return processor;
+    }
+
+    public void setProcessor(String processor) {
+        this.processor = processor;
     }
 
     public int getPrice() {

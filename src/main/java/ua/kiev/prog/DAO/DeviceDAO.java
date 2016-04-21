@@ -16,4 +16,6 @@ public interface DeviceDAO {
     Device findOne(int id);
     int total();
     List<Device> priceFilter(int min, int max);
+
+    List<Device> ramFilter(int ram);
 }
