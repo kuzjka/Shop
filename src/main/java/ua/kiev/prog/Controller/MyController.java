@@ -80,18 +80,18 @@ public class MyController {
         return "index";
     }
 
-    @RequestMapping(value = "/ramfilter", method = RequestMethod.GET)
-    public String ramFilter(@RequestParam(value = "ram") int a, @RequestParam(value = "ram") int b,
-                            @RequestParam(value = "ram")
-                            int c, Model model) {
-
+    @RequestMapping(value = "/ramfilter", method = RequestMethod.POST)
+    public String ramFilter(HttpServletRequest request, Model model) {
+        String[] sram = request.getParameterValues("ram");
         List<Integer> ram = new ArrayList<>();
+        if (sram.equals(null))
+            ram.add(-1);
+        for (String s : sram) {
+            if (s != null) {
+                ram.add(Integer.parseInt(s));
+            }
+        }
 
-        ram.add(c);
-
-        ram.add(b);
-
-        ram.add(a);
 
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.ramFilter(ram));

@@ -54,7 +54,7 @@
     </div>
 </div>
 <div align="center">
-    <form action="/ramfilter" method="get">
+    <form action="/ramfilter" method="post">
         <input type="checkbox" name="ram" value="2">2</input>
         <input type="checkbox" name="ram" value="4">4</input>
         <input type="checkbox" name="ram" value="8">8</input>
