@@ -23,20 +23,11 @@ public class MyController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
 
-        List<Device> l1 = deviceService.listDevices(null);
-        List<Integer> l2 = deviceService.list2();
-        int count = 0;
 
-        for (Device d : l1) {
-            if (l2.contains(d.getId())) {
-
-                count++;
-
-            }
-        }
 
 
         model.addAttribute("carts", deviceService.listCarts());
+
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices(null));
 
@@ -84,8 +75,7 @@ public class MyController {
     public String ramFilter(HttpServletRequest request, Model model) {
         String[] sram = request.getParameterValues("ram");
         List<Integer> ram = new ArrayList<>();
-        if (sram.equals(null))
-            ram.add(-1);
+
         for (String s : sram) {
             if (s != null) {
                 ram.add(Integer.parseInt(s));

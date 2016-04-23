@@ -66,10 +66,6 @@ public class DeviceService {
         return deviceDAO.listByType(typeName);
     }
 
-    @Transactional(readOnly = true)
-    public List<Integer> list2() {
-        return deviceDAO.list2();
-    }
 
     @Transactional(readOnly = true)
     public List<Cart> listCarts() {

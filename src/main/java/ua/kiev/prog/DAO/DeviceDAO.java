@@ -9,7 +9,7 @@ public interface DeviceDAO {
 
     void delete(int id);
 
-    List<Integer> list2();
+
     List<Device> listByType(String typeName);
     List<Device> list(String pattern);
     Device findOne(int id);

@@ -76,8 +76,10 @@
         </tr>
         </thead>
         <c:forEach items="${devices}" var="device">
-            <tr>
-            <td><a href="/onedevice/${device.id}"><img class="img-responsive" height="100" width="100" src="/device/${device.id}/0"/></a></td>
+        <tr>
+
+            <td><a href="/onedevice/${device.id}"><img class="img-responsive" height="100" width="100"
+                                                       src="/device/${device.id}/0"/></a></td>
             <td>${device.name}</td>
                 <td>${device.manufacturer}</td>
             <td>${device.price}</td>
@@ -91,12 +93,21 @@
                     <td>Default</td>
                 </c:otherwise>
             </c:choose>
+            <c:set var="count" value="${0}"></c:set>
+            <c:forEach items="${carts}" var="cart">
 
 
-                <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
+                <c:when test="${cart.device.id ==device.id}">${count+1}</c:when></c:forEach>
+            <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
+
+            <c:otherwise>
+                <td><a href="/cart_add_page">in cart</a></td>
+            </c:otherwise>
+            </c:choose>
 
 
             </tr>
+
         </c:forEach>
     </table>
 </div></div>

@@ -36,16 +36,7 @@ public class DeviceDAOImpl implements DeviceDAO {
         }
 
 
-    @Override
-    public List<Integer> list2() {
-        Query query;
 
-
-        query = entityManager.createQuery("select c.device.id from Cart c", Integer.class);
-
-
-        return (List<Integer>) query.getResultList();
-    }
 
     @Override
     public List<Device> listByType(String typeName) {
