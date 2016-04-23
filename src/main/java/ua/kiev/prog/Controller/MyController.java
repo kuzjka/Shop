@@ -26,12 +26,12 @@ public class MyController {
 
 
 
-        model.addAttribute("carts", deviceService.listCarts());
+
 
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices(null));
-
-
+        model.addAttribute("n", 0);
+        model.addAttribute("carts", deviceService.listCarts());
         return "index";
 
     }

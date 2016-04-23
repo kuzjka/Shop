@@ -93,20 +93,12 @@
                     <td>Default</td>
                 </c:otherwise>
             </c:choose>
-            <c:set var="count" value="${0}"></c:set>
-            <c:forEach items="${carts}" var="cart">
 
 
-                <c:when test="${cart.device.id ==device.id}">${count+1}</c:when></c:forEach>
-            <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
-
-            <c:otherwise>
-                <td><a href="/cart_add_page">in cart</a></td>
-            </c:otherwise>
-            </c:choose>
+            <td><a href="/cart_add_page" class="btn btn-info" role="button">To cart</a></td>
 
 
-            </tr>
+        </tr>
 
         </c:forEach>
     </table>
