@@ -66,31 +66,24 @@ public class MyController {
         model.addAttribute("name", d.getName());
         return "one_device_page";
     }
-    @RequestMapping(value = "/price_filter", method = RequestMethod.POST)
-    public String priceFilter(Model model, @RequestParam String min_price,
-                              @RequestParam String max_price){
-        int min= Integer.parseInt(min_price);
-        int max= Integer.parseInt(max_price);
-        model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.priceFilter(min,max ));
 
-        return "index";
-    }
 
-    @RequestMapping(value = "/ramfilter", method = RequestMethod.POST)
-    public String ramFilter(HttpServletRequest request, Model model) {
+    @RequestMapping(value = "/filter", method = RequestMethod.POST)
+    public String ramFilter(HttpServletRequest request, @RequestParam(required = false, defaultValue = "-1") String max_price, Model model) {
         String[] sram = request.getParameterValues("ram");
         List<Integer> ram = new ArrayList<>();
 
+
         for (String s : sram) {
-            if (s != null) {
+
                 ram.add(Integer.parseInt(s));
             }
-        }
+
 
 
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.ramFilter(ram));
+        model.addAttribute("devices" , deviceService.priceFilter(Integer.parseInt(max_price)));
         return "index";
     }
 
@@ -127,7 +120,7 @@ public class MyController {
         return "index";
     }
 
-    @PreAuthorize("/login")
+
     @RequestMapping(value = "/admin" )
     public String index_admin(Model model) {
 

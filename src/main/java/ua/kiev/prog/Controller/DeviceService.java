@@ -92,8 +92,8 @@ public class DeviceService {
         return deviceDAO.list(pattern);
     }
     @Transactional(readOnly = true)
-    public List<Device> priceFilter(int min, int max) {
-        return deviceDAO.priceFilter(min, max);
+    public List<Device> priceFilter( int max) {
+        return deviceDAO.priceFilter(max);
     }
     @Transactional(readOnly = true)
     public int totalPrice() {

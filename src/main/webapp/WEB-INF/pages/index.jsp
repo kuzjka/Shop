@@ -34,33 +34,26 @@
 <div align="center"><button data-toggle="collapse"  class="btn btn-info" data-target="#demo">Filters</button></div>
 
 <div id="demo" align="center" class="collapse">
-    <form class="form-inline" action="/price_filter" method="post" role="form">
-        <div class="form-group">
-            <label  >Min price:</label>
-            <input type="text" class="form-control" name="min_price">
-        </div>
-        <div class="form-group">
-            <label  >Max price:</label>
-            <input type="text" class="form-control" name="max_price">
+    <form  action="/filter" method="post" role="form">
+
+        <div>
+            <label>Max price:</label>
+            <input type="text"   name="max_price">
         </div>
 
-        <button type="submit" class="btn btn-info">Submit</button>
-    </form>
+
+
     <div  class="btn-group">
         <a href="/type/smartphone" class="btn btn-primary btn btn-lg" role="button">Smartphones</a>
         <a href="/type/tablet" class="btn btn-primary btn btn-lg" role="button">Tablets</a>
         <a href="/type/laptop" class="btn btn-primary btn btn-lg" role="button">Laptops</a>
     </div>
-    <div align="center"><h2>RAM:</h2></div>
-    <div class="checkbox">
-        <label><input type="checkbox" name="ram" value="2">2 GB</label>
-    </div>
-    <div class="checkbox">
-        <label><input type="checkbox" name="ram" value="4">4 GB</label>
-    </div>
-    <div class="checkbox ">
-        <label><input type="checkbox" name="ram" value="8">8 GB</label>
-    </div>
+    <div align="center"><h3>RAM:</h3></div>
+    <label class="checkbox-inline"><input type="checkbox" name="ram" value="2" >2 GB</label>
+    <label class="checkbox-inline"><input type="checkbox" name="ram" value="4">4 GB</label>
+    <label class="checkbox-inline"><input type="checkbox" name="ram"  value="8">8 GB</label>
+    <label class="checkbox-inline"><input type="checkbox" name="ram" value="16">16 GB</label>
+    <button type="submit" class="btn btn-info">Submit</button></form>
 </div>
 
     <table class="table table-default">
