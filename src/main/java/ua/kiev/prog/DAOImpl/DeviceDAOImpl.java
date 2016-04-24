@@ -25,17 +25,13 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
 
-
-
     @Override
     public void delete(int id) {
 
 
-           Device d = entityManager.getReference(Device.class, id);
-            entityManager.remove(d);
-        }
-
-
+        Device d = entityManager.getReference(Device.class, id);
+        entityManager.remove(d);
+    }
 
 
     @Override
@@ -62,9 +58,9 @@ public class DeviceDAOImpl implements DeviceDAO {
     @Override
     public Device findOne(int id) {
 
-        Query query=entityManager.createQuery("select d from Device d where d.id=:id", Device.class);
-        query.setParameter("id" , id);
-        Device d= (Device) query.getSingleResult();
+        Query query = entityManager.createQuery("select d from Device d where d.id=:id", Device.class);
+        query.setParameter("id", id);
+        Device d = (Device) query.getSingleResult();
 
         return d;
     }
@@ -74,10 +70,10 @@ public class DeviceDAOImpl implements DeviceDAO {
 
         Query query = entityManager.createQuery("select c from Cart c", Cart.class);
 
-        List<Cart>l=query.getResultList();
-        int sum=0;
+        List<Cart> l = query.getResultList();
+        int sum = 0;
         for (Cart c : l) {
-            sum=sum+c.totalPrice();
+            sum = sum + c.totalPrice();
         }
         return sum;
 
@@ -86,24 +82,21 @@ public class DeviceDAOImpl implements DeviceDAO {
 
     @Override
     public List<Device> priceFilter(int max) {
-        if(max == -1){
-            Query query= entityManager.createQuery("select d from Device d ", Device.class);
-            return query.getResultList();
-        }else{
-        Query query= entityManager.createQuery("select d from Device d where  d.price<=:max", Device.class);
-
-        query.setParameter("max", max);
-         return query.getResultList();
-
-    }}
-
-    public List<Device> ramFilter(List<Integer> ram) {
-       if(ram.equals(null)){
-
-            Query query = entityManager.createQuery("select d from Device d", Device.class);
+        if (max == -1) {
+            Query query = entityManager.createQuery("select d from Device d ", Device.class);
             return query.getResultList();
         } else {
-            Query query = entityManager.createQuery("select d from Device d", Device.class);
+            Query query = entityManager.createQuery("select d from Device d where  d.price<=:max", Device.class);
+
+            query.setParameter("max", max);
+            return query.getResultList();
+
+        }
+    }
+
+    public List<Device> ramFilter(List<Integer> ram) {
+
+            Query query = entityManager.createQuery("select d from Device d ", Device.class);
             List<Device> a = query.getResultList();
             List<Device> b = new ArrayList<>();
 
@@ -120,9 +113,8 @@ public class DeviceDAOImpl implements DeviceDAO {
         }
 
 
-
-        }
     }
+
 
 
 

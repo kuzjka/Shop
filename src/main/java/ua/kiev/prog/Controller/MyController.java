@@ -75,15 +75,15 @@ public class MyController {
 
 
         for (String s : sram) {
-
-                ram.add(Integer.parseInt(s));
+                if(s!=null){
+                ram.add(Integer.parseInt(s));}
             }
 
 
 
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.ramFilter(ram));
-        model.addAttribute("devices" , deviceService.priceFilter(Integer.parseInt(max_price)));
+
         return "index";
     }
 
