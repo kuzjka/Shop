@@ -61,7 +61,7 @@
         <input type="submit">
     </form>
 </div>
-<div>
+
     <table class="table table-default">
         <thead>
         <tr>
@@ -76,7 +76,7 @@
         </tr>
         </thead>
         <c:forEach items="${devices}" var="device">
-        <tr>
+
 
             <td><a href="/onedevice/${device.id}"><img class="img-responsive" height="100" width="100"
                                                        src="/device/${device.id}/0"/></a></td>
@@ -95,11 +95,31 @@
             </c:choose>
 
 
-            <td><a href="/cart_add_page" class="btn btn-info" role="button">To cart</a></td>
+<c:set var="count" value="${0}"/>
 
+
+            <c:forEach items="${carts}"   var="cart">
+
+
+
+
+
+    <c:if test="${cart.device.id == device.id}">
+        ${count = count+1}
+                <td><a href="/cart_add_page">${cart.items}In cart</a></td>
+    </c:if>
+
+
+
+
+
+
+</c:forEach>
+            <c:if test="${count == 0}">
+                <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
+            </c:if>
 
         </tr>
-
         </c:forEach>
     </table>
 </div></div>
