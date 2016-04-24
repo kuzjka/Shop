@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn"
-           uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
@@ -95,10 +94,10 @@
             </c:choose>
 
 
-<c:set var="count" value="${0}"/>
+            <sec:authorize url="/login"><c:set var="count" scope="session" value="${0}"/>
 
 
-            <c:forEach items="${carts}"   var="cart">
+             <c:forEach items="${carts}"   var="cart">
 
 
 
@@ -106,7 +105,7 @@
 
     <c:if test="${cart.device.id == device.id}">
         ${count = count+1}
-                <td><a href="/cart_add_page">${cart.items}In cart</a></td>
+        <td><a href="/cart_add_page">${cart.items}In cart</a></td>
     </c:if>
 
 
@@ -117,7 +116,7 @@
 </c:forEach>
             <c:if test="${count == 0}">
                 <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
-            </c:if>
+            </c:if></sec:authorize>
 
         </tr>
         </c:forEach>
