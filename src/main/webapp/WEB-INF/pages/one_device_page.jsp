@@ -49,5 +49,6 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+<div align="center"><a href="/${id}/1" class="btn btn-lg btn btn-success" role="button">To cart</a> </div>
 </body>
 </html>

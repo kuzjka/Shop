@@ -168,11 +168,13 @@ public class MyController {
     }
 
 
-    @RequestMapping(value = "/device/delete/{id}", method = RequestMethod.GET)
-    public String search(@PathVariable(value = "id") int toDelete, Model model) {
+    @RequestMapping(value = "/device/delete", method = RequestMethod.GET)
+    public String search(HttpServletRequest request, Model model) {
 
-        deviceService.deleteDevice(toDelete);
-
+        String []del = request.getParameterValues("todelete[]");
+        for(String d: del){
+           deviceService.deleteDevice(Integer.parseInt(d));
+        }
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices(null));
         return "index_admin";

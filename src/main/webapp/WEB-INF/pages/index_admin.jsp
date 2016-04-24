@@ -52,10 +52,12 @@
         </div><!-- /.container-fluid -->
     </nav>
 
+    <form action="/device/delete" method="get">
     <table class="table table-striped">
         <thead>
         <tr>
-            <td></td>
+            <td><input type="submit" class="btn btn-danger" value="Delete"> </td>
+
             <td><b>Photo</b></td>
             <td><b>Name</b></td>
             <td><b>Manufactor</b></td>
@@ -64,8 +66,9 @@
         </tr>
         </thead>
         <c:forEach items="${devices}" var="device">
-            <tr>
-                <td><input type=checkbox name="todelete[]" value="${device.id}"></td>
+         <tr>
+
+                <td><input type=checkbox id="td" name="todelete[]" value="${device.id}"></td>
                 <td><img class="img-responsive" height="200" width="200" src="/device/${device.id}/0"/></td>
                 <td>${device.name}</td>
                 <td>${device.manufacturer}</td>
@@ -78,12 +81,13 @@
                         <td>Default</td>
                     </c:otherwise>
                 </c:choose>
+                <td></td>
 
 
+            </tr></c:forEach>
 
-            </tr>
-        </c:forEach>
     </table>
+        </form>
 </div>
 
 <script>
