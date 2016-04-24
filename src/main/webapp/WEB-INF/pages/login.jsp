@@ -1,20 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Anton
-  Date: 14.04.2016
-  Time: 19:06
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div align="center"><form action="/login" method="post">
-    <p><input name = "username" type="text"></p>
-    <p><input type = "password" name="password"></p>
-    <p><input type = "submit"></p></form>
-<p></p></form> </div>
+
 </body>
 </html>

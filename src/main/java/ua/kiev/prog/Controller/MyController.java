@@ -35,6 +35,10 @@ public class MyController {
         return "index";
 
     }
+    @RequestMapping("/user")
+    public String login(){
+        return "login";
+    }
 
     @RequestMapping("/type/{type}")
     public String type(Model model, @PathVariable String type) {

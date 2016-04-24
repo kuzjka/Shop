@@ -31,7 +31,7 @@
         </ul>
     </div>
 </nav>
-<button data-toggle="collapse" class="btn btn-info" data-target="#demo">Filters</button>
+<div align="center"><button data-toggle="collapse"  class="btn btn-info" data-target="#demo">Filters</button></div>
 
 <div id="demo" align="center" class="collapse">
     <form class="form-inline" action="/price_filter" method="post" role="form">
@@ -51,14 +51,16 @@
         <a href="/type/tablet" class="btn btn-primary btn btn-lg" role="button">Tablets</a>
         <a href="/type/laptop" class="btn btn-primary btn btn-lg" role="button">Laptops</a>
     </div>
-</div>
-<div align="center">
-    <form action="/ramfilter" method="post">
-        <input type="checkbox" name="ram" value="2">2</input>
-        <input type="checkbox" name="ram" value="4">4</input>
-        <input type="checkbox" name="ram" value="8">8</input>
-        <input type="submit">
-    </form>
+
+    <div class="checkbox">
+        <label><input type="checkbox" name="ram" value="2">2 GB</label>
+    </div>
+    <div class="checkbox">
+        <label><input type="checkbox" name="ram" value="4">4 GB</label>
+    </div>
+    <div class="checkbox ">
+        <label><input type="checkbox" name="ram" value="8">8 GB</label>
+    </div>
 </div>
 
     <table class="table table-default">
@@ -80,10 +82,10 @@
             <td><a href="/onedevice/${device.id}"><img class="img-responsive" height="100" width="100"
                                                        src="/device/${device.id}/0"/></a></td>
             <td>${device.name}</td>
-                <td>${device.manufacturer}</td>
+            <td>${device.manufacturer}</td>
             <td>${device.price}</td>
-                <td>${device.ram}</td>
-                <td>${device.processor}</td>
+            <td>${device.ram}</td>
+            <td>${device.processor}</td>
             <c:choose>
                 <c:when test="${device.type ne null}">
                     <td>${device.type.name}</td>
@@ -105,7 +107,7 @@
 
     <c:if test="${cart.device.id == device.id}">
         ${count = count+1}
-        <td><a href="/cart_add_page">${cart.items}In cart</a></td>
+        <td><a href="/cart_add_page">In cart <span class="badge">${cart.items}</span></a><br></td>
     </c:if>
 
 
