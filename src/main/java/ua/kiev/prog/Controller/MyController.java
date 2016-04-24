@@ -1,6 +1,8 @@
 package ua.kiev.prog.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -125,7 +127,7 @@ public class MyController {
         return "index";
     }
 
-
+    @PreAuthorize("/login")
     @RequestMapping(value = "/admin" )
     public String index_admin(Model model) {
 

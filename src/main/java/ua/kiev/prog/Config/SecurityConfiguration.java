@@ -30,9 +30,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure (HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-
+                .antMatchers("/").permitAll()
                 .antMatchers("/login").authenticated()
-                .anyRequest().permitAll()
+                .antMatchers("/admin").authenticated()
                 .and().formLogin()
                 .usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/")
 

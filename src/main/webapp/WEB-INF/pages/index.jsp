@@ -17,7 +17,7 @@
             <a class="navbar-brand" href="/">Shop</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/">All</a></li>
+            <li class="active"><a href="/">Home</a></li>
 
 
             <li><a href="/cart_add_page">Cart</a></li>
@@ -51,7 +51,7 @@
         <a href="/type/tablet" class="btn btn-primary btn btn-lg" role="button">Tablets</a>
         <a href="/type/laptop" class="btn btn-primary btn btn-lg" role="button">Laptops</a>
     </div>
-
+    <div align="center"><h2>RAM:</h2></div>
     <div class="checkbox">
         <label><input type="checkbox" name="ram" value="2">2 GB</label>
     </div>
