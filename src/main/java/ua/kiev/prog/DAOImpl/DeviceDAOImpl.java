@@ -96,7 +96,7 @@ public class DeviceDAOImpl implements DeviceDAO {
 
     public List<Device> ramFilter(List<Integer> ram) {
 
-            Query query = entityManager.createQuery("select d from Device d ", Device.class);
+            Query query = entityManager.createQuery("select d from Device d  ", Device.class);
 
             List<Device> a = query.getResultList();
             List<Device> b = new ArrayList<>();
