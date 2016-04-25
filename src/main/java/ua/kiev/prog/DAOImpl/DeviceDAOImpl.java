@@ -94,26 +94,26 @@ public class DeviceDAOImpl implements DeviceDAO {
         }
     }
 
-    public List<Device> ramFilter(List<Integer> ram) {
+    public List<Device> ramFilter(List<Integer> ram, List<String> proc) {
 
             Query query = entityManager.createQuery("select d from Device d  ", Device.class);
 
             List<Device> a = query.getResultList();
             List<Device> b = new ArrayList<>();
-
+            int count=0;
             for (Device d : a) {
-                if (ram.contains(d.getRam())) {
+                if (ram.contains(d.getRam())&& proc.contains(d.getProcessor())) {
                     b.add(d);
-
+                    count++;
 
                 }
             }
-        if(ram.contains(-1)){
-            return a;
-        }else{
 
-            return b;
-        }}}
+            if(count==0){
+                return a;
+            }else{
+            return b;}
+        }}
 
 
 

@@ -38,27 +38,31 @@
 
         <div class="form-group">
             <label>Max price:</label>
-            <input type="text"   name="min_price">
+            <input type="text" class="form-control"  name="min_price">
         </div>
-        <div class="form-group">
-            <label>Max price:</label>
-            <input type="text"   name="max_price">
-        </div>
-    </form>
 
 
-    <div  class="btn-group">
-        <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
-        <a href="/type/tablet" class="btn btn-primary" role="button">Tablets</a>
-        <a href="/type/laptop" class="btn btn-primary" role="button">Laptops</a>
-    </div>
-    <div align="center"><label>RAM:</label></div>
-        <form action="/filter" method="post">
-    <label class="checkbox-inline"><input type="checkbox" name="ram" value="2">2 GB</label>
+
+
+
+    <div align="center"><label>Select RAM:</label></div>
+            <label class="checkbox-inline"><input type="checkbox" name="ram" value="2">2 GB</label>
     <label class="checkbox-inline"><input type="checkbox" name="ram" value="4">4 GB</label>
     <label class="checkbox-inline"><input type="checkbox" name="ram"  value="8">8 GB</label>
     <label class="checkbox-inline"><input type="checkbox" name="ram" value="16">16 GB</label>
+
+    <div align="center"><label>Select processor:</label></div>
+    <label class="checkbox-inline"><input type="checkbox" name="proc" value="i3">i3</label>
+    <label class="checkbox-inline"><input type="checkbox" name="proc" value="i5">i5</label>
+    <label class="checkbox-inline"><input type="checkbox" name="proc" value="i7">i7</label>
+
     <button type="submit" class="btn btn-info">Submit</button></form>
+
+</div>
+<div  class="btn-group">
+    <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
+    <a href="/type/tablet" class="btn btn-primary" role="button">Tablets</a>
+    <a href="/type/laptop" class="btn btn-primary" role="button">Laptops</a>
 </div>
 
     <table class="table table-default">
