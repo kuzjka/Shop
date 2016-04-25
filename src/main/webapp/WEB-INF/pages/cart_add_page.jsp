@@ -14,7 +14,7 @@
             <a class="navbar-brand" href="/">Shop</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/">All</a></li>
+            <li class="active"><a href="/">Home</a></li>
 
 
             <li><a href="/cart_add_page">Cart</a></li>
@@ -34,6 +34,7 @@
 <table class="table table-default">
     <thead>
     <tr><td><b></b></td>
+        <td><b>Photo</b></td>
         <td><b>Device</b></td>
         <td><b>Price</b></td>
         <td><b>Items</b></td>
@@ -45,6 +46,8 @@
 <c:forEach items="${carts}" var="cart">
     <tr>
         <td><a href="/cart/delete/${cart.id}" class="btn btn-info" role="button">Delete from cart</a></td>
+        <td><img class="img-responsive" alt="No photo" height="200" width="200"
+             src="/device/${device.id}/0"/></td>
         <td>${cart.device.name}</td>
         <td>${cart.device.price}</td>
         <td>${cart.items}</td>

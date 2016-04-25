@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class="container">
-            <form role="form" enctype="multipart/form-data" class="form-horizontal" action="/type/add" method="post">
+            <form role="form" enctype="multipart/form-data" class="form-horizontal" action="/addtype" method="post">
                 <div class="form-type"><h3>New Type</h3></div>
                 <div class="form-type"><input type="text" class="form-control" name="name" placeholder="Name"></div>
                 <div class="form-type"><input type="submit" class="btn btn-primary" value="Add"></div>

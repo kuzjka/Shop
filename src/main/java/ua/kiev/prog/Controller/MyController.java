@@ -69,7 +69,7 @@ public class MyController {
 
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST)
-    public String ramFilter(HttpServletRequest request,  @RequestParam(required = false, defaultValue = "-1") String max_price, Model model) {
+    public String ramFilter(HttpServletRequest request,  @RequestParam(required = false, defaultValue = "-1") Integer max_price, Model model) {
         String[] sram = request.getParameterValues("ram");
         String [] sproc = request.getParameterValues("proc");
 
@@ -82,12 +82,13 @@ public class MyController {
             ram.add(2);
             ram.add(4);
             ram.add(8);
+            ram.add(16);
 
         }
 
         if(sproc!=null)
             for(String p :sproc){
-                if(p!=null)
+
                 proc.add(p);
             }else{
             proc.add("i3");
@@ -98,7 +99,7 @@ public class MyController {
 
 
 
-            model.addAttribute("devices", deviceService.ramFilter(ram, proc));
+            model.addAttribute("devices", deviceService.filter(ram, proc, max_price));
         return "index";}
 
 
@@ -195,7 +196,7 @@ public class MyController {
         return "index_admin";
     }
 
-    @RequestMapping(value = "/device/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/adddevice", method = RequestMethod.POST)
     public String contactAdd(@RequestParam(value = "type") int typeId,
                              @RequestParam String name,
                              @RequestParam String manufacturer,
@@ -217,7 +218,7 @@ public class MyController {
         return "index_admin";
     }
 
-    @RequestMapping(value = "/type/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/addtype", method = RequestMethod.POST)
     public String groupAdd(@RequestParam String name, Model model) {
         deviceService.addType(new Type(name));
 

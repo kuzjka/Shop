@@ -83,25 +83,25 @@ public class DeviceDAOImpl implements DeviceDAO {
 
 
     public List<Device> filter(List<Integer> ram, List<String> proc, int max) {
-
+            if(max==-1){
+                max=Integer.MAX_VALUE;
+            }
             Query query = entityManager.createQuery("select d from Device d where d.price<=:max ", Device.class);
             query.setParameter("max" , max);
             List<Device> a = query.getResultList();
             List<Device> b = new ArrayList<>();
-            int count=0;
+
             for (Device d : a) {
                 if (ram.contains(d.getRam())&& proc.contains(d.getProcessor())) {
                     b.add(d);
-                    count++;
+
 
                 }
             }
 
-            if(count==0){
-                return a;
-            }else{
+
             return b;}
-        }}
+        }
 
 
 

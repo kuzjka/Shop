@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="container">
-            <form role="form"   enctype="multipart/form-data" class="form-horizontal" action="/device/add" method="post">
+            <form role="form"   enctype="multipart/form-data" class="form-horizontal" action="/adddevice" method="post">
                         <h3>New device</h3>
                         <select class="selectpicker form-control form-type" name="type">
 

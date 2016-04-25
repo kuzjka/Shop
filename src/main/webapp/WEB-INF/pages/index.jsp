@@ -11,8 +11,8 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
+<nav align = "center" class="navbar navbar-inverse">
+    <div align="center" class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Shop</a>
         </div>
@@ -45,8 +45,7 @@
 
 
 
-    <div align="center"><label>Select RAM:</label></div>
-            <label class="checkbox-inline"><input type="checkbox" name="ram" value="2">2 GB</label>
+    <div align="center"><label>Select RAM:</label></div><label class="checkbox-inline"><input type="checkbox" name="ram" value="2">2 GB</label>
     <label class="checkbox-inline"><input type="checkbox" name="ram" value="4">4 GB</label>
     <label class="checkbox-inline"><input type="checkbox" name="ram"  value="8">8 GB</label>
     <label class="checkbox-inline"><input type="checkbox" name="ram" value="16">16 GB</label>
@@ -59,10 +58,11 @@
     <button type="submit" class="btn btn-info">Submit</button></form>
 
 </div>
-<div  class="btn-group">
-    <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
-    <a href="/type/tablet" class="btn btn-primary" role="button">Tablets</a>
+<div align="center" class="container">
+<div align="center"  class="btn-group">
+    <a href="/type/smartphone" class="btn btn-primary" role="button">Smartphones</a>
     <a href="/type/laptop" class="btn btn-primary" role="button">Laptops</a>
+    <a href="/type/desctop" class="btn btn-primary" role="button">Desctops</a>
 </div>
 
     <table class="table table-default">
@@ -108,8 +108,9 @@
 
 
     <c:if test="${cart.device.id == device.id}">
-        ${count = count+1}
+
         <td><a href="/cart_add_page">In cart <span class="badge">${cart.items}</span></a><br></td>
+        ${count+1}
     </c:if>
 
 
@@ -125,6 +126,6 @@
         </tr>
         </c:forEach>
     </table>
-</div></div>
+</div>
 </body>
 </html>

@@ -10,47 +10,17 @@
 </head>
 
 
-<div class="container">
+<div align="center" class="container">
     <h3>Devices List</h3>
-
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul id="groupList" class="nav navbar-nav">
-
-                    <li>
-                        <button type="button" id="add_photo" class="btn btn-primary navbar-btn">Add Photo</button>
-                    </li>
-                    <li>
-                        <button type="button" id="add_device" class="btn btn-primary navbar-btn">Add Device</button>
-                    </li>
-                    <li>
-                        <button type="button" id="add_type" class="btn btn-primary navbar-btn">Add Type</button>
-                    </li>
-                    <li class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle navbar-btn" type="button" data-toggle="dropdown">Device type
-                            <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="/searchByType/desctop">Desctop</a></li>
-                            <li><a href="/searchByType/laptop">Laptop</a></li>
-                            <li><a href="/searchByType/tablet">Tablet</a></li>
-                            <li><a href="/searchByType/smartphone">Smartphone</a></li>
-                            <li><a href="/searchByType/all">All</a></li>
-                        </ul>
-                    </li>
+    <div align="center"  class="btn-group">
+        <a href ="/" class="btn btn-primary" role="button">Home</a>
+        <a href="/photo_add_page" class="btn btn-primary" role="button">Add photo</a>
+        <a href="/device_add_page" class="btn btn-primary" role="button">Add device</a>
+        <a href="/type_add_page" class="btn btn-primary" role="button">Add type</a>
+    </div>
 
 
-                </ul>
-                <form class="navbar-form navbar-left" role="search" action="/search" method="post">
-                    <div class="form-type">
-                        <input type="text" class="form-control" name="pattern" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
+
 
     <form action="/device/delete" method="get">
     <table class="table table-striped">
@@ -69,7 +39,7 @@
          <tr>
 
                 <td><input type=checkbox id="td" name="todelete[]" value="${device.id}"></td>
-                <td><img class="img-responsive" height="100" width="100" src="/device/${device.id}/0"/></td>
+                <td><img class="img-responsive" height="100" width="100" alt="No Photo" src="/device/${device.id}/0"/></td>
                 <td>${device.name}</td>
                 <td>${device.manufacturer}</td>
                 <td>${device.price}</td>
@@ -90,23 +60,6 @@
         </form>
 </div>
 
-<script>
-    $('.dropdown-toggle').dropdown();
 
-    $('#add_device').click(function () {
-        window.location.href = "/device_add_page/";
-    })
-
-    $('#add_type').click(function () {
-        window.location.href = '/type_add_page';
-    })
-    $('#add_photo').click(function () {
-        window.location.href = '/photo_add_page';
-    })
-
-    $("li .searchterm").click(function () {
-        console.log('testing');
-    });
-</script>
 </body>
 </html>
