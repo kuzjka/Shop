@@ -91,10 +91,7 @@ public class DeviceService {
     public List<Device> searchDevices(String pattern) {
         return deviceDAO.list(pattern);
     }
-    @Transactional(readOnly = true)
-    public List<Device> priceFilter( int max) {
-        return deviceDAO.priceFilter(max);
-    }
+
     @Transactional(readOnly = true)
     public int totalPrice() {
         return deviceDAO.total();
@@ -115,7 +112,7 @@ public class DeviceService {
     public List<Photo> getPhoto(Device device){ return photoDao.getPhoto(device);}
 
     @Transactional
-    public List<Device> ramFilter(List<Integer> ram , List<String> proc) {
-        return deviceDAO.ramFilter(ram, proc);
+    public List<Device> filter(List<Integer> ram , List<String> proc, int max) {
+        return deviceDAO.filter(ram, proc, max);
     }
 }

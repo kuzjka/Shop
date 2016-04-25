@@ -79,14 +79,21 @@ public class MyController {
         for (String s : sram)
 
                 ram.add(Integer.parseInt(s));}else{
-            ram.add(-1);}
+            ram.add(2);
+            ram.add(4);
+            ram.add(8);
+
+        }
 
         if(sproc!=null)
             for(String p :sproc){
                 if(p!=null)
                 proc.add(p);
             }else{
-            proc.add(null);
+            proc.add("i3");
+            proc.add("i5");
+            proc.add("i7");
+
         }
 
 
