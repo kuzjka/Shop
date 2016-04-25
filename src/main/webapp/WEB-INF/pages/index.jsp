@@ -38,17 +38,22 @@
 
         <div class="form-group">
             <label>Max price:</label>
+            <input type="text"   name="min_price">
+        </div>
+        <div class="form-group">
+            <label>Max price:</label>
             <input type="text"   name="max_price">
         </div>
-
+    </form>
 
 
     <div  class="btn-group">
-        <a href="/type/smartphone" class="btn btn-primary btn btn-lg" role="button">Smartphones</a>
-        <a href="/type/tablet" class="btn btn-primary btn btn-lg" role="button">Tablets</a>
-        <a href="/type/laptop" class="btn btn-primary btn btn-lg" role="button">Laptops</a>
+        <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
+        <a href="/type/tablet" class="btn btn-primary" role="button">Tablets</a>
+        <a href="/type/laptop" class="btn btn-primary" role="button">Laptops</a>
     </div>
-    <div align="center"><h3>RAM:</h3></div>
+    <div align="center"><label>RAM:</label></div>
+        <form action="/filter" method="post">
     <label class="checkbox-inline"><input type="checkbox" name="ram" value="2">2 GB</label>
     <label class="checkbox-inline"><input type="checkbox" name="ram" value="4">4 GB</label>
     <label class="checkbox-inline"><input type="checkbox" name="ram"  value="8">8 GB</label>

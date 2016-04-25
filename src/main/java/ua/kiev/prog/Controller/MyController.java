@@ -69,23 +69,24 @@ public class MyController {
 
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST)
-    public String ramFilter(HttpServletRequest request, @RequestParam(required = false, defaultValue = "-1") String max_price, Model model) {
+    public String ramFilter(HttpServletRequest request,  @RequestParam(required = false, defaultValue = "-1") String max_price, Model model) {
         String[] sram = request.getParameterValues("ram");
+
         List<Integer> ram = new ArrayList<>();
 
+        if(sram!=null){
+        for (String s : sram)
 
-        for (String s : sram) {
-                if(s!=null){
-                ram.add(Integer.parseInt(s));}
-            }
+                ram.add(Integer.parseInt(s));}else{
+            ram.add(-1);}
 
 
 
-        model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.ramFilter(ram));
 
-        return "index";
-    }
+            model.addAttribute("devices", deviceService.ramFilter(ram));
+        return "index";}
+
+
 
     @RequestMapping("/photo_add_page")
     public String photoAddPage(Model model){
