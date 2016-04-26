@@ -22,6 +22,7 @@
 
             <li><a href="/cart_add_page">Cart</a></li>
             <li><a href="/order_add_page">Order</a></li>
+            <li><a href="/photo/all">Photos</a></li>
             <li><a href="/admin">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -31,13 +32,11 @@
         </ul>
     </div>
 </nav>
-<div align="center"><button data-toggle="collapse"  class="btn btn-info" data-target="#demo">Filters</button></div>
-
-<div id="demo" align="center" class="collapse">
+<div >
     <form class="form-inline"  action="/filter" method="post" role="form">
 
         <div class="form-group">
-            <label>Max price:</label>
+            <label>Max price: </label>
             <input type="text" class="form-control"  name="min_price">
         </div>
 
@@ -45,25 +44,21 @@
 
 
 
-    <div align="center"><label>Select RAM:</label></div><label class="checkbox-inline"><input type="checkbox" name="ram" value="2">2 GB</label>
+        <label>Select RAM:</label>
+        <label class="checkbox-inline"><input type="checkbox" name="ram" value="2">2 GB</label>
     <label class="checkbox-inline"><input type="checkbox" name="ram" value="4">4 GB</label>
     <label class="checkbox-inline"><input type="checkbox" name="ram"  value="8">8 GB</label>
     <label class="checkbox-inline"><input type="checkbox" name="ram" value="16">16 GB</label>
-
-    <div align="center"><label>Select processor:</label></div>
+        <label>Select processor: </label>
     <label class="checkbox-inline"><input type="checkbox" name="proc" value="i3">i3</label>
     <label class="checkbox-inline"><input type="checkbox" name="proc" value="i5">i5</label>
     <label class="checkbox-inline"><input type="checkbox" name="proc" value="i7">i7</label>
 
-    <button type="submit" class="btn btn-info">Submit</button></form>
+    <button  type="submit" class="btn btn-info">Submit</button></form>
 
 </div>
 <div align="center" class="container">
-<div align="center"  class="btn-group">
-    <a href="/type/smartphone" class="btn btn-primary" role="button">Smartphones</a>
-    <a href="/type/laptop" class="btn btn-primary" role="button">Laptops</a>
-    <a href="/type/desctop" class="btn btn-primary" role="button">Desctops</a>
-</div>
+
 
     <table class="table table-default">
         <thead>

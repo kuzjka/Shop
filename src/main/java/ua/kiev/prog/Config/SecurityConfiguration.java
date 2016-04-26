@@ -32,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").authenticated()
-                .antMatchers("/admin").authenticated()
+                .antMatchers("/admin", "/cart_add_page", "/order_add_page").authenticated()
                 .and().formLogin()
                 .usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/")
 

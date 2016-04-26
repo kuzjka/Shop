@@ -10,6 +10,11 @@
 </head>
 <body>
 <div align="center"><h1>Type: ${type}</h1></div>
+<div align="center"  class="btn-group">
+    <a href="/photo/smartphone" class="btn btn-primary" role="button">Smartphones</a>
+    <a href="/photo/laptop" class="btn btn-primary" role="button">Laptops</a>
+    <a href="/photo/desctop" class="btn btn-primary" role="button">Desctops</a>
+</div>
 <div class="container">
     <br>
     <div id="myCarousel" class="carousel slide" data-ride="carousel">

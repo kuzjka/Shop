@@ -38,12 +38,12 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List<Device> listByType(String typeName) {
         Query query;
 
-        if (typeName != null) {
-            query = entityManager.createQuery("SELECT d FROM Device d WHERE d.type.name = :typeName", Device.class);
-            query.setParameter("typeName", typeName);
-        } else {
+        if (typeName.equals("all")) {
             query = entityManager.createQuery("SELECT d FROM Device d", Device.class);
-        }
+
+        } else {
+            query = entityManager.createQuery("SELECT d FROM Device d  WHERE d.type.name = :typeName", Device.class);
+        query.setParameter("typeName", typeName);}
 
         return (List<Device>) query.getResultList();
     }

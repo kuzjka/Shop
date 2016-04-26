@@ -31,7 +31,7 @@ public class MyController {
 
 
         model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices(null));
+        model.addAttribute("devices", deviceService.listDevices("all"));
 
         model.addAttribute("carts", deviceService.listCarts());
         return "index";
@@ -42,8 +42,9 @@ public class MyController {
         return "login";
     }
 
-    @RequestMapping("/type/{type}")
+    @RequestMapping("/photo/{type}")
     public String type(Model model, @PathVariable String type) {
+
         List<Device> l = deviceService.listDevices(type);
         Random rn = new Random();
         Device d1 = l.get(rn.nextInt(l.size()));
@@ -56,7 +57,7 @@ public class MyController {
         model.addAttribute("d4", d4);
         model.addAttribute("type", type);
 
-        return "type";
+        return "photos";
     }
     @RequestMapping("/onedevice/{id}")
     public String oneDevice(Model model, @PathVariable int id){
@@ -106,7 +107,7 @@ public class MyController {
 
     @RequestMapping("/photo_add_page")
     public String photoAddPage(Model model){
-        model.addAttribute("devices", deviceService.listDevices(null));
+        model.addAttribute("devices", deviceService.listDevices("all"));
         return "photo_add_page";
     }
 
@@ -117,7 +118,7 @@ public class MyController {
         Device d= deviceService.findDevice(id);
         deviceService.addPhoto(new Photo(d, photo.getOriginalFilename(), photo.getBytes()));
         model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices(null));
+        model.addAttribute("devices", deviceService.listDevices("all"));
         return "index_admin";
     }
 
@@ -133,7 +134,7 @@ public class MyController {
         deviceService.addUser(new User(user, password, true));
         deviceService.addRole(new Role(user,role));
         model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices(null));
+        model.addAttribute("devices", deviceService.listDevices("all"));
         return "index";
     }
 
@@ -142,7 +143,7 @@ public class MyController {
     public String index_admin(Model model) {
 
         model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices(null));
+        model.addAttribute("devices", deviceService.listDevices("all"));
 
 
         return "index_admin";
@@ -174,12 +175,11 @@ public class MyController {
     public String searchByType(@PathVariable String type, Model model) {
 
 
-        model.addAttribute("types", deviceService.listTypes());
-        if (type.equals("all")) {
-            model.addAttribute("devices", deviceService.listDevices(null));
-        } else {
+
+
+
             model.addAttribute("devices", deviceService.listDevices(type));
-        }
+
         return "index_admin";
     }
 
@@ -214,7 +214,7 @@ public class MyController {
         deviceService.addDevice(device);
 
         model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices(null));
+        model.addAttribute("devices", deviceService.listDevices("all"));
         return "index_admin";
     }
 
@@ -223,7 +223,7 @@ public class MyController {
         deviceService.addType(new Type(name));
 
         model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices(null));
+        model.addAttribute("devices", deviceService.listDevices("all"));
         return "index_admin";
     }
 
