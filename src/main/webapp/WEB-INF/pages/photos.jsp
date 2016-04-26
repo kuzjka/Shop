@@ -9,6 +9,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div align="center"><a href="/" class="btn btn-info" role="button">Home</a></div>
 <div align="center"><h1>Type: ${type}</h1></div>
 <div align="center"  class="btn-group">
     <a href="/photo/smartphone" class="btn btn-primary" role="button">Smartphones</a>

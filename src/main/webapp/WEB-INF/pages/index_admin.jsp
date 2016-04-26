@@ -39,7 +39,7 @@
          <tr>
 
                 <td><input type=checkbox id="td" name="todelete[]" value="${device.id}"></td>
-                <td><img class="img-responsive" height="100" width="100" alt="No Photo" src="/device/${device.id}/0"/></td>
+                <td><img class="img-responsive" alt="No Photo" height="100" width="100"  src="/device/${device.id}/0"/></td>
                 <td>${device.name}</td>
                 <td>${device.manufacturer}</td>
                 <td>${device.price}</td>
