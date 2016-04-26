@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
-<body>
+<p>
 
 <nav align = "center" class="navbar navbar-inverse">
     <div align="center" class="container">
@@ -32,30 +32,41 @@
         </ul>
     </div>
 </nav>
-<div >
-    <form class="form-inline"  action="/filter" method="post" role="form">
+<div align="center"><button  data-toggle="collapse" class="btn btn-info" data-target="#demo">Filters</button></div>
 
-        <div class="form-group">
-            <label>Max price: </label>
-            <input type="text" class="form-control"  name="min_price">
-        </div>
+<div id="demo" class="collapse">
+    <div align="center">
+        <form class="form-inline"  action="/filter" method="post" role="form">
+
+            <div class="form-group">
+                <label>Max price: </label>
+                <input type="text" class="form-control"  name="min_price">
+            </div>
 
 
 
 
 
-        <label>Select RAM:</label>
-        <label class="checkbox-inline"><input type="checkbox" name="ram" value="2">2 GB</label>
-    <label class="checkbox-inline"><input type="checkbox" name="ram" value="4">4 GB</label>
-    <label class="checkbox-inline"><input type="checkbox" name="ram"  value="8">8 GB</label>
-    <label class="checkbox-inline"><input type="checkbox" name="ram" value="16">16 GB</label>
-        <label>Select processor: </label>
-    <label class="checkbox-inline"><input type="checkbox" name="proc" value="i3">i3</label>
-    <label class="checkbox-inline"><input type="checkbox" name="proc" value="i5">i5</label>
-    <label class="checkbox-inline"><input type="checkbox" name="proc" value="i7">i7</label>
+            <label>RAM:</label>
+            <label class="checkbox-inline"><input type="checkbox" name="ram" value="2">2 GB</label>
+            <label class="checkbox-inline"><input type="checkbox" name="ram" value="4">4 GB</label>
+            <label class="checkbox-inline"><input type="checkbox" name="ram"  value="8">8 GB</label>
+            <label class="checkbox-inline"><input type="checkbox" name="ram" value="16">16 GB</label>
+            <label>Processor: </label>
+            <label class="checkbox-inline"><input type="checkbox" name="proc" value="i3">i3</label>
+            <label class="checkbox-inline"><input type="checkbox" name="proc" value="i5">i5</label>
+            <label class="checkbox-inline"><input type="checkbox" name="proc" value="i7">i7</label>
 
-    <button  type="submit" class="btn btn-info">Submit</button></form>
+            <button  type="submit" class="btn btn-info">Submit</button></form>
 
+    </div>
+</div><p></p>
+<div align="center">
+<div align="center"  class="btn-group">
+    <a href="/type/smartphone" class="btn btn-primary" role="button">Smartphones</a>
+    <a href="/type/laptop" class="btn btn-primary" role="button">Laptops</a>
+    <a href="/type/desctop" class="btn btn-primary" role="button">Desctops</a>
+</div>
 </div>
 <div align="center" class="container">
 

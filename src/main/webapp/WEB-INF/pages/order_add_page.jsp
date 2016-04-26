@@ -9,7 +9,7 @@
 </head>
 <body>
 <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
+    <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Shop</a>
         </div>
@@ -33,7 +33,7 @@
         <h3><input type="submit" class="btn btn-success" role="button" value="Make order"></h3>
 
             <c:forEach items="${carts}" var="cart">
-                In order: <input  type="checkbox" name="cart[]" value="${cart.id}" checked>${cart.device.name}</checkbox>
+                <label>In order:</label> <input  type="checkbox" name="cart[]" value="${cart.id}" checked>${cart.device.name}</checkbox>
             </c:forEach>
 
         <input class="form-control form-type" type="text" name="name" placeholder="Name">

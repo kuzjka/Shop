@@ -171,7 +171,7 @@ public class MyController {
         return "index_admin";
     }
 
-    @RequestMapping(value = "/searchByType/{type}", method = RequestMethod.GET)
+    @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
     public String searchByType(@PathVariable String type, Model model) {
 
 
@@ -180,7 +180,7 @@ public class MyController {
 
             model.addAttribute("devices", deviceService.listDevices(type));
 
-        return "index_admin";
+        return "index";
     }
 
 
@@ -278,7 +278,7 @@ public class MyController {
 
 
 
-        model.addAttribute("carts", deviceService.listCarts());
+
         model.addAttribute("orders", deviceService.listOrders());
         model.addAttribute("total", deviceService.totalPrice());
         return "result_page";

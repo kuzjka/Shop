@@ -9,7 +9,7 @@
 </head>
 <body>
 <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
+    <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Shop</a>
         </div>
@@ -21,7 +21,8 @@
         </ul>
     </div>
 </nav>
-<table class="table table-striped">
+<div align="center"><h2>Total price: ${total}</h2></div>
+<table class="table table-default">
     <thead>
     <tr>
 
@@ -29,6 +30,7 @@
         <td><b>Address</b></td>
         <td><b>Phone</b></td>
         <td><b>Device</b></td>
+        <td><b>Items</b></td>
 
     </tr>
     </thead>
@@ -41,6 +43,9 @@
             <td>${order.address}</td>
             <td>${order.phone}</td>
             <td>${order.cart.device.name}</td>
+            <td>${order.cart.items}</td>
+
+
 
         </tr>
     </c:forEach>
