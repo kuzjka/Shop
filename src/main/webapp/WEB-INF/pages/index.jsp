@@ -81,7 +81,7 @@
             <td><b>RAM</b></td>
             <td><b>Processor</b></td>
             <td><b>Type</b></td>
-            <td><b>Login to by online or administrate site</b></td>
+            <td><b>Sign up to by online or administrate site</b></td>
         </tr>
         </thead>
         <c:forEach items="${devices}" var="device">

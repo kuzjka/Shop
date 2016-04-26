@@ -201,8 +201,8 @@ public class MyController {
                              @RequestParam String name,
                              @RequestParam String manufacturer,
                              @RequestParam int price,
-                             @RequestParam int ram,
-                             @RequestParam String processor,
+                             @RequestParam(required = false) int ram,
+                             @RequestParam (required = false)String processor,
 
 
                              Model model) throws IOException {

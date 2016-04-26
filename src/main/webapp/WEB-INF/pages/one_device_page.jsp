@@ -9,6 +9,7 @@
 
 </head>
 <body>
+<div align="center"><a href="/" class="btn btn-info" role="button">Home</a></div>
 <div align="center"><h1>${name}</h1></div>
 <div align="center" id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -49,6 +50,6 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-<div align="center"><a href="/${id}/1" class="btn btn-lg btn btn-success" role="button">To cart</a> </div>
+
 </body>
 </html>
