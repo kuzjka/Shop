@@ -149,7 +149,7 @@ public class MyController {
     }
 
 
-    @RequestMapping("/device_add_page/")
+    @RequestMapping("/device_add_page")
 
     public String contactAddPage(Model model) {
         model.addAttribute("types", deviceService.listTypes());
@@ -262,17 +262,22 @@ public class MyController {
         return "cart_add_page";
     }
 
-    @RequestMapping(value = "/orderAdd", method = RequestMethod.POST)
-    public String orderAdd(@RequestParam String name,
+    @RequestMapping(value = "/addorder", method = RequestMethod.POST)
+    public String orderAdd( HttpServletRequest request, @RequestParam String name,
                            @RequestParam String address,
                            @RequestParam String phone,
-                           @RequestParam(value = "cart") int cartId,
+
 
                            Model model) {
-        Cart cart = deviceService.findCart(cartId);
+        String[] sid=  request.getParameterValues("cart[]");
+        for(String s:sid){
+            Cart cart = deviceService.findCart(Integer.parseInt(s));
+            Order order = new Order (name, address, phone, cart );
+            deviceService.addOrder(order);
+        }
 
-        Order order = new Order(name, address, phone, cart);
-        deviceService.addOrder(order);
+
+
         model.addAttribute("carts", deviceService.listCarts());
         model.addAttribute("orders", deviceService.listOrders());
         model.addAttribute("total", deviceService.totalPrice());

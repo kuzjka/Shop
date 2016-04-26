@@ -36,6 +36,10 @@ public class CartDAOImpl implements CartDAO {
 
     @Override
     public Cart findOne(int id) {
-        return entityManager.getReference(Cart.class, id);
+
+        Query query = entityManager.createQuery("select c from Cart c where c.id=:id", Cart.class);
+        query.setParameter("id" , id);
+
+        return (Cart) query.getSingleResult();
     }
 }

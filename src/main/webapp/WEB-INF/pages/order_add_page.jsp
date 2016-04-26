@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -28,17 +29,17 @@
     </div>
 </nav>
 
-    <form role="form" enctype="multipart/form-data" class="form-horizontal" action="/orderAdd" method="post">
-        <h3>New order</h3>
-        <select class="selectpicker form-control form-type" name="cart">
+    <form role="form" enctype="multipart/form-data" class="form-horizontal" action="/addorder" method="post">
+        <h3><input type="submit" class="btn btn-success" role="button" value="Make order"></h3>
+
             <c:forEach items="${carts}" var="cart">
-                <option value="${cart.id}">${cart.device.name}</option>
+                In order: <input  type="checkbox" name="cart[]" value="${cart.id}" checked>${cart.device.name}</checkbox>
             </c:forEach>
-        </select>
+
         <input class="form-control form-type" type="text" name="name" placeholder="Name">
         <input class="form-control form-type" type="text" name="address" placeholder="Address">
         <input class="form-control form-type" type="text" name="phone" placeholder="Phone">
-        <input type="submit" class="btn btn-success" value="Add">
+
     </form>
 </div>
 

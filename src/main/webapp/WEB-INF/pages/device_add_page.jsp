@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="container">
-            <form role="form"   enctype="multipart/form-data" class="form-horizontal" action="/adddevice" method="post">
+            <form  role="form"   enctype="multipart/form-data" class="form-horizontal" action="/adddevice" method="post">
                         <h3>New device</h3>
                         <select class="selectpicker form-control form-type" name="type">
 
@@ -17,17 +17,15 @@
                                 <option value="${type.id}">${type.name}</option>
                             </c:forEach>
                         </select>
-                        <input class="form-control form-type" type="text"   name="name" placeholder="Name">
-                <input class="form-control form-type" type="text" name="manufacturer" placeholder="Manufacturer">
+                        <input class="form-control form-type" type="text" name="name" placeholder="Name">
+                        <input class="form-control form-type" type="text" name="manufacturer" placeholder="Manufacturer">
                         <input class="form-control form-type" type="text" name="price" placeholder="Price">
-                <input class="form-control form-type" type="text" name="ram" placeholder="RAM">
-                <input class="form-control form-type" type="text" name="processor" placeholder="Processor">
+                        <input class="form-control form-type" type="text" name="ram" placeholder="RAM">
+                        <input class="form-control form-type" type="text" name="processor" placeholder="Processor">
                         <input type="submit" class="btn btn-primary" value="Add">
             </form>
         </div>
 
-        <script>
-            $('.selectpicker').selectpicker();
-        </script>
+
     </body>
 </html>

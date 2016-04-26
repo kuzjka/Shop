@@ -7,7 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
-<body>
+
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -29,8 +29,7 @@
     </div>
 </nav>
 
-
-
+<h1 align="center">Total price: ${total}</h1>
 <table class="table table-default">
     <thead>
     <tr><td><b></b></td>
@@ -38,14 +37,15 @@
         <td><b>Device</b></td>
         <td><b>Price</b></td>
         <td><b>Items</b></td>
-        <td><b>Total price:${total}</b></td>
+
 
 
     </tr>
     </thead>
 <c:forEach items="${carts}" var="cart">
+
     <tr>
-        <td><a href="/cart/delete/${cart.id}" class="btn btn-info" role="button">Delete from cart</a></td>
+        <td><a href="/cart/delete/${cart.id}" class="btn btn-danger" role="button">Delete from cart</a></td>
         <td><img class="img-responsive" alt="No photo" height="200" width="200"
              src="/device/${device.id}/0"/></td>
         <td>${cart.device.name}</td>
@@ -59,6 +59,6 @@
 
 </table>
 
-</div>
+</h1>
 </body>
 </html>

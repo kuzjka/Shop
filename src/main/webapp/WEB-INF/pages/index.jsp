@@ -98,9 +98,9 @@
             </c:choose>
 
 
-            <sec:authorize url="/login"><c:set var="count" scope="session" value="${0}"/>
+            <sec:authorize url="/login">
 
-
+                <c:set var="count" value="${0}"/>
              <c:forEach items="${carts}"   var="cart">
 
 
@@ -108,9 +108,9 @@
 
 
     <c:if test="${cart.device.id == device.id}">
-
+        <c:remove var="count"/>
         <td><a href="/cart_add_page">In cart <span class="badge">${cart.items}</span></a><br></td>
-        ${count+1}
+
     </c:if>
 
 
@@ -121,7 +121,7 @@
 </c:forEach>
             <c:if test="${count == 0}">
                 <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
-            </c:if></sec:authorize>
+            </c:if> </sec:authorize>
 
         </tr>
         </c:forEach>
