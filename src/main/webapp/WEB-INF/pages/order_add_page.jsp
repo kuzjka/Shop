@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Order</title>
-    <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -33,8 +33,8 @@
     </div>
 </nav>
 
-    <form role="form" enctype="multipart/form-data"   class="form-horizontal" action="/addorder" method="post">
-        <h3><input type="submit" class="btn btn-success" role="button" value="Make order"></h3>
+    <form role="form" name="order"   class="form-horizontal"  method="post">
+        <h3><input type="submit" class="btn btn-success" role="button" value="Make order"  ></h3>
 
             <c:forEach items="${carts}" var="cart">
                 <label>In order:</label> <input  type="checkbox" name="cart[]" value="${cart.id}" checked>${cart.device.name}</checkbox>
@@ -45,6 +45,7 @@
         <input class="form-control form-type" type="text" name="phone" placeholder="Phone">
 
     </form>
+
 </div>
 
 

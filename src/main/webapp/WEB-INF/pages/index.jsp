@@ -1,11 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset = UTF-8"  language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<html>
+<div>
 <head>
     <title>Title</title>
-    <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -19,10 +19,10 @@
             <a class="navbar-brand" href="/">Shop</a>
         </div>
         <ul class="nav navbar-nav">
-            <li ><a href="/">Home</a></li>
+            <li ><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
 
 
-            <li><a href="/cart_add_page">Cart</a></li>
+            <li><a href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
             <li><a href="/order_add_page">Order</a></li>
             <li><a href="/photo/all">Photos</a></li>
             <li><a href="/admin">Admin</a></li>
@@ -34,43 +34,64 @@
         </ul>
     </div>
 </nav>
-<div align="center"><button  data-toggle="collapse" class="btn btn-info" data-target="#demo">Filters</button></div>
+<div align="center">
+    <div align="center"  class="btn-group">
+        <a href="/type/smartphone" class="btn btn-primary" role="button">Smartphones</a>
+        <a href="/type/laptop" class="btn btn-primary" role="button">Laptops</a>
+        <a href="/type/desctop" class="btn btn-primary" role="button">Desctops</a>
+    </div>
+</div>
+    <div class="container">
+<div class="row">
 
-<div id="demo" class="collapse">
-    <div align="center">
-        <form class="form-inline"  action="/filter" method="post" role="form">
+    <div class="col-sm-2">
+
+    <form action="/filter" method="post">
 
             <div class="form-group">
-                <label>Max price: </label>
-                <input type="text" class="form-control"  name="min_price">
+                <label for="min">Min price</label>
+                <input type="text" class="form-control" id="min">
+            </div>
+            <div class="form-group">
+                <label for="max">Max price</label>
+                <input type="text" class="form-control" id="max">
             </div>
 
 
 
 
 
-            <label>RAM:</label>
-            <label class="checkbox-inline"><input type="checkbox" name="ram" value="2">2 GB</label>
-            <label class="checkbox-inline"><input type="checkbox" name="ram" value="4">4 GB</label>
-            <label class="checkbox-inline"><input type="checkbox" name="ram"  value="8">8 GB</label>
-            <label class="checkbox-inline"><input type="checkbox" name="ram" value="16">16 GB</label>
-            <label>Processor: </label>
-            <label class="checkbox-inline"><input type="checkbox" name="proc" value="i3">i3</label>
-            <label class="checkbox-inline"><input type="checkbox" name="proc" value="i5">i5</label>
-            <label class="checkbox-inline"><input type="checkbox" name="proc" value="i7">i7</label>
 
-            <button  type="submit" class="btn btn-info">Submit</button></form>
+        <label>RAM:</label>
+        <div class="checkbox">
+            <label><input type="checkbox" name="ram" value="2">2 GB</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" name="ram" value="4">4 GB</label>
+        </div>
+        <div class="checkbox disabled">
+            <label><input type="checkbox" name="ram" value="8">8 GB</label>
+        </div>
+        <label>Processor: </label>
+        <div class="checkbox">
+            <label><input type="checkbox" name="proc" value="i3">i3</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" name="proc" value="i5">i5</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" name="proc" value="i7">i7</label>
+        </div>
 
-    </div>
-</div><p></p>
-<div align="center">
-<div align="center"  class="btn-group">
-    <a href="/type/smartphone" class="btn btn-primary" role="button">Smartphones</a>
-    <a href="/type/laptop" class="btn btn-primary" role="button">Laptops</a>
-    <a href="/type/desctop" class="btn btn-primary" role="button">Desctops</a>
+        <button  type="submit" class="btn btn-info">Submit</button>
+        </form>
 </div>
-</div>
-<div align="center" class="container">
+
+
+
+
+
+<div class="col-sm-10">
 
 
     <table class="table table-default">
@@ -134,6 +155,9 @@
         </tr>
         </c:forEach>
     </table>
+</div>
+</div>
+</div>
 </div>
 </body>
 </html>

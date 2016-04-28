@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Photo Add Page</title>
@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-    <form role="form"   enctype="multipart/form-data" class="form-horizontal" action="/addphoto" method="post">
+    <form role="form"   enctype="multipart/form-data"  class="form-horizontal" action="/addphoto" method="post">
         <h3>New device</h3>
         <select class="selectpicker form-control form-type" name="device">
 
