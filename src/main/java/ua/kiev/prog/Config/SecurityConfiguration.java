@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").authenticated()
                 .antMatchers("/admin", "/cart_add_page", "/order_add_page").authenticated()
-                .and().formLogin()
+                .and().formLogin().loginPage("/login_page")
                 .usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/")
 
 

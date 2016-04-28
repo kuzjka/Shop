@@ -37,10 +37,11 @@ public class MyController {
         return "index";
 
     }
-    @RequestMapping("/user")
+@RequestMapping("/login_page")
     public String login(){
-        return "login";
-    }
+        return "login_page";}
+
+
 
     @RequestMapping("/photo/{type}")
     public String type(Model model, @PathVariable String type) {
@@ -197,17 +198,17 @@ public class MyController {
     }
 
     @RequestMapping(value = "/adddevice", method = RequestMethod.POST)
-    public String contactAdd(@RequestParam(value = "type") int typeId,
+    public String contactAdd(@RequestParam(value = "type") int sid,
                              @RequestParam String name,
                              @RequestParam String manufacturer,
                              @RequestParam int price,
-                             @RequestParam(required = false) int ram,
-                             @RequestParam (required = false)String processor,
+                             @RequestParam int ram,
+                             @RequestParam String processor,
 
 
                              Model model) throws IOException {
-        Type type = (typeId != DEFAULT_TYPE_ID) ? deviceService.findType(typeId) : null;
 
+    Type  type= deviceService.findType(sid );
 
         Device device = new Device(type, name, manufacturer, price, ram, processor);
 
