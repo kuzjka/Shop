@@ -11,7 +11,27 @@
 
 </head>
 <body>
-<div align="center"><a href="/" class="btn btn-info" role="button">Home</a></div>
+<nav align = "center" class="navbar navbar-inverse">
+    <div align="center" class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Shop</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+
+
+            <li><a href="/cart_add_page">Cart</a></li>
+            <li><a href="/order_add_page">Order</a></li>
+            <li><a href="/photo/all">Photos</a></li>
+            <li><a href="/admin">Admin</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+        </ul>
+    </div>
+</nav>
 <div align="center"><h1>${name}</h1></div>
 <div align="center" id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->

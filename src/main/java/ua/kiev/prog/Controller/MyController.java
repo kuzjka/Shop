@@ -130,13 +130,17 @@ public class MyController {
     }
 
     @RequestMapping(value="/register", method = RequestMethod.POST)
-    public String register(@RequestParam String user, @RequestParam String password, Model model){
+    public String register(@RequestParam String username, @RequestParam String password1, @RequestParam
+    String password2,Model model){
         String role="USER";
-        deviceService.addUser(new User(user, password, true));
-        deviceService.addRole(new Role(user,role));
-        model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices("all"));
-        return "index";
+        if(password1.equals(password2)){
+        deviceService.addUser(new User(username, password2, true));
+        deviceService.addRole(new Role(username,role));
+        model.addAttribute("message", "registration success!");
+        return "register";}else{
+            model.addAttribute("message", "passwords are not matching");
+            return "register";
+        }
     }
 
 

@@ -5,12 +5,13 @@
     <title>Login page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container"></div>
+<div class="container">
 <form role="form" action="/login_page" method="post">
     <div class="form-group">
         <label for="username">Username:</label>
@@ -21,8 +22,8 @@
         <input type="password" name="password" class="form-control" id="password">
     </div>
 
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
+</div>
 </body>
 </html>

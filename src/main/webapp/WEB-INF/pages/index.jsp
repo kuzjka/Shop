@@ -19,7 +19,7 @@
             <a class="navbar-brand" href="/">Shop</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
+            <li ><a href="/">Home</a></li>
 
 
             <li><a href="/cart_add_page">Cart</a></li>
