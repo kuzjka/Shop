@@ -51,7 +51,7 @@
             <div class="item active">
                 <img src="/device/${d1.id}/0">
                 <div class="carousel-caption">
-                    <h3>${d1.name}</h3>
+                    <h3 style="color:black">${d1.name}</h3>
 
                 </div>
             </div>
@@ -59,7 +59,7 @@
             <div class="item">
                 <img src="/device/${d2.id}/0">
                 <div class="carousel-caption">
-                    <h3>${d2.name}</h3>
+                    <h3 style="color:black">${d2.name}</h3>
 
                 </div>
             </div>
@@ -67,7 +67,7 @@
             <div class="item">
                 <img src="/device/${d3.id}/0">
                 <div class="carousel-caption">
-                    <h3>${d3.name}</h3>
+                    <h3 style="color:black">${d3.name}</h3>
 
                 </div>
             </div>
@@ -75,7 +75,7 @@
             <div class="item">
                 <img src="/device/${d4.id}/0">
                 <div class="carousel-caption">
-                    <h3>${d4.name}</h3>
+                    <h3 style="color:black">${d4.name}</h3>
 
                 </div>
             </div>

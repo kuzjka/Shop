@@ -12,6 +12,15 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <style>
 
+        .navbar-nav {
+            background-color: black;
+        }
+        .glyphicon{
+            color:white;
+        }
+        .navbar-nav li a:hover a{
+            background-color:white;
+        }
 
     </style>
 </head>
@@ -19,12 +28,12 @@
 <nav align = "center" class="navbar navbar-inverse">
     <div align="center" class="container">
 
-        <ul class="nav navbar-nav">
+        <ul  class="nav navbar-nav">
             <li class="active"><a href="/" ><span class="glyphicon glyphicon-home"></span></a></li>
 
 
             <li><a href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
-            <li><a href="/order_add_page">Order</a></li>
+            <li ><a href="/order_add_page">Order</a></li>
             <li><a href="/photo/all">Photos</a></li>
             <li><a href="/admin">Admin</a></li>
         </ul>

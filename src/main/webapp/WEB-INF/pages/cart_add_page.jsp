@@ -13,8 +13,8 @@
 <nav align = "center" class="navbar navbar-inverse">
     <div align="center" class="container">
 
-        <ul class="nav navbar-nav">
-            <li ><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
+        <ul style="color:white" class="nav navbar-nav">
+            <li ><a href="/"><span style="color:white"  class="glyphicon glyphicon-home"></span></a></li>
 
 
             <li class="active"><a href="/cart_add_page">Cart</a></li>
@@ -23,9 +23,9 @@
             <li><a href="/admin">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+            <li><a href="/register_page"><span style="color:white" class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/login"><span style="color:white" class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="/logout"><span style="color:white" class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
         </ul>
     </div>
 </nav>

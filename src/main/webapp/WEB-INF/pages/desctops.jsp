@@ -43,12 +43,12 @@
         <tr>
             <c:forEach items="${rams}" var="ram">
                 <td>RAM:</td>
-            <td> ${ram}  </td>
+            <td>${ram};</td>
             </c:forEach>
 
             <c:forEach items="${processors}" var="processor">
                 <td>Processor:</td>
-                <td>${processor}</td>
+                <td>${processor};</td>
             </c:forEach>
         </tr>
 
