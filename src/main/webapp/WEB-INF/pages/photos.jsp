@@ -11,16 +11,14 @@
 <body>
 <nav align = "center" class="navbar navbar-inverse">
     <div align="center" class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Shop</a>
-        </div>
+
         <ul class="nav navbar-nav">
             <li ><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
 
 
             <li><a href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
             <li><a href="/order_add_page">Order</a></li>
-            <li><a href="/photo/all">Photos</a></li>
+            <li class="active"><a href="/photo/all">Photos</a></li>
             <li><a href="/admin">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">

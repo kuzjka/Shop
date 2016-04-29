@@ -10,16 +10,17 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+
+
+    </style>
 </head>
-<p>
 
 <nav align = "center" class="navbar navbar-inverse">
     <div align="center" class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Shop</a>
-        </div>
+
         <ul class="nav navbar-nav">
-            <li ><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li class="active"><a href="/" ><span class="glyphicon glyphicon-home"></span></a></li>
 
 
             <li><a href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
@@ -42,56 +43,6 @@
     </div>
 </div>
     <div class="container">
-<div class="row">
-
-    <div class="col-sm-2">
-
-    <form action="/filter" method="post">
-
-            <div class="form-group">
-                <label for="min">Min price</label>
-                <input type="text" class="form-control" id="min">
-            </div>
-            <div class="form-group">
-                <label for="max">Max price</label>
-                <input type="text" class="form-control" id="max">
-            </div>
-
-
-
-
-
-
-        <label>RAM:</label>
-        <div class="checkbox">
-            <label><input type="checkbox" name="ram" value="2">2 GB</label>
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox" name="ram" value="4">4 GB</label>
-        </div>
-        <div class="checkbox disabled">
-            <label><input type="checkbox" name="ram" value="8">8 GB</label>
-        </div>
-        <label>Processor: </label>
-        <div class="checkbox">
-            <label><input type="checkbox" name="proc" value="i3">i3</label>
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox" name="proc" value="i5">i5</label>
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox" name="proc" value="i7">i7</label>
-        </div>
-
-        <button  type="submit" class="btn btn-info">Submit</button>
-        </form>
-</div>
-
-
-
-
-
-<div class="col-sm-10">
 
 
     <table class="table table-default">
@@ -104,7 +55,7 @@
             <td><b>RAM</b></td>
             <td><b>Processor</b></td>
             <td><b>Type</b></td>
-            <td><b>Sign up to by online or administrate site</b></td>
+            <td><b>Sign up to by online<br /> or administrate site</b></td>
         </tr>
         </thead>
         <c:forEach items="${devices}" var="device">

@@ -27,7 +27,7 @@ public class MyController {
 
 
 
-        List<Cart>n=deviceService.listCarts();
+
 
 
         model.addAttribute("types", deviceService.listTypes());
@@ -70,8 +70,8 @@ public class MyController {
     }
 
 
-    @RequestMapping(value = "/filter", method = RequestMethod.POST)
-    public String ramFilter(HttpServletRequest request,  @RequestParam(required = false, defaultValue = "-1") Integer max_price, Model model) {
+    @RequestMapping(value = "/filter1", method = RequestMethod.POST)
+    public String ramFilter(HttpServletRequest request,    Model model) {
         String[] sram = request.getParameterValues("ram");
         String [] sproc = request.getParameterValues("proc");
 
@@ -98,12 +98,51 @@ public class MyController {
             proc.add("i7");
 
         }
+            if(sproc!=null)
+            model.addAttribute("processors", proc);
+            if(sram!=null)
+            model.addAttribute("rams", ram);
+            model.addAttribute("devices", deviceService.filter(ram, proc));
+        return "desctops";}
+
+    @RequestMapping("/filter2/{type}")
+    public String desctopFilter(Model model, @PathVariable String type){
+
+            List<Integer> ram = new ArrayList<>();
+        List<String> proc = new ArrayList<>();
+        if(type.equals("budget")){
+            ram.add(2);
+            ram.add(4);
+            proc.add("i3");}
 
 
 
-            model.addAttribute("devices", deviceService.filter(ram, proc, max_price));
-        return "index";}
+         if(type.equals("job")){
+        ram.add(4);
+            ram.add(8);
+            proc.add("i3");
+            proc.add("i5");}
 
+
+
+
+         if(type.equals("gamer")){
+            ram.add(8);
+            ram.add(16);
+            proc.add("i5");
+            proc.add("i7");}
+            model.addAttribute("rams", ram);
+            model.addAttribute("processors" , proc);
+            model.addAttribute("devices", deviceService.filter(ram, proc));
+            return "desctops";
+
+
+        }
+    @RequestMapping("/filter3/{manufactuter}")
+    public String mobileFilter(Model model, @PathVariable String manufacturer){
+        model.addAttribute("devices", deviceService.listByManufacturer(manufacturer));
+        return "smartphones";
+    }
 
 
     @RequestMapping("/photo_add_page")
@@ -181,12 +220,12 @@ public class MyController {
 
 
 
-
-
             model.addAttribute("devices", deviceService.listDevices(type));
+        if(type.equals("desctop")){
+            return "desctops";}
+        else {return "index";}}
 
-        return "index";
-    }
+
 
 
     @RequestMapping(value = "/device/delete", method = RequestMethod.GET)
@@ -206,22 +245,23 @@ public class MyController {
                              @RequestParam String name,
                              @RequestParam String manufacturer,
                              @RequestParam int price,
-                             @RequestParam int ram,
-                             @RequestParam String processor,
+                             @RequestParam (required = false)int ram,
+                             @RequestParam (required = false)String processor,
 
 
-                             Model model) throws IOException {
+                             Model model)  {
 
-    Type  type= deviceService.findType(sid );
+    Type  type= deviceService.findType(sid);
+
 
         Device device = new Device(type, name, manufacturer, price, ram, processor);
+            deviceService.addDevice(device);
 
-        deviceService.addDevice(device);
 
-        model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices("all"));
-        return "index_admin";
-    }
+            model.addAttribute("devices", deviceService.listDevices("all"));
+            return "index_admin";
+        }
+
 
     @RequestMapping(value = "/addtype", method = RequestMethod.POST)
     public String groupAdd(@RequestParam String name, Model model) {

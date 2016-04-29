@@ -45,6 +45,13 @@ public class Device {
         this.processor = processor;
     }
 
+    public Device(Type type, String name, String manufacturer, int price) {
+        this.type = type;
+        this.name = name;
+        this.manufacturer = manufacturer;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }

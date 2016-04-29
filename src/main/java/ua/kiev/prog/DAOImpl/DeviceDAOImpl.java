@@ -33,6 +33,14 @@ public class DeviceDAOImpl implements DeviceDAO {
         entityManager.remove(d);
     }
 
+    @Override
+    public List<Device> listByManufacturer(String manufacturer) {
+        Query query=entityManager.createQuery("select d from Device d where d.manufacturer = :manufacturer",
+                Device.class);
+        query.setParameter("manufacturer", manufacturer);
+        return query.getResultList();
+    }
+
 
     @Override
     public List<Device> listByType(String typeName) {
@@ -82,12 +90,11 @@ public class DeviceDAOImpl implements DeviceDAO {
 
 
 
-    public List<Device> filter(List<Integer> ram, List<String> proc, int max) {
-            if(max==-1){
-                max=Integer.MAX_VALUE;
-            }
-            Query query = entityManager.createQuery("select d from Device d where d.price<=:max ", Device.class);
-            query.setParameter("max" , max);
+    public List<Device> filter(List<Integer> ram, List<String> proc) {
+
+
+            Query query = entityManager.createQuery("select d from Device d  ", Device.class);
+
             List<Device> a = query.getResultList();
             List<Device> b = new ArrayList<>();
 

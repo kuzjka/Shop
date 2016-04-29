@@ -9,12 +9,12 @@ public interface DeviceDAO {
 
     void delete(int id);
 
-
+    List <Device>listByManufacturer(String manufacturer);
     List<Device> listByType(String typeName);
     List<Device> list(String pattern);
     Device findOne(int id);
     int total();
 
 
-    List<Device> filter(List<Integer> ram , List<String>proc, int max);
+    List<Device> filter(List<Integer> ram , List<String>proc);
 }
