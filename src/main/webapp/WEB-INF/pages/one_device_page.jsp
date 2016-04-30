@@ -72,6 +72,19 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+<div align="center">
+<c:set var="test" value="${0}"/>
+<c:forEach items="${devices}" var="device">
 
+    <c:if test="${device.id==id}">
+        <c:remove var="test"/>
+        <b><a href="/cart_add_page">In cart</a></b>
+    </c:if>
+
+</c:forEach>
+<c:if test="${test==0}">
+    <a href="/${id}/1" class="btn btn-primary btn-lg" role="button">To cart</a>
+</div>
+</c:if>
 </body>
 </html>

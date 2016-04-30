@@ -75,7 +75,13 @@ public class MyController {
 
         model.addAttribute("id" , id );
         model.addAttribute("name", d.getName());
+        List<Cart>l1=deviceService.listCarts();
+        List<Device>l2=new ArrayList<>();
+        for(Cart c:l1){
+            l2.add(c.getDevice());
+        }
 
+        model.addAttribute("devices", l2);
         return "one_device_page";
     }
 

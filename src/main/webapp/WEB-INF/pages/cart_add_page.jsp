@@ -48,7 +48,7 @@
     <tr>
         <td><a href="/cart/delete/${cart.id}" class="btn btn-danger" role="button">Delete from cart</a></td>
         <td><img class="img-responsive" alt="No photo" height="200" width="200"
-             src="/device/${device.id}/0"/></td>
+             src="/device/${cart.device.id}/0"/></td>
         <td>${cart.device.name}</td>
         <td>${cart.device.price}</td>
         <td>${cart.items}</td>

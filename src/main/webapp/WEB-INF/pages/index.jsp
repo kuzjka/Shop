@@ -21,7 +21,7 @@
 
 
             <li><a href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
-            <li ><a href="/order_add_page">Order</a></li>
+            <li><a href="/order_add_page">Order</a></li>
             <li><a href="/photo/all">Photos</a></li>
             <li><a href="/admin">Admin</a></li>
         </ul>
@@ -34,9 +34,10 @@
 </nav>
 <div align="center">
     <div align="center"  class="btn-group">
-        <a href="/type/smartphone" class="btn btn-primary" role="button">Smartphones</a>
-        <a href="/type/laptop" class="btn btn-primary" role="button">Laptops</a>
+        <a href="/type/all" class="btn btn-primary" role="button">All</a>
         <a href="/type/desctop" class="btn btn-primary" role="button">Desctops</a>
+        <a href="/type/laptop" class="btn btn-primary" role="button">Laptops</a>
+        <a href="/type/smartphone" class="btn btn-primary" role="button">Smartphone</a>
     </div>
 </div>
     <div class="container">
@@ -52,7 +53,7 @@
             <td><b>RAM</b></td>
             <td><b>Processor</b></td>
             <td><b>Type</b></td>
-            <td><b>Sign up to by online<br /> or administrate site</b></td>
+           <td><b>Sign up to by online<br /> or administrate site</b></td>
         </tr>
         </thead>
         <c:forEach items="${devices}" var="device">
