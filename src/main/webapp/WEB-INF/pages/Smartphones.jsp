@@ -4,9 +4,36 @@
 <html>
 <head>
     <title>Smartphones</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style type="text/css">
+
+        .navbar-fixed-top {
+
+            background-color: deepskyblue;
+        }
+
+
+        ul.navbar-nav  a.active  {
+            color:white;
+            background-color: aquamarine;
+        }
+        ul.navbar-nav a:hover:not(.active){
+            color:white;
+            background-color: aquamarine;
+        }
+
+        .img-responsive:hover{
+            width: 50%;
+            height: auto;
+        }
+
+    </style>
 </head>
 <body>
-<nav align = "center" class="navbar navbar-inverse">
+<nav align = "center" class="navbar navbar-default navbar-fixed-top">
     <div align="center" class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Shop</a>

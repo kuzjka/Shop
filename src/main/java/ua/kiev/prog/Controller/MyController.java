@@ -147,8 +147,7 @@ public class MyController {
             ram.add(16);
             proc.add("i5");
             proc.add("i7");}
-            model.addAttribute("rams", ram);
-            model.addAttribute("processors" , proc);
+            model.addAttribute("type" , type);
             model.addAttribute("devices", deviceService.filter(ram, proc));
             return "desctops";
 

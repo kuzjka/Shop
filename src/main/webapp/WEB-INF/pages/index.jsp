@@ -10,14 +10,43 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<style type="text/css">
 
+.navbar-fixed-top {
+    color: white;
+    background-color: deepskyblue;
+}
+
+
+      ul.navbar-nav  a.active  {
+          color:white;
+          background-color: aquamarine;
+      }
+    ul.navbar-nav a:hover:not(.active){
+        color:white;
+        background-color: aquamarine;
+    }
+
+.img-responsive:hover{
+    width:50%;
+    height: auto;
+
+}
+.btn-info {
+    color:white;
+    background-color: deepskyblue;
+}
+.table {
+    background-color: seashell;
+}
+</style>
 </head>
 
-<nav align = "center" class="navbar navbar-inverse">
-    <div align="center" class="container">
+<nav  class="navbar navbar-default navbar-fixed-top">
+    <div  class="container">
 
         <ul  class="nav navbar-nav">
-            <li class="active"><a href="/" ><span class="glyphicon glyphicon-home"></span></a></li>
+            <li ><a class="active" href="/" ><span class="glyphicon glyphicon-home"></span></a></li>
 
 
             <li><a href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
@@ -32,18 +61,19 @@
         </ul>
     </div>
 </nav>
-<div align="center">
+
+<div align="center" style="padding-top: 100px; padding-bottom: 50px;" >
     <div align="center"  class="btn-group">
-        <a href="/type/all" class="btn btn-primary" role="button">All</a>
-        <a href="/type/desctop" class="btn btn-primary" role="button">Desctops</a>
-        <a href="/type/laptop" class="btn btn-primary" role="button">Laptops</a>
-        <a href="/type/smartphone" class="btn btn-primary" role="button">Smartphone</a>
+        <a href="/type/all" class="btn btn-primary btn-lg" role="button">All</a>
+        <a href="/type/desctop" class="btn btn-primary btn-lg" role="button">Desctops</a>
+        <a href="/type/laptop" class="btn btn-primary btn-lg" role="button">Laptops</a>
+        <a href="/type/smartphone" class="btn btn-primary btn-lg" role="button">Smartphone</a>
     </div>
 </div>
     <div class="container">
 
 
-    <table class="table table-default">
+    <table class="table table-default" >
         <thead>
         <tr>
             <td><b>Photo</b></td>
@@ -61,7 +91,7 @@
 
             <td><a href="/onedevice/${device.id}"><img class="img-responsive" alt="No photo" height="100" width="100"
                                                        src="/device/${device.id}/0"/></a></td>
-            <td>${device.name}</td>
+            <td><a href="/onedevice/${device.id}">${device.name}</a></td>
             <td>${device.manufacturer}</td>
             <td>${device.price}</td>
             <td>${device.ram}</td>

@@ -8,22 +8,46 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+
+        .navbar-fixed-top {
+
+            background-color: deepskyblue;
+        }
+
+
+        ul.navbar-nav  a.active  {
+            color:white;
+            background-color: aquamarine;
+        }
+        ul.navbar-nav a:hover:not(.active){
+            color:white;
+            background-color: aquamarine;
+        }
+
+        .img-responsive:hover{
+            width: 50%;
+            height: auto;
+        }
+
+    </style>
 </head>
 
-<nav align = "center" class="navbar navbar-inverse">
+<nav align = "center" class="navbar navbar-default navbar-fixed-top">
     <div align="center" class="container">
 
-        <ul style="color:white" class="nav navbar-nav">
-            <li ><a href="/"><span style="color:white"  class="glyphicon glyphicon-home"></span></a></li>
+        <ul  class="nav navbar-nav">
+            <li ><a href="/"><span   class="glyphicon glyphicon-home"></span></a></li>
 
 
-            <li class="active"><a href="/cart_add_page">Cart</a></li>
+            <li ><a class="active" href="/cart_add_page">Cart</a></li>
             <li><a href="/order_add_page">Order</a></li>
             <li><a href="/photo/all">Photos</a></li>
             <li><a href="/admin">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/register_page"><span style="color:white" class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/register_page"><span  class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="/login"><span style="color:white" class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li><a href="/logout"><span style="color:white" class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
         </ul>

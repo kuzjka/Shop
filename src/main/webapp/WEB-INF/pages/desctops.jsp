@@ -8,9 +8,32 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style type="text/css">
+
+        .navbar-fixed-top {
+
+            background-color: deepskyblue;
+        }
+
+
+        ul.navbar-nav  a.active  {
+            color:white;
+            background-color: aquamarine;
+        }
+        ul.navbar-nav a:hover:not(.active){
+            color:white;
+            background-color: aquamarine;
+        }
+
+        .img-responsive:hover{
+            width: 50%;
+            height: auto;
+        }
+
+    </style>
 </head>
 <body>
-<nav align = "center" class="navbar navbar-inverse">
+<nav align = "center" class="navbar navbar-default navbar-fixed-top">
     <div align="center" class="container">
 
         <ul class="nav navbar-nav">
@@ -29,17 +52,17 @@
         </ul>
     </div>
 </nav>
-<div align="center">
+<div align="center" style="padding-bottom: 50px; padding-top: 100px;">
     <div align="center"  class="btn-group">
-        <a href="/filter2/budget" class="btn btn-primary " role="button" >Budget computers</a>
-        <a href="/filter2/job" class="btn btn-primary" role="button">Computers for job</a>
-        <a href="/filter2/gamer" class="btn btn-primary " role="button">Gamer computers</a>
+        <a href="/filter2/budget" class="btn btn-primary btn-lg" role="button" >Budget computers</a>
+        <a href="/filter2/job" class="btn btn-primary btn-lg" role="button">Computers for job</a>
+        <a href="/filter2/gamer" class="btn btn-primary btn-lg " role="button">Gamer computers</a>
     </div>
 </div>
 <div class="container" align="center">
 
     <table class="table-default">
-
+        <tr>${type}</tr>
         <tr>
             <c:forEach items="${rams}" var="ram">
                 <td>RAM:</td>
