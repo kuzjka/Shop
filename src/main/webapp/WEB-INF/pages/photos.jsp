@@ -52,7 +52,18 @@
                 <img src="/device/${d1.id}/0">
                 <div class="carousel-caption">
                     <h3 style="color:black">${d1.name}</h3>
+                    <c:set var="test" value="${0}"/>
+                    <c:forEach items="${devices}" var="device">
 
+                        <c:if test="${device.id==d1.id}">
+                            <c:remove var="test"/>
+                            <a href="/cart_add_page">In cart</a>
+                        </c:if>
+
+                    </c:forEach>
+                    <c:if test="${test==0}">
+                        <a href="/${d1.id}/1" class="btn btn-info" role="button">To cart</a>
+                    </c:if>
                 </div>
             </div>
 
@@ -60,7 +71,18 @@
                 <img src="/device/${d2.id}/0">
                 <div class="carousel-caption">
                     <h3 style="color:black">${d2.name}</h3>
+                    <c:set var="test" value="${0}"/>
+                    <c:forEach items="${devices}" var="device">
 
+                        <c:if test="${device.id==d2.id}">
+                            <c:remove var="test"/>
+                            <a href="/cart_add_page">In cart</a>
+                        </c:if>
+
+                    </c:forEach>
+                    <c:if test="${test==0}">
+                        <a href="/${d2.id}/1" class="btn btn-info" role="button">To cart</a>
+                    </c:if>
                 </div>
             </div>
 
@@ -68,6 +90,19 @@
                 <img src="/device/${d3.id}/0">
                 <div class="carousel-caption">
                     <h3 style="color:black">${d3.name}</h3>
+                    <c:set var="test" value="${0}"/>
+                    <c:forEach items="${devices}" var="device">
+
+                        <c:if test="${device.id==d3.id}">
+                            <c:remove var="test"/>
+                            <a href="/cart_add_page">In cart</a>
+                        </c:if>
+
+                    </c:forEach>
+                   <c:if test="${test==0}">
+                    <a href="/${d3.id}/1" class="btn btn-info" role="button">To cart</a>
+                   </c:if>
+
 
                 </div>
             </div>
@@ -76,7 +111,18 @@
                 <img src="/device/${d4.id}/0">
                 <div class="carousel-caption">
                     <h3 style="color:black">${d4.name}</h3>
+                    <c:set var="test" value="${0}"/>
+                    <c:forEach items="${devices}" var="device">
 
+                        <c:if test="${device.id==d4.id}">
+                            <c:remove var="test"/>
+                            <a href="/cart_add_page">In cart</a>
+                        </c:if>
+
+                    </c:forEach>
+                    <c:if test="${test==0}">
+                        <a href="/${d4.id}/1" class="btn btn-info" role="button">To cart</a>
+                    </c:if>
                 </div>
             </div>
 

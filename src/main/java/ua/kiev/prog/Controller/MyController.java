@@ -17,7 +17,7 @@ import java.util.*;
 @Controller
 @RequestMapping("/")
 public class MyController {
-    static final int DEFAULT_TYPE_ID = -1;
+
 
     @Autowired
     private DeviceService deviceService;
@@ -56,6 +56,15 @@ public class MyController {
         model.addAttribute("d2", d2);
         model.addAttribute("d3", d3);
         model.addAttribute("d4", d4);
+
+        List<Cart>l1=deviceService.listCarts();
+        List<Device>l2=new ArrayList<>();
+        for(Cart c:l1){
+            l2.add(c.getDevice());
+        }
+
+        model.addAttribute("devices", l2);
+
         model.addAttribute("type", type);
 
         return "photos";
@@ -66,6 +75,7 @@ public class MyController {
 
         model.addAttribute("id" , id );
         model.addAttribute("name", d.getName());
+
         return "one_device_page";
     }
 
