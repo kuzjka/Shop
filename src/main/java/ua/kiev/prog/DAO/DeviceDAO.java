@@ -6,15 +6,13 @@ import java.util.List;
 
 public interface DeviceDAO {
     void add(Device device);
-
     void delete(int id);
-
     List <Device>listByManufacturer(String manufacturer);
     List<Device> listByType(String typeName);
     List<Device> list(String pattern);
     Device findOne(int id);
     int total();
-
-
-    List<Device> filter(List<Integer> ram , List<String>proc, int min_price, int max_price);
+    List<Device> procFilter( List<String> proc);
+    List<Device> ramFilter( List<Integer> ram);
+    List<Device>sort(String dir);
 }

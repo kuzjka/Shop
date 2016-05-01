@@ -87,33 +87,51 @@ public class DeviceDAOImpl implements DeviceDAO {
 
 
     }
+    @Override
+    public List<Device> procFilter(List<String> proc) {
+        if(proc.size()>0){
+            Query query= entityManager.createQuery("select d from Device d where d.processor " +
+                    "in (:proc)", Device.class);
+            query.setParameter("proc", proc);
+            return query.getResultList();
+
+        }else{
+            Query query=entityManager.createQuery("select d from Device d", Device.class);
+            return query.getResultList();
+        }}
+
+
 
     @Override
-    public List<Device> filter(List<Integer> ram, List<String> proc, int min_price, int max_price) {
+    public List<Device> ramFilter(List<Integer> ram) {
+        if(ram.size()>0){
+        Query query= entityManager.createQuery("select d from Device d where d.ram in (:ram)", Device.class);
+            query.setParameter("ram", ram);
+        return query.getResultList();
 
-if(max_price==-1){
-    max_price=Integer.MAX_VALUE;
-}
+        }else{
+            Query query=entityManager.createQuery("select d from Device d", Device.class);
+            return query.getResultList();
+        }}
 
-            Query query = entityManager.createQuery("select d from Device d" +
-                    " where d.price>=:min_price and d.price<=:max_price ", Device.class);
-        query.setParameter("min_price", min_price);
-        query.setParameter("max_price", max_price);
+    @Override
+    public List<Device> sort(String dir) {
+        Query query=null;
+        if(dir.equals("asc")){
 
-            List<Device> a = query.getResultList();
-            List<Device> b = new ArrayList<>();
-
-            for (Device d : a) {
-                if (ram.contains(d.getRam())&& proc.contains(d.getProcessor())) {
-                    b.add(d);
+         query=entityManager.createQuery("select d from  Device d order by d.price", Device.class);}
 
 
-                }
+        else if(dir.equals("desc")){
+             query=entityManager.createQuery("select d from  Device d order by d.price desc", Device.class);
             }
+        return  query.getResultList();
 
 
-            return b;}
-    }
+
+
+
+}}
 
 
 

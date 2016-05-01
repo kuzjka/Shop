@@ -101,7 +101,12 @@
                     <input type="text" class="form-control" name="max_price" id="max_price">
                 </div>
 
-
+                <div class="radio">
+                    <label><input type="radio" name="dir" value="asc" checked>From cheap<br/>to expensive</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="dir" value="desc">From expensive<br/>to cheap</label></label>
+                </div>
 
 
 

@@ -110,11 +110,17 @@ public class DeviceService {
     public void addPhoto(Photo photo){photoDao.add(photo);}
     @Transactional
     public List<Photo> getPhoto(Device device){ return photoDao.getPhoto(device);}
+    @Transactional(readOnly = true)
+    public List<Device>sort(String dir){return deviceDAO.sort(dir);}
 
     @Transactional(readOnly = true)
-    public List<Device> filter(List<Integer> ram , List<String> proc, int min_price, int max_price) {
-        return deviceDAO.filter(ram, proc, min_price, max_price);
-    }@Transactional(readOnly = true)
+    public List<Device>ramFilter(List<Integer>ram){
+        return  deviceDAO.ramFilter(ram);}
+        @Transactional(readOnly = true)
+        public List<Device> procFilter (List<String>proc){
+            return  deviceDAO.procFilter(proc);}
+
+    @Transactional(readOnly = true)
     public List<Device> listByManufacturer (String manufacturer){
         return deviceDAO.listByManufacturer(manufacturer);
     }

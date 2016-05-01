@@ -72,7 +72,7 @@
         <a href="/type/all" class="btn btn-primary btn-lg" role="button">All</a>
         <a href="/type/desctop" class="btn btn-primary btn-lg" role="button">Desctops</a>
         <a href="/type/laptop" class="btn btn-primary btn-lg" role="button">Laptops</a>
-        <a href="/type/smartphone" class="btn btn-primary btn-lg" role="button">Smartphone</a>
+        <a href="/type/smartphone" class="btn btn-primary btn-lg" role="button">Smartphones</a>
     </div>
 </div>
     <div class="container">

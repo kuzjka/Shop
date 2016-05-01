@@ -106,29 +106,34 @@ public String denied(Model model){
         if(sram!=null){
         for (String s : sram)
 
-                ram.add(Integer.parseInt(s));}else{
-            ram.add(2);
-            ram.add(4);
-            ram.add(8);
-            ram.add(16);
+                ram.add(Integer.parseInt(s));}
 
-        }
 
-        if(sproc!=null)
-            for(String p :sproc){
+        if(sproc!=null){
+            for(String p :sproc)
 
                 proc.add(p);
-            }else{
-            proc.add("i3");
-            proc.add("i5");
-            proc.add("i7");
+            }
 
+            if(sproc!=null){
+            model.addAttribute("processors", proc);}
+            if(sram!=null){
+            model.addAttribute("rams", ram);}
+
+        if(ram.size()>0 && proc.size()>0){
+        model.addAttribute("devices", deviceService.procFilter(proc));
+
+        model.addAttribute("devices", deviceService.ramFilter(ram));}
+        if (ram.size()==0 && proc.size()>0){
+            model.addAttribute("devices", deviceService.procFilter(proc));
         }
-            if(sproc!=null)
-            model.addAttribute("processors", proc);
-            if(sram!=null)
-            model.addAttribute("rams", ram);
-            model.addAttribute("devices", deviceService.filter(ram, proc, min_price, max_price ));
+        if(proc.size()==0 && ram.size()>0){
+            model.addAttribute("devices", deviceService.ramFilter(ram));
+        }
+        if(ram.size()==0 && proc.size()==0){
+            model.addAttribute("devices", deviceService.listDevices("all"));
+        }
+
         return "desctops";}
 
     @RequestMapping("/filter2/{type}")
@@ -158,7 +163,8 @@ public String denied(Model model){
             proc.add("i5");
             proc.add("i7");}
             model.addAttribute("type" , type);
-            model.addAttribute("devices", deviceService.filter(ram, proc, 0, -1));
+            model.addAttribute("devices", deviceService.ramFilter(ram));
+            model.addAttribute("devices", deviceService.procFilter(proc));
             return "desctops";
 
 
