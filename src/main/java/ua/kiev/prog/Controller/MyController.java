@@ -1,6 +1,7 @@
 package ua.kiev.prog.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ua.kiev.prog.Classes.*;
+import ua.kiev.prog.Config.SecurityConfiguration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,11 +39,18 @@ public class MyController {
         return "index";
 
     }
-@RequestMapping("/login_page")
+@RequestMapping(value = "/login_page", method=RequestMethod.GET)
     public String login(){
+
         return "login_page";}
 
 
+
+@RequestMapping("/403")
+public String denied(Model model){
+    model.addAttribute("message", "Access denied");
+    return "login_page";
+}
 
     @RequestMapping("/photo/{type}")
     public String type(Model model, @PathVariable String type) {
@@ -87,7 +96,8 @@ public class MyController {
 
 
     @RequestMapping(value = "/filter1", method = RequestMethod.POST)
-    public String ramFilter(HttpServletRequest request,    Model model) {
+    public String ramFilter(HttpServletRequest request, @RequestParam(required = false, defaultValue = "0") int min_price,
+                            @RequestParam(required = false, defaultValue = "-1")  int max_price ,Model model) {
         String[] sram = request.getParameterValues("ram");
         String [] sproc = request.getParameterValues("proc");
 
@@ -118,7 +128,7 @@ public class MyController {
             model.addAttribute("processors", proc);
             if(sram!=null)
             model.addAttribute("rams", ram);
-            model.addAttribute("devices", deviceService.filter(ram, proc));
+            model.addAttribute("devices", deviceService.filter(ram, proc, min_price, max_price ));
         return "desctops";}
 
     @RequestMapping("/filter2/{type}")
@@ -126,14 +136,14 @@ public class MyController {
 
             List<Integer> ram = new ArrayList<>();
         List<String> proc = new ArrayList<>();
-        if(type.equals("budget")){
+        if(type.equals("budget_computers")){
             ram.add(2);
             ram.add(4);
             proc.add("i3");}
 
 
 
-         if(type.equals("job")){
+         if(type.equals("computers_for_job")){
         ram.add(4);
             ram.add(8);
             proc.add("i3");
@@ -142,13 +152,13 @@ public class MyController {
 
 
 
-         if(type.equals("gamer")){
+         if(type.equals("gaming_computers")){
             ram.add(8);
             ram.add(16);
             proc.add("i5");
             proc.add("i7");}
             model.addAttribute("type" , type);
-            model.addAttribute("devices", deviceService.filter(ram, proc));
+            model.addAttribute("devices", deviceService.filter(ram, proc, 0, -1));
             return "desctops";
 
 

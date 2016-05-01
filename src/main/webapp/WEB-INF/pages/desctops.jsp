@@ -62,9 +62,9 @@
 </nav>
 <div align="center" style="padding-bottom: 50px; padding-top: 100px;">
     <div align="center"  class="btn-group">
-        <a href="/filter2/budget" class="btn btn-primary btn-lg" role="button" >Budget computers</a>
-        <a href="/filter2/job" class="btn btn-primary btn-lg" role="button">Computers for job</a>
-        <a href="/filter2/gamer" class="btn btn-primary btn-lg " role="button">Gamer computers</a>
+        <a href="/filter2/budget_computers" class="btn btn-primary btn-lg" role="button" >Budget computers</a>
+        <a href="/filter2/computers_for_job" class="btn btn-primary btn-lg" role="button">Computers for job</a>
+        <a href="/filter2/gaming_computers" class="btn btn-primary btn-lg " role="button">Gaming computers</a>
     </div>
 </div>
 <div class="container" align="center">
@@ -93,12 +93,12 @@
             <form action="/filter1" method="post">
 
                 <div class="form-group">
-                    <label for="min">Min price</label>
-                    <input type="text" class="form-control" id="min">
+                    <label for="min_price">Min price</label>
+                    <input type="text" class="form-control" name="min_price" id="min_price">
                 </div>
                 <div class="form-group">
-                    <label for="max">Max price</label>
-                    <input type="text" class="form-control" id="max">
+                    <label for="max_price">Max price</label>
+                    <input type="text" class="form-control" name="max_price" id="max_price">
                 </div>
 
 

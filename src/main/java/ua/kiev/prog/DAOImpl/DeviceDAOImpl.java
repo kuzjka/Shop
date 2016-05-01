@@ -88,12 +88,17 @@ public class DeviceDAOImpl implements DeviceDAO {
 
     }
 
+    @Override
+    public List<Device> filter(List<Integer> ram, List<String> proc, int min_price, int max_price) {
 
+if(max_price==-1){
+    max_price=Integer.MAX_VALUE;
+}
 
-    public List<Device> filter(List<Integer> ram, List<String> proc) {
-
-
-            Query query = entityManager.createQuery("select d from Device d  ", Device.class);
+            Query query = entityManager.createQuery("select d from Device d" +
+                    " where d.price>=:min_price and d.price<=:max_price ", Device.class);
+        query.setParameter("min_price", min_price);
+        query.setParameter("max_price", max_price);
 
             List<Device> a = query.getResultList();
             List<Device> b = new ArrayList<>();
@@ -108,7 +113,11 @@ public class DeviceDAOImpl implements DeviceDAO {
 
 
             return b;}
-        }
+    }
+
+
+
+
 
 
 

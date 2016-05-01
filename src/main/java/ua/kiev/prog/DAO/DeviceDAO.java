@@ -16,5 +16,5 @@ public interface DeviceDAO {
     int total();
 
 
-    List<Device> filter(List<Integer> ram , List<String>proc);
+    List<Device> filter(List<Integer> ram , List<String>proc, int min_price, int max_price);
 }

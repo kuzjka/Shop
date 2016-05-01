@@ -35,7 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers( "/cart_add_page", "/order_add_page").hasAuthority("USER")
                 .antMatchers("/admin").hasAuthority("ADMIN")
                 .and().formLogin().loginPage("/login_page")
-                .usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/login_page")
+                .usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/")
 
 
 
@@ -43,7 +43,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/")
+                .and().exceptionHandling().accessDeniedPage("/403");
+
+
 
     }
 

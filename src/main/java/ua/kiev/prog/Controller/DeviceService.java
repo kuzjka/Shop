@@ -111,10 +111,10 @@ public class DeviceService {
     @Transactional
     public List<Photo> getPhoto(Device device){ return photoDao.getPhoto(device);}
 
-    @Transactional
-    public List<Device> filter(List<Integer> ram , List<String> proc) {
-        return deviceDAO.filter(ram, proc);
-    }@Transactional
+    @Transactional(readOnly = true)
+    public List<Device> filter(List<Integer> ram , List<String> proc, int min_price, int max_price) {
+        return deviceDAO.filter(ram, proc, min_price, max_price);
+    }@Transactional(readOnly = true)
     public List<Device> listByManufacturer (String manufacturer){
         return deviceDAO.listByManufacturer(manufacturer);
     }

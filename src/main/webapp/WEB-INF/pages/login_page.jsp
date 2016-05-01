@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -54,19 +54,24 @@
         </ul>
     </div>
 </nav>
-<div class="container" style="padding-top: 50px">
-<form role="form" action="/login_page" method="post">
-    <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" name="username" class="form-control" id="username">
-    </div>
-    <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" name="password" class="form-control" id="password">
-    </div>
+<div class="container"  style="padding-top: 50px">
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <form role="form" action="/login_page" method="post" >
+
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" name="username" class="form-control" id="username" >
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password" class="form-control" id="password">
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>
 </div>
+<div align="center"> <h3 >${message}</h3></div>
 </body>
 </html>
