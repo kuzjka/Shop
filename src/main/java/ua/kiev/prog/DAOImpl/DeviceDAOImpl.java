@@ -89,30 +89,24 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
     @Override
     public List<Device> procFilter(List<String> proc) {
-        if(proc.size()>0){
+
             Query query= entityManager.createQuery("select d from Device d where d.processor " +
                     "in (:proc)", Device.class);
             query.setParameter("proc", proc);
             return query.getResultList();
 
-        }else{
-            Query query=entityManager.createQuery("select d from Device d", Device.class);
-            return query.getResultList();
-        }}
+       }
 
 
 
     @Override
     public List<Device> ramFilter(List<Integer> ram) {
-        if(ram.size()>0){
+
         Query query= entityManager.createQuery("select d from Device d where d.ram in (:ram)", Device.class);
             query.setParameter("ram", ram);
         return query.getResultList();
 
-        }else{
-            Query query=entityManager.createQuery("select d from Device d", Device.class);
-            return query.getResultList();
-        }}
+        }
 
     @Override
     public List<Device> sort(String dir) {
