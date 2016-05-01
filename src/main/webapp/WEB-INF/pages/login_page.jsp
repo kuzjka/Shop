@@ -11,7 +11,26 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container">
+<nav   class="navbar navbar-default navbar-fixed-top">
+    <div  class="container">
+
+        <ul  class="nav navbar-nav">
+            <li ><a class="active" href="/" ><span class="glyphicon glyphicon-home"></span></a></li>
+
+
+            <li><a href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
+            <li><a href="/order_add_page">Order</a></li>
+            <li><a href="/photo/all">Photos</a></li>
+            <li><a href="/admin">Admin</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container" style="padding-top: 50px">
 <form role="form" action="/login_page" method="post">
     <div class="form-group">
         <label for="username">Username:</label>

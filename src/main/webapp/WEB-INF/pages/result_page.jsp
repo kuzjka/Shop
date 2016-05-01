@@ -8,9 +8,40 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style type="text/css">
+
+        .navbar-fixed-top {
+
+            background-color: deepskyblue;
+        }
+
+
+
+        ul.navbar-nav  a.active  {
+            color:deepskyblue;
+            background-color: white;
+        }
+        ul.navbar-nav a:hover:not(.active){
+            color:deepskyblue;
+            background-color: white;
+        }
+
+        .img-responsive:hover{
+            width:50%;
+            height: auto;
+
+        }
+        .btn-info {
+            color:white;
+            background-color: deepskyblue;
+        }
+        .table {
+            background-color: seashell;
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Shop</a>

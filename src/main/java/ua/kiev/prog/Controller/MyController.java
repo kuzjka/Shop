@@ -184,9 +184,10 @@ public class MyController {
     }
 
     @RequestMapping(value="/register", method = RequestMethod.POST)
-    public String register(@RequestParam String username, @RequestParam String password1, @RequestParam
+    public String register(@RequestParam String role, @RequestParam String username,
+                           @RequestParam String password1, @RequestParam
     String password2,Model model){
-        String role="USER";
+
         if(password1.equals(password2)){
         deviceService.addUser(new User(username, password2, true));
         deviceService.addRole(new Role(username,role));

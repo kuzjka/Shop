@@ -6,9 +6,40 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <style type="text/css">
+
+        .navbar-fixed-top {
+
+            background-color: deepskyblue;
+        }
+
+
+
+        ul.navbar-nav  a.active  {
+            color:deepskyblue;
+            background-color: white;
+        }
+        ul.navbar-nav a:hover:not(.active){
+            color:deepskyblue;
+            background-color: white;
+        }
+
+        .img-responsive:hover{
+            width:50%;
+            height: auto;
+
+        }
+        .btn-info {
+            color:white;
+            background-color: deepskyblue;
+        }
+        .table {
+            background-color: seashell;
+        }
+    </style>
 </head>
 <body>
-<nav align = "center" class="navbar navbar-inverse">
+<nav align = "center" class="navbar navbar-default navbar-fixed-top">
     <div align="center" class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Shop</a>
@@ -23,14 +54,25 @@
             <li><a href="/admin">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a class="active" href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
         </ul>
     </div>
 </nav>
-<div class="container">
-    <form role="form" action="/register" method="post">
+<div class="container" style="padding-top: 50px" >
+    <form role="form" action="/register" method="post" >
+        <div class="form-group">
+            <label for="role">Role:</label>
+            <select class="selectpicker form-control form-type" name="role" id="role">
+
+
+                    <option value="USER">USER</option>
+                    <option value="ADMIN">ADMIN</option>
+                </select>
+
+
+        </div>
         <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" name="username" class="form-control" id="username">

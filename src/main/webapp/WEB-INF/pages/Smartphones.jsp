@@ -16,20 +16,28 @@
         }
 
 
+
         ul.navbar-nav  a.active  {
-            color:white;
-            background-color: aquamarine;
+            color:deepskyblue;
+            background-color: white;
         }
         ul.navbar-nav a:hover:not(.active){
-            color:white;
-            background-color: aquamarine;
+            color:deepskyblue;
+            background-color: white;
         }
 
         .img-responsive:hover{
-            width: 50%;
+            width:50%;
             height: auto;
-        }
 
+        }
+        .btn-info {
+            color:white;
+            background-color: deepskyblue;
+        }
+        .table {
+            background-color: seashell;
+        }
     </style>
 </head>
 <body>

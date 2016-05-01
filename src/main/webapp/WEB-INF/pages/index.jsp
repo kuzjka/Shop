@@ -12,19 +12,23 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <style type="text/css">
 
-.navbar-fixed-top {
-    color: white;
-    background-color: deepskyblue;
+.navbar-fixed-top{
+    background-color:deepskyblue;
 }
 
 
+
+
+
       ul.navbar-nav  a.active  {
-          color:white;
-          background-color: aquamarine;
+          color:deepskyblue;
+          background-color: white;
       }
+
+
     ul.navbar-nav a:hover:not(.active){
-        color:white;
-        background-color: aquamarine;
+        color:deepskyblue;
+        background-color: white;
     }
 
 .img-responsive:hover{
@@ -42,7 +46,7 @@
 </style>
 </head>
 
-<nav  class="navbar navbar-default navbar-fixed-top">
+<nav   class="navbar navbar-default navbar-fixed-top">
     <div  class="container">
 
         <ul  class="nav navbar-nav">
@@ -106,7 +110,7 @@
             </c:choose>
 
 
-            <sec:authorize url="/login">
+            <sec:authorize access="hasAuthority('USER')">
 
                 <c:set var="count" value="${0}"/>
              <c:forEach items="${carts}"   var="cart">
