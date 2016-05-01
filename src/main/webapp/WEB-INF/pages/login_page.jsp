@@ -38,7 +38,7 @@
     <div  class="container">
 
         <ul  class="nav navbar-nav">
-            <li ><a class="active" href="/" ><span class="glyphicon glyphicon-home"></span></a></li>
+            <li ><a  href="/" ><span class="glyphicon glyphicon-home"></span></a></li>
 
 
             <li><a href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
@@ -48,8 +48,9 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="/user" class="active"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+
         </ul>
     </div>
 </nav>
