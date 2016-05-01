@@ -30,12 +30,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure (HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/login").authenticated()
-                .antMatchers( "/cart_add_page", "/order_add_page").authenticated()
+                .antMatchers("/user").authenticated()
+
+                .antMatchers( "/cart_add_page", "/order_add_page").hasAuthority("USER")
                 .antMatchers("/admin").hasAuthority("ADMIN")
                 .and().formLogin().loginPage("/login_page")
-                .usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/")
+                .usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/login_page")
 
 
 

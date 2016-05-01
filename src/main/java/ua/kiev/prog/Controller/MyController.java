@@ -22,7 +22,7 @@ public class MyController {
     @Autowired
     private DeviceService deviceService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/user"} , method = RequestMethod.GET)
     public String index(Model model) {
 
 

@@ -62,7 +62,7 @@
     </div>
 </nav>
 
-<h1 align="center">Total price: ${total}</h1>
+<h1 align="center" style="padding-top: 50px">Total price: ${total}</h1>
 <table class="table table-default">
     <thead>
     <tr><td><b></b></td>
