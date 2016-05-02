@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -39,6 +40,7 @@
             background-color: seashell;
         }
     </style>
+
 </head>
 <body>
 <nav align = "center" class="navbar navbar-default navbar-fixed-top">
@@ -90,23 +92,25 @@
 
         <div class="col-sm-2">
 
-            <form action="/filter1" method="post">
+            <form action="/filter" method="get">
 
                 <div class="form-group">
                     <label for="min_price">Min price</label>
-                    <input type="text" class="form-control" name="min_price" id="min_price">
+                    <input type="text" class="form-control" name="min" id="min_price">
                 </div>
                 <div class="form-group">
                     <label for="max_price">Max price</label>
-                    <input type="text" class="form-control" name="max_price" id="max_price">
+                    <input type="text" class="form-control" name="max" id="max_price">
                 </div>
 
                 <div class="radio">
-                    <label><input type="radio" name="dir" value="asc" checked>From cheap<br/>to expensive</label>
+                    <label><input type="radio" name="dir" value="asc" >From cheap<br/>to expensive</label>
                 </div>
                 <div class="radio">
                     <label><input type="radio" name="dir" value="desc">From expensive<br/>to cheap</label></label>
                 </div>
+                <input type="submit" class="btn btn-primary" value="submit">
+            </form>
 
 
 
@@ -114,29 +118,29 @@
 
                 <label>RAM:</label>
                 <div class="checkbox">
-                    <label><input type="checkbox" name="ram" value="2">2 GB</label>
+                    <label><input type="checkbox"  name="ram" value="2">2 GB</label>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" name="ram" value="4">4 GB</label></label>
+                    <label><input type="checkbox" name="ram" value="4">4 GB</label>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" name="ram" value="8">8 GB</label></label>
+                    <label><input type="checkbox" name="ram" value="8">8 GB</label>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" name="ram" value="16">16 GB</label></label>
+                    <label><input type="checkbox" name="ram" value="16">16 GB</label>
                 </div>
                 <label>Processor: </label>
                 <div class="checkbox">
-                    <label><input type="checkbox" name="proc" value="i3">i3</label></label>
+                    <label><input type="checkbox" name="proc" value="i3">i3</label>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" name="proc" value="i5">i5</label></label>
+                    <label><input type="checkbox" name="proc" value="i5">i5</label>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" name="proc" value="i7">i7</label></label>
-                </div>
-            <button  type="submit" class="btn btn-info">Submit</button>
+                    <label><input type="checkbox" name="proc" value="i7">i7</label>
+                </div><input type="submit" class="btn btn-primary" value="submit">
             </form>
+
 
 
         </div>

@@ -111,7 +111,7 @@ public class DeviceService {
     @Transactional
     public List<Photo> getPhoto(Device device){ return photoDao.getPhoto(device);}
     @Transactional(readOnly = true)
-    public List<Device>sort(String dir){return deviceDAO.sort(dir);}
+    public List<Device>priceFilter(int min, int max, String dir){return deviceDAO.priceFilter(min, max,dir);}
 
     @Transactional(readOnly = true)
     public List<Device>ramFilter(List<Integer>ram){

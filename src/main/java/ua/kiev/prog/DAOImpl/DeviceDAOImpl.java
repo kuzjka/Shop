@@ -109,23 +109,38 @@ public class DeviceDAOImpl implements DeviceDAO {
         }
 
     @Override
-    public List<Device> sort(String dir) {
-        Query query=null;
-        if(dir.equals("asc")){
+    public List<Device> priceFilter(int min, int max, String dir) {
 
-         query=entityManager.createQuery("select d from  Device d order by d.price", Device.class);}
+        if(max==-1){
+            max = Integer.MAX_VALUE;
+        }
+
+        if(dir.equals("desc")){
+
+         Query query=entityManager.createQuery("select d from  Device d where d.price between" +
+                 " (:min) and (:max ) order by d.price desc ", Device.class);
+            query.setParameter("min", min);
+            query.setParameter("max", max);
+        return  query.getResultList();}
 
 
-        else if(dir.equals("desc")){
-             query=entityManager.createQuery("select d from  Device d order by d.price desc", Device.class);
-            }
-        return  query.getResultList();
+
+         else{
+     Query     query=entityManager.createQuery("select d from  Device d where d.price between" +
+                    " (:min) and (:max )order by d.price  ", Device.class);
+             query.setParameter("min", min);
+             query.setParameter("max", max);
+
+            return  query.getResultList();
+        }}}
 
 
 
 
 
-}}
+
+
+
 
 
 

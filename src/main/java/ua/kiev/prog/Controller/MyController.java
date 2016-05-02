@@ -94,10 +94,17 @@ public String denied(Model model){
         return "one_device_page";
     }
 
-
+@RequestMapping(value = "/filter" , method = RequestMethod.GET)
+public String priceFilter(@RequestParam (required = false, defaultValue = "0")int min,
+                          @RequestParam (required =  false , defaultValue="-1") int max,
+                          @RequestParam String dir,
+                           Model model ){
+    model.addAttribute("devices" , deviceService.priceFilter(min, max, dir));
+    return "desctops";
+}
     @RequestMapping(value = "/filter1", method = RequestMethod.POST)
-    public String ramFilter(HttpServletRequest request, @RequestParam(required = false, defaultValue = "0") int min_price,
-                            @RequestParam(required = false, defaultValue = "-1")  int max_price ,Model model) {
+    public String ramFilter(HttpServletRequest request
+                             ,Model model) {
         String[] sram = request.getParameterValues("ram");
         String [] sproc = request.getParameterValues("proc");
 
@@ -112,13 +119,16 @@ public String denied(Model model){
         if(sproc!=null){
             for(String p :sproc)
 
+
                 proc.add(p);
+
             }
 
             if(sproc!=null){
             model.addAttribute("processors", proc);}
             if(sram!=null){
             model.addAttribute("rams", ram);}
+
 
         if(ram.size()>0 && proc.size()>0){
         model.addAttribute("devices", deviceService.procFilter(proc));
