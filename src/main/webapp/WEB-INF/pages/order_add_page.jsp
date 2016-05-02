@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <html>
@@ -63,14 +64,18 @@
     </div>
 </nav>
 <div class="container" style="padding-top: 50px">
-    <form role="form" name="order"   class="form-horizontal"  method="post">
+    <form action="/addorder" role="form" name="order"   class="form-horizontal"  method="post">
         <h3><input type="submit" class="btn btn-success" role="button" value="Make order"  ></h3>
 
-            <c:forEach items="${carts}" var="cart">
-                <label>In order:</label> <input  type="checkbox" name="cart[]" value="${cart.id}" checked>${cart.device.name}</checkbox>
-            </c:forEach>
+        <select multiple class="selectpicker form-control form-type" name="cart">
 
-        <input class="form-control form-type" type="text"  name="name" placeholder="Name">
+            <c:forEach items="${carts}" var="cart">
+                <option value="${cart.id}" selected>${cart.device.name}</option>
+            </c:forEach>
+        </select>
+
+        <input class="form-control form-type" type="text" name="username" placeholder="Username">
+        <input class="form-control form-type" type="password" name="password" placeholder="Password">
         <input class="form-control form-type" type="text" name="address" placeholder="Address">
         <input class="form-control form-type" type="text" name="phone" placeholder="Phone">
 

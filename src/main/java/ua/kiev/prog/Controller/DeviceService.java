@@ -98,9 +98,11 @@ public class DeviceService {
     }
 
     @Transactional(readOnly = true)
-    public List<Order> listOrders() {
-        return orderDAO.list();
+    public List<Order> listOrders(User user) {
+        return orderDAO.list(user);
     }
+    @Transactional(readOnly = true)
+    public User findUser(String username) {return userDAO.findOne(username);}
 
     @Transactional
     public void addOrder(Order order) {
@@ -112,14 +114,10 @@ public class DeviceService {
     public List<Photo> getPhoto(Device device){ return photoDao.getPhoto(device);}
     @Transactional(readOnly = true)
     public List<Device>priceFilter(int min, int max, String dir){return deviceDAO.priceFilter(min, max,dir);}
-
     @Transactional(readOnly = true)
-    public List<Device>ramFilter(List<Integer>ram){
-        return  deviceDAO.ramFilter(ram);}
-        @Transactional(readOnly = true)
-        public List<Device> procFilter (List<String>proc){
-            return  deviceDAO.procFilter(proc);}
-
+    public List<Device>ramFilter(List<Integer>ram){return  deviceDAO.ramFilter(ram);}
+    @Transactional(readOnly = true)
+    public List<Device> procFilter (List<String>proc){return  deviceDAO.procFilter(proc);}
     @Transactional(readOnly = true)
     public List<Device> listByManufacturer (String manufacturer){
         return deviceDAO.listByManufacturer(manufacturer);

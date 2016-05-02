@@ -1,5 +1,6 @@
 package ua.kiev.prog.Controller;
 
+import com.mysql.jdbc.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.access.annotation.Secured;
@@ -350,32 +351,38 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
     }
 
     @RequestMapping(value = "/addorder", method = RequestMethod.POST)
-    public String orderAdd( HttpServletRequest request, @RequestParam String name,
+    public String orderAdd( HttpServletRequest request, @RequestParam String username,
+                            @RequestParam String password,
                            @RequestParam String address,
                            @RequestParam String phone,
 
 
                            Model model) {
-        String[] sid=  request.getParameterValues("cart[]");
+        User user=deviceService.findUser(username);
+        if(user.getPassword().equals(password));
+
+        String[] sid=  request.getParameterValues("cart");
         for(String s:sid){
             Cart cart = deviceService.findCart(Integer.parseInt(s));
-            Order order = new Order (name, address, phone, cart );
-            deviceService.addOrder(order);
-        }
+            Order order = new Order (user, address, phone, cart );
+            deviceService.addOrder(order);}
 
 
 
 
-        model.addAttribute("orders", deviceService.listOrders());
+        model.addAttribute("username", username);
+        model.addAttribute("orders", deviceService.listOrders(user));
         model.addAttribute("total", deviceService.totalPrice());
         return "result_page";
 
 
     }
 
-    @RequestMapping(value = "/order_add_page")
-    public String order(Model model) {
+    @RequestMapping(value = "/order_add_page",  method = RequestMethod.GET)
+    public String order(Model model ) {
+
         model.addAttribute("carts", deviceService.listCarts());
+
         return "order_add_page";
     }
 
@@ -386,10 +393,7 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
         model.addAttribute("total", deviceService.totalPrice());
         return "cart_add_page";
 
-    }@RequestMapping(value="/result_page")
-    public String result (Model model){
-        model.addAttribute("orders", deviceService.listOrders());
-        return "result_page";
+
     }@RequestMapping(value = "/device/{id}/{n}", method = RequestMethod.GET)
     public void onPhoto(HttpServletRequest request, HttpServletResponse response, @PathVariable int id,
                         @PathVariable int n){

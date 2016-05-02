@@ -1,9 +1,7 @@
 package ua.kiev.prog.Classes;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -12,7 +10,8 @@ public class User {
     private String username;
     private String password;
     boolean enabled;
-
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 
 
 

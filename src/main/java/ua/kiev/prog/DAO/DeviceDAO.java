@@ -13,6 +13,6 @@ public interface DeviceDAO {
     Device findOne(int id);
     int total();
     List<Device> procFilter(List<String> proc);
-    List<Device> ramFilter( List<Integer> ram);
+    List<Device> ramFilter(List<Integer> ram);
     List<Device>priceFilter(int min, int max, String dir);
 }

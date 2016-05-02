@@ -11,7 +11,9 @@ public class Order {
     @Id
     @GeneratedValue
     private int id;
-    private String name;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
     private String address;
     private String phone;
     @ManyToOne
@@ -22,8 +24,8 @@ public class Order {
     public Order() {
     }
 
-    public Order(String name, String address, String phone, Cart cart) {
-        this.name = name;
+    public Order(User user, String address, String phone, Cart cart) {
+        this.user = user;
         this.address = address;
         this.phone = phone;
         this.cart = cart;
@@ -37,12 +39,12 @@ public class Order {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public User getUser() {
+        return user;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getAddress() {

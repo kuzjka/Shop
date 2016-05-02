@@ -72,7 +72,7 @@
         <tr>
 
 
-            <td>${order.name}</td>
+            <td>${username}</td>
             <td>${order.address}</td>
             <td>${order.phone}</td>
             <td>${order.cart.device.name}</td>
