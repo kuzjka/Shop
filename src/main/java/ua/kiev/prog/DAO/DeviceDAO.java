@@ -12,7 +12,7 @@ public interface DeviceDAO {
     List<Device> list(String pattern);
     Device findOne(int id);
     int total();
-    List<Device> procFilter( List<String> proc);
+    List<Device> procFilter(List<String> proc);
     List<Device> ramFilter( List<Integer> ram);
     List<Device>priceFilter(int min, int max, String dir);
 }
