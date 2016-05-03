@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -54,31 +55,44 @@
         </ul>
     </div>
 </nav>
-<div class="container">
-    <div class="row">
+<div class="raw" style="padding-top: 100px;">
+    <div class="col-sm-3" style= "position: fixed;">
+        <div   class="btn-group">
+            <a href="/type/all" class="btn btn-primary " role="button">All</a>
+            <a href="/type/desctop" class="btn btn-primary  " role="button">Desctops</a>
+            <a href="/type/laptop" class="btn btn-primary active" role="button">Laptops</a>
+            <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
+        </div>
 
-        <div class="col-sm-2">
+        <form action="/name_filter" method="get">
 
-            <form action="/filter" method="get">
+            <div class="form-group">
+                <label for="device_name">Device name</label>
+                <input type="text" class="form-control" name="device_name" id="device_name"></div>
+            <input type="submit" class="btn btn-primary" value="submit">
+        </form>
 
-                <div class="form-group">
-                    <label for="min_price">Min price</label>
-                    <input type="text" class="form-control" name="min" id="min_price">
-                </div>
-                <div class="form-group">
-                    <label for="max_price">Max price</label>
-                    <input type="text" class="form-control" name="max" id="max_price">
-                </div>
 
-                <div class="radio">
-                    <label><input type="radio" name="dir" value="asc" >From cheap<br/>to expensive</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="dir" value="desc">From expensive<br/>to cheap</label></label>
-                </div>
-                <input type="submit" class="btn btn-primary" value="submit">
-            </form>
 
+        <form action="/price_filter" method="get">
+            <div class="form-group">
+                <label for="min_price">Min price</label>
+                <input type="text" class="form-control" name="min" id="min_price">
+            </div>
+            <div class="form-group">
+                <label for="max_price">Max price</label>
+                <input type="text" class="form-control" name="max" id="max_price">
+            </div>
+
+            <div class="radio">
+                <label><input type="radio" name="dir" value="asc" checked>From cheap<br/>to expensive</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="dir" value="desc">From expensive<br/>to cheap</label>
+            </div>
+            <input type="submit" class="btn btn-primary" value="submit">
+        </form>
+        <form action="/filter1" method="post">
             <label>RAM:</label>
             <div class="checkbox">
                 <label><input type="checkbox"  name="ram" value="2">2 GB</label>
@@ -102,74 +116,69 @@
             <div class="checkbox">
                 <label><input type="checkbox" name="proc" value="i7">i7</label>
             </div><input type="submit" class="btn btn-primary" value="submit">
-            </form>
-
-
-
-        </div>
+        </form></form>
 
 
 
 
 
-        <div class="col-sm-10">
+
+    </div>
+    <div class="col-sm-9" style="float: right;">
+        <table class="table table-default"  >
+            <thead>
+            <tr>
+                <td><b>Photo</b></td>
+                <td><b>Name</b></td>
+                <td><b>Manufacturer</b></td>
+                <td><b>Price</b></td>
+                <td><b>RAM</b></td>
+                <td><b>Processor</b></td>
+
+                <td><b>Sign up to by online<br /> or administrate site</b></td>
+            </tr>
+            </thead>
+            <c:forEach items="${devices}" var="device">
 
 
-            <table class="table table-default">
-                <thead>
-                <tr>
-                    <td><b>Photo</b></td>
-                    <td><b>Name</b></td>
-                    <td><b>Manufacturer</b></td>
-                    <td><b>Price</b></td>
-                    <td><b>RAM</b></td>
-                    <td><b>Processor</b></td>
+                <td><a href="/onedevice/${device.id}"><img class="img-responsive" alt="No photo" height="100" width="100"
+                                                           src="/device/${device.id}/0"/></a></td>
+                <td>${device.name}</td>
+                <td>${device.manufacturer}</td>
+                <td>${device.price}</td>
+                <td>${device.ram}</td>
+                <td>${device.processor}</td>
 
-                    <td><b>Sign up to by online<br /> or administrate site</b></td>
+
+
+                <sec:authorize url="/login">
+
+                    <c:set var="count" value="${0}"/>
+                    <c:forEach items="${carts}"   var="cart">
+
+
+
+
+
+                        <c:if test="${cart.device.id == device.id}">
+                            <c:remove var="count"/>
+                            <td><a href="/cart_add_page">In cart <span class="badge">${cart.items}</span></a><br></td>
+
+                        </c:if>
+
+
+
+
+
+
+                    </c:forEach>
+                    <c:if test="${count == 0}">
+                        <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
+                    </c:if> </sec:authorize>
+
                 </tr>
-                </thead>
-                <c:forEach items="${devices}" var="device">
-
-
-                    <td><a href="/onedevice/${device.id}"><img class="img-responsive" alt="No photo" height="100" width="100"
-                                                               src="/device/${device.id}/0"/></a></td>
-                    <td>${device.name}</td>
-                    <td>${device.manufacturer}</td>
-                    <td>${device.price}</td>
-                    <td>${device.ram}</td>
-                    <td>${device.processor}</td>
-
-
-
-                    <sec:authorize url="/login">
-
-                        <c:set var="count" value="${0}"/>
-                        <c:forEach items="${carts}"   var="cart">
-
-
-
-
-
-                            <c:if test="${cart.device.id == device.id}">
-                                <c:remove var="count"/>
-                                <td><a href="/cart_add_page">In cart <span class="badge">${cart.items}</span></a><br></td>
-
-                            </c:if>
-
-
-
-
-
-
-                        </c:forEach>
-                        <c:if test="${count == 0}">
-                            <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
-                        </c:if> </sec:authorize>
-
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
+            </c:forEach>
+        </table>
     </div>
 </div>
 </body>

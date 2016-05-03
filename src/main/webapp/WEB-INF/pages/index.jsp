@@ -63,8 +63,15 @@
     </div>
 </nav>
 
-    <div class="raw" style= " padding-top: 150px">
-        <div class="col-sm-3" style="position:fixed"><form action="/name_filter" method="get">
+    <div class="raw" style= " padding-top: 100px">
+        <div class="col-sm-3" style="position:fixed">
+            <div   class="btn-group">
+                <a href="/type/all" class="btn btn-primary active" role="button">All</a>
+                <a href="/type/desctop" class="btn btn-primary " role="button">Desctops</a>
+                <a href="/type/laptop" class="btn btn-primary " role="button">Laptops</a>
+                <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
+            </div>
+            <form action="/name_filter" method="get">
 
             <div class="form-group">
                 <label for="device_name">Device name</label>
@@ -92,11 +99,7 @@
                 </div>
                 <input type="submit" class="btn btn-primary" value="submit">
             </form>
-        <div align="center"  class="btn-group" style="padding-top: 50px">
-            <a href="/type/desctop" class="btn btn-primary btn-lg" role="button">Desctops</a>
-            <a href="/type/laptop" class="btn btn-primary btn-lg" role="button">Laptops</a>
-            <a href="/type/smartphone" class="btn btn-primary btn-lg" role="button">Smartphones</a>
-        </div>
+
 
 
 

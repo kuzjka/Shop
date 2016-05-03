@@ -67,29 +67,42 @@
 
 
         <div class="raw" style="padding-top: 100px;">
-            <div class="col-sm-3" style= "position: fixed;"><form action="/filter" method="get">
-                <div class="form-group">
-                    <label for="device_name">Device name</label>
-                    <input type="text" class="form-control" name="min" id="device_name">
-                </div>
-                <form action="/price_filter" method="get">
-                <div class="form-group">
-                    <label for="min_price">Min price</label>
-                    <input type="text" class="form-control" name="min" id="min_price">
-                </div>
-                <div class="form-group">
-                    <label for="max_price">Max price</label>
-                    <input type="text" class="form-control" name="max" id="max_price">
+            <div class="col-sm-3" style= "position: fixed;">
+                <div   class="btn-group">
+                    <a href="/type/all" class="btn btn-primary " role="button">All</a>
+                    <a href="/type/desctop" class="btn btn-primary active " role="button">Desctops</a>
+                    <a href="/type/laptop" class="btn btn-primary " role="button">Laptops</a>
+                    <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
                 </div>
 
-                <div class="radio">
-                    <label><input type="radio" name="dir" value="asc" checked>From cheap<br/>to expensive</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="dir" value="desc">From expensive<br/>to cheap</label>
-                </div>
-                <input type="submit" class="btn btn-primary" value="submit">
-            </form>
+                <form action="/name_filter" method="get">
+
+                    <div class="form-group">
+                        <label for="device_name">Device name</label>
+                        <input type="text" class="form-control" name="device_name" id="device_name"></div>
+                    <input type="submit" class="btn btn-primary" value="submit">
+                </form>
+
+
+
+                <form action="/price_filter" method="get">
+                    <div class="form-group">
+                        <label for="min_price">Min price</label>
+                        <input type="text" class="form-control" name="min" id="min_price">
+                    </div>
+                    <div class="form-group">
+                        <label for="max_price">Max price</label>
+                        <input type="text" class="form-control" name="max" id="max_price">
+                    </div>
+
+                    <div class="radio">
+                        <label><input type="radio" name="dir" value="asc" checked>From cheap<br/>to expensive</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="dir" value="desc">From expensive<br/>to cheap</label>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="submit">
+                </form>
 <form action="/filter1" method="post">
                 <label>RAM:</label>
                 <div class="checkbox">

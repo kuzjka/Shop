@@ -10,7 +10,7 @@
 <body>
 <div class="container">
     <form role="form"   enctype="multipart/form-data"  class="form-horizontal" action="/addphoto" method="post">
-        <h3>New device</h3>
+        <h3>Add photo</h3>
         <select class="selectpicker form-control form-type" name="device">
 
             <c:forEach items="${devices}" var="device">
@@ -24,8 +24,6 @@
     </form>
 </div>
 
-<script>
-    $('.selectpicker').selectpicker();
-</script>
+
 </body>
 </html>
