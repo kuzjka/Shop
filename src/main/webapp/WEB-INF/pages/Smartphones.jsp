@@ -58,17 +58,58 @@
         </ul>
     </div>
 </nav>
-<div class="container">
-<div align="center">
-    <div align="center"  class="btn-group" style="padding-top: 50px">
-        <a href="/filter3/sony" class="btn btn-primary" role="button">Sony</a>
-        <a href="/filter3/apple" class="btn btn-primary" role="button">Apple</a>
-        <a href="/filter3/samsung" class="btn btn-primary" role="button">Samsung</a>
-    </div>
-</div>
 
 
-            <table class="table table-default">
+
+
+    <div class="raw" style= " padding-top: 100px">
+        <div class="col-sm-3" style="position:fixed">
+            <div   class="btn-group">
+                <a href="/type/all" class="btn btn-primary " role="button">All</a>
+                <a href="/type/desctop" class="btn btn-primary " role="button">Desctops</a>
+                <a href="/type/laptop" class="btn btn-primary " role="button">Laptops</a>
+                <a href="/type/smartphone" class="btn btn-primary active " role="button">Smartphones</a>
+            </div>
+
+            <form action="/name_filter" method="get">
+
+            <div class="form-group">
+                <label for="device_name">Device name</label>
+                <input type="text" class="form-control" name="device_name" id="device_name"></div>
+            <input type="submit" class="btn btn-primary" value="submit">
+        </form>
+
+
+
+            <form action="/price_filter" method="get">
+                <div class="form-group">
+                    <label for="min_price">Min price</label>
+                    <input type="text" class="form-control" name="min" id="min_price">
+                </div>
+                <div class="form-group">
+                    <label for="max_price">Max price</label>
+                    <input type="text" class="form-control" name="max" id="max_price">
+                </div>
+
+                <div class="radio">
+                    <label><input type="radio" name="dir" value="asc" checked>From cheap<br/>to expensive</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="dir" value="desc">From expensive<br/>to cheap</label>
+                </div>
+                <input type="submit" class="btn btn-primary" value="submit">
+            </form>
+
+
+
+
+
+
+
+        </div>
+        <div class="col-sm-9" style="float: right;">
+
+            <table class="table table-default"  >
                 <thead>
                 <tr>
                     <td><b>Photo</b></td>
@@ -126,5 +167,4 @@
 </div>
 </body>
 </html>
-</body>
-</html>
+
