@@ -63,7 +63,13 @@
             <a href="/type/laptop" class="btn btn-primary active" role="button">Laptops</a>
             <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
         </div>
+        <form action="/laptop/name_filter" method="get">
 
+            <div class="form-group">
+                <label for="device_name">Device name</label>
+                <input type="text" class="form-control" name="name" id="device_name"></div>
+            <input type="submit" class="btn btn-primary" value="submit">
+        </form>
         <form action="/laptop/price_filter" method="get">
             <div class="form-group">
                 <label for="min_price">Min price</label>

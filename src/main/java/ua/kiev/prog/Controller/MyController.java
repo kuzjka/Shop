@@ -95,13 +95,20 @@ public String denied(Model model){
         return "one_device_page";
     }
 
-    @RequestMapping(value = "/name_filter", method = RequestMethod.GET)
-    public String nameFilter(@RequestParam String device_name,@PathVariable String page, Model model){
-        model.addAttribute("devices", deviceService.searchDevices(device_name));
+    @RequestMapping(value = "/{type}/name_filter", method = RequestMethod.GET)
+    public String nameFilter(@RequestParam String name,@PathVariable String type, Model model){
+        model.addAttribute("devices", deviceService.searchDevices(type, name));
 
-        return "index";
+        if(type.equals("desctop")){
+            return "desctops";}
+        if(type.equals("laptop")){
+            return "laptops";
+        }if(type.equals("smartphone")){
+            return "smartphones";
+        }
+        else {return "index";}}
 
-    }
+
 
 @RequestMapping(value = "/{type}/price_filter" , method = RequestMethod.GET)
 public String priceFilter(@RequestParam (required = false, defaultValue = "0")int min,
@@ -267,12 +274,7 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
     }
 
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String search(@RequestParam String pattern, Model model) {
-        model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.searchDevices(pattern));
-        return "index_admin";
-    }
+
 
     @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
     public String searchByType(@PathVariable String type, Model model) {

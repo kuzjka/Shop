@@ -71,11 +71,11 @@
                 <a href="/type/laptop" class="btn btn-primary " role="button">Laptops</a>
                 <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
             </div>
-            <form action="/name_filter" method="get">
+            <form action="/all/name_filter" method="get">
 
             <div class="form-group">
                 <label for="device_name">Device name</label>
-                <input type="text" class="form-control" name="device_name" id="device_name"></div>
+                <input type="text" class="form-control" name="name" id="device_name"></div>
                 <input type="submit" class="btn btn-primary" value="submit">
         </form>
 
