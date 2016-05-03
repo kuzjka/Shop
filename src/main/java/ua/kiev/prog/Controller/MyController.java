@@ -95,22 +95,21 @@ public String denied(Model model){
         return "one_device_page";
     }
 
-    @RequestMapping(value = "/name_filter/{page}", method = RequestMethod.GET)
+    @RequestMapping(value = "/name_filter", method = RequestMethod.GET)
     public String nameFilter(@RequestParam String device_name,@PathVariable String page, Model model){
         model.addAttribute("devices", deviceService.searchDevices(device_name));
 
-        return page;
+        return "index";
 
     }
 
-@RequestMapping(value = "/price_filter/{page}" , method = RequestMethod.GET)
+@RequestMapping(value = "/price_filter" , method = RequestMethod.GET)
 public String priceFilter(@RequestParam (required = false, defaultValue = "0")int min,
                           @RequestParam (required =  false , defaultValue="-1") int max,
-                          @RequestParam String dir, @PathVariable String page,
-                           Model model ){
+                          @RequestParam String dir, Model model ){
 
     model.addAttribute("devices" , deviceService.priceFilter(min, max, dir));
-    return page;
+    return "index";
 }
     @RequestMapping(value = "/filter1", method = RequestMethod.POST)
     public String ramFilter(HttpServletRequest request

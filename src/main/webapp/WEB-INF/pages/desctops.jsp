@@ -53,7 +53,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="/user"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
         </ul>
     </div>
@@ -75,34 +75,7 @@
                     <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
                 </div>
 
-                <form action="/name_filter/desctops" method="get">
 
-                    <div class="form-group">
-                        <label for="device_name">Device name</label>
-                        <input type="text" class="form-control" name="device_name" id="device_name"></div>
-                    <input type="submit" class="btn btn-primary" value="submit">
-                </form>
-
-
-
-                <form action="/price_filter" method="get">
-                    <div class="form-group">
-                        <label for="min_price">Min price</label>
-                        <input type="text" class="form-control" name="min" id="min_price">
-                    </div>
-                    <div class="form-group">
-                        <label for="max_price">Max price</label>
-                        <input type="text" class="form-control" name="max" id="max_price">
-                    </div>
-
-                    <div class="radio">
-                        <label><input type="radio" name="dir" value="asc" checked>From cheap<br/>to expensive</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="dir" value="desc">From expensive<br/>to cheap</label>
-                    </div>
-                    <input type="submit" class="btn btn-primary" value="submit">
-                </form>
 <form action="/filter1" method="post">
                 <label>RAM:</label>
                 <div class="checkbox">
@@ -162,7 +135,7 @@
 
 
 
-                    <sec:authorize url="/login">
+                    <sec:authorize url="/user">
 
                         <c:set var="count" value="${0}"/>
                         <c:forEach items="${carts}"   var="cart">
