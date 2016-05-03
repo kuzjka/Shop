@@ -27,11 +27,7 @@
             background-color: white;
         }
 
-        .img-responsive:hover{
-            width:50%;
-            height: auto;
 
-        }
         .btn-info {
             color:white;
             background-color: deepskyblue;
@@ -62,38 +58,21 @@
         </ul>
     </div>
 </nav>
-<div align="center" style="padding-bottom: 50px; padding-top: 100px;">
-    <div align="center"  class="btn-group">
-        <a href="/filter2/budget_computers" class="btn btn-primary btn-lg" role="button" >Budget computers</a>
-        <a href="/filter2/computers_for_job" class="btn btn-primary btn-lg" role="button">Computers for job</a>
-        <a href="/filter2/gaming_computers" class="btn btn-primary btn-lg " role="button">Gaming computers</a>
-    </div>
-</div>
-<div class="container" align="center">
 
-    <table class="table-default">
-        <tr>${type}</tr>
-        <tr>
-            <c:forEach items="${rams}" var="ram">
-                <td>RAM:</td>
-            <td>${ram};</td>
-            </c:forEach>
 
-            <c:forEach items="${processors}" var="processor">
-                <td>Processor:</td>
-                <td>${processor};</td>
-            </c:forEach>
-        </tr>
 
-    </table>
-</div>
-<div class="container">
-    <div class="row">
 
-        <div class="col-sm-2">
 
-            <form action="/filter" method="get">
 
+
+
+        <div class="raw" style="padding-top: 100px;">
+            <div class="col-sm-3" style= "position: fixed;"><form action="/filter" method="get">
+                <div class="form-group">
+                    <label for="device_name">Device name</label>
+                    <input type="text" class="form-control" name="min" id="device_name">
+                </div>
+                <form action="/price_filter" method="get">
                 <div class="form-group">
                     <label for="min_price">Min price</label>
                     <input type="text" class="form-control" name="min" id="min_price">
@@ -104,18 +83,14 @@
                 </div>
 
                 <div class="radio">
-                    <label><input type="radio" name="dir" value="asc" >From cheap<br/>to expensive</label>
+                    <label><input type="radio" name="dir" value="asc" checked>From cheap<br/>to expensive</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="dir" value="desc">From expensive<br/>to cheap</label></label>
+                    <label><input type="radio" name="dir" value="desc">From expensive<br/>to cheap</label>
                 </div>
                 <input type="submit" class="btn btn-primary" value="submit">
             </form>
-
-
-
-
-
+<form action="/filter1" method="post">
                 <label>RAM:</label>
                 <div class="checkbox">
                     <label><input type="checkbox"  name="ram" value="2">2 GB</label>
@@ -139,20 +114,16 @@
                 <div class="checkbox">
                     <label><input type="checkbox" name="proc" value="i7">i7</label>
                 </div><input type="submit" class="btn btn-primary" value="submit">
-            </form>
-
-
-
-        </div>
+                </form></form>
 
 
 
 
 
-        <div class="col-sm-10">
 
-
-            <table class="table table-default">
+            </div>
+            <div class="col-sm-9" style="float: right;">
+            <table class="table table-default"  >
                 <thead>
                 <tr>
                     <td><b>Photo</b></td>

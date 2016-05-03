@@ -95,7 +95,14 @@ public String denied(Model model){
         return "one_device_page";
     }
 
-@RequestMapping(value = "/filter" , method = RequestMethod.GET)
+    @RequestMapping(value = "/name_filter", method = RequestMethod.GET)
+    public String nameFilter(@RequestParam String device_name, Model model){
+        model.addAttribute("devices", deviceService.searchDevices(device_name));
+        return "index";
+
+    }
+
+@RequestMapping(value = "/price_filter" , method = RequestMethod.GET)
 public String priceFilter(@RequestParam (required = false, defaultValue = "0")int min,
                           @RequestParam (required =  false , defaultValue="-1") int max,
                           @RequestParam String dir,
@@ -266,6 +273,11 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
             model.addAttribute("devices", deviceService.listDevices(type));
         if(type.equals("desctop")){
             return "desctops";}
+        if(type.equals("laptop")){
+            return "laptops";
+        }if(type.equals("smartphone")){
+            return "smartphones";
+        }
         else {return "index";}}
 
 
