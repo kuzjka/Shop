@@ -74,7 +74,7 @@
 
 
 
-        <form action="/price_filter" method="get">
+        <form action="/price_filter/laptops" method="get">
             <div class="form-group">
                 <label for="min_price">Min price</label>
                 <input type="text" class="form-control" name="min" id="min_price">

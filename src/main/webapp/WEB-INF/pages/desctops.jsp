@@ -75,7 +75,7 @@
                     <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
                 </div>
 
-                <form action="/name_filter" method="get">
+                <form action="/name_filter/desctops" method="get">
 
                     <div class="form-group">
                         <label for="device_name">Device name</label>
