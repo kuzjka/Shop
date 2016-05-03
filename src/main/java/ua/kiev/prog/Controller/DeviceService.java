@@ -88,8 +88,8 @@ public class DeviceService {
     }
 
     @Transactional(readOnly = true)
-    public List<Device> searchDevices(String pattern) {
-        return deviceDAO.list(pattern);
+    public List<Device> searchDevices(String type, String pattern) {
+        return deviceDAO.list(type, pattern);
     }
 
     @Transactional(readOnly = true)
@@ -113,7 +113,8 @@ public class DeviceService {
     @Transactional
     public List<Photo> getPhoto(Device device){ return photoDao.getPhoto(device);}
     @Transactional(readOnly = true)
-    public List<Device>priceFilter(int min, int max, String dir){return deviceDAO.priceFilter(min, max,dir);}
+    public List<Device>priceFilter(String type, int min, int max, String dir)
+    {return deviceDAO.priceFilter(type, min, max, dir);}
     @Transactional(readOnly = true)
     public List<Device>ramFilter(List<Integer>ram){return  deviceDAO.ramFilter(ram);}
     @Transactional(readOnly = true)

@@ -103,14 +103,22 @@ public String denied(Model model){
 
     }
 
-@RequestMapping(value = "/price_filter" , method = RequestMethod.GET)
+@RequestMapping(value = "/{type}/price_filter" , method = RequestMethod.GET)
 public String priceFilter(@RequestParam (required = false, defaultValue = "0")int min,
                           @RequestParam (required =  false , defaultValue="-1") int max,
-                          @RequestParam String dir, Model model ){
+                          @RequestParam String dir,@PathVariable String type, Model model ){
 
-    model.addAttribute("devices" , deviceService.priceFilter(min, max, dir));
-    return "index";
-}
+    model.addAttribute("devices" , deviceService.priceFilter(type, min, max, dir));
+    if(type.equals("desctop")){
+        return "desctops";}
+    if(type.equals("laptop")){
+        return "laptops";
+    }if(type.equals("smartphone")){
+        return "smartphones";
+    }
+    else {return "index";}}
+
+
     @RequestMapping(value = "/filter1", method = RequestMethod.POST)
     public String ramFilter(HttpServletRequest request
                              ,Model model) {

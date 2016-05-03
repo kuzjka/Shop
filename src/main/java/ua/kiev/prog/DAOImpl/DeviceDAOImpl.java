@@ -57,10 +57,19 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     @Override
-    public List<Device> list(String pattern) {
-        Query query = entityManager.createQuery("SELECT d FROM Device d WHERE d.name LIKE :pattern", Device.class);
+    public List<Device> list(String type, String pattern) {
+        if(type.equals("all")){
+        Query query = entityManager.createQuery("SELECT d FROM Device d " +
+                " where d.name LIKE :pattern", Device.class);
         query.setParameter("pattern", "%" + pattern + "%");
-        return (List<Device>) query.getResultList();
+        return (List<Device>) query.getResultList();}
+        else {
+            Query query = entityManager.createQuery("SELECT d FROM Device d " +
+                    " where d.name LIKE :pattern and d.type.name=:type", Device.class);
+            query.setParameter("pattern", "%" + pattern + "%");
+            query.setParameter("type", type);
+            return (List<Device>) query.getResultList();
+        }
     }
 
     @Override
@@ -109,7 +118,7 @@ public class DeviceDAOImpl implements DeviceDAO {
         }
 
     @Override
-    public List<Device> priceFilter(int min, int max, String dir) {
+    public List<Device> priceFilter(String type,int min, int max, String dir) {
 
         if(max==-1){
             max = Integer.MAX_VALUE;
@@ -117,8 +126,10 @@ public class DeviceDAOImpl implements DeviceDAO {
 
         if(dir.equals("desc")){
 
-         Query query=entityManager.createQuery("select d from  Device d where d.price between" +
+         Query query=entityManager.createQuery("select d from  Device d where" +
+                 " d.type.name=:type and d.price between" +
                  " (:min) and (:max ) order by d.price desc ", Device.class);
+            query.setParameter("type", type);
             query.setParameter("min", min);
             query.setParameter("max", max);
         return  query.getResultList();}
@@ -126,8 +137,9 @@ public class DeviceDAOImpl implements DeviceDAO {
 
 
          else{
-     Query     query=entityManager.createQuery("select d from  Device d where d.price between" +
-                    " (:min) and (:max )order by d.price  ", Device.class);
+     Query     query=entityManager.createQuery("select d from  Device d where d.type.name=:type " +
+             "and  d.price between (:min) and (:max )order by d.price  ", Device.class);
+            query.setParameter("type", type);
              query.setParameter("min", min);
              query.setParameter("max", max);
 

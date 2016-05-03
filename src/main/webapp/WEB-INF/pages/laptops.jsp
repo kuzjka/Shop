@@ -64,7 +64,24 @@
             <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
         </div>
 
+        <form action="/laptop/price_filter" method="get">
+            <div class="form-group">
+                <label for="min_price">Min price</label>
+                <input type="text" class="form-control" name="min" id="min_price">
+            </div>
+            <div class="form-group">
+                <label for="max_price">Max price</label>
+                <input type="text" class="form-control" name="max" id="max_price">
+            </div>
 
+            <div class="radio">
+                <label><input type="radio" name="dir" value="asc" checked>From cheap<br/>to expensive</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="dir" value="desc">From expensive<br/>to cheap</label>
+            </div>
+            <input type="submit" class="btn btn-primary" value="submit">
+        </form>
         <form action="/filter1" method="post">
             <label>RAM:</label>
             <div class="checkbox">
