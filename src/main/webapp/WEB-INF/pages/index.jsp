@@ -63,8 +63,9 @@
     </div>
 </nav>
 
-    <div class="raw" style="padding-top: 100px;">
-        <div class="col-sm-3" style= "position: fixed;"><form action="/name_filter" method="get">
+    <div class="raw" style= " padding-top: 150px">
+        <div class="col-sm-3" style="position:fixed"><form action="/name_filter" method="get">
+
             <div class="form-group">
                 <label for="device_name">Device name</label>
                 <input type="text" class="form-control" name="device_name" id="device_name"></div>
@@ -91,7 +92,11 @@
                 </div>
                 <input type="submit" class="btn btn-primary" value="submit">
             </form>
-</div>
+        <div align="center"  class="btn-group" style="padding-top: 50px">
+            <a href="/type/desctop" class="btn btn-primary btn-lg" role="button">Desctops</a>
+            <a href="/type/laptop" class="btn btn-primary btn-lg" role="button">Laptops</a>
+            <a href="/type/smartphone" class="btn btn-primary btn-lg" role="button">Smartphones</a>
+        </div>
 
 
 
@@ -100,6 +105,7 @@
 
         </div>
         <div class="col-sm-9" style="float: right;">
+
             <table class="table table-default"  >
                 <thead>
                 <tr>

@@ -26,11 +26,7 @@
             background-color: white;
         }
 
-        .img-responsive:hover{
-            width:50%;
-            height: auto;
 
-        }
         .btn-info {
             color:white;
             background-color: deepskyblue;
@@ -62,8 +58,9 @@
         </ul>
     </div>
 </nav>
+<div class="container">
 <div align="center">
-    <div align="center"  class="btn-group">
+    <div align="center"  class="btn-group" style="padding-top: 50px">
         <a href="/filter3/sony" class="btn btn-primary" role="button">Sony</a>
         <a href="/filter3/apple" class="btn btn-primary" role="button">Apple</a>
         <a href="/filter3/samsung" class="btn btn-primary" role="button">Samsung</a>
