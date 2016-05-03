@@ -53,7 +53,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="/user"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
         </ul>
     </div>
@@ -70,18 +70,14 @@
                 <a href="/type/laptop" class="btn btn-primary " role="button">Laptops</a>
                 <a href="/type/smartphone" class="btn btn-primary active " role="button">Smartphones</a>
             </div>
+            <form action="/smartphone/name_filter" method="get">
 
-            <form action="/name_filter" method="get">
-
-            <div class="form-group">
-                <label for="device_name">Device name</label>
-                <input type="text" class="form-control" name="device_name" id="device_name"></div>
-            <input type="submit" class="btn btn-primary" value="submit">
-        </form>
-
-
-
-            <form action="/price_filter" method="get">
+                <div class="form-group">
+                    <label for="device_name">Device name</label>
+                    <input type="text" class="form-control" name="name" id="device_name"></div>
+                <input type="submit" class="btn btn-primary" value="submit">
+            </form>
+            <form action="/smartphone/price_filter" method="get">
                 <div class="form-group">
                     <label for="min_price">Min price</label>
                     <input type="text" class="form-control" name="min" id="min_price">
@@ -133,7 +129,7 @@
 
 
 
-                    <sec:authorize url="/login">
+                    <sec:authorize url="/user">
 
                         <c:set var="count" value="${0}"/>
                         <c:forEach items="${carts}"   var="cart">
