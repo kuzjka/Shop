@@ -126,26 +126,28 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
     else {return "index";}}
 
 
-    @RequestMapping(value = "/{type}/ramProcFilter", method = RequestMethod.GET)
-    public String ramFilter(HttpServletRequest request, @PathVariable String type
-                             ,Model model) {
+    @RequestMapping(value = "/ramProcFilter", method = RequestMethod.POST)
+    public String ramFilter(HttpServletRequest request, Model model) {
+
         String[] sram = request.getParameterValues("ram");
         String [] sproc = request.getParameterValues("proc");
 
         List<String>proc=new ArrayList<>();
         List<Integer>ram=new ArrayList<>();
+        if(sproc!=null){
         for(String p:sproc){
             if(p!=null){
                 proc.add(p);
             }
-        }
+        }}
+        if(sram!=null){
         for(String r:sram){
             if(r!=null){
                 ram.add(Integer.parseInt(r));
             }
-        }
+        }}
 
-        model.addAttribute("devices", deviceService.ramProcFilter(type, ram, proc ));
+        model.addAttribute("devices", deviceService.ramProcFilter("desctop", ram, proc ));
 
 
         return "desctops";}
@@ -177,8 +179,7 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
             proc.add("i5");
             proc.add("i7");}
             model.addAttribute("type" , type);
-            model.addAttribute("devices", deviceService.ramFilter(ram));
-            model.addAttribute("devices", deviceService.procFilter(proc));
+
             return "desctops";
 
 

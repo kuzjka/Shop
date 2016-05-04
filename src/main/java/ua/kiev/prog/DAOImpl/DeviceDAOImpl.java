@@ -103,34 +103,33 @@ public class DeviceDAOImpl implements DeviceDAO {
 
     @Override
     public List<Device> ramProcFilter(String type, List<Integer> ram, List<String>proc) {
-        Query query=null;
+Query query=null;
         if(ram.size()>0&&proc.size()>0){
-         query= entityManager.createQuery("select d from Device d where " +
-                "  d.ram in (:ram)" +
-                "and d.processor in(:proc) and d.type.name=:type", Device.class);
+        query= entityManager.createQuery("select d from Device d where d.type.name=:type " +
+                " and d.ram in (:ram)" +
+                "and d.processor in(:proc)  ", Device.class);
         query.setParameter("ram", ram);
         query.setParameter("proc", proc);
         query.setParameter("type", type);
+
         }
-         if(ram.size()==0){
-             query= entityManager.createQuery("select d from Device d where " +
-                    "  " +
-                    " d.processor in(:proc) and d.type.name=:type", Device.class);
+        else if(ram.size()==0){
+            query= entityManager.createQuery("select d from Device d where d.type.name=:type " +
+                                       "and d.processor in (:proc)  ", Device.class);
 
             query.setParameter("proc", proc);
             query.setParameter("type", type);
 
-        } if(proc.size()==0){
-             query= entityManager.createQuery("select d from Device d where " +
-                    "  " +
-                    " d.ram in(:ram) and d.type.name=:type", Device.class);
+
+        }else if(proc.size()==0){
+          query= entityManager.createQuery("select d from Device d where d.type.name=:type and d.ram in (:ram)  ", Device.class);
 
             query.setParameter("ram", ram);
             query.setParameter("type", type);
 
-        }  if(ram.size()==0&&proc.size()==0){
-             query= entityManager.createQuery("select d from Device d where " +
-                    "  " +
+        } else if(ram.size()==0&&proc.size()==0){
+            query= entityManager.createQuery("select d from Device d where " +
+
                     "  d.type.name=:type", Device.class);
 
             query.setParameter("type", type);}
@@ -138,6 +137,8 @@ public class DeviceDAOImpl implements DeviceDAO {
 
 
         return query.getResultList();}
+
+
 
     @Override
     public List<Device> priceFilter(String type,int min, int max, String dir) {

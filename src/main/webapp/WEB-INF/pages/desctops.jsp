@@ -102,7 +102,7 @@
                     </div>
                     <input type="submit" class="btn btn-primary" value="submit">
                 </form>
-<form action="/filter1" method="post">
+<form action="/ramProcFilter" method="post">
                 <label>RAM:</label>
                 <div class="checkbox">
                     <label><input type="checkbox"  name="ram" value="2">2 GB</label>
