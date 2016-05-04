@@ -48,11 +48,14 @@
     <div  class="container">
 
         <ul  class="nav navbar-nav">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Shop</a>
+            </div>
             <li ><a class="active" href="/" ><span class="glyphicon glyphicon-home"></span></a></li>
 
 
             <li><a href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
-            <li><a href="/order_add_page">Order</a></li>
+            <li><a href="/order_add_page" class="active">Order</a></li>
             <li><a href="/photo/all">Photos</a></li>
             <li><a href="/admin">Admin</a></li>
         </ul>

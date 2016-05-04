@@ -38,6 +38,9 @@
     <div  class="container">
 
         <ul  class="nav navbar-nav">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Shop</a>
+            </div>
             <li ><a  href="/" ><span class="glyphicon glyphicon-home"></span></a></li>
 
 
