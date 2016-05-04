@@ -126,47 +126,27 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
     else {return "index";}}
 
 
-    @RequestMapping(value = "/filter1", method = RequestMethod.POST)
-    public String ramFilter(HttpServletRequest request
+    @RequestMapping(value = "/{type}/ramProcFilter", method = RequestMethod.GET)
+    public String ramFilter(HttpServletRequest request, @PathVariable String type
                              ,Model model) {
         String[] sram = request.getParameterValues("ram");
         String [] sproc = request.getParameterValues("proc");
 
-        List<Integer> ram = new ArrayList<>();
-        List<String> proc = new ArrayList<>();
-        if(sram!=null){
-        for (String s : sram)
-
-                ram.add(Integer.parseInt(s));}
-
-
-        if(sproc!=null){
-            for(String p :sproc)
-
-
+        List<String>proc=new ArrayList<>();
+        List<Integer>ram=new ArrayList<>();
+        for(String p:sproc){
+            if(p!=null){
                 proc.add(p);
-
             }
-
-            if(sproc!=null){
-            model.addAttribute("processors", proc);}
-            if(sram!=null){
-            model.addAttribute("rams", ram);}
-
-
-        if(ram.size()>0 && proc.size()>0){
-        model.addAttribute("devices", deviceService.procFilter(proc));
-
-        model.addAttribute("devices", deviceService.ramFilter(ram));}
-        if (ram.size()==0 && proc.size()>0){
-            model.addAttribute("devices", deviceService.procFilter(proc));
         }
-        if(proc.size()==0 && ram.size()>0){
-            model.addAttribute("devices", deviceService.ramFilter(ram));
+        for(String r:sram){
+            if(r!=null){
+                ram.add(Integer.parseInt(r));
+            }
         }
-        if(ram.size()==0 && proc.size()==0){
-            model.addAttribute("devices", deviceService.listDevices("all"));
-        }
+
+        model.addAttribute("devices", deviceService.ramProcFilter(type, ram, proc ));
+
 
         return "desctops";}
 

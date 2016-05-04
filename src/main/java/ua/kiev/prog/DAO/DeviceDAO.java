@@ -12,7 +12,6 @@ public interface DeviceDAO {
     List<Device> list(String type, String pattern);
     Device findOne(int id);
     int total();
-    List<Device> procFilter(List<String> proc);
-    List<Device> ramFilter(List<Integer> ram);
+    List<Device>ramProcFilter(String type, List<Integer>ram, List<String>proc);
     List<Device>priceFilter(String type, int min, int max, String dir);
 }

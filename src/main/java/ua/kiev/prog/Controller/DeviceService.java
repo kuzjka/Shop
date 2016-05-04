@@ -116,9 +116,9 @@ public class DeviceService {
     public List<Device>priceFilter(String type, int min, int max, String dir)
     {return deviceDAO.priceFilter(type, min, max, dir);}
     @Transactional(readOnly = true)
-    public List<Device>ramFilter(List<Integer>ram){return  deviceDAO.ramFilter(ram);}
-    @Transactional(readOnly = true)
-    public List<Device> procFilter (List<String>proc){return  deviceDAO.procFilter(proc);}
+    public List<Device>ramProcFilter(String type, List<Integer>ram, List<String>proc)
+    {return  deviceDAO.ramProcFilter(type, ram, proc);}
+
     @Transactional(readOnly = true)
     public List<Device> listByManufacturer (String manufacturer){
         return deviceDAO.listByManufacturer(manufacturer);

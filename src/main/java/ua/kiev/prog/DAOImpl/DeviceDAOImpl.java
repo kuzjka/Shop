@@ -5,6 +5,7 @@ import ua.kiev.prog.Classes.Cart;
 import ua.kiev.prog.DAO.DeviceDAO;
 import ua.kiev.prog.Classes.Device;
 
+import javax.annotation.processing.Processor;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -96,26 +97,47 @@ public class DeviceDAOImpl implements DeviceDAO {
 
 
     }
-    @Override
-    public List<Device> procFilter(List<String> proc) {
 
-            Query query= entityManager.createQuery("select d from Device d where d.processor " +
-                    "in (:proc)", Device.class);
-            query.setParameter("proc", proc);
-            return query.getResultList();
-
-       }
 
 
 
     @Override
-    public List<Device> ramFilter(List<Integer> ram) {
-
-        Query query= entityManager.createQuery("select d from Device d where d.ram in (:ram)", Device.class);
-            query.setParameter("ram", ram);
-        return query.getResultList();
-
+    public List<Device> ramProcFilter(String type, List<Integer> ram, List<String>proc) {
+        Query query=null;
+        if(ram.size()>0&&proc.size()>0){
+         query= entityManager.createQuery("select d from Device d where " +
+                "  d.ram in (:ram)" +
+                "and d.processor in(:proc) and d.type.name=:type", Device.class);
+        query.setParameter("ram", ram);
+        query.setParameter("proc", proc);
+        query.setParameter("type", type);
         }
+         if(ram.size()==0){
+             query= entityManager.createQuery("select d from Device d where " +
+                    "  " +
+                    " d.processor in(:proc) and d.type.name=:type", Device.class);
+
+            query.setParameter("proc", proc);
+            query.setParameter("type", type);
+
+        } if(proc.size()==0){
+             query= entityManager.createQuery("select d from Device d where " +
+                    "  " +
+                    " d.ram in(:ram) and d.type.name=:type", Device.class);
+
+            query.setParameter("ram", ram);
+            query.setParameter("type", type);
+
+        }  if(ram.size()==0&&proc.size()==0){
+             query= entityManager.createQuery("select d from Device d where " +
+                    "  " +
+                    "  d.type.name=:type", Device.class);
+
+            query.setParameter("type", type);}
+
+
+
+        return query.getResultList();}
 
     @Override
     public List<Device> priceFilter(String type,int min, int max, String dir) {
