@@ -148,32 +148,32 @@ Query query=null;
 
     @Override
     public List<Device> priceFilter(String type,int min, int max, String dir) {
-
+Query query;
         if(max==-1){
             max = Integer.MAX_VALUE;
         }
 
         if(dir.equals("desc")){
 
-         Query query=entityManager.createQuery("select d from  Device d where" +
+          query=entityManager.createQuery("select d from  Device d where" +
                  " d.type.name=:type and d.price between" +
                  " (:min) and (:max ) order by d.price desc ", Device.class);
             query.setParameter("type", type);
             query.setParameter("min", min);
             query.setParameter("max", max);
-        return  query.getResultList();}
+        }
 
 
 
          else{
-     Query     query=entityManager.createQuery("select d from  Device d where d.type.name=:type " +
+         query=entityManager.createQuery("select d from  Device d where d.type.name=:type " +
              "and  d.price between (:min) and (:max )order by d.price  ", Device.class);
             query.setParameter("type", type);
              query.setParameter("min", min);
-             query.setParameter("max", max);
+             query.setParameter("max", max);}
 
             return  query.getResultList();
-        }}}
+        }}
 
 
 

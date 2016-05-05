@@ -57,8 +57,6 @@ ul.navbar-nav a.default   {
                 <a  class="navbar-brand" href="/">Shop</a>
             </div>
             <li ><a class="active" href="/" ><span class="glyphicon glyphicon-home"></span></a></li>
-
-
             <li><a class="default"  href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
             <li><a class="default" href="/order_add_page">Order</a></li>
             <li><a class="default" href="/photo/all">Photos</a></li>
@@ -88,33 +86,6 @@ ul.navbar-nav a.default   {
                 <input type="submit" class="btn btn-primary" value="submit">
         </form>
 
-
-
-            <form action="/all/price_filter" method="get">
-                <div class="form-group">
-                    <label for="min_price">Min price</label>
-                    <input type="text" class="form-control" name="min" id="min_price">
-                </div>
-                <div class="form-group">
-                    <label for="max_price">Max price</label>
-                    <input type="text" class="form-control" name="max" id="max_price">
-                </div>
-
-                <div class="radio">
-                    <label><input type="radio" name="dir" value="asc" checked>From cheap<br/>to expensive</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="dir" value="desc">From expensive<br/>to cheap</label>
-                </div>
-                <input type="submit" class="btn btn-primary" value="submit">
-            </form>
-
-
-
-
-
-
-
         </div>
         <div class="col-sm-9" style="float: right;">
 
@@ -143,25 +114,16 @@ ul.navbar-nav a.default   {
                     <td>${device.processor}</td>
 
 
-
                     <sec:authorize url="/user">
 
                         <c:set var="count" value="${0}"/>
                         <c:forEach items="${carts}"   var="cart">
-
-
-
-
 
                             <c:if test="${cart.device.id == device.id}">
                                 <c:remove var="count"/>
                                 <td><a href="/cart_add_page">In cart <span class="badge">${cart.items}</span></a><br></td>
 
                             </c:if>
-
-
-
-
 
 
                         </c:forEach>

@@ -68,10 +68,6 @@
         </ul>
     </div>
 </nav>
-
-
-
-
     <div class="raw" style= " padding-top: 100px">
         <div class="col-sm-3" style="position:fixed">
             <div   class="btn-group">
@@ -113,10 +109,6 @@
             </div>
 
 
-
-
-
-
         </div>
         <div class="col-sm-9" style="float: right;">
 
@@ -141,28 +133,16 @@
                     <td>${device.manufacturer}</td>
                     <td>${device.price}</td>
 
-
-
-
                     <sec:authorize url="/user">
 
                         <c:set var="count" value="${0}"/>
                         <c:forEach items="${carts}"   var="cart">
-
-
-
-
 
                             <c:if test="${cart.device.id == device.id}">
                                 <c:remove var="count"/>
                                 <td><a href="/cart_add_page">In cart <span class="badge">${cart.items}</span></a><br></td>
 
                             </c:if>
-
-
-
-
-
 
                         </c:forEach>
                         <c:if test="${count == 0}">

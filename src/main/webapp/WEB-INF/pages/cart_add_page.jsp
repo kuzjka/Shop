@@ -57,8 +57,6 @@
                 <a class="navbar-brand" href="/">Shop</a>
             </div>
             <li ><a class="default" href="/"><span   class="glyphicon glyphicon-home"></span></a></li>
-
-
             <li ><a class="active" href="/cart_add_page">Cart</a></li>
             <li><a class="default" href="/order_add_page">Order</a></li>
             <li><a class="default" href="/photo/all">Photos</a></li>
@@ -80,9 +78,6 @@
         <td><b>Device</b></td>
         <td><b>Price</b></td>
         <td><b>Items</b></td>
-
-
-
     </tr>
     </thead>
 <c:forEach items="${carts}" var="cart">

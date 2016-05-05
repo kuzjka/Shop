@@ -18,7 +18,6 @@
             </c:forEach>
         </select>
 
-
         <input  type="file"   name="photo">
         <input type="submit" class="btn btn-primary" value="Add">
     </form>

@@ -128,11 +128,6 @@
             </div><input type="submit" class="btn btn-primary" value="submit">
         </form></form>
 
-
-
-
-
-
     </div>
     <div class="col-sm-9" style="float: right;">
         <table class="table table-default"  >
@@ -159,27 +154,16 @@
                 <td>${device.ram}</td>
                 <td>${device.processor}</td>
 
-
-
                 <sec:authorize url="/user">
 
                     <c:set var="count" value="${0}"/>
                     <c:forEach items="${carts}"   var="cart">
-
-
-
-
 
                         <c:if test="${cart.device.id == device.id}">
                             <c:remove var="count"/>
                             <td><a href="/cart_add_page">In cart <span class="badge">${cart.items}</span></a><br></td>
 
                         </c:if>
-
-
-
-
-
 
                     </c:forEach>
                     <c:if test="${count == 0}">

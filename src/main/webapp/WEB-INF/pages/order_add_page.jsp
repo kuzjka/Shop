@@ -57,8 +57,6 @@
                 <a class="navbar-brand" href="/">Shop</a>
             </div>
             <li ><a class="default" href="/" ><span class="glyphicon glyphicon-home"></span></a></li>
-
-
             <li><a class="default" href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
             <li><a href="/order_add_page" class="active">Order</a></li>
             <li><a class="default" href="/photo/all">Photos</a></li>
@@ -90,7 +88,5 @@
     </form>
 
 </div>
-
-
 </body>
 </html>

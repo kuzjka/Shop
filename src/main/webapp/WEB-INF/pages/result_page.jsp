@@ -85,15 +85,11 @@
 
     <c:forEach items="${orders}" var="order">
         <tr>
-
-
             <td>${username}</td>
             <td>${order.address}</td>
             <td>${order.phone}</td>
             <td>${order.cart.device.name}</td>
             <td>${order.cart.items}</td>
-
-
 
         </tr>
     </c:forEach>

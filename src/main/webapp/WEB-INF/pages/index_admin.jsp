@@ -26,9 +26,6 @@
         <a href="/type_add_page" class="btn btn-primary" role="button">Add type</a>
     </div>
 
-
-
-
     <form action="/device/delete" method="get">
     <table class="table table-striped">
         <thead>

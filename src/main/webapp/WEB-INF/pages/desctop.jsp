@@ -57,8 +57,6 @@
                 <a class="navbar-brand" href="/">Shop</a>
             </div>
             <li ><a class="default" href="/"><span class="glyphicon glyphicon-home"></span></a></li>
-
-
             <li><a class="default" href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
             <li><a class="default" href="/order_add_page">Order</a></li>
             <li><a class="default" href="/photo/all">Photos</a></li>
@@ -71,15 +69,7 @@
         </ul>
     </div>
 </nav>
-
-
-
-
-
-
-
-
-        <div class="raw" style="padding-top: 100px;">
+   <div class="raw" style="padding-top: 100px;">
             <div class="col-sm-3" style= "position: fixed;">
                 <div   class="btn-group">
                     <a href="/type/all" class="btn btn-primary " role="button">All</a>
