@@ -98,15 +98,11 @@ public String denied(Model model){
     @RequestMapping(value = "/{type}/name_filter", method = RequestMethod.GET)
     public String nameFilter(@RequestParam String name,@PathVariable String type, Model model){
         model.addAttribute("devices", deviceService.searchDevices(type, name));
-
-        if(type.equals("desctop")){
-            return "desctops";}
-        if(type.equals("laptop")){
-            return "laptops";
-        }if(type.equals("smartphone")){
-            return "smartphones";
+        if(type.equals("all")){
+            return  "index";}
+        else {
+return type;}
         }
-        else {return "index";}}
 
 
 
@@ -116,18 +112,15 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
                           @RequestParam String dir,@PathVariable String type, Model model ){
 
     model.addAttribute("devices" , deviceService.priceFilter(type, min, max, dir));
-    if(type.equals("desctop")){
-        return "desctops";}
-    if(type.equals("laptop")){
-        return "laptops";
-    }if(type.equals("smartphone")){
-        return "smartphones";
+    if(type.equals("all")){
+        return  "index";}
+    else {
+        return type;}
     }
-    else {return "index";}}
 
 
-    @RequestMapping(value = "/ramProcFilter", method = RequestMethod.POST)
-    public String ramFilter(HttpServletRequest request, Model model) {
+    @RequestMapping(value = "/{type}/ramProcFilter", method = RequestMethod.POST)
+    public String ramFilter(HttpServletRequest request, @PathVariable String type, Model model) {
 
         String[] sram = request.getParameterValues("ram");
         String [] sproc = request.getParameterValues("proc");
@@ -147,10 +140,13 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
             }
         }}
 
-        model.addAttribute("devices", deviceService.ramProcFilter("desctop", ram, proc ));
+        model.addAttribute("devices", deviceService.ramProcFilter(type, ram, proc ));
+        if(type.equals("all")){
+            return  "index";}
+        else {
+            return type;}
 
-
-        return "desctops";}
+        }
 
     @RequestMapping("/filter2/{type}")
     public String desctopFilter(Model model, @PathVariable String type){
@@ -186,7 +182,7 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
         }
     @RequestMapping("/filter3/{manufactuter}")
     public String mobileFilter(Model model, @PathVariable String manufacturer){
-        model.addAttribute("devices", deviceService.listByManufacturer(manufacturer));
+        model.addAttribute("devices", deviceService.manufacturerFilter("smartphone", manufacturer));
         return "smartphones";
     }
 
@@ -263,14 +259,11 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
 
 
             model.addAttribute("devices", deviceService.listDevices(type));
-        if(type.equals("desctop")){
-            return "desctops";}
-        if(type.equals("laptop")){
-            return "laptops";
-        }if(type.equals("smartphone")){
-            return "smartphones";
+        if(type.equals("all")){
+            return  "index";}
+        else {
+            return type;}
         }
-        else {return "index";}}
 
 
 

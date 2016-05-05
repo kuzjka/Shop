@@ -35,16 +35,18 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     @Override
-    public List<Device> listByManufacturer(String manufacturer) {
-        Query query=entityManager.createQuery("select d from Device d where d.manufacturer = :manufacturer",
+    public List<Device> manufacturerFilter (String type, String manufacturer) {
+        Query query=entityManager.createQuery("select d from Device d where d.manufacturer = :manufacturer and" +
+                " d.type.name=:type",
                 Device.class);
+        query.setParameter("type", type);
         query.setParameter("manufacturer", manufacturer);
         return query.getResultList();
     }
 
 
     @Override
-    public List<Device> listByType(String typeName) {
+    public List<Device> typeFilter(String typeName) {
         Query query;
 
         if (typeName.equals("all")) {
@@ -107,27 +109,27 @@ Query query=null;
         if(ram.size()>0&&proc.size()>0){
         query= entityManager.createQuery("select d from Device d where d.type.name=:type " +
                 " and d.ram in (:ram)" +
-                "and d.processor in(:proc)  ", Device.class);
+                " and d.processor in (:proc)  ", Device.class);
         query.setParameter("ram", ram);
         query.setParameter("proc", proc);
         query.setParameter("type", type);
 
         }
-        else if(ram.size()==0){
+         if(ram.size()==0){
             query= entityManager.createQuery("select d from Device d where d.type.name=:type " +
                                        "and d.processor in (:proc)  ", Device.class);
 
             query.setParameter("proc", proc);
-            query.setParameter("type", type);
+            query.setParameter("type", type);}
 
 
-        }else if(proc.size()==0){
+         if(proc.size()==0){
           query= entityManager.createQuery("select d from Device d where d.type.name=:type and d.ram in (:ram)  ", Device.class);
 
             query.setParameter("ram", ram);
             query.setParameter("type", type);
 
-        } else if(ram.size()==0&&proc.size()==0){
+        }  if(ram.size()==0&&proc.size()==0){
             query= entityManager.createQuery("select d from Device d where " +
 
                     "  d.type.name=:type", Device.class);

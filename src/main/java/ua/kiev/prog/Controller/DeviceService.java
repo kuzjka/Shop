@@ -63,7 +63,7 @@ public class DeviceService {
 
     @Transactional(readOnly = true)
     public List<Device> listDevices(String typeName) {
-        return deviceDAO.listByType(typeName);
+        return deviceDAO.typeFilter(typeName);
     }
 
 
@@ -120,7 +120,7 @@ public class DeviceService {
     {return  deviceDAO.ramProcFilter(type, ram, proc);}
 
     @Transactional(readOnly = true)
-    public List<Device> listByManufacturer (String manufacturer){
-        return deviceDAO.listByManufacturer(manufacturer);
+    public List<Device> manufacturerFilter (String type, String manufacturer){
+        return deviceDAO.manufacturerFilter(type, manufacturer);
     }
 }

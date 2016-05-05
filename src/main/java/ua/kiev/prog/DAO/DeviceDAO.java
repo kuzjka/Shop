@@ -7,8 +7,8 @@ import java.util.List;
 public interface DeviceDAO {
     void add(Device device);
     void delete(int id);
-    List <Device>listByManufacturer(String manufacturer);
-    List<Device> listByType(String typeName);
+    List <Device> manufacturerFilter(String type,String manufacturer);
+    List<Device> typeFilter(String typeName);
     List<Device> list(String type, String pattern);
     Device findOne(int id);
     int total();

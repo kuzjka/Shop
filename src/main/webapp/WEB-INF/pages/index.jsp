@@ -16,9 +16,15 @@
     color: white;
     background-color:deepskyblue;
 }
+.navbar-header a.navbar-brand{
+    color:white;
+    background-color: deepskyblue;
+}
 
-
-
+ul.navbar-nav a.default   {
+    color:white;
+    background-color: deepskyblue;
+}
 
 
       ul.navbar-nav  a.active  {
@@ -48,20 +54,20 @@
 
         <ul  class="nav navbar-nav">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">Shop</a>
+                <a  class="navbar-brand" href="/">Shop</a>
             </div>
             <li ><a class="active" href="/" ><span class="glyphicon glyphicon-home"></span></a></li>
 
 
-            <li><a  href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
-            <li><a href="/order_add_page">Order</a></li>
-            <li><a href="/photo/all">Photos</a></li>
-            <li><a href="/admin">Admin</a></li>
+            <li><a class="default"  href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
+            <li><a class="default" href="/order_add_page">Order</a></li>
+            <li><a class="default" href="/photo/all">Photos</a></li>
+            <li><a class="default" href="/admin">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="/user"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+            <li><a class="default" href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a class="default"  href="/user"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a class="default" href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
         </ul>
     </div>
 </nav>
