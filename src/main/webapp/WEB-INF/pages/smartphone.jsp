@@ -63,7 +63,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a class="default" href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a class="default" href="/user"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li> <a class="default" href="/user"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li><a class="default" href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
         </ul>
     </div>
@@ -105,7 +105,12 @@
                 </div>
                 <input type="submit" class="btn btn-primary" value="submit">
             </form>
+            <div   class="btn-group">
 
+                <a href="/smartphone/apple/manufacturer_filter" class="btn btn-primary " role="button">Apple</a>
+                <a href="/smartphone/samsung/manufacturer_filter" class="btn btn-primary " role="button">Samsung</a>
+                <a href="/smartphone/sony/manufacturer_filter" class="btn btn-primary  " role="button">Sony</a>
+            </div>
 
 
 

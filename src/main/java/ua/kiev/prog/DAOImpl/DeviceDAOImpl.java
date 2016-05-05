@@ -36,13 +36,17 @@ public class DeviceDAOImpl implements DeviceDAO {
 
     @Override
     public List<Device> manufacturerFilter (String type, String manufacturer) {
-        Query query=entityManager.createQuery("select d from Device d where d.manufacturer = :manufacturer and" +
-                " d.type.name=:type",
+        Query query;
+
+        query=entityManager.createQuery("select d from Device d where d.type.name=:type and d.manufacturer=:manufacturer "
+                ,
                 Device.class);
         query.setParameter("type", type);
         query.setParameter("manufacturer", manufacturer);
         return query.getResultList();
     }
+
+
 
 
     @Override

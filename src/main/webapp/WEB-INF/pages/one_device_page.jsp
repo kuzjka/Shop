@@ -66,7 +66,7 @@
         </ul>
     </div>
 </nav>
-<div align="center"><h1>${name}</h1></div>
+<div align="center" style="padding-top: 50px"><h1>${name}</h1></div>
 <div align="center" id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">

@@ -119,8 +119,8 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
     }
 
 
-    @RequestMapping(value = "/{type}/ramProcFilter", method = RequestMethod.POST)
-    public String ramFilter(HttpServletRequest request, @PathVariable String type, Model model) {
+    @RequestMapping(value = "/{type}/ram_proc_filter", method = RequestMethod.POST)
+    public String ramProcFilter(HttpServletRequest request, @PathVariable String type, Model model) {
 
         String[] sram = request.getParameterValues("ram");
         String [] sproc = request.getParameterValues("proc");
@@ -148,42 +148,11 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
 
         }
 
-    @RequestMapping("/filter2/{type}")
-    public String desctopFilter(Model model, @PathVariable String type){
 
-            List<Integer> ram = new ArrayList<>();
-        List<String> proc = new ArrayList<>();
-        if(type.equals("budget_computers")){
-            ram.add(2);
-            ram.add(4);
-            proc.add("i3");}
-
-
-
-         if(type.equals("computers_for_job")){
-        ram.add(4);
-            ram.add(8);
-            proc.add("i3");
-            proc.add("i5");}
-
-
-
-
-         if(type.equals("gaming_computers")){
-            ram.add(8);
-            ram.add(16);
-            proc.add("i5");
-            proc.add("i7");}
-            model.addAttribute("type" , type);
-
-            return "desctops";
-
-
-        }
-    @RequestMapping("/filter3/{manufactuter}")
-    public String mobileFilter(Model model, @PathVariable String manufacturer){
-        model.addAttribute("devices", deviceService.manufacturerFilter("smartphone", manufacturer));
-        return "smartphones";
+    @RequestMapping("/{type}/{manufacturer}/manufacturer_filter")
+    public String manufacturerFilter(Model model,@PathVariable String type, @PathVariable String manufacturer){
+        model.addAttribute("devices", deviceService.manufacturerFilter(type, manufacturer));
+        return "smartphone";
     }
 
 

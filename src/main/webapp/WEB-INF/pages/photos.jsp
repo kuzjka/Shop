@@ -58,7 +58,7 @@
 
             <li><a class="default" href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
             <li><a class="default" href="/order_add_page">Order</a></li>
-            <li class="active"><a href="/photo/all">Photos</a></li>
+            <li ><a class="active" href="/photo/all">Photos</a></li>
             <li><a class="default" href="/admin">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -68,8 +68,8 @@
         </ul>
     </div>
 </nav>
-<div align="center"><h1>Type: ${type}</h1></div>
-<div align="center"  class="btn-group">
+<div align="center" style="padding-top: 50px;"><h1>Type: ${type}</h1></div>
+<div   class="btn-group">
     <a href="/photo/smartphone" class="btn btn-primary" role="button">Smartphones</a>
     <a href="/photo/laptop" class="btn btn-primary" role="button">Laptops</a>
     <a href="/photo/desctop" class="btn btn-primary" role="button">Desctops</a>
