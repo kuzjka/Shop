@@ -102,7 +102,7 @@
                     </div>
                     <input type="submit" class="btn btn-primary" value="submit">
                 </form>
-<form action="/desctop/ram_proc_filter" method="post">
+                <form action="/desctop/ram_proc_filter" method="get">
                 <label>RAM:</label>
                 <div class="checkbox">
                     <label><input type="checkbox"  name="ram" value="2">2 GB</label>
@@ -127,10 +127,6 @@
                     <label><input type="checkbox" name="proc" value="i7">i7</label>
                 </div><input type="submit" class="btn btn-primary" value="submit">
                 </form></form>
-
-
-
-
 
 
             </div>
@@ -160,26 +156,16 @@
                     <td>${device.processor}</td>
 
 
-
                     <sec:authorize url="/user">
 
                         <c:set var="count" value="${0}"/>
                         <c:forEach items="${carts}"   var="cart">
-
-
-
-
 
                             <c:if test="${cart.device.id == device.id}">
                                 <c:remove var="count"/>
                                 <td><a href="/cart_add_page">In cart <span class="badge">${cart.items}</span></a><br></td>
 
                             </c:if>
-
-
-
-
-
 
                         </c:forEach>
                         <c:if test="${count == 0}">

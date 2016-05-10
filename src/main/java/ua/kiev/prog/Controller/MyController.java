@@ -28,14 +28,8 @@ public class MyController {
     @RequestMapping(value = {"/", "/user"} , method = RequestMethod.GET)
     public String index(Model model) {
 
-
-
-
-
-
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices("all"));
-
         model.addAttribute("carts", deviceService.listCarts());
         return "index";
 
@@ -44,8 +38,6 @@ public class MyController {
     public String login(){
 
         return "login_page";}
-
-
 
 @RequestMapping("/403")
 public String denied(Model model){
@@ -105,7 +97,6 @@ return type;}
         }
 
 
-
 @RequestMapping(value = "/{type}/price_filter" , method = RequestMethod.GET)
 public String priceFilter(@RequestParam (required = false, defaultValue = "0")int min,
                           @RequestParam (required =  false , defaultValue="-1") int max,
@@ -119,23 +110,22 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
     }
 
 
-    @RequestMapping(value = "/{type}/ram_proc_filter", method = RequestMethod.POST)
-    public String ramProcFilter(HttpServletRequest request, @PathVariable String type, Model model) {
+    @RequestMapping(value = "/{type}/ram_proc_filter", method = RequestMethod.GET)
+    public String ramProcFilter(@RequestParam (value = "proc",  required = false) String [] sproc,
+                                @RequestParam(value = "ram",  required = false) String [] sram,
+                                @PathVariable String type, Model model) {
 
-        String[] sram = request.getParameterValues("ram");
-        String [] sproc = request.getParameterValues("proc");
-
-        List<String>proc=new ArrayList<>();
-        List<Integer>ram=new ArrayList<>();
+        List<String>proc = new ArrayList<>();
+        List<Integer>ram = new ArrayList<>();
         if(sproc!=null){
         for(String p:sproc){
             if(p!=null){
                 proc.add(p);
             }
         }}
-        if(sram!=null){
+        if(sram != null){
         for(String r:sram){
-            if(r!=null){
+            if(r != null){
                 ram.add(Integer.parseInt(r));
             }
         }}
@@ -237,15 +227,16 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
 
 
 
-    @RequestMapping(value = "/device/delete", method = RequestMethod.GET)
-    public String search(HttpServletRequest request, Model model) {
+    @RequestMapping(value = "/device/delete")
+    public String search(@RequestParam(value = "todelete[]") String [] todelete, Model model) {
 
-        String []del = request.getParameterValues("todelete[]");
-        for(String d: del){
-           deviceService.deleteDevice(Integer.parseInt(d));
+
+        for(String d: todelete){
+            if(d!=null){
+           deviceService.deleteDevice(Integer.parseInt(d));}
         }
         model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices(null));
+        model.addAttribute("devices", deviceService.listDevices("all"));
         return "index_admin";
     }
 
