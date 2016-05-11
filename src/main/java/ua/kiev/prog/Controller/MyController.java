@@ -1,9 +1,14 @@
 package ua.kiev.prog.Controller;
 
 import com.mysql.jdbc.Security;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +20,7 @@ import ua.kiev.prog.Config.SecurityConfiguration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 @Controller
@@ -325,8 +331,6 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
             deviceService.addOrder(order);}
 
 
-
-
         model.addAttribute("username", username);
         model.addAttribute("orders", deviceService.listOrders(user));
         model.addAttribute("total", deviceService.totalPrice());
@@ -351,22 +355,24 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
         return "cart_add_page";
 
 
-    }@RequestMapping(value = "/device/{id}/{n}", method = RequestMethod.GET)
-    public void onPhoto(HttpServletRequest request, HttpServletResponse response, @PathVariable int id,
-                        @PathVariable int n){
-        Device d= deviceService.findDevice(id);
-        List <Photo>p=deviceService.getPhoto(d);
+    }
+
+    @RequestMapping(value = "/photo/{id}/{n}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<byte[]> onPhoto(@PathVariable(value = "id") int id, @PathVariable int n){
+
+        Device d = deviceService.findDevice(id);
+        List <Photo> l = deviceService.getPhoto(d);
+        Photo p = l.get(n);
+        return ResponseEntity.ok(p.getBody());
 
 
-        byte res[] = p.get(n).getBody();
 
 
-        response.setContentType("image/jpg");
-        try {
-            response.getOutputStream().write(res);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+
+
+
 
 
     }

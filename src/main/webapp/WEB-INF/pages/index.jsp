@@ -106,7 +106,7 @@ ul.navbar-nav a.default   {
 
 
                     <td><a href="/onedevice/${device.id}"><img class="img-responsive" alt="No photo" height="100" width="100"
-                                                               src="/device/${device.id}/0"/></a></td>
+                                                               src="/photo/${device.id}/0"/></a></td>
                     <td>${device.name}</td>
                     <td>${device.manufacturer}</td>
                     <td>${device.price}</td>
