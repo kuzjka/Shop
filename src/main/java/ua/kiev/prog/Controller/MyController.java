@@ -31,7 +31,7 @@ public class MyController {
     @Autowired
     private DeviceService deviceService;
 
-    @RequestMapping(value = {"/", "/user"} , method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/user"}, method = RequestMethod.GET)
     public String index(Model model) {
 
         model.addAttribute("types", deviceService.listTypes());
@@ -40,16 +40,18 @@ public class MyController {
         return "index";
 
     }
-@RequestMapping(value = "/login_page", method=RequestMethod.GET)
-    public String login(){
 
-        return "login_page";}
+    @RequestMapping(value = "/login_page", method = RequestMethod.GET)
+    public String login() {
 
-@RequestMapping("/403")
-public String denied(Model model){
-    model.addAttribute("message", "Access denied");
-    return "login_page";
-}
+        return "login_page";
+    }
+
+    @RequestMapping("/403")
+    public String denied(Model model) {
+        model.addAttribute("message", "Access denied");
+        return "login_page";
+    }
 
     @RequestMapping("/photo/{type}")
     public String type(Model model, @PathVariable String type) {
@@ -65,9 +67,9 @@ public String denied(Model model){
         model.addAttribute("d3", d3);
         model.addAttribute("d4", d4);
 
-        List<Cart>l1=deviceService.listCarts();
-        List<Device>l2=new ArrayList<>();
-        for(Cart c:l1){
+        List<Cart> l1 = deviceService.listCarts();
+        List<Device> l2 = new ArrayList<>();
+        for (Cart c : l1) {
             l2.add(c.getDevice());
         }
 
@@ -77,15 +79,16 @@ public String denied(Model model){
 
         return "photos";
     }
-    @RequestMapping("/onedevice/{id}")
-    public String oneDevice(Model model, @PathVariable int id){
-        Device d= deviceService.findDevice(id);
 
-        model.addAttribute("id" , id );
+    @RequestMapping("/onedevice/{id}")
+    public String oneDevice(Model model, @PathVariable int id) {
+        Device d = deviceService.findDevice(id);
+
+        model.addAttribute("id", id);
         model.addAttribute("name", d.getName());
-        List<Cart>l1=deviceService.listCarts();
-        List<Device>l2=new ArrayList<>();
-        for(Cart c:l1){
+        List<Cart> l1 = deviceService.listCarts();
+        List<Device> l2 = new ArrayList<>();
+        for (Cart c : l1) {
             l2.add(c.getDevice());
         }
 
@@ -94,75 +97,80 @@ public String denied(Model model){
     }
 
     @RequestMapping(value = "/{type}/name_filter", method = RequestMethod.GET)
-    public String nameFilter(@RequestParam String name,@PathVariable String type, Model model){
+    public String nameFilter(@RequestParam String name, @PathVariable String type, Model model) {
         model.addAttribute("devices", deviceService.searchDevices(type, name));
-        if(type.equals("all")){
-            return  "index";}
-        else {
-return type;}
+        if (type.equals("all")) {
+            return "index";
+        } else {
+            return type;
         }
+    }
 
 
-@RequestMapping(value = "/{type}/price_filter" , method = RequestMethod.GET)
-public String priceFilter(@RequestParam (required = false, defaultValue = "0")int min,
-                          @RequestParam (required =  false , defaultValue="-1") int max,
-                          @RequestParam String dir,@PathVariable String type, Model model ){
+    @RequestMapping(value = "/{type}/price_filter", method = RequestMethod.GET)
+    public String priceFilter(@RequestParam(required = false, defaultValue = "0") int min,
+                              @RequestParam(required = false, defaultValue = "-1") int max,
+                              @RequestParam String dir, @PathVariable String type, Model model) {
 
-    model.addAttribute("devices" , deviceService.priceFilter(type, min, max, dir));
-    if(type.equals("all")){
-        return  "index";}
-    else {
-        return type;}
+        model.addAttribute("devices", deviceService.priceFilter(type, min, max, dir));
+        if (type.equals("all")) {
+            return "index";
+        } else {
+            return type;
+        }
     }
 
 
     @RequestMapping(value = "/{type}/ram_proc_filter", method = RequestMethod.GET)
-    public String ramProcFilter(@RequestParam (value = "proc",  required = false) String [] sproc,
-                                @RequestParam(value = "ram",  required = false) String [] sram,
+    public String ramProcFilter(@RequestParam(value = "proc", required = false) String[] sproc,
+                                @RequestParam(value = "ram", required = false) String[] sram,
                                 @PathVariable String type, Model model) {
 
-        List<String>proc = new ArrayList<>();
-        List<Integer>ram = new ArrayList<>();
-        if(sproc!=null){
-        for(String p:sproc){
-            if(p!=null){
-                proc.add(p);
+        List<String> proc = new ArrayList<>();
+        List<Integer> ram = new ArrayList<>();
+        if (sproc != null) {
+            for (String p : sproc) {
+                if (p != null) {
+                    proc.add(p);
+                }
             }
-        }}
-        if(sram != null){
-        for(String r:sram){
-            if(r != null){
-                ram.add(Integer.parseInt(r));
-            }
-        }}
-
-        model.addAttribute("devices", deviceService.ramProcFilter(type, ram, proc ));
-        if(type.equals("all")){
-            return  "index";}
-        else {
-            return type;}
-
         }
+        if (sram != null) {
+            for (String r : sram) {
+                if (r != null) {
+                    ram.add(Integer.parseInt(r));
+                }
+            }
+        }
+
+        model.addAttribute("devices", deviceService.ramProcFilter(type, ram, proc));
+        if (type.equals("all")) {
+            return "index";
+        } else {
+            return type;
+        }
+
+    }
 
 
     @RequestMapping("/{type}/{manufacturer}/manufacturer_filter")
-    public String manufacturerFilter(Model model,@PathVariable String type, @PathVariable String manufacturer){
+    public String manufacturerFilter(Model model, @PathVariable String type, @PathVariable String manufacturer) {
         model.addAttribute("devices", deviceService.manufacturerFilter(type, manufacturer));
         return "smartphone";
     }
 
 
     @RequestMapping("/photo_add_page")
-    public String photoAddPage(Model model){
+    public String photoAddPage(Model model) {
         model.addAttribute("devices", deviceService.listDevices("all"));
         return "photo_add_page";
     }
 
-    @RequestMapping(value = "/addphoto" , method = RequestMethod.POST)
-    public String addPhoto(@RequestParam (value = "device") int id,
+    @RequestMapping(value = "/addphoto", method = RequestMethod.POST)
+    public String addPhoto(@RequestParam(value = "device") int id,
                            @RequestParam(value = "photo") MultipartFile photo, Model model) throws IOException {
 
-        Device d= deviceService.findDevice(id);
+        Device d = deviceService.findDevice(id);
         deviceService.addPhoto(new Photo(d, photo.getOriginalFilename(), photo.getBytes()));
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices("all"));
@@ -171,27 +179,28 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
 
     @RequestMapping("/register_page")
 
-    public String register_page(){
+    public String register_page() {
         return "register";
     }
 
-    @RequestMapping(value="/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@RequestParam String role, @RequestParam String username,
                            @RequestParam String password1, @RequestParam
-    String password2,Model model){
+                           String password2, Model model) {
 
-        if(password1.equals(password2)){
-        deviceService.addUser(new User(username, password2, true));
-        deviceService.addRole(new Role(username,role));
-        model.addAttribute("message", "registration success!");
-        return "register";}else{
+        if (password1.equals(password2)) {
+            deviceService.addUser(new User(username, password2, true));
+            deviceService.addRole(new Role(username, role));
+            model.addAttribute("message", "registration success!");
+            return "register";
+        } else {
             model.addAttribute("message", "passwords are not matching");
             return "register";
         }
     }
 
 
-    @RequestMapping(value = "/admin" )
+    @RequestMapping(value = "/admin")
     public String index_admin(Model model) {
 
         model.addAttribute("types", deviceService.listTypes());
@@ -216,30 +225,27 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
     }
 
 
-
-
     @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
     public String searchByType(@PathVariable String type, Model model) {
 
 
-
-            model.addAttribute("devices", deviceService.listDevices(type));
-        if(type.equals("all")){
-            return  "index";}
-        else {
-            return type;}
+        model.addAttribute("devices", deviceService.listDevices(type));
+        if (type.equals("all")) {
+            return "index";
+        } else {
+            return type;
         }
-
-
+    }
 
 
     @RequestMapping(value = "/device/delete")
-    public String search(@RequestParam(value = "todelete[]") String [] todelete, Model model) {
+    public String search(@RequestParam(value = "todelete[]") String[] todelete, Model model) {
 
 
-        for(String d: todelete){
-            if(d!=null){
-           deviceService.deleteDevice(Integer.parseInt(d));}
+        for (String d : todelete) {
+            if (d != null) {
+                deviceService.deleteDevice(Integer.parseInt(d));
+            }
         }
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices("all"));
@@ -247,26 +253,27 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
     }
 
     @RequestMapping(value = "/adddevice", method = RequestMethod.POST)
-    public String contactAdd(@RequestParam(value = "type") int sid,
+    public String deviceAdd(@RequestParam (value = "type") int id,
                              @RequestParam String name,
                              @RequestParam String manufacturer,
                              @RequestParam int price,
-                             @RequestParam (required = false)int ram,
-                             @RequestParam (required = false)String processor,
+                             @RequestParam (value="ram", required = false, defaultValue = "-1") String ram,
+                             @RequestParam (value="processor", required = false) String processor,
 
 
-                             Model model)  {
+                             Model model) {
 
-    Type  type= deviceService.findType(sid);
-
-
-        Device device = new Device(type, name, manufacturer, price, ram, processor);
-            deviceService.addDevice(device);
+        Type type = deviceService.findType(id);
 
 
-            model.addAttribute("devices", deviceService.listDevices("all"));
-            return "index_admin";
-        }
+
+        Device device = new Device(type, name, manufacturer, price, Integer.parseInt(ram), processor);
+        deviceService.addDevice(device);
+
+
+        model.addAttribute("devices", deviceService.listDevices("all"));
+        return "index_admin";
+    }
 
 
     @RequestMapping(value = "/addtype", method = RequestMethod.POST)
@@ -314,21 +321,22 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
     }
 
     @RequestMapping(value = "/addorder", method = RequestMethod.POST)
-    public String orderAdd( HttpServletRequest request, @RequestParam String username,
-                            @RequestParam String password,
+    public String orderAdd(HttpServletRequest request, @RequestParam String username,
+                           @RequestParam String password,
                            @RequestParam String address,
                            @RequestParam String phone,
 
 
                            Model model) {
-        User user=deviceService.findUser(username);
-        if(user.getPassword().equals(password));
+        User user = deviceService.findUser(username);
+        if (user.getPassword().equals(password)) ;
 
-        String[] sid=  request.getParameterValues("cart");
-        for(String s:sid){
+        String[] sid = request.getParameterValues("cart");
+        for (String s : sid) {
             Cart cart = deviceService.findCart(Integer.parseInt(s));
-            Order order = new Order (user, address, phone, cart );
-            deviceService.addOrder(order);}
+            Order order = new Order(user, address, phone, cart);
+            deviceService.addOrder(order);
+        }
 
 
         model.addAttribute("username", username);
@@ -339,8 +347,8 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
 
     }
 
-    @RequestMapping(value = "/order_add_page",  method = RequestMethod.GET)
-    public String order(Model model ) {
+    @RequestMapping(value = "/order_add_page", method = RequestMethod.GET)
+    public String order(Model model) {
 
         model.addAttribute("carts", deviceService.listCarts());
 
@@ -359,20 +367,12 @@ public String priceFilter(@RequestParam (required = false, defaultValue = "0")in
 
     @RequestMapping(value = "/photo/{id}/{n}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<byte[]> onPhoto(@PathVariable(value = "id") int id, @PathVariable int n){
+    public ResponseEntity<byte[]> onPhoto(@PathVariable(value = "id") int id, @PathVariable int n) {
 
         Device d = deviceService.findDevice(id);
-        List <Photo> l = deviceService.getPhoto(d);
+        List<Photo> l = deviceService.getPhoto(d);
         Photo p = l.get(n);
         return ResponseEntity.ok(p.getBody());
-
-
-
-
-
-
-
-
 
 
     }

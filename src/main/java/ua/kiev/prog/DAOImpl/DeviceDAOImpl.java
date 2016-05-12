@@ -35,18 +35,16 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     @Override
-    public List<Device> manufacturerFilter (String type, String manufacturer) {
+    public List<Device> manufacturerFilter(String type, String manufacturer) {
         Query query;
 
-        query=entityManager.createQuery("select d from Device d where d.type.name=:type and d.manufacturer=:manufacturer "
+        query = entityManager.createQuery("select d from Device d where d.type.name=:type and d.manufacturer=:manufacturer "
                 ,
                 Device.class);
         query.setParameter("type", type);
         query.setParameter("manufacturer", manufacturer);
         return query.getResultList();
     }
-
-
 
 
     @Override
@@ -58,19 +56,20 @@ public class DeviceDAOImpl implements DeviceDAO {
 
         } else {
             query = entityManager.createQuery("SELECT d FROM Device d  WHERE d.type.name = :typeName", Device.class);
-        query.setParameter("typeName", typeName);}
+            query.setParameter("typeName", typeName);
+        }
 
         return (List<Device>) query.getResultList();
     }
 
     @Override
     public List<Device> list(String type, String pattern) {
-        if(type.equals("all")){
-        Query query = entityManager.createQuery("SELECT d FROM Device d " +
-                " where d.name LIKE :pattern", Device.class);
-        query.setParameter("pattern", "%" + pattern + "%");
-        return (List<Device>) query.getResultList();}
-        else {
+        if (type.equals("all")) {
+            Query query = entityManager.createQuery("SELECT d FROM Device d " +
+                    " where d.name LIKE :pattern", Device.class);
+            query.setParameter("pattern", "%" + pattern + "%");
+            return (List<Device>) query.getResultList();
+        } else {
             Query query = entityManager.createQuery("SELECT d FROM Device d " +
                     " where d.name LIKE :pattern and d.type.name=:type", Device.class);
             query.setParameter("pattern", "%" + pattern + "%");
@@ -104,76 +103,73 @@ public class DeviceDAOImpl implements DeviceDAO {
 
     }
 
-
-
-
     @Override
-    public List<Device> ramProcFilter(String type, List<Integer> ram, List<String>proc) {
-Query query=null;
-        if(ram.size()>0&&proc.size()>0){
-        query= entityManager.createQuery("select d from Device d where d.type.name=:type " +
-                " and d.ram in (:ram)" +
-                " and d.processor in (:proc)  ", Device.class);
-        query.setParameter("ram", ram);
-        query.setParameter("proc", proc);
-        query.setParameter("type", type);
+    public List<Device> ramProcFilter(String type, List<Integer> ram, List<String> proc) {
+        Query query = null;
+        if (ram.size() > 0 && proc.size() > 0) {
+            query = entityManager.createQuery("select d from Device d where d.type.name=:type " +
+                    " and d.ram in (:ram)" +
+                    " and d.processor in (:proc)  ", Device.class);
+            query.setParameter("ram", ram);
+            query.setParameter("proc", proc);
+            query.setParameter("type", type);
 
         }
-         if(ram.size()==0){
-            query= entityManager.createQuery("select d from Device d where d.type.name=:type " +
-                                       "and d.processor in (:proc)  ", Device.class);
+        if (ram.size() == 0) {
+            query = entityManager.createQuery("select d from Device d where d.type.name=:type " +
+                    "and d.processor in (:proc)  ", Device.class);
 
             query.setParameter("proc", proc);
-            query.setParameter("type", type);}
+            query.setParameter("type", type);
+        }
 
 
-         if(proc.size()==0){
-          query= entityManager.createQuery("select d from Device d where d.type.name=:type and d.ram in (:ram)  ", Device.class);
+        if (proc.size() == 0) {
+            query = entityManager.createQuery("select d from Device d where d.type.name=:type and d.ram in (:ram)  ", Device.class);
 
             query.setParameter("ram", ram);
             query.setParameter("type", type);
 
-        }  if(ram.size()==0&&proc.size()==0){
-            query= entityManager.createQuery("select d from Device d where " +
+        }
+        if (ram.size() == 0 && proc.size() == 0) {
+            query = entityManager.createQuery("select d from Device d where " +
 
                     "  d.type.name=:type", Device.class);
 
-            query.setParameter("type", type);}
+            query.setParameter("type", type);
+        }
 
 
-
-        return query.getResultList();}
-
+        return query.getResultList();
+    }
 
 
     @Override
-    public List<Device> priceFilter(String type,int min, int max, String dir) {
-Query query;
-        if(max==-1){
+    public List<Device> priceFilter(String type, int min, int max, String dir) {
+        Query query;
+        if (max == -1) {
             max = Integer.MAX_VALUE;
         }
 
-        if(dir.equals("desc")){
+        if (dir.equals("desc")) {
 
-          query=entityManager.createQuery("select d from  Device d where" +
-                 " d.type.name=:type and d.price between" +
-                 " (:min) and (:max ) order by d.price desc ", Device.class);
+            query = entityManager.createQuery("select d from  Device d where" +
+                    " d.type.name=:type and d.price between" +
+                    " (:min) and (:max ) order by d.price desc ", Device.class);
+            query.setParameter("type", type);
+            query.setParameter("min", min);
+            query.setParameter("max", max);
+        } else {
+            query = entityManager.createQuery("select d from  Device d where d.type.name=:type " +
+                    "and  d.price between (:min) and (:max )order by d.price  ", Device.class);
             query.setParameter("type", type);
             query.setParameter("min", min);
             query.setParameter("max", max);
         }
 
-
-
-         else{
-         query=entityManager.createQuery("select d from  Device d where d.type.name=:type " +
-             "and  d.price between (:min) and (:max )order by d.price  ", Device.class);
-            query.setParameter("type", type);
-             query.setParameter("min", min);
-             query.setParameter("max", max);}
-
-            return  query.getResultList();
-        }}
+        return query.getResultList();
+    }
+}
 
 
 

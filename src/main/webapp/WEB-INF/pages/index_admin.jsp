@@ -17,9 +17,9 @@
 </head>
 
 
-<div align="center" class="container">
+<div align="center"  class="container-fluid">
     <h3>Devices List</h3>
-    <div align="center"  class="btn-group">
+    <div   class="btn-group">
         <a href ="/" class="btn btn-primary" role="button">Home</a>
         <a href="/photo_add_page" class="btn btn-primary" role="button">Add photo</a>
         <a href="/device_add_page" class="btn btn-primary" role="button">Add device</a>
@@ -34,8 +34,10 @@
 
             <td><b>Photo</b></td>
             <td><b>Name</b></td>
-            <td><b>Manufactor</b></td>
+            <td><b>Manufacturer</b></td>
             <td><b>Price</b></td>
+            <td><b>Ram</b></td>
+            <td><b>Processor</b></td>
             <td><b>Type</b></td>
         </tr>
         </thead>
@@ -43,18 +45,21 @@
          <tr>
 
                 <td><input type=checkbox id="td" name="todelete[]" value="${device.id}"></td>
-                <td><img class="img-responsive" alt="No Photo" height="100" width="100"  src="/device/${device.id}/0"/></td>
+                <td><img class="img-responsive" alt="No Photo" height="100" width="100"  src="/photo/${device.id}/0"/></td>
                 <td>${device.name}</td>
                 <td>${device.manufacturer}</td>
                 <td>${device.price}</td>
                 <c:choose>
-                    <c:when test="${device.type ne null}">
-                        <td>${device.type.name}</td>
+                    <c:when test="${device.ram ne -1}">
+                        <td>${device.ram}</td>
                     </c:when>
                     <c:otherwise>
-                        <td>Default</td>
+                        <td></td>
                     </c:otherwise>
                 </c:choose>
+
+                <td>${device.processor}</td>
+                <td>${device.type.name}</td>
                 <td></td>
 
 

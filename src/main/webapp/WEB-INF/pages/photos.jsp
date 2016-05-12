@@ -89,7 +89,7 @@
         <div class="carousel-inner" role="listbox">
 
             <div class="item active">
-                <img src="/device/${d1.id}/0">
+                <img src="/photo/${d1.id}/0">
                 <div class="carousel-caption">
                     <h3 style="color:black">${d1.name}</h3>
                     <c:set var="test" value="${0}"/>
@@ -108,7 +108,7 @@
             </div>
 
             <div class="item">
-                <img src="/device/${d2.id}/0">
+                <img src="/photo/${d2.id}/0">
                 <div class="carousel-caption">
                     <h3 style="color:black">${d2.name}</h3>
                     <c:set var="test" value="${0}"/>
@@ -127,7 +127,7 @@
             </div>
 
             <div class="item">
-                <img src="/device/${d3.id}/0">
+                <img src="/photo/${d3.id}/0">
                 <div class="carousel-caption">
                     <h3 style="color:black">${d3.name}</h3>
                     <c:set var="test" value="${0}"/>
@@ -148,7 +148,7 @@
             </div>
 
             <div class="item">
-                <img src="/device/${d4.id}/0">
+                <img src="/photo/${d4.id}/0">
                 <div class="carousel-caption">
                     <h3 style="color:black">${d4.name}</h3>
                     <c:set var="test" value="${0}"/>

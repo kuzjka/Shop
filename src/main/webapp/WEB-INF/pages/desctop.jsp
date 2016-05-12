@@ -152,7 +152,14 @@
                     <td>${device.name}</td>
                     <td>${device.manufacturer}</td>
                     <td>${device.price}</td>
-                    <td>${device.ram}</td>
+                    <c:choose>
+                        <c:when test="${device.ram ne -1}">
+                            <td>${device.ram}</td>
+                        </c:when>
+                        <c:otherwise>
+                            <td></td>
+                        </c:otherwise>
+                    </c:choose>
                     <td>${device.processor}</td>
 
 
