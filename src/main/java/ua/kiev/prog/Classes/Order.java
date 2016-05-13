@@ -14,6 +14,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
+    private String name;
     private String address;
     private String phone;
     @ManyToOne
@@ -24,8 +25,9 @@ public class Order {
     public Order() {
     }
 
-    public Order(User user, String address, String phone, Cart cart) {
+    public Order(User user, String name, String address, String phone, Cart cart) {
         this.user = user;
+        this.name = name;
         this.address = address;
         this.phone = phone;
         this.cart = cart;
@@ -45,6 +47,14 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddress() {

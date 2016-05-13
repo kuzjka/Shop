@@ -58,7 +58,7 @@
             </div>
             <li ><a class="default" href="/" ><span class="glyphicon glyphicon-home"></span></a></li>
             <li><a class="default" href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
-            <li><a href="/order_add_page" class="active">Order</a></li>
+            <li><a href="/result_page" class="active">Order</a></li>
             <li><a class="default" href="/photo/all">Photos</a></li>
             <li><a class="default" href="/admin">Admin</a></li>
         </ul>
@@ -79,9 +79,7 @@
                 <option value="${cart.id}" selected>${cart.device.name}</option>
             </c:forEach>
         </select>
-
-        <input class="form-control form-type" type="text" name="username" placeholder="Username">
-        <input class="form-control form-type" type="password" name="password" placeholder="Password">
+        <input class="form-control form-type" type="text" name="name" placeholder="Name">
         <input class="form-control form-type" type="text" name="address" placeholder="Address">
         <input class="form-control form-type" type="text" name="phone" placeholder="Phone">
 

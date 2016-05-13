@@ -10,6 +10,8 @@ import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -253,18 +255,17 @@ public class MyController {
     }
 
     @RequestMapping(value = "/adddevice", method = RequestMethod.POST)
-    public String deviceAdd(@RequestParam (value = "type") int id,
-                             @RequestParam String name,
-                             @RequestParam String manufacturer,
-                             @RequestParam int price,
-                             @RequestParam (value="ram", required = false, defaultValue = "-1") String ram,
-                             @RequestParam (value="processor", required = false) String processor,
+    public String deviceAdd(@RequestParam(value = "type") int id,
+                            @RequestParam String name,
+                            @RequestParam String manufacturer,
+                            @RequestParam int price,
+                            @RequestParam(value = "ram", required = false, defaultValue = "-1") String ram,
+                            @RequestParam(value = "processor", required = false) String processor,
 
 
-                             Model model) {
+                            Model model) {
 
         Type type = deviceService.findType(id);
-
 
 
         Device device = new Device(type, name, manufacturer, price, Integer.parseInt(ram), processor);
@@ -321,30 +322,33 @@ public class MyController {
     }
 
     @RequestMapping(value = "/addorder", method = RequestMethod.POST)
-    public String orderAdd(HttpServletRequest request, @RequestParam String username,
-                           @RequestParam String password,
+    public String orderAdd(@RequestParam(value = "cart") int cart_id,
+                           @RequestParam String name,
                            @RequestParam String address,
                            @RequestParam String phone,
 
 
                            Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
         User user = deviceService.findUser(username);
-        if (user.getPassword().equals(password)) ;
-
-        String[] sid = request.getParameterValues("cart");
-        for (String s : sid) {
-            Cart cart = deviceService.findCart(Integer.parseInt(s));
-            Order order = new Order(user, address, phone, cart);
-            deviceService.addOrder(order);
-        }
+        Cart cart = deviceService.findCart(cart_id);
+        Order order = new Order(user, name, address, phone, cart);
+        deviceService.addOrder(order);
 
 
-        model.addAttribute("username", username);
         model.addAttribute("orders", deviceService.listOrders(user));
         model.addAttribute("total", deviceService.totalPrice());
         return "result_page";
 
 
+    }
+    @RequestMapping("/result_page")
+    public String result(Model model){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("orders", deviceService.listOrders(user));
+        model.addAttribute("total", deviceService.totalPrice());
+        return "result_page";
     }
 
     @RequestMapping(value = "/order_add_page", method = RequestMethod.GET)
