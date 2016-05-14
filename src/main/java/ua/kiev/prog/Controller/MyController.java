@@ -81,7 +81,7 @@ public class MyController {
         }
 
         model.addAttribute("devices", l2);
-
+        model.addAttribute("items", deviceService.items(user));
         model.addAttribute("type", type);
 
         return "photos";

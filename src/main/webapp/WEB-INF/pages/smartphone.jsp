@@ -118,7 +118,7 @@
                 <td><b>Photo</b></td>
                 <td><b>Name</b></td>
                 <td><b>Manufacturer</b></td>
-                <td><b>Price</b></td>
+                <td><b>Price, grn</b></td>
                 <td><b>Sign up to by online<br/> or administrate site</b></td>
             </tr>
             </thead>

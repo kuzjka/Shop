@@ -73,7 +73,7 @@
             <li><a class="default" href="/user"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <sec:authorize url="/user">
                 <li><a class="default" href="/logout">
-                    <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                    <span class="glyphicon glyphicon-log-out"></span>Log Out</a></li>
             </sec:authorize>
         </ul>
     </div>
@@ -147,7 +147,7 @@
                 <td><b>Photo</b></td>
                 <td><b>Name</b></td>
                 <td><b>Manufacturer</b></td>
-                <td><b>Price</b></td>
+                <td><b>Price, grn</b></td>
                 <td><b>RAM, GB</b></td>
                 <td><b>Processor</b></td>
                 <td><b>Sign up to by online<br/> or administrate site</b></td>

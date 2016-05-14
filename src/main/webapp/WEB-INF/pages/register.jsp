@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -40,6 +41,10 @@
         .table {
             background-color: seashell;
         }
+        .badge {
+            background-color: white;
+            color: deepskyblue;
+        }
     </style>
 </head>
 <body>
@@ -50,17 +55,23 @@
         </div>
         <ul class="nav navbar-nav">
             <li><a class="default" href="/">Home</a></li>
-
-
-            <li><a class="default" href="/cart_add_page">Cart</a></li>
-            <li><a class="default" href="/order_add_page">Order</a></li>
+            <sec:authorize url="/user">
+                <li><a class="default" href="/cart_add_page">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>Cart
+                    <span class="badge">${items}</span></a>
+                </li>
+                <li><a class="default" href="/order_add_page">Order</a></li>
+            </sec:authorize>
             <li><a class="default" href="/photo/all">Photos</a></li>
             <li><a class="default" href="/admin">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a class="active" href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a class="default" href="/user"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <li><a class="default" href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+            <sec:authorize url="/user">
+                <li><a class="default" href="/logout">
+                    <span class="glyphicon glyphicon-log-out"></span>Log Out</a></li>
+            </sec:authorize>
         </ul>
     </div>
 </nav>

@@ -95,7 +95,6 @@
                 <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
             </div>
             <form action="/all/name_filter" method="get">
-
                 <div class="form-group">
                     <label for="device_name">Device name</label>
                     <input type="text" class="form-control" name="name" id="device_name"></div>
@@ -112,7 +111,7 @@
                     <td><b>Price, grn</b></td>
                     <td><b>RAM, GB</b></td>
                     <td><b>Processor</b></td>
-                    <td><b>Sign up to by online<br/> or administrate site</b></td>
+                    <td><b>Sign up to by online<br/>or administrate site</b></td>
                 </tr>
                 </thead>
                 <c:forEach items="${devices}" var="device">
