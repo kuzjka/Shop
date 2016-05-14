@@ -90,6 +90,18 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     @Override
+    public int items(User user) {
+        Query query = entityManager.createQuery("select c from Cart c where c.user=:user", Cart.class);
+        query.setParameter("user", user);
+        List<Cart> l = query.getResultList();
+        int sum = 0;
+        for (Cart c : l) {
+            sum = sum + c.getItems();
+        }
+        return sum;
+    }
+
+    @Override
     public int total(User user) {
 
         Query query = entityManager.createQuery("select c from Cart c where c.user=:user", Cart.class);

@@ -41,6 +41,7 @@ public class MyController {
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices("all"));
         model.addAttribute("carts", deviceService.listCarts(user));
+        model.addAttribute("items", deviceService.items(user));
         return "index";
 
     }

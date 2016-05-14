@@ -45,6 +45,11 @@
             .table {
                 background-color: seashell;
             }
+
+            .badge {
+                background-color: white;
+                color: deepskyblue;
+            }
         </style>
     </head>
 
@@ -56,19 +61,31 @@
                     <a class="navbar-brand" href="/">Shop</a>
                 </div>
                 <li><a class="active" href="/"><span class="glyphicon glyphicon-home"></span></a></li>
-                <li><a class="default" href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a>
-                </li>
-                <li><a class="default" href="/order_add_page">Order</a></li>
+                <sec:authorize url="/user">
+                    <li><a class="default" href="/cart_add_page">
+                        <span class="glyphicon glyphicon-shopping-cart"></span>Cart
+                        <span class="badge">${items}</span></a>
+                    </li>
+                    <li><a class="default" href="/order_add_page">Order</a></li>
+                </sec:authorize>
                 <li><a class="default" href="/photo/all">Photos</a></li>
                 <li><a class="default" href="/admin">Admin</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a class="default" href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+                <li><a class="default" href="/register_page">
+                    <span class="glyphicon glyphicon-user"></span> Sign Up</a>
                 </li>
-                <li><a class="default" href="/user"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                <li><a class="default" href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                <li><a class="default" href="/user">
+                    <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <sec:authorize url="/user">
+                    <li><a class="default" href="/logout">
+                        <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                </sec:authorize>
+                </li>
+                </ul>
+                </ul>
             </ul>
-        </div>
+            </div>
     </nav>
 
     <div class="raw" style=" padding-top: 100px">
@@ -130,7 +147,7 @@
 
                             <c:if test="${cart.device.id == device.id}">
                                 <c:remove var="count"/>
-                                <td><a href="/cart_add_page">In cart <span class="badge">${cart.items}</span></a><br>
+                                <td><a href="/cart_add_page">In cart</a><br>
                                 </td>
 
                             </c:if>

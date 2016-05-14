@@ -91,6 +91,10 @@ public class DeviceService {
     public List<Device> searchDevices(String type, String pattern) {
         return deviceDAO.list(type, pattern);
     }
+    @Transactional(readOnly = true)
+    public int items(User user) {
+        return deviceDAO.items(user);
+    }
 
     @Transactional(readOnly = true)
     public int totalPrice(User user) {
