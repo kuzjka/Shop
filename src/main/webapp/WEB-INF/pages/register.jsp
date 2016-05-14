@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -8,44 +7,43 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <style type="text/css">
 
-        .navbar-fixed-top{
+        .navbar-fixed-top {
             color: white;
-            background-color:deepskyblue;
-        }
-        .navbar-header a.navbar-brand{
-            color:white;
             background-color: deepskyblue;
         }
 
-        ul.navbar-nav a.default   {
-            color:white;
+        .navbar-header a.navbar-brand {
+            color: white;
             background-color: deepskyblue;
         }
 
+        ul.navbar-nav a.default {
+            color: white;
+            background-color: deepskyblue;
+        }
 
-        ul.navbar-nav  a.active  {
-            color:deepskyblue;
+        ul.navbar-nav a.active {
+            color: deepskyblue;
             background-color: white;
         }
 
-
-        ul.navbar-nav a:hover:not(.active){
-            color:deepskyblue;
+        ul.navbar-nav a:hover:not(.active) {
+            color: deepskyblue;
             background-color: white;
         }
-
 
         .btn-info {
-            color:white;
+            color: white;
             background-color: deepskyblue;
         }
+
         .table {
             background-color: seashell;
         }
     </style>
 </head>
 <body>
-<nav align = "center" class="navbar navbar-default navbar-fixed-top">
+<nav align="center" class="navbar navbar-default navbar-fixed-top">
     <div align="center" class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Shop</a>
@@ -66,18 +64,14 @@
         </ul>
     </div>
 </nav>
-<div class="container" style="padding-top: 50px" >
-    <form role="form" action="/register" method="post" >
+<div class="container" style="padding-top: 50px">
+    <form role="form" action="/register" method="post">
         <div class="form-group">
             <label for="role">Role:</label>
             <select class="selectpicker form-control form-type" name="role" id="role">
-
-
-                    <option value="USER">USER</option>
-                    <option value="ADMIN">ADMIN</option>
-                </select>
-
-
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="username">Username:</label>
@@ -94,7 +88,7 @@
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <div> <h3 >${message}</h3></div>
+    <div><h3>${message}</h3></div>
 </div>
 
 </body>

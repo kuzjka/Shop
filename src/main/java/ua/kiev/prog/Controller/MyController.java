@@ -93,7 +93,6 @@ public class MyController {
         String username = auth.getName();
         User user = deviceService.findUser(username);
         Device d = deviceService.findDevice(id);
-
         model.addAttribute("id", id);
         model.addAttribute("name", d.getName());
         List<Cart> l1 = deviceService.listCarts(user);
@@ -101,7 +100,6 @@ public class MyController {
         for (Cart c : l1) {
             l2.add(c.getDevice());
         }
-
         model.addAttribute("devices", l2);
         return "one_device_page";
     }
@@ -116,13 +114,15 @@ public class MyController {
         }
     }
 
-
     @RequestMapping(value = "/{type}/price_filter", method = RequestMethod.GET)
     public String priceFilter(@RequestParam(required = false, defaultValue = "0") int min,
                               @RequestParam(required = false, defaultValue = "-1") int max,
                               @RequestParam String dir, @PathVariable String type, Model model) {
-
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = deviceService.findUser(username);
         model.addAttribute("devices", deviceService.priceFilter(type, min, max, dir));
+        model.addAttribute("items", deviceService.items(user));
         if (type.equals("all")) {
             return "index";
         } else {
@@ -130,12 +130,10 @@ public class MyController {
         }
     }
 
-
     @RequestMapping(value = "/{type}/ram_proc_filter", method = RequestMethod.GET)
     public String ramProcFilter(@RequestParam(value = "proc", required = false) String[] sproc,
                                 @RequestParam(value = "ram", required = false) String[] sram,
                                 @PathVariable String type, Model model) {
-
         List<String> proc = new ArrayList<>();
         List<Integer> ram = new ArrayList<>();
         if (sproc != null) {
@@ -152,7 +150,10 @@ public class MyController {
                 }
             }
         }
-
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = deviceService.findUser(username);
+        model.addAttribute("items", deviceService.items(user));
         model.addAttribute("devices", deviceService.ramProcFilter(type, ram, proc));
         if (type.equals("all")) {
             return "index";
@@ -162,13 +163,15 @@ public class MyController {
 
     }
 
-
     @RequestMapping("/{type}/{manufacturer}/manufacturer_filter")
     public String manufacturerFilter(Model model, @PathVariable String type, @PathVariable String manufacturer) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = deviceService.findUser(username);
+        model.addAttribute("items", deviceService.items(user));
         model.addAttribute("devices", deviceService.manufacturerFilter(type, manufacturer));
         return "smartphone";
     }
-
 
     @RequestMapping("/photo_add_page")
     public String photoAddPage(Model model) {
@@ -209,17 +212,13 @@ public class MyController {
         }
     }
 
-
     @RequestMapping(value = "/admin")
     public String index_admin(Model model) {
 
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices("all"));
-
-
         return "index_admin";
     }
-
 
     @RequestMapping("/device_add_page")
 
@@ -228,17 +227,13 @@ public class MyController {
         return "device_add_page";
     }
 
-
     @RequestMapping("/type_add_page")
     public String groupAddPage() {
         return "type_add_page";
     }
 
-
     @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
     public String searchByType(@PathVariable String type, Model model) {
-
-
         model.addAttribute("devices", deviceService.listDevices(type));
         if (type.equals("all")) {
             return "index";
@@ -247,11 +242,8 @@ public class MyController {
         }
     }
 
-
     @RequestMapping(value = "/device/delete")
     public String search(@RequestParam(value = "todelete[]") String[] todelete, Model model) {
-
-
         for (String d : todelete) {
             if (d != null) {
                 deviceService.deleteDevice(Integer.parseInt(d));
@@ -269,21 +261,13 @@ public class MyController {
                             @RequestParam int price,
                             @RequestParam(value = "ram", required = false, defaultValue = "-1") String ram,
                             @RequestParam(value = "processor", required = false) String processor,
-
-
                             Model model) {
-
         Type type = deviceService.findType(id);
-
-
         Device device = new Device(type, name, manufacturer, price, Integer.parseInt(ram), processor);
         deviceService.addDevice(device);
-
-
         model.addAttribute("devices", deviceService.listDevices("all"));
         return "index_admin";
     }
-
 
     @RequestMapping(value = "/addtype", method = RequestMethod.POST)
     public String groupAdd(@RequestParam String name, Model model) {
@@ -300,20 +284,16 @@ public class MyController {
         String username = auth.getName();
         User user = deviceService.findUser(username);
         Device device = deviceService.findDevice(id);
-
         Cart cart = new Cart(user, device, 1);
         List<Cart> l = deviceService.listCarts(user);
         int count = 1;
         for (Cart c : l) {
             if (c.getDevice().getId() == id) {
-
                 count = c.getItems() + n;
-
                 c.setItems(count);
                 if (count >= 1) {
                     deviceService.addCart(c);
                 }
-
             }
         }
         if (count == 1 && n == 1) {
@@ -329,6 +309,7 @@ public class MyController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = deviceService.findUser(username);
+        model.addAttribute("items", deviceService.items(user));
         model.addAttribute("carts", deviceService.listCarts(user));
         model.addAttribute("total", deviceService.totalPrice(user));
         return "cart_add_page";
@@ -336,21 +317,20 @@ public class MyController {
 
     @RequestMapping(value = "/addorder", method = RequestMethod.POST)
     public String orderAdd(
-                           @RequestParam String name,
-                           @RequestParam String address,
-                           @RequestParam String phone,
-
-
-                           Model model) {
+            @RequestParam String name,
+            @RequestParam String address,
+            @RequestParam String phone,
+            Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = deviceService.findUser(username);
-        List<Cart>carts=deviceService.listCarts(user);
-        for(Cart c:carts){
-        Order order = new Order(user, name, address, phone, c);
-        deviceService.addOrder(order);}
+        List<Cart> carts = deviceService.listCarts(user);
+        for (Cart c : carts) {
+            Order order = new Order(user, name, address, phone, c);
+            deviceService.addOrder(order);
+        }
 
-
+        model.addAttribute("items", deviceService.items(user));
         model.addAttribute("orders", deviceService.listOrders(user));
         model.addAttribute("total", deviceService.totalPrice(user));
         return "result_page";
@@ -363,6 +343,7 @@ public class MyController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = deviceService.findUser(username);
+        model.addAttribute("items", deviceService.items(user));
         model.addAttribute("orders", deviceService.listOrders(user));
         model.addAttribute("total", deviceService.totalPrice(user));
         return "result_page";
@@ -373,6 +354,7 @@ public class MyController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = deviceService.findUser(username);
+        model.addAttribute("items", deviceService.items(user));
         model.addAttribute("carts", deviceService.listCarts(user));
 
         return "order_add_page";
@@ -384,6 +366,7 @@ public class MyController {
         String username = auth.getName();
         User user = deviceService.findUser(username);
         deviceService.deleteCart(id);
+        model.addAttribute("items", deviceService.items(user));
         model.addAttribute("carts", deviceService.listCarts(user));
         model.addAttribute("total", deviceService.totalPrice(user));
         return "cart_add_page";
@@ -394,15 +377,11 @@ public class MyController {
     @RequestMapping(value = "/photo/{id}/{n}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<byte[]> onPhoto(@PathVariable(value = "id") int id, @PathVariable int n) {
-
         Device d = deviceService.findDevice(id);
         List<Photo> l = deviceService.getPhoto(d);
         Photo p = l.get(n);
         return ResponseEntity.ok(p.getBody());
-
-
     }
-
 }
 
 

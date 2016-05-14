@@ -52,7 +52,6 @@
             }
         </style>
     </head>
-
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
 
@@ -73,21 +72,20 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a class="default" href="/register_page">
-                    <span class="glyphicon glyphicon-user"></span> Sign Up</a>
+                    <span class="glyphicon glyphicon-user"></span>Sign Up</a>
                 </li>
                 <li><a class="default" href="/user">
-                    <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <span class="glyphicon glyphicon-log-in"></span>Login</a></li>
                 <sec:authorize url="/user">
                     <li><a class="default" href="/logout">
                         <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
                 </sec:authorize>
                 </li>
-                </ul>
-                </ul>
             </ul>
-            </div>
+            </ul>
+            </ul>
+        </div>
     </nav>
-
     <div class="raw" style=" padding-top: 100px">
         <div class="col-sm-3" style="position:fixed">
             <div class="btn-group">
@@ -103,26 +101,21 @@
                     <input type="text" class="form-control" name="name" id="device_name"></div>
                 <input type="submit" class="btn btn-primary" value="submit">
             </form>
-
         </div>
         <div class="col-sm-9" style="float: right;">
-
             <table class="table table-default">
                 <thead>
                 <tr>
                     <td><b>Photo</b></td>
                     <td><b>Name</b></td>
                     <td><b>Manufacturer</b></td>
-                    <td><b>Price</b></td>
+                    <td><b>Price, grn</b></td>
                     <td><b>RAM, GB</b></td>
                     <td><b>Processor</b></td>
-
                     <td><b>Sign up to by online<br/> or administrate site</b></td>
                 </tr>
                 </thead>
                 <c:forEach items="${devices}" var="device">
-
-
                     <td><a href="/onedevice/${device.id}"><img class="img-responsive" alt="No photo" height="100"
                                                                width="100"
                                                                src="/photo/${device.id}/0"/></a></td>
@@ -138,10 +131,7 @@
                         </c:otherwise>
                     </c:choose>
                     <td>${device.processor}</td>
-
-
                     <sec:authorize url="/user">
-
                         <c:set var="count" value="${0}"/>
                         <c:forEach items="${carts}" var="cart">
 
@@ -149,15 +139,11 @@
                                 <c:remove var="count"/>
                                 <td><a href="/cart_add_page">In cart</a><br>
                                 </td>
-
                             </c:if>
-
-
                         </c:forEach>
                         <c:if test="${count == 0}">
                             <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
                         </c:if> </sec:authorize>
-
                     </tr>
                 </c:forEach>
             </table>
