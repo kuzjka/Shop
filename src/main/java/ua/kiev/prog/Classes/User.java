@@ -4,15 +4,16 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
     @Id
     private String username;
     private String password;
     boolean enabled;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Order> orders;
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Cart> carts;
 
 
     public User() {
@@ -40,5 +41,27 @@ public class User {
         this.password = password;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
 
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public List<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(List<Cart> carts) {
+        this.carts = carts;
+    }
 }

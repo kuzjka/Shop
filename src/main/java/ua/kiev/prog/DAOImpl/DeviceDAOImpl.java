@@ -2,6 +2,7 @@ package ua.kiev.prog.DAOImpl;
 
 import org.springframework.stereotype.Repository;
 import ua.kiev.prog.Classes.Cart;
+import ua.kiev.prog.Classes.User;
 import ua.kiev.prog.DAO.DeviceDAO;
 import ua.kiev.prog.Classes.Device;
 
@@ -89,10 +90,10 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     @Override
-    public int total() {
+    public int total(User user) {
 
-        Query query = entityManager.createQuery("select c from Cart c", Cart.class);
-
+        Query query = entityManager.createQuery("select c from Cart c where c.user=:user", Cart.class);
+        query.setParameter("user", user);
         List<Cart> l = query.getResultList();
         int sum = 0;
         for (Cart c : l) {

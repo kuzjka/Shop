@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name = "carts")
 public class Cart {
     @Id
     @GeneratedValue
     private int id;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
     @ManyToOne
     @JoinColumn(name = "device_id")
 
@@ -28,7 +31,8 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(Device device, int items) {
+    public Cart(User user, Device device, int items) {
+        this.user = user;
         this.device = device;
         this.items = items;
     }
@@ -39,6 +43,14 @@ public class Cart {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Device getDevice() {

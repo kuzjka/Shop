@@ -35,10 +35,12 @@ public class MyController {
 
     @RequestMapping(value = {"/", "/user"}, method = RequestMethod.GET)
     public String index(Model model) {
-
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = deviceService.findUser(username);
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices("all"));
-        model.addAttribute("carts", deviceService.listCarts());
+        model.addAttribute("carts", deviceService.listCarts(user));
         return "index";
 
     }
@@ -57,7 +59,9 @@ public class MyController {
 
     @RequestMapping("/photo/{type}")
     public String type(Model model, @PathVariable String type) {
-
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = deviceService.findUser(username);
         List<Device> l = deviceService.listDevices(type);
         Random rn = new Random();
         Device d1 = l.get(rn.nextInt(l.size()));
@@ -69,7 +73,7 @@ public class MyController {
         model.addAttribute("d3", d3);
         model.addAttribute("d4", d4);
 
-        List<Cart> l1 = deviceService.listCarts();
+        List<Cart> l1 = deviceService.listCarts(user);
         List<Device> l2 = new ArrayList<>();
         for (Cart c : l1) {
             l2.add(c.getDevice());
@@ -84,11 +88,14 @@ public class MyController {
 
     @RequestMapping("/onedevice/{id}")
     public String oneDevice(Model model, @PathVariable int id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = deviceService.findUser(username);
         Device d = deviceService.findDevice(id);
 
         model.addAttribute("id", id);
         model.addAttribute("name", d.getName());
-        List<Cart> l1 = deviceService.listCarts();
+        List<Cart> l1 = deviceService.listCarts(user);
         List<Device> l2 = new ArrayList<>();
         for (Cart c : l1) {
             l2.add(c.getDevice());
@@ -288,11 +295,13 @@ public class MyController {
 
     @RequestMapping(value = "/{id}/{n}", method = RequestMethod.GET)
     public String toCart(@PathVariable int id, @PathVariable int n, Model model) {
-
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = deviceService.findUser(username);
         Device device = deviceService.findDevice(id);
 
-        Cart cart = new Cart(device, 1);
-        List<Cart> l = deviceService.listCarts();
+        Cart cart = new Cart(user, device, 1);
+        List<Cart> l = deviceService.listCarts(user);
         int count = 1;
         for (Cart c : l) {
             if (c.getDevice().getId() == id) {
@@ -309,20 +318,23 @@ public class MyController {
         if (count == 1 && n == 1) {
             deviceService.addCart(cart);
         }
-        model.addAttribute("carts", deviceService.listCarts());
-        model.addAttribute("total", deviceService.totalPrice());
+        model.addAttribute("carts", deviceService.listCarts(user));
+        model.addAttribute("total", deviceService.totalPrice(user));
         return "cart_add_page";
     }
 
     @RequestMapping(value = "/cart_add_page", method = RequestMethod.GET)
     public String cart(Model model) {
-        model.addAttribute("carts", deviceService.listCarts());
-        model.addAttribute("total", deviceService.totalPrice());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = deviceService.findUser(username);
+        model.addAttribute("carts", deviceService.listCarts(user));
+        model.addAttribute("total", deviceService.totalPrice(user));
         return "cart_add_page";
     }
 
     @RequestMapping(value = "/addorder", method = RequestMethod.POST)
-    public String orderAdd(@RequestParam(value = "cart") int cart_id,
+    public String orderAdd(
                            @RequestParam String name,
                            @RequestParam String address,
                            @RequestParam String phone,
@@ -332,38 +344,47 @@ public class MyController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = deviceService.findUser(username);
-        Cart cart = deviceService.findCart(cart_id);
-        Order order = new Order(user, name, address, phone, cart);
-        deviceService.addOrder(order);
+        List<Cart>carts=deviceService.listCarts(user);
+        for(Cart c:carts){
+        Order order = new Order(user, name, address, phone, c);
+        deviceService.addOrder(order);}
 
 
         model.addAttribute("orders", deviceService.listOrders(user));
-        model.addAttribute("total", deviceService.totalPrice());
+        model.addAttribute("total", deviceService.totalPrice(user));
         return "result_page";
 
 
     }
+
     @RequestMapping("/result_page")
-    public String result(Model model){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public String result(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = deviceService.findUser(username);
         model.addAttribute("orders", deviceService.listOrders(user));
-        model.addAttribute("total", deviceService.totalPrice());
+        model.addAttribute("total", deviceService.totalPrice(user));
         return "result_page";
     }
 
     @RequestMapping(value = "/order_add_page", method = RequestMethod.GET)
     public String order(Model model) {
-
-        model.addAttribute("carts", deviceService.listCarts());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = deviceService.findUser(username);
+        model.addAttribute("carts", deviceService.listCarts(user));
 
         return "order_add_page";
     }
 
     @RequestMapping(value = "/cart/delete/{id}")
     public String deleteCart(@PathVariable int id, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = deviceService.findUser(username);
         deviceService.deleteCart(id);
-        model.addAttribute("carts", deviceService.listCarts());
-        model.addAttribute("total", deviceService.totalPrice());
+        model.addAttribute("carts", deviceService.listCarts(user));
+        model.addAttribute("total", deviceService.totalPrice(user));
         return "cart_add_page";
 
 

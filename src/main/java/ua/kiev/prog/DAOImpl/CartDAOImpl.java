@@ -2,6 +2,7 @@ package ua.kiev.prog.DAOImpl;
 
 import org.springframework.stereotype.Repository;
 import ua.kiev.prog.Classes.Cart;
+import ua.kiev.prog.Classes.User;
 import ua.kiev.prog.DAO.CartDAO;
 
 import javax.persistence.EntityManager;
@@ -29,8 +30,9 @@ public class CartDAOImpl implements CartDAO {
         entityManager.remove(c);
     }
     @Override
-    public List<Cart> list() {
-        Query query = entityManager.createQuery("SELECT c FROM Cart c", Cart.class);
+    public List<Cart> list(User user) {
+        Query query = entityManager.createQuery("SELECT c FROM Cart c where c.user=:user", Cart.class);
+        query.setParameter("user", user);
         return (List<Cart>) query.getResultList();
     }
 

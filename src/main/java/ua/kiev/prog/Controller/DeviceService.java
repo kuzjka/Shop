@@ -68,8 +68,8 @@ public class DeviceService {
 
 
     @Transactional(readOnly = true)
-    public List<Cart> listCarts() {
-        return cartDAO.list();
+    public List<Cart> listCarts(User user) {
+        return cartDAO.list(user);
     }
 
     @Transactional(readOnly = true)
@@ -93,8 +93,8 @@ public class DeviceService {
     }
 
     @Transactional(readOnly = true)
-    public int totalPrice() {
-        return deviceDAO.total();
+    public int totalPrice(User user) {
+        return deviceDAO.total(user);
     }
 
     @Transactional(readOnly = true)
