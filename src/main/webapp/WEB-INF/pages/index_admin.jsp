@@ -36,7 +36,7 @@
             <td><b>Name</b></td>
             <td><b>Manufacturer</b></td>
             <td><b>Price</b></td>
-            <td><b>Ram</b></td>
+            <td><b>Ram, GB</b></td>
             <td><b>Processor</b></td>
             <td><b>Type</b></td>
         </tr>

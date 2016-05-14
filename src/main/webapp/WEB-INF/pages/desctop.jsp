@@ -138,7 +138,7 @@
                     <td><b>Name</b></td>
                     <td><b>Manufacturer</b></td>
                     <td><b>Price</b></td>
-                    <td><b>RAM</b></td>
+                    <td><b>RAM, GB</b></td>
                     <td><b>Processor</b></td>
 
                     <td><b>Sign up to by online<br /> or administrate site</b></td>

@@ -12,52 +12,52 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <style type="text/css">
 
-        .navbar-fixed-top{
+        .navbar-fixed-top {
             color: white;
-            background-color:deepskyblue;
-        }
-        .navbar-header a.navbar-brand{
-            color:white;
             background-color: deepskyblue;
         }
 
-        ul.navbar-nav a.default   {
-            color:white;
+        .navbar-header a.navbar-brand {
+            color: white;
             background-color: deepskyblue;
         }
 
+        ul.navbar-nav a.default {
+            color: white;
+            background-color: deepskyblue;
+        }
 
-        ul.navbar-nav  a.active  {
-            color:deepskyblue;
+        ul.navbar-nav a.active {
+            color: deepskyblue;
             background-color: white;
         }
 
-
-        ul.navbar-nav a:hover:not(.active){
-            color:deepskyblue;
+        ul.navbar-nav a:hover:not(.active) {
+            color: deepskyblue;
             background-color: white;
         }
-
 
         .btn-info {
-            color:white;
+            color: white;
             background-color: deepskyblue;
         }
+
         .table {
             background-color: seashell;
         }
     </style>
 </head>
 <body>
-<nav   class="navbar navbar-default navbar-fixed-top">
-    <div  class="container">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
 
-        <ul  class="nav navbar-nav">
+        <ul class="nav navbar-nav">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">Shop</a>
             </div>
-            <li ><a class="default" href="/" ><span class="glyphicon glyphicon-home"></span></a></li>
-            <li><a class="default" href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
+            <li><a class="default" href="/"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li><a class="default" href="/cart_add_page"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a>
+            </li>
             <li><a href="/result_page" class="active">Order</a></li>
             <li><a class="default" href="/photo/all">Photos</a></li>
             <li><a class="default" href="/admin">Admin</a></li>
@@ -70,9 +70,8 @@
     </div>
 </nav>
 <div class="container" style="padding-top: 50px">
-    <form action="/addorder" role="form" name="order"   class="form-horizontal"  method="post">
+    <form action="/addorder" role="form" name="order" class="form-horizontal" method="post">
         <h3><input type="submit" class="btn btn-success" role="button" value="Make order"></h3>
-
         <input class="form-control form-type" type="text" name="name" placeholder="Name">
         <input class="form-control form-type" type="text" name="address" placeholder="Address">
         <input class="form-control form-type" type="text" name="phone" placeholder="Phone">
