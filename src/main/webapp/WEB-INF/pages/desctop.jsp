@@ -154,7 +154,8 @@
                 <td><b>RAM, GB</b></td>
                 <td><b>Processor</b></td>
 
-                <td><b>Sign up to by online<br/> or administrate site</b></td>
+                <td><sec:authorize access="!hasAuthority('USER')"> <b>Log in to by online<br/>or administrate site</b>
+                </sec:authorize></td>
             </tr>
             </thead>
             <c:forEach items="${devices}" var="device">
