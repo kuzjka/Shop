@@ -8,5 +8,6 @@ import java.util.List;
 public interface UserDAO {
     void add(User user);
     void delete(User user);
-    User findOne(String username);
+    User  findOne(String username);
+    List<User>list(String username);
 }

@@ -39,11 +39,17 @@ public class DeviceService {
     public void addCart(Cart cart) {
         cartDAO.add(cart);
     }
+
     @Transactional
-    public void addUser(User user){
-        userDAO.add(user);}
+    public void addUser(User user) {
+        userDAO.add(user);
+    }
+
     @Transactional
-    public void addRole(Role role){roleDAO.add(role);}
+    public void addRole(Role role) {
+        roleDAO.add(role);
+    }
+
     @Transactional
     public void deleteCart(int id) {
         cartDAO.delete(id);
@@ -53,7 +59,6 @@ public class DeviceService {
     public void deleteDevice(int id) {
         deviceDAO.delete(id);
     }
-
 
 
     @Transactional(readOnly = true)
@@ -91,6 +96,7 @@ public class DeviceService {
     public List<Device> searchDevices(String type, String pattern) {
         return deviceDAO.list(type, pattern);
     }
+
     @Transactional(readOnly = true)
     public int items(User user) {
         return deviceDAO.items(user);
@@ -105,26 +111,44 @@ public class DeviceService {
     public List<Order> listOrders(User user) {
         return orderDAO.list(user);
     }
+
     @Transactional(readOnly = true)
-    public User findUser(String username) {return userDAO.findOne(username);}
+    public User findUser(String username) {
+        return userDAO.findOne(username);
+    }
+
+    @Transactional(readOnly = true)
+    public List<User> listUsers(String username) {
+        return userDAO.list(username);
+    }
 
     @Transactional
     public void addOrder(Order order) {
         orderDAO.add(order);
     }
+
     @Transactional
-    public void addPhoto(Photo photo){photoDao.add(photo);}
+    public void addPhoto(Photo photo) {
+        photoDao.add(photo);
+    }
+
     @Transactional
-    public List<Photo> getPhoto(Device device){ return photoDao.getPhoto(device);}
-    @Transactional(readOnly = true)
-    public List<Device>priceFilter(String type, int min, int max, String dir)
-    {return deviceDAO.priceFilter(type, min, max, dir);}
-    @Transactional(readOnly = true)
-    public List<Device>ramProcFilter(String type, List<Integer>ram, List<String>proc)
-    {return  deviceDAO.ramProcFilter(type, ram, proc);}
+    public List<Photo> getPhoto(Device device) {
+        return photoDao.getPhoto(device);
+    }
 
     @Transactional(readOnly = true)
-    public List<Device> manufacturerFilter (String type, String manufacturer){
+    public List<Device> priceFilter(String type, int min, int max, String dir) {
+        return deviceDAO.priceFilter(type, min, max, dir);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Device> ramProcFilter(String type, List<Integer> ram, List<String> proc) {
+        return deviceDAO.ramProcFilter(type, ram, proc);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Device> manufacturerFilter(String type, String manufacturer) {
         return deviceDAO.manufacturerFilter(type, manufacturer);
     }
 }

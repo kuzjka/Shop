@@ -35,13 +35,11 @@ public class MyController {
 
     @RequestMapping(value = {"/", "/user"}, method = RequestMethod.GET)
     public String index(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        User user = deviceService.findUser(username);
+
         model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices("all"));
-        model.addAttribute("carts", deviceService.listCarts(user));
-        model.addAttribute("items", deviceService.items(user));
+        model.addAttribute("carts", deviceService.listCarts(findUser()));
+        model.addAttribute("items", deviceService.items(findUser()));
         return "index";
 
     }
@@ -60,9 +58,6 @@ public class MyController {
 
     @RequestMapping("/photo/{type}")
     public String type(Model model, @PathVariable String type) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        User user = deviceService.findUser(username);
         List<Device> l = deviceService.listDevices(type);
         Random rn = new Random();
         Device d1 = l.get(rn.nextInt(l.size()));
@@ -74,14 +69,14 @@ public class MyController {
         model.addAttribute("d3", d3);
         model.addAttribute("d4", d4);
 
-        List<Cart> l1 = deviceService.listCarts(user);
+        List<Cart> l1 = deviceService.listCarts(findUser());
         List<Device> l2 = new ArrayList<>();
         for (Cart c : l1) {
             l2.add(c.getDevice());
         }
 
         model.addAttribute("devices", l2);
-        model.addAttribute("items", deviceService.items(user));
+        model.addAttribute("items", deviceService.items(findUser()));
         model.addAttribute("type", type);
 
         return "photos";
@@ -89,13 +84,10 @@ public class MyController {
 
     @RequestMapping("/onedevice/{id}")
     public String oneDevice(Model model, @PathVariable int id) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        User user = deviceService.findUser(username);
-        Device d = deviceService.findDevice(id);
+                Device d = deviceService.findDevice(id);
         model.addAttribute("id", id);
         model.addAttribute("name", d.getName());
-        List<Cart> l1 = deviceService.listCarts(user);
+        List<Cart> l1 = deviceService.listCarts(findUser());
         List<Device> l2 = new ArrayList<>();
         for (Cart c : l1) {
             l2.add(c.getDevice());
@@ -118,11 +110,8 @@ public class MyController {
     public String priceFilter(@RequestParam(required = false, defaultValue = "0") int min,
                               @RequestParam(required = false, defaultValue = "-1") int max,
                               @RequestParam String dir, @PathVariable String type, Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        User user = deviceService.findUser(username);
-        model.addAttribute("devices", deviceService.priceFilter(type, min, max, dir));
-        model.addAttribute("items", deviceService.items(user));
+                model.addAttribute("devices", deviceService.priceFilter(type, min, max, dir));
+        model.addAttribute("items", deviceService.items(findUser()));
         if (type.equals("all")) {
             return "index";
         } else {
@@ -150,10 +139,8 @@ public class MyController {
                 }
             }
         }
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        User user = deviceService.findUser(username);
-        model.addAttribute("items", deviceService.items(user));
+
+        model.addAttribute("items", deviceService.items(findUser()));
         model.addAttribute("devices", deviceService.ramProcFilter(type, ram, proc));
         if (type.equals("all")) {
             return "index";
@@ -165,10 +152,7 @@ public class MyController {
 
     @RequestMapping("/{type}/{manufacturer}/manufacturer_filter")
     public String manufacturerFilter(Model model, @PathVariable String type, @PathVariable String manufacturer) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        User user = deviceService.findUser(username);
-        model.addAttribute("items", deviceService.items(user));
+        model.addAttribute("items", deviceService.items(findUser()));
         model.addAttribute("devices", deviceService.manufacturerFilter(type, manufacturer));
         return "smartphone";
     }
@@ -200,17 +184,19 @@ public class MyController {
     public String register(@RequestParam String role, @RequestParam String username,
                            @RequestParam String password1, @RequestParam
                            String password2, Model model) {
-
-        if (password1.equals(password2)) {
+        List<User> users = deviceService.listUsers(username);
+        if (users.size()==0) {
             deviceService.addUser(new User(username, password2, true));
             deviceService.addRole(new Role(username, role));
             model.addAttribute("message", "registration success!");
             return "register";
         } else {
-            model.addAttribute("message", "passwords are not matching");
+            model.addAttribute("message", "user already exists!");
             return "register";
         }
+
     }
+
 
     @RequestMapping(value = "/admin")
     public String index_admin(Model model) {
@@ -280,12 +266,9 @@ public class MyController {
 
     @RequestMapping(value = "/{id}/{n}", method = RequestMethod.GET)
     public String toCart(@PathVariable int id, @PathVariable int n, Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        User user = deviceService.findUser(username);
         Device device = deviceService.findDevice(id);
-        Cart cart = new Cart(user, device, 1);
-        List<Cart> l = deviceService.listCarts(user);
+        Cart cart = new Cart(findUser(), device, 1);
+        List<Cart> l = deviceService.listCarts(findUser());
         int count = 1;
         for (Cart c : l) {
             if (c.getDevice().getId() == id) {
@@ -299,19 +282,16 @@ public class MyController {
         if (count == 1 && n == 1) {
             deviceService.addCart(cart);
         }
-        model.addAttribute("carts", deviceService.listCarts(user));
-        model.addAttribute("total", deviceService.totalPrice(user));
+        model.addAttribute("carts", deviceService.listCarts(findUser()));
+        model.addAttribute("total", deviceService.totalPrice(findUser()));
         return "cart_add_page";
     }
 
     @RequestMapping(value = "/cart_add_page", method = RequestMethod.GET)
     public String cart(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        User user = deviceService.findUser(username);
-        model.addAttribute("items", deviceService.items(user));
-        model.addAttribute("carts", deviceService.listCarts(user));
-        model.addAttribute("total", deviceService.totalPrice(user));
+        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("carts", deviceService.listCarts(findUser()));
+        model.addAttribute("total", deviceService.totalPrice(findUser()));
         return "cart_add_page";
     }
 
@@ -321,18 +301,15 @@ public class MyController {
             @RequestParam String address,
             @RequestParam String phone,
             Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        User user = deviceService.findUser(username);
-        List<Cart> carts = deviceService.listCarts(user);
+        List<Cart> carts = deviceService.listCarts(findUser());
         for (Cart c : carts) {
-            Order order = new Order(user, name, address, phone, c);
+            Order order = new Order(findUser(), name, address, phone, c);
             deviceService.addOrder(order);
         }
 
-        model.addAttribute("items", deviceService.items(user));
-        model.addAttribute("orders", deviceService.listOrders(user));
-        model.addAttribute("total", deviceService.totalPrice(user));
+        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("orders", deviceService.listOrders(findUser()));
+        model.addAttribute("total", deviceService.totalPrice(findUser()));
         return "result_page";
 
 
@@ -340,35 +317,27 @@ public class MyController {
 
     @RequestMapping("/result_page")
     public String result(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        User user = deviceService.findUser(username);
-        model.addAttribute("items", deviceService.items(user));
-        model.addAttribute("orders", deviceService.listOrders(user));
-        model.addAttribute("total", deviceService.totalPrice(user));
+        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("orders", deviceService.listOrders(findUser()));
+        model.addAttribute("total", deviceService.totalPrice(findUser()));
         return "result_page";
     }
 
     @RequestMapping(value = "/order_add_page", method = RequestMethod.GET)
     public String order(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        User user = deviceService.findUser(username);
-        model.addAttribute("items", deviceService.items(user));
-        model.addAttribute("carts", deviceService.listCarts(user));
+
+        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("carts", deviceService.listCarts(findUser()));
 
         return "order_add_page";
     }
 
     @RequestMapping(value = "/cart/delete/{id}")
     public String deleteCart(@PathVariable int id, Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        User user = deviceService.findUser(username);
         deviceService.deleteCart(id);
-        model.addAttribute("items", deviceService.items(user));
-        model.addAttribute("carts", deviceService.listCarts(user));
-        model.addAttribute("total", deviceService.totalPrice(user));
+        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("carts", deviceService.listCarts(findUser()));
+        model.addAttribute("total", deviceService.totalPrice(findUser()));
         return "cart_add_page";
 
 
@@ -381,6 +350,12 @@ public class MyController {
         List<Photo> l = deviceService.getPhoto(d);
         Photo p = l.get(n);
         return ResponseEntity.ok(p.getBody());
+    }
+    public User findUser(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = deviceService.findUser(username);
+        return user;
     }
 }
 

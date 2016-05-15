@@ -65,7 +65,7 @@
                         <span class="glyphicon glyphicon-shopping-cart"></span>Cart
                         <span class="badge">${items}</span></a>
                     </li>
-                    <li><a class="default" href="/order_add_page">Order</a></li>
+                    <li><a class="default" href="/result_page">Orders</a></li>
                 </sec:authorize>
                 <li><a class="default" href="/photo/all">Photos</a></li>
                 <li><a class="default" href="/admin">Admin</a></li>

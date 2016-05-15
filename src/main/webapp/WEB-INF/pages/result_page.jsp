@@ -44,6 +44,10 @@
         .table {
             background-color: seashell;
         }
+        .badge{
+            background-color: deepskyblue;
+            color:white;
+        }
     </style>
 </head>
 <body>
@@ -59,7 +63,7 @@
                     <span class="glyphicon glyphicon-shopping-cart"></span>Cart
                     <span class="badge">${items}</span></a>
                 </li>
-                <li><a class="default" href="/order_add_page">Order</a></li>
+                <li><a class="active" href="/result_page">Orders</a></li>
             </sec:authorize>
             <li><a class="default" href="/photo/all">Photos</a></li>
             <li><a class="default" href="/admin">Admin</a></li>
@@ -71,7 +75,7 @@
             </sec:authorize>
             <sec:authorize url="/user">
                 <li><a class="default" href="/logout">
-                    <span class="glyphicon glyphicon-log-out"></span>Log Out</a></li>
+                    <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </sec:authorize>
         </ul>
     </div>

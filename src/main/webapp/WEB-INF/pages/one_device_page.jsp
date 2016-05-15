@@ -56,7 +56,7 @@
 
 
             <li><a class="default" href="/cart_add_page">Cart</a></li>
-            <li><a class="default" href="/order_add_page">Order</a></li>
+            <li><a class="default" href="/result_page">Orders</a></li>
             <li><a class="default" href="/photo/all">Photos</a></li>
             <li><a class="default" href="/admin">Admin</a></li>
         </ul>
