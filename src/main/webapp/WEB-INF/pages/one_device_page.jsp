@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -61,8 +62,11 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a class="default" href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a class="default" href="/user"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <li><a class="default" href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+            <sec:authorize access="!hasAuthority('USER')"> <li><a class="default" href="/user">
+                <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </sec:authorize>
+            <sec:authorize access="hasAuthority('USER')"><li><a class="default" href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+            </sec:authorize>
         </ul>
     </div>
 </nav>
