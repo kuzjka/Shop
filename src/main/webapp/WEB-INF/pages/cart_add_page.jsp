@@ -91,7 +91,7 @@
         <td><b></b></td>
         <td><b>Photo</b></td>
         <td><b>Device</b></td>
-        <td><b>Price</b></td>
+        <td><b>Price, grn</b></td>
         <td><b>Items</b></td>
     </tr>
     </thead>

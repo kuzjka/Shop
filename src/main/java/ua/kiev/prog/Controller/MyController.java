@@ -84,7 +84,7 @@ public class MyController {
 
     @RequestMapping("/onedevice/{id}")
     public String oneDevice(Model model, @PathVariable int id) {
-                Device d = deviceService.findDevice(id);
+        Device d = deviceService.findDevice(id);
         model.addAttribute("id", id);
         model.addAttribute("name", d.getName());
         List<Cart> l1 = deviceService.listCarts(findUser());
@@ -110,7 +110,7 @@ public class MyController {
     public String priceFilter(@RequestParam(required = false, defaultValue = "0") int min,
                               @RequestParam(required = false, defaultValue = "-1") int max,
                               @RequestParam String dir, @PathVariable String type, Model model) {
-                model.addAttribute("devices", deviceService.priceFilter(type, min, max, dir));
+        model.addAttribute("devices", deviceService.priceFilter(type, min, max, dir));
         model.addAttribute("items", deviceService.items(findUser()));
         if (type.equals("all")) {
             return "index";
@@ -185,16 +185,18 @@ public class MyController {
                            @RequestParam String password1, @RequestParam
                            String password2, Model model) {
         List<User> users = deviceService.listUsers(username);
-        if (users.size()==0) {
+        if (users.size() == 0 && password1.equals(password2)) {
             deviceService.addUser(new User(username, password2, true));
             deviceService.addRole(new Role(username, role));
             model.addAttribute("message", "registration success!");
-            return "register";
-        } else {
-            model.addAttribute("message", "user already exists!");
-            return "register";
-        }
 
+        }  if (users.size() > 0) {
+            model.addAttribute("message", "user already exists!");
+
+        }  if (!password1.equals(password2)) {
+            model.addAttribute("message", "password are not matching");
+        }
+        return "register";
     }
 
 
@@ -351,7 +353,8 @@ public class MyController {
         Photo p = l.get(n);
         return ResponseEntity.ok(p.getBody());
     }
-    public User findUser(){
+
+    public User findUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = deviceService.findUser(username);

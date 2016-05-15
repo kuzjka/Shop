@@ -85,7 +85,7 @@
     <a href="/photo/laptop" class="btn btn-primary" role="button">Laptops</a>
     <a href="/photo/desctop" class="btn btn-primary" role="button">Desctops</a>
 </div>
-<div class="container">
+<div class="container" align="center">
     <br>
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
