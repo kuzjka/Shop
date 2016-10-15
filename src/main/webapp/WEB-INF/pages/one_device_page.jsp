@@ -47,7 +47,7 @@
         }
     </style>
 </head>
-<body>
+
 <nav align = "center" class="navbar navbar-default navbar-fixed-top">
     <div align="center" class="container">
 
@@ -57,7 +57,7 @@
 
             <li><a class="default" href="/cart_add_page">Cart</a></li>
             <li><a class="default" href="/result_page">Orders</a></li>
-            <li><a class="default" href="/photo/all">Photos</a></li>
+
             <li><a class="default" href="/admin">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -110,6 +110,10 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+<sec:authorize access="!hasAuthority('USER')">
+    <div align="center"><h3>Login to buy online</h3></div>
+</sec:authorize>
+<sec:authorize access="hasAuthority('USER')">
 <div align="center">
 <c:set var="test" value="${0}"/>
 <c:forEach items="${devices}" var="device">
@@ -122,7 +126,9 @@
 </c:forEach>
 <c:if test="${test==0}">
     <a href="/${id}/1" class="btn btn-primary btn-lg" role="button">To cart</a>
-</div>
 </c:if>
+</div>
+</sec:authorize>
+
 </body>
 </html>

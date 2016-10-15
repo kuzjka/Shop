@@ -69,7 +69,7 @@
                 </li>
                 <li><a class="default" href="/result_page">Orders</a></li>
             </sec:authorize>
-            <li><a class="default" href="/photo/all">Photos</a></li>
+
             <li><a class="default" href="/admin">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
