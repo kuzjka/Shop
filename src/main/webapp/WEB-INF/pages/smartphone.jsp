@@ -149,7 +149,7 @@
                 <td><b>Name</b></td>
                 <td><b>Manufacturer</b></td>
                 <td><b>Price, grn</b></td>
-                <td><sec:authorize access="!hasAuthority('USER')"> <b>Log in to by online<br/>or administrate site</b>
+                <td><sec:authorize access="!hasAuthority('USER')">Log in to buy online
                 </sec:authorize></td>
             </tr>
             </thead>

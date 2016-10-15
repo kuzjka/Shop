@@ -70,13 +70,13 @@
             <li><a class="default" href="/admin">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a class="default" href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a class="default" href="/register_page"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
             <sec:authorize access="!hasAuthority('USER')"> <li><a class="default" href="/user">
                 <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </sec:authorize>
             <sec:authorize url="/user">
                 <li><a class="default" href="/logout">
-                    <span class="glyphicon glyphicon-log-out"></span>Log Out</a></li>
+                    <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </sec:authorize>
         </ul>
     </div>
@@ -187,7 +187,7 @@
                 <td><b>Price, grn</b></td>
                 <td><b>RAM, GB</b></td>
                 <td><b>Processor</b></td>
-                <td><sec:authorize access="!hasAuthority('USER')"> <b>Log in to by online<br/>or administrate site</b>
+                <td><sec:authorize access="!hasAuthority('USER')">Log in to buy online
                 </sec:authorize></td>
             </tr>
             </thead>
