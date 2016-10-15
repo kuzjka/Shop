@@ -91,11 +91,11 @@
         <div class="col-sm-3" style="position:fixed">
             <div class="btn-group">
                 <a href="/type/all" class="btn btn-primary active" role="button">All</a>
-                <a href="/type/desctop" class="btn btn-primary " role="button">Desctops</a>
-                <a href="/type/laptop" class="btn btn-primary " role="button">Laptops</a>
-                <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
+                <a href="/type/desctop" class="btn btn-primary" role="button">Desctops</a>
+                <a href="/type/laptop" class="btn btn-primary" role="button">Laptops</a>
+                <a href="/type/smartphone" class="btn btn-primary" role="button">Smartphones</a>
             </div>
-            <form action="/all/name_filter" method="get">
+            <form action="/name_filter/all" method="get">
                 <div class="form-group">
                     <label for="device_name">Device name</label>
                     <input type="text" class="form-control" name="name" id="device_name"></div>
@@ -117,7 +117,8 @@
                 </tr>
                 </thead>
                 <c:forEach items="${devices}" var="device">
-                    <td><a href="/onedevice/${device.id}"><img class="img-responsive" alt="No photo" height="100"
+                    <td><a href="/onedevice/${device.id}">
+                        <img class="img-responsive" alt="No photo" height="100"
                                                                width="100"
                                                                src="/photo/${device.id}/0"/></a></td>
                     <td>${device.name}</td>

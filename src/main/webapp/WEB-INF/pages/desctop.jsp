@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -73,8 +74,9 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a class="default" href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <sec:authorize access="!hasAuthority('USER')"> <li><a class="default" href="/user">
-                <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <sec:authorize access="!hasAuthority('USER')">
+                <li><a class="default" href="/user">
+                    <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </sec:authorize>
             <sec:authorize url="/user">
                 <li><a class="default" href="/logout">
@@ -83,21 +85,21 @@
         </ul>
     </div>
 </nav>
-<div class="raw" style="padding-top: 100px;">
-    <div class="col-sm-3" style="position: fixed;">
+<div class="raw" style="padding-top: 100px">
+    <div class="col-sm-3">
         <div class="btn-group">
-            <a href="/type/all" class="btn btn-primary " role="button">All</a>
-            <a href="/type/desctop" class="btn btn-primary active " role="button">Desctops</a>
-            <a href="/type/laptop" class="btn btn-primary " role="button">Laptops</a>
-            <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
+            <a href="/type/all" class="btn btn-primary" role="button">All</a>
+            <a href="/type/desctop" class="btn btn-primary active" role="button">Desctops</a>
+            <a href="/type/laptop" class="btn btn-primary" role="button">Laptops</a>
+            <a href="/type/smartphone" class="btn btn-primary" role="button">Smartphones</a>
         </div>
-        <form action="/desctop/name_filter" method="get">
+        <form action="/name_filter/desctop/" method="get">
             <div class="form-group">
                 <label for="device_name">Device name</label>
                 <input type="text" class="form-control" name="name" id="device_name"></div>
             <input type="submit" class="btn btn-primary" value="submit">
         </form>
-        <form action="/desctop/price_filter" method="get">
+        <form action="/price_filter/desctop" method="get">
             <div class="form-group">
                 <label for="min_price">Min price</label>
                 <input type="text" class="form-control" name="min" id="min_price">
@@ -115,35 +117,71 @@
             </div>
             <input type="submit" class="btn btn-primary" value="submit">
         </form>
-        <form action="/desctop/ram_proc_filter" method="get">
-            <label>RAM:</label>
-            <div class="checkbox">
-                <label><input type="checkbox" name="ram" value="2">2 GB</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="ram" value="4">4 GB</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="ram" value="8">8 GB</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="ram" value="16">16 GB</label>
-            </div>
-            <label>Processor: </label>
-            <div class="checkbox">
-                <label><input type="checkbox" name="proc" value="i3">i3</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="proc" value="i5">i5</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="proc" value="i7">i7</label>
-            </div>
-            <input type="submit" class="btn btn-primary" value="submit">
-        </form>
-        </form>
+        <h4>RAM:</h4>
+        <div class="btn-group">
+            <c:set var="r" value="${rams}"/>
+            <c:choose>
+                <c:when test="${fn:contains(r, 4)}">
+                    <a href="/ram_filter/desctop/4" class="btn btn-success" role="button">4 GB</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/ram_filter/desctop/4" class="btn btn-primary" role="button">4 GB</a>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${fn:contains(r, 8)}">
+                    <a href="/ram_filter/desctop/8" class="btn btn-success" role="button">8 GB</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/ram_filter/desctop/8" class="btn btn-primary" role="button">8 GB</a>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${fn:contains(r, 16)}">
+                    <a href="/ram_filter/desctop/16" class="btn btn-success" role="button">16 GB</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/ram_filter/desctop/16" class="btn btn-primary" role="button">16 GB</a>
+                </c:otherwise>
+            </c:choose>
+
+
+        </div>
+        <br/>
+
+        <h4>Processor:</h4>
+        <div class="btn-group">
+            <c:set var="p" value="${processors}"/>
+            <c:choose>
+                <c:when test="${fn:contains(p, 'i3')}">
+                    <a href="/proc_filter/desctop/i3" class="btn btn-success" role="button">i3</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/proc_filter/desctop/i3" class="btn btn-primary" role="button">i3</a>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${fn:contains(p, 'i5')}">
+                    <a href="/proc_filter/desctop/i5" class="btn btn-success" role="button">i5</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/proc_filter/desctop/i5" class="btn btn-primary" role="button">i5</a>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${fn:contains(p, 'i7')}">
+                    <a href="/proc_filter/desctop/i7" class="btn btn-success" role="button">i7</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/proc_filter/desctop/i7" class="btn btn-primary" role="button">i7</a>
+                </c:otherwise>
+            </c:choose>
+
+
+        </div>
+
     </div>
-    <div class="col-sm-9" style="float: right;">
+    <div class="col-sm-9" style="padding-top: 100px" ;>
         <table class="table table-default">
             <thead>
             <tr>
@@ -154,7 +192,8 @@
                 <td><b>RAM, GB</b></td>
                 <td><b>Processor</b></td>
 
-                <td><sec:authorize access="!hasAuthority('USER')"> <b>Log in to by online<br/>or administrate site</b>
+                <td><sec:authorize access="!hasAuthority('USER')"> <b>Log in to by online<br/>or administrate
+                    site</b>
                 </sec:authorize></td>
             </tr>
             </thead>
@@ -190,9 +229,10 @@
                 </tr>
             </c:forEach>
         </table>
+
     </div>
 </div>
-</div>
-</div>
+
+
 </body>
 </html>

@@ -11,7 +11,7 @@ public class Photo {
     @GeneratedValue
     private int id;
     @ManyToOne
-    @JoinColumn(name="device_id")
+    @JoinColumn(name = "device_id")
     private Device device;
     private String name;
     private byte[]body;
@@ -25,20 +25,20 @@ public class Photo {
         this.body = body;
     }
 
-    public Device getDevice() {
-        return device;
-    }
-
-    public void setDevice(Device device) {
-        this.device = device;
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Device getDevice() {
+        return device;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
     }
 
     public String getName() {

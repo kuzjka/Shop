@@ -93,6 +93,10 @@ public class DeviceService {
     }
 
     @Transactional(readOnly = true)
+    public Device findDevice2(String name) {
+        return deviceDAO.findDevice(name);
+    }
+    @Transactional(readOnly = true)
     public List<Device> searchDevices(String type, String pattern) {
         return deviceDAO.list(type, pattern);
     }
@@ -133,8 +137,8 @@ public class DeviceService {
     }
 
     @Transactional
-    public List<Photo> getPhoto(Device device) {
-        return photoDao.getPhoto(device);
+    public List<Photo> getPhotos(Device device) {
+        return photoDao.getPhotos(device);
     }
 
     @Transactional(readOnly = true)
@@ -143,12 +147,12 @@ public class DeviceService {
     }
 
     @Transactional(readOnly = true)
-    public List<Device> ramProcFilter(String type, List<Integer> ram, List<String> proc) {
-        return deviceDAO.ramProcFilter(type, ram, proc);
+    public List<Device> ramFilter(String type, List<Integer> ram, List<String> proc) {
+        return deviceDAO.ramFilter(type, ram, proc);
     }
 
     @Transactional(readOnly = true)
-    public List<Device> manufacturerFilter(String type, String manufacturer) {
-        return deviceDAO.manufacturerFilter(type, manufacturer);
+    public List<Device> manufacturerFilter(String type, List<String> manufacturers) {
+        return deviceDAO.manufacturerFilter(type, manufacturers);
     }
 }

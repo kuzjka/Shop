@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <title>Smartphones</title>
@@ -90,7 +91,8 @@
                 <input type="text" class="form-control" name="name" id="device_name"></div>
             <input type="submit" class="btn btn-primary" value="submit">
         </form>
-        <form action="/smartphone/price_filter" method="get">
+        <form action="/price_filter/smartphone" method="get">
+
             <div class="form-group">
                 <label for="min_price">Min price</label>
                 <input type="text" class="form-control" name="min" id="min_price">
@@ -107,11 +109,36 @@
             </div>
             <input type="submit" class="btn btn-primary" value="submit">
         </form>
+        <h4>Manufacturer:</h4>
         <div class="btn-group">
+            <c:set var="m" value="${manufacturers}"/>
+            <c:choose>
+                <c:when test="${fn:contains(m, 'apple')}">
+                    <a href="/manufacturer_filter/smartphone/apple" class="btn btn-success"
+                       role="button">Apple</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/manufacturer_filter/smartphone/apple" class="btn btn-primary" role="button">Apple</a>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${fn:contains(m, 'samsung')}">
+                    <a href="/manufacturer_filter/smartphone/samsung" class="btn btn-success" role="button">Samsung</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/manufacturer_filter/smartphone/samsung" class="btn btn-primary" role="button">Samsung</a>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${fn:contains(m, 'sony')}">
+                    <a href="/manufacturer_filter/smartphone/sony" class="btn btn-success" role="button">Sony</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/manufacturer_filter/smartphone/sony" class="btn btn-primary" role="button">Sony</a>
+                </c:otherwise>
+            </c:choose>
 
-            <a href="/smartphone/apple/manufacturer_filter" class="btn btn-primary " role="button">Apple</a>
-            <a href="/smartphone/samsung/manufacturer_filter" class="btn btn-primary " role="button">Samsung</a>
-            <a href="/smartphone/sony/manufacturer_filter" class="btn btn-primary  " role="button">Sony</a>
+
         </div>
     </div>
     <div class="col-sm-9" style="float: right;">
@@ -142,7 +169,7 @@
                         </c:if>
                     </c:forEach>
                     <c:if test="${count == 0}">
-                        <td><a href="/${device.id}/1" class="btn btn-info" role="button">To cart</a></td>
+                        <td><a href="/${device.id}" class="btn btn-info" role="button">To cart</a></td>
                     </c:if> </sec:authorize>
                 </tr>
             </c:forEach>

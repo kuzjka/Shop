@@ -17,15 +17,17 @@ public class PhotoDAOImpl implements PhotoDao {
     private EntityManager entityManager;
     @Override
     public void add(Photo photo) {
-        entityManager.merge(photo);
+        entityManager.persist(photo);
     }
 
     @Override
-    public List<Photo> getPhoto (Device device) {
+    public List<Photo> getPhotos(Device device) {
             Query query= entityManager.createQuery("select p from Photo p where p.device =:device", Photo.class);
         query.setParameter("device", device);
-        List<Photo>l=query.getResultList();
-        return l;}}
+        List<Photo> photos = query.getResultList();
+        return photos;
+    }
+}
 
 
 

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -83,10 +84,10 @@
 <div class="raw" style="padding-top: 100px;">
     <div class="col-sm-3" style="position: fixed;">
         <div class="btn-group">
-            <a href="/type/all" class="btn btn-primary " role="button">All</a>
-            <a href="/type/desctop" class="btn btn-primary  " role="button">Desctops</a>
+            <a href="/type/all" class="btn btn-primary" role="button">All</a>
+            <a href="/type/desctop" class="btn btn-primary" role="button">Desctops</a>
             <a href="/type/laptop" class="btn btn-primary active" role="button">Laptops</a>
-            <a href="/type/smartphone" class="btn btn-primary " role="button">Smartphones</a>
+            <a href="/type/smartphone" class="btn btn-primary" role="button">Smartphones</a>
         </div>
         <form action="/laptop/name_filter" method="get">
 
@@ -95,7 +96,7 @@
                 <input type="text" class="form-control" name="name" id="device_name"></div>
             <input type="submit" class="btn btn-primary" value="submit">
         </form>
-        <form action="/laptop/price_filter" method="get">
+        <form action="/price_filter/laptop" method="get">
             <div class="form-group">
                 <label for="min_price">Min price</label>
                 <input type="text" class="form-control" name="min" id="min_price">
@@ -113,33 +114,67 @@
             </div>
             <input type="submit" class="btn btn-primary" value="submit">
         </form>
-        <form action="/laptop/ram_proc_filter" method="post">
-            <label>RAM:</label>
-            <div class="checkbox">
-                <label><input type="checkbox" name="ram" value="2">2 GB</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="ram" value="4">4 GB</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="ram" value="8">8 GB</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="ram" value="16">16 GB</label>
-            </div>
-            <label>Processor: </label>
-            <div class="checkbox">
-                <label><input type="checkbox" name="proc" value="i3">i3</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="proc" value="i5">i5</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="proc" value="i7">i7</label>
-            </div>
-            <input type="submit" class="btn btn-primary" value="submit">
-        </form>
-        </form>
+        <h4>RAM:</h4>
+        <div class="btn-group">
+            <c:set var="r" value="${rams}"/>
+            <c:choose>
+                <c:when test="${fn:contains(r, 4)}">
+                    <a href="/ram_filter/laptop/4" class="btn btn-success" role="button">4 GB</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/ram_filter/laptop/4" class="btn btn-primary" role="button">4 GB</a>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${fn:contains(r, 8)}">
+                    <a href="/ram_filter/laptop/8" class="btn btn-success" role="button">8 GB</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/ram_filter/laptop/8" class="btn btn-primary" role="button">8 GB</a>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${fn:contains(r, 16)}">
+                    <a href="/ram_filter/laptop/16" class="btn btn-success" role="button">16 GB</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/ram_filter/laptop/16" class="btn btn-primary" role="button">16 GB</a>
+                </c:otherwise>
+            </c:choose>
+
+
+        </div>
+        <br/>
+        <h4>Processor:</h4>
+        <div class="btn-group">
+            <c:set var="p" value="${processors}"/>
+            <c:choose>
+                <c:when test="${fn:contains(p, 'i3')}">
+                    <a href="/proc_filter/laptop/i3" class="btn btn-success" role="button">i3</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/proc_filter/laptop/i3" class="btn btn-primary" role="button">i3</a>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${fn:contains(p, 'i5')}">
+                    <a href="/proc_filter/laptop/i5" class="btn btn-success" role="button">i5</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/proc_filter/laptop/i5" class="btn btn-primary" role="button">i5</a>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${fn:contains(p, 'i7')}">
+                    <a href="/proc_filter/laptop/i7" class="btn btn-success" role="button">i7</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/proc_filter/laptop/i7" class="btn btn-primary" role="button">i7</a>
+                </c:otherwise>
+            </c:choose>
+
+
+        </div>
 
     </div>
     <div class="col-sm-9" style="float: right;">

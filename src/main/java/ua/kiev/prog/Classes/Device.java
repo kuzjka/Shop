@@ -1,6 +1,9 @@
 package ua.kiev.prog.Classes;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -9,16 +12,14 @@ public class Device {
     @Id
     @GeneratedValue
     private int id;
-
+    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Photo> photos;
     @ManyToOne
     @JoinColumn(name = "type_id")
     private Type type;
-    @OneToMany(mappedBy = "device" ,  cascade = CascadeType.ALL , fetch = FetchType.LAZY)
-
-    private List<Cart> carts;
     @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 
-    private List<Photo> photos;
+    private List<Cart> carts;
 
     private String name;
     private String manufacturer;
@@ -27,29 +28,16 @@ public class Device {
     private String processor;
 
 
-
-
     public Device() {
     }
 
-
-    public Device(Type type,
-                  String name, String manufacturer, int price, int ram, String processor) {
+    public Device(Type type, String name, String manufacturer, int price, int ram, String processor) {
         this.type = type;
-        this.carts = carts;
-        this.photos = photos;
         this.name = name;
         this.manufacturer = manufacturer;
         this.price = price;
         this.ram = ram;
         this.processor = processor;
-    }
-
-    public Device(Type type, String name, String manufacturer, int price) {
-        this.type = type;
-        this.name = name;
-        this.manufacturer = manufacturer;
-        this.price = price;
     }
 
     public int getId() {
@@ -58,6 +46,14 @@ public class Device {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
     }
 
     public Type getType() {
@@ -76,8 +72,6 @@ public class Device {
         this.carts = carts;
     }
 
-
-
     public String getName() {
         return name;
     }
@@ -86,20 +80,20 @@ public class Device {
         this.name = name;
     }
 
-    public List<Photo> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
-    }
-
     public String getManufacturer() {
         return manufacturer;
     }
 
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public int getRam() {
@@ -117,13 +111,6 @@ public class Device {
     public void setProcessor(String processor) {
         this.processor = processor;
     }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
 }
+
 

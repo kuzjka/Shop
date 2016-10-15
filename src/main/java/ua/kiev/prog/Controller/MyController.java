@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.util.*;
 
 @Controller
@@ -56,31 +57,6 @@ public class MyController {
         return "login_page";
     }
 
-    @RequestMapping("/photo/{type}")
-    public String type(Model model, @PathVariable String type) {
-        List<Device> l = deviceService.listDevices(type);
-        Random rn = new Random();
-        Device d1 = l.get(rn.nextInt(l.size()));
-        Device d2 = l.get(rn.nextInt(l.size()));
-        Device d3 = l.get(rn.nextInt(l.size()));
-        Device d4 = l.get(rn.nextInt(l.size()));
-        model.addAttribute("d1", d1);
-        model.addAttribute("d2", d2);
-        model.addAttribute("d3", d3);
-        model.addAttribute("d4", d4);
-
-        List<Cart> l1 = deviceService.listCarts(findUser());
-        List<Device> l2 = new ArrayList<>();
-        for (Cart c : l1) {
-            l2.add(c.getDevice());
-        }
-
-        model.addAttribute("devices", l2);
-        model.addAttribute("items", deviceService.items(findUser()));
-        model.addAttribute("type", type);
-
-        return "photos";
-    }
 
     @RequestMapping("/onedevice/{id}")
     public String oneDevice(Model model, @PathVariable int id) {
@@ -96,9 +72,28 @@ public class MyController {
         return "one_device_page";
     }
 
-    @RequestMapping(value = "/{type}/name_filter", method = RequestMethod.GET)
-    public String nameFilter(@RequestParam String name, @PathVariable String type, Model model) {
+    @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
+    public String nameFilter(@PathVariable String type,
+                             Model model) {
+
+
+        if (type.equals("all")) {
+            model.addAttribute("devices", deviceService.listDevices(type));
+            return "index";
+        } else {
+
+
+            model.addAttribute("devices", deviceService.listDevices(type));
+
+            return type;
+        }
+    }
+
+    @RequestMapping(value = "/name_filter/{type}", method = RequestMethod.GET)
+    public String nameFilter(@PathVariable String type,
+                             @RequestParam String name, Model model) {
         model.addAttribute("devices", deviceService.searchDevices(type, name));
+        model.addAttribute("items", deviceService.items(findUser()));
         if (type.equals("all")) {
             return "index";
         } else {
@@ -106,12 +101,13 @@ public class MyController {
         }
     }
 
-    @RequestMapping(value = "/{type}/price_filter", method = RequestMethod.GET)
+    @RequestMapping(value = "/price_filter/{type}", method = RequestMethod.GET)
     public String priceFilter(@RequestParam(required = false, defaultValue = "0") int min,
                               @RequestParam(required = false, defaultValue = "-1") int max,
                               @RequestParam String dir, @PathVariable String type, Model model) {
         model.addAttribute("devices", deviceService.priceFilter(type, min, max, dir));
         model.addAttribute("items", deviceService.items(findUser()));
+
         if (type.equals("all")) {
             return "index";
         } else {
@@ -119,41 +115,79 @@ public class MyController {
         }
     }
 
-    @RequestMapping(value = "/{type}/ram_proc_filter", method = RequestMethod.GET)
-    public String ramProcFilter(@RequestParam(value = "proc", required = false) String[] sproc,
-                                @RequestParam(value = "ram", required = false) String[] sram,
-                                @PathVariable String type, Model model) {
-        List<String> proc = new ArrayList<>();
-        List<Integer> ram = new ArrayList<>();
-        if (sproc != null) {
-            for (String p : sproc) {
-                if (p != null) {
-                    proc.add(p);
-                }
-            }
-        }
-        if (sram != null) {
-            for (String r : sram) {
-                if (r != null) {
-                    ram.add(Integer.parseInt(r));
-                }
-            }
+    List<Integer> rams = new ArrayList<>();
+    List<String> processors = new ArrayList<>();
+
+    @RequestMapping(value = "/ram_filter/{type}/{sram}",
+            method = RequestMethod.GET)
+
+    public String ramFilter(@PathVariable String type,
+                            @PathVariable String sram,
+
+                            Model model
+    ) {
+
+        Integer ram = Integer.parseInt(sram);
+
+
+        if (!rams.contains(ram)) {
+            rams.add(ram);
+        } else if (rams.contains(ram)) {
+            rams.remove(ram);
         }
 
+
+        model.addAttribute("rams", rams);
+        model.addAttribute("processors", processors);
         model.addAttribute("items", deviceService.items(findUser()));
-        model.addAttribute("devices", deviceService.ramProcFilter(type, ram, proc));
+        model.addAttribute("devices", deviceService.ramFilter(type, rams, processors));
         if (type.equals("all")) {
             return "index";
         } else {
             return type;
         }
-
     }
 
-    @RequestMapping("/{type}/{manufacturer}/manufacturer_filter")
-    public String manufacturerFilter(Model model, @PathVariable String type, @PathVariable String manufacturer) {
+    @RequestMapping(value = "/proc_filter/{type}/{proc}",
+            method = RequestMethod.GET)
+
+    public String processorFilter(@PathVariable String type,
+                                  @PathVariable String proc,
+                                  Model model
+    ) {
+
+
+        if (!processors.contains(proc)) {
+            processors.add(proc);
+        } else {
+            processors.remove(proc);
+        }
+
+        model.addAttribute("rams", rams);
+        model.addAttribute("processors", processors);
         model.addAttribute("items", deviceService.items(findUser()));
-        model.addAttribute("devices", deviceService.manufacturerFilter(type, manufacturer));
+        model.addAttribute("devices", deviceService.ramFilter(type, rams, processors));
+        if (type.equals("all")) {
+            return "index";
+        } else {
+            return type;
+        }
+    }
+
+    List<String> manufacturers = new ArrayList<>();
+
+    @RequestMapping("manufacturer_filter/{type}/{manufacturer}")
+    public String manufacturerFilter(Model model, @PathVariable String type,
+                                     @PathVariable String manufacturer) {
+        if (!manufacturers.contains(manufacturer)) {
+            manufacturers.add(manufacturer);
+
+        } else {
+            manufacturers.remove(manufacturer);
+        }
+        model.addAttribute("manufacturers", manufacturers);
+        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("devices", deviceService.manufacturerFilter(type, manufacturers));
         return "smartphone";
     }
 
@@ -163,16 +197,6 @@ public class MyController {
         return "photo_add_page";
     }
 
-    @RequestMapping(value = "/addphoto", method = RequestMethod.POST)
-    public String addPhoto(@RequestParam(value = "device") int id,
-                           @RequestParam(value = "photo") MultipartFile photo, Model model) throws IOException {
-
-        Device d = deviceService.findDevice(id);
-        deviceService.addPhoto(new Photo(d, photo.getOriginalFilename(), photo.getBytes()));
-        model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices("all"));
-        return "index_admin";
-    }
 
     @RequestMapping("/register_page")
 
@@ -190,10 +214,12 @@ public class MyController {
             deviceService.addRole(new Role(username, role));
             model.addAttribute("message", "registration success!");
 
-        }  if (users.size() > 0) {
+        }
+        if (users.size() > 0) {
             model.addAttribute("message", "user already exists!");
 
-        }  if (!password1.equals(password2)) {
+        }
+        if (!password1.equals(password2)) {
             model.addAttribute("message", "password are not matching");
         }
         return "register";
@@ -220,15 +246,6 @@ public class MyController {
         return "type_add_page";
     }
 
-    @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
-    public String searchByType(@PathVariable String type, Model model) {
-        model.addAttribute("devices", deviceService.listDevices(type));
-        if (type.equals("all")) {
-            return "index";
-        } else {
-            return type;
-        }
-    }
 
     @RequestMapping(value = "/device/delete")
     public String search(@RequestParam(value = "todelete[]") String[] todelete, Model model) {
@@ -244,15 +261,29 @@ public class MyController {
 
     @RequestMapping(value = "/adddevice", method = RequestMethod.POST)
     public String deviceAdd(@RequestParam(value = "type") int id,
+                            @RequestParam MultipartFile main_photo,
+                            @RequestParam MultipartFile photo2,
+                            @RequestParam MultipartFile photo3,
+                            @RequestParam MultipartFile photo4,
                             @RequestParam String name,
                             @RequestParam String manufacturer,
                             @RequestParam int price,
                             @RequestParam(value = "ram", required = false, defaultValue = "-1") String ram,
                             @RequestParam(value = "processor", required = false) String processor,
-                            Model model) {
+                            Model model) throws IOException {
         Type type = deviceService.findType(id);
-        Device device = new Device(type, name, manufacturer, price, Integer.parseInt(ram), processor);
+
+
+        Device device = new Device(type, name, manufacturer, price,
+                Integer.parseInt(ram), processor);
         deviceService.addDevice(device);
+        Device d = deviceService.findDevice2(name);
+        deviceService.addPhoto(new Photo(d, main_photo.getOriginalFilename(), main_photo.getBytes()));
+        deviceService.addPhoto(new Photo(d, photo2.getOriginalFilename(), photo2.getBytes()));
+        deviceService.addPhoto(new Photo(d, photo3.getOriginalFilename(), photo3.getBytes()));
+        deviceService.addPhoto(new Photo(d, photo4.getOriginalFilename(), photo4.getBytes()));
+
+
         model.addAttribute("devices", deviceService.listDevices("all"));
         return "index_admin";
     }
@@ -347,11 +378,13 @@ public class MyController {
 
     @RequestMapping(value = "/photo/{id}/{n}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<byte[]> onPhoto(@PathVariable(value = "id") int id, @PathVariable int n) {
+    public ResponseEntity<byte[]> onPhoto(@PathVariable int id, @PathVariable int n) {
         Device d = deviceService.findDevice(id);
-        List<Photo> l = deviceService.getPhoto(d);
-        Photo p = l.get(n);
-        return ResponseEntity.ok(p.getBody());
+
+        List<Photo> photos = deviceService.getPhotos(d);
+        Photo photo = photos.get(n);
+
+        return ResponseEntity.ok(photo.getBody());
     }
 
     public User findUser() {
@@ -360,6 +393,8 @@ public class MyController {
         User user = deviceService.findUser(username);
         return user;
     }
+
+
 }
 
 

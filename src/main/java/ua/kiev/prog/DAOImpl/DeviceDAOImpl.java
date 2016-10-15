@@ -6,7 +6,6 @@ import ua.kiev.prog.Classes.User;
 import ua.kiev.prog.DAO.DeviceDAO;
 import ua.kiev.prog.Classes.Device;
 
-import javax.annotation.processing.Processor;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -36,14 +35,17 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     @Override
-    public List<Device> manufacturerFilter(String type, String manufacturer) {
+    public List<Device> manufacturerFilter(String type, List<String> manufacturers) {
         Query query;
-
-        query = entityManager.createQuery("select d from Device d where d.type.name=:type and d.manufacturer=:manufacturer "
-                ,
-                Device.class);
+        if (manufacturers.size() > 0) {
+            query = entityManager.createQuery("select d from Device d where d.type.name=:type " +
+                    "and d.manufacturer in(:manufacturers)", Device.class);
         query.setParameter("type", type);
-        query.setParameter("manufacturer", manufacturer);
+            query.setParameter("manufacturers", manufacturers);
+        } else {
+            query = entityManager.createQuery("select d from Device d where d.type.name=:type", Device.class);
+            query.setParameter("type", type);
+        }
         return query.getResultList();
     }
 
@@ -90,6 +92,12 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     @Override
+    public Device findDevice(String name) {
+        Query query = entityManager.createQuery("select d from Device d where d.name=:name", Device.class);
+        query.setParameter("name", name);
+        return (Device) query.getSingleResult();
+    }
+    @Override
     public int items(User user) {
         Query query = entityManager.createQuery("select c from Cart c where c.user=:user", Cart.class);
         query.setParameter("user", user);
@@ -117,42 +125,40 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     @Override
-    public List<Device> ramProcFilter(String type, List<Integer> ram, List<String> proc) {
+    public List<Device> ramFilter(String type, List<Integer> ram, List<String> proc) {
         Query query = null;
+
         if (ram.size() > 0 && proc.size() > 0) {
+
             query = entityManager.createQuery("select d from Device d where d.type.name=:type " +
-                    " and d.ram in (:ram)" +
-                    " and d.processor in (:proc)  ", Device.class);
+                    " and d.ram in (:ram) and d.processor in(:proc)", Device.class);
             query.setParameter("ram", ram);
             query.setParameter("proc", proc);
             query.setParameter("type", type);
 
+
         }
-        if (ram.size() == 0) {
-            query = entityManager.createQuery("select d from Device d where d.type.name=:type " +
-                    "and d.processor in (:proc)  ", Device.class);
+        if (ram.size() > 0 && proc.size() == 0) {
 
-            query.setParameter("proc", proc);
-            query.setParameter("type", type);
-        }
-
-
-        if (proc.size() == 0) {
-            query = entityManager.createQuery("select d from Device d where d.type.name=:type and d.ram in (:ram)  ", Device.class);
+            query = entityManager.createQuery("select d from Device d where d.type.name=:type" +
+                            " and d.ram in (:ram) "
+                    , Device.class);
 
             query.setParameter("ram", ram);
             query.setParameter("type", type);
 
+
+        }
+        if (ram.size() == 0 && proc.size() > 0) {
+            query = entityManager.createQuery("select d from  Device d where d.type.name=:type" +
+                    " and d.processor in (:proc)", Device.class);
+            query.setParameter("proc", proc);
+            query.setParameter("type", type);
         }
         if (ram.size() == 0 && proc.size() == 0) {
-            query = entityManager.createQuery("select d from Device d where " +
-
-                    "  d.type.name=:type", Device.class);
-
+            query = entityManager.createQuery("select d from  Device d where d.type.name=:type", Device.class);
             query.setParameter("type", type);
         }
-
-
         return query.getResultList();
     }
 
