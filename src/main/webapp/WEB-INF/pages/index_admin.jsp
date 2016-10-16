@@ -25,7 +25,6 @@
     <h3>Devices List</h3>
     <div   class="btn-group">
         <a href ="/" class="btn btn-primary" role="button">Home</a>
-        <a href="/photo_add_page" class="btn btn-primary" role="button">Add photo</a>
         <a href="/device_add_page" class="btn btn-primary" role="button">Add device</a>
         <a href="/type_add_page" class="btn btn-primary" role="button">Add type</a>
     </div>
