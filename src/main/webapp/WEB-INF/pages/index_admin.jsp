@@ -13,6 +13,10 @@
         .btn-danger{
             background-color: crimson;
         }
+
+        .btn-info {
+            background-color: deepskyblue;
+        }
         </style>
 </head>
 
@@ -60,7 +64,7 @@
 
                 <td>${device.processor}</td>
                 <td>${device.type.name}</td>
-                <td></td>
+             <td><a href="/edit_device_page/${device.id}" class="btn btn-info" role="button">Edit device</a></td>
 
 
             </tr></c:forEach>

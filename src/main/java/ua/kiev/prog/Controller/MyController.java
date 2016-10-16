@@ -288,6 +288,31 @@ public class MyController {
         return "index_admin";
     }
 
+    @RequestMapping(value = "/edit_device_page/{id}", method = RequestMethod.GET)
+    public String editDevicePage(@PathVariable int id, Model model) {
+        Device device = deviceService.findDevice(id);
+        model.addAttribute("type", device.getType().getId());
+        model.addAttribute("device", device);
+        return "edit_device_page";
+    }
+
+    @RequestMapping(value = "/edit_device/{id}", method = RequestMethod.POST)
+    public String editDevice(@PathVariable int id,
+                             @RequestParam String name,
+                             @RequestParam String manufacturer,
+                             @RequestParam int price,
+                             Model model) {
+        Device device = deviceService.findDevice(id);
+        device.setName(name);
+        device.setManufacturer(manufacturer);
+        device.setPrice(price);
+        deviceService.addDevice(device);
+        model.addAttribute("devices", deviceService.listDevices("all"));
+        return "index_admin";
+
+
+    }
+
     @RequestMapping(value = "/addtype", method = RequestMethod.POST)
     public String groupAdd(@RequestParam String name, Model model) {
         deviceService.addType(new Type(name));
