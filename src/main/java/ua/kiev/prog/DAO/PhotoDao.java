@@ -9,6 +9,7 @@ import java.util.List;
 public interface PhotoDao {
     void add(Photo photo);
 
-    List<Photo> getPhotos(Device device);
+    List<Photo> listPhotos(Device device);
+
 
 }

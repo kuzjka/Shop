@@ -10,66 +10,68 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <style>
-        .btn-danger{
+        .btn-danger {
             background-color: crimson;
         }
 
         .btn-info {
             background-color: deepskyblue;
         }
-        </style>
+    </style>
 </head>
 
 
-<div align="center"  class="container-fluid">
+<div align="center" class="container-fluid">
     <h3>Devices List</h3>
-    <div   class="btn-group">
-        <a href ="/" class="btn btn-primary" role="button">Home</a>
+    <div class="btn-group">
+        <a href="/" class="btn btn-primary" role="button">Home</a>
         <a href="/device_add_page" class="btn btn-primary" role="button">Add device</a>
         <a href="/type_add_page" class="btn btn-primary" role="button">Add type</a>
     </div>
 
     <form action="/device/delete" method="get">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <td><input type="submit" class="btn btn-danger" value="Delete"> </td>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td><input type="submit" class="btn btn-danger" value="Delete"></td>
 
-            <td><b>Photo</b></td>
-            <td><b>Name</b></td>
-            <td><b>Manufacturer</b></td>
-            <td><b>Price, grn</b></td>
-            <td><b>Ram, GB</b></td>
-            <td><b>Processor</b></td>
-            <td><b>Type</b></td>
-        </tr>
-        </thead>
-        <c:forEach items="${devices}" var="device">
-         <tr>
+                <td><b>Photo</b></td>
+                <td><b>Name</b></td>
+                <td><b>Manufacturer</b></td>
+                <td><b>Price, grn</b></td>
+                <td><b>Ram, GB</b></td>
+                <td><b>Processor</b></td>
+                <td><b>Type</b></td>
+            </tr>
+            </thead>
+            <c:forEach items="${devices}" var="device">
+                <tr>
 
-                <td><input type=checkbox id="td" name="todelete[]" value="${device.id}"></td>
-                <td><img class="img-responsive" alt="No Photo" height="100" width="100"  src="/photo/${device.id}/0"/></td>
-                <td>${device.name}</td>
-                <td>${device.manufacturer}</td>
-                <td>${device.price}</td>
-                <c:choose>
-                    <c:when test="${device.ram ne -1}">
-                        <td>${device.ram}</td>
-                    </c:when>
-                    <c:otherwise>
-                        <td></td>
-                    </c:otherwise>
-                </c:choose>
+                    <td><input type=checkbox id="td" name="todelete[]" value="${device.id}"></td>
+                    <td><img class="img-responsive" alt="No Photo" height="100" width="100"
+                             src="/photo/${device.id}/0"/></td>
+                    <td>${device.name}</td>
+                    <td>${device.manufacturer}</td>
+                    <td>${device.price}</td>
+                    <c:choose>
+                        <c:when test="${device.ram ne -1}">
+                            <td>${device.ram}</td>
+                        </c:when>
+                        <c:otherwise>
+                            <td></td>
+                        </c:otherwise>
+                    </c:choose>
 
-                <td>${device.processor}</td>
-                <td>${device.type.name}</td>
-             <td><a href="/edit_device_page/${device.id}" class="btn btn-info" role="button">Edit device</a></td>
+                    <td>${device.processor}</td>
+                    <td>${device.type.name}</td>
+                    <td><a href="/edit_device_page/${device.id}" class="btn btn-info" role="button">Edit device</a></td>
 
 
-            </tr></c:forEach>
+                </tr>
+            </c:forEach>
 
-    </table>
-        </form>
+        </table>
+    </form>
 </div>
 
 

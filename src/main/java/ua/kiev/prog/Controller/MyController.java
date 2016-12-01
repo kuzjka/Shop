@@ -1,29 +1,22 @@
 package ua.kiev.prog.Controller;
 
-import com.mysql.jdbc.Security;
-import org.apache.commons.io.IOUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.MediaType;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.SecurityConfig;
-import org.springframework.security.access.annotation.Secured;
+
 import org.springframework.security.access.method.P;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ua.kiev.prog.Classes.*;
-import ua.kiev.prog.Config.SecurityConfiguration;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Method;
+
 import java.util.*;
 
 @Controller
@@ -38,62 +31,61 @@ public class MyController {
     public String index(Model model) {
 
         model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices("all"));
+
         model.addAttribute("carts", deviceService.listCarts(findUser()));
-        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("items", deviceService.totalItems(findUser()));
         return "index";
+
 
     }
 
     @RequestMapping(value = "/login_page", method = RequestMethod.GET)
-    public String login() {
-
+    public String login(Model model, @RequestParam(required = false) String error) {
+        if (error != null) {
+            model.addAttribute("message", "Wrong login and password!");
+            model.addAttribute("state", "alert alert-danger");
+        }
         return "login_page";
     }
+
 
     @RequestMapping("/403")
     public String denied(Model model) {
         model.addAttribute("message", "Access denied");
+        model.addAttribute("state", "alert alert-danger");
         return "login_page";
     }
 
 
-    @RequestMapping("/onedevice/{id}")
-    public String oneDevice(Model model, @PathVariable int id) {
-        Device d = deviceService.findDevice(id);
-        model.addAttribute("id", id);
-        model.addAttribute("name", d.getName());
-        List<Cart> l1 = deviceService.listCarts(findUser());
-        List<Device> l2 = new ArrayList<>();
-        for (Cart c : l1) {
-            l2.add(c.getDevice());
-        }
-        model.addAttribute("devices", l2);
+    @RequestMapping(value = "/onedevice/{id}", method = RequestMethod.GET)
+    public String oneDevice(@PathVariable int id, Model model) {
+        Device d = deviceService.findDeviceById(id);
+        model.addAttribute("d", d);
+        model.addAttribute("c", deviceService.listCarts(findUser()));
+        model.addAttribute("items", deviceService.totalItems(findUser()));
+
         return "one_device_page";
     }
 
-    @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
-    public String nameFilter(@PathVariable String type,
+    @RequestMapping(value = "/type/{id}", method = RequestMethod.GET)
+    public String nameFilter(@PathVariable int id,
                              Model model) {
 
 
-        if (type.equals("all")) {
-            model.addAttribute("devices", deviceService.listDevices(type));
-            return "index";
-        } else {
+        Type type = deviceService.findType(id);
 
-
-            model.addAttribute("devices", deviceService.listDevices(type));
-
-            return type;
-        }
+        model.addAttribute("devices", deviceService.listDevices(type));
+        model.addAttribute("carts", deviceService.listCarts(findUser()));
+        model.addAttribute("items", deviceService.totalItems(findUser()));
+        return type.getName().toLowerCase();
     }
+
 
     @RequestMapping(value = "/name_filter/{type}", method = RequestMethod.GET)
     public String nameFilter(@PathVariable String type,
                              @RequestParam String name, Model model) {
         model.addAttribute("devices", deviceService.searchDevices(type, name));
-        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("items", deviceService.totalItems(findUser()));
         if (type.equals("all")) {
             return "index";
         } else {
@@ -106,7 +98,7 @@ public class MyController {
                               @RequestParam(required = false, defaultValue = "-1") int max,
                               @RequestParam String dir, @PathVariable String type, Model model) {
         model.addAttribute("devices", deviceService.priceFilter(type, min, max, dir));
-        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("items", deviceService.totalItems(findUser()));
 
         if (type.equals("all")) {
             return "index";
@@ -139,7 +131,7 @@ public class MyController {
 
         model.addAttribute("rams", rams);
         model.addAttribute("processors", processors);
-        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("items", deviceService.totalItems(findUser()));
         model.addAttribute("devices", deviceService.ramFilter(type, rams, processors));
         if (type.equals("all")) {
             return "index";
@@ -165,7 +157,7 @@ public class MyController {
 
         model.addAttribute("rams", rams);
         model.addAttribute("processors", processors);
-        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("items", deviceService.totalItems(findUser()));
         model.addAttribute("devices", deviceService.ramFilter(type, rams, processors));
         if (type.equals("all")) {
             return "index";
@@ -176,7 +168,7 @@ public class MyController {
 
     List<String> manufacturers = new ArrayList<>();
 
-    @RequestMapping("manufacturer_filter/{type}/{manufacturer}")
+    @RequestMapping("/manufacturer_filter/{type}/{manufacturer}")
     public String manufacturerFilter(Model model, @PathVariable String type,
                                      @PathVariable String manufacturer) {
         if (!manufacturers.contains(manufacturer)) {
@@ -186,14 +178,14 @@ public class MyController {
             manufacturers.remove(manufacturer);
         }
         model.addAttribute("manufacturers", manufacturers);
-        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("items", deviceService.totalItems(findUser()));
         model.addAttribute("devices", deviceService.manufacturerFilter(type, manufacturers));
         return "smartphone";
     }
 
     @RequestMapping("/photo_add_page")
     public String photoAddPage(Model model) {
-        model.addAttribute("devices", deviceService.listDevices("all"));
+        model.addAttribute("devices", deviceService.listDevices(null));
         return "photo_add_page";
     }
 
@@ -210,17 +202,23 @@ public class MyController {
                            String password2, Model model) {
         List<User> users = deviceService.listUsers(username);
         if (users.size() == 0 && password1.equals(password2)) {
-            deviceService.addUser(new User(username, password2, true));
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String hashedPassword = passwordEncoder.encode(password2);
+            deviceService.addUser(new User(username, hashedPassword, true));
             deviceService.addRole(new Role(username, role));
             model.addAttribute("message", "registration success!");
+            model.addAttribute("state", "alert alert-success");
 
         }
         if (users.size() > 0) {
             model.addAttribute("message", "user already exists!");
+            model.addAttribute("state", "alert alert-danger");
 
         }
         if (!password1.equals(password2)) {
             model.addAttribute("message", "password are not matching");
+            model.addAttribute("state", "alert alert-danger");
+
         }
         return "register";
     }
@@ -230,7 +228,7 @@ public class MyController {
     public String index_admin(Model model) {
 
         model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices("all"));
+        model.addAttribute("devices", deviceService.listDevices(null));
         return "index_admin";
     }
 
@@ -255,7 +253,7 @@ public class MyController {
             }
         }
         model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices("all"));
+        model.addAttribute("devices", deviceService.listDevices(null));
         return "index_admin";
     }
 
@@ -277,20 +275,20 @@ public class MyController {
         Device device = new Device(type, name, manufacturer, price,
                 Integer.parseInt(ram), processor);
         deviceService.addDevice(device);
-        Device d = deviceService.findDevice2(name);
+        Device d = deviceService.findDeviceByName(name);
         deviceService.addPhoto(new Photo(d, main_photo.getOriginalFilename(), main_photo.getBytes()));
         deviceService.addPhoto(new Photo(d, photo2.getOriginalFilename(), photo2.getBytes()));
         deviceService.addPhoto(new Photo(d, photo3.getOriginalFilename(), photo3.getBytes()));
         deviceService.addPhoto(new Photo(d, photo4.getOriginalFilename(), photo4.getBytes()));
 
 
-        model.addAttribute("devices", deviceService.listDevices("all"));
+        model.addAttribute("devices", deviceService.listDevices(null));
         return "index_admin";
     }
 
     @RequestMapping(value = "/edit_device_page/{id}", method = RequestMethod.GET)
     public String editDevicePage(@PathVariable int id, Model model) {
-        Device device = deviceService.findDevice(id);
+        Device device = deviceService.findDeviceById(id);
         model.addAttribute("type", device.getType().getId());
         model.addAttribute("device", device);
         return "edit_device_page";
@@ -302,29 +300,31 @@ public class MyController {
                              @RequestParam String manufacturer,
                              @RequestParam int price,
                              Model model) {
-        Device device = deviceService.findDevice(id);
+        Device device = deviceService.findDeviceById(id);
         device.setName(name);
         device.setManufacturer(manufacturer);
         device.setPrice(price);
         deviceService.addDevice(device);
-        model.addAttribute("devices", deviceService.listDevices("all"));
+        model.addAttribute("devices", deviceService.listDevices(null));
         return "index_admin";
 
 
     }
 
     @RequestMapping(value = "/addtype", method = RequestMethod.POST)
-    public String groupAdd(@RequestParam String name, Model model) {
+    public String addType(@RequestParam String name, Model model) {
+
+
         deviceService.addType(new Type(name));
 
         model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices("all"));
+        model.addAttribute("devices", deviceService.listDevices(null));
         return "index_admin";
     }
 
-    @RequestMapping(value = "/{id}/{n}", method = RequestMethod.GET)
+    @RequestMapping(value = "/tocart/{id}/{n}", method = RequestMethod.GET)
     public String toCart(@PathVariable int id, @PathVariable int n, Model model) {
-        Device device = deviceService.findDevice(id);
+        Device device = deviceService.findDeviceById(id);
         Cart cart = new Cart(findUser(), device, 1);
         List<Cart> l = deviceService.listCarts(findUser());
         int count = 1;
@@ -340,16 +340,20 @@ public class MyController {
         if (count == 1 && n == 1) {
             deviceService.addCart(cart);
         }
+        model.addAttribute("items", deviceService.totalItems(findUser()));
         model.addAttribute("carts", deviceService.listCarts(findUser()));
         model.addAttribute("total", deviceService.totalPrice(findUser()));
         return "cart_add_page";
     }
 
     @RequestMapping(value = "/cart_add_page", method = RequestMethod.GET)
-    public String cart(Model model) {
-        model.addAttribute("items", deviceService.items(findUser()));
+    public String cart(
+            Model model) {
+
+
         model.addAttribute("carts", deviceService.listCarts(findUser()));
         model.addAttribute("total", deviceService.totalPrice(findUser()));
+        model.addAttribute("items", deviceService.totalItems(findUser()));
         return "cart_add_page";
     }
 
@@ -365,7 +369,7 @@ public class MyController {
             deviceService.addOrder(order);
         }
 
-        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("items", deviceService.totalItems(findUser()));
         model.addAttribute("orders", deviceService.listOrders(findUser()));
         model.addAttribute("total", deviceService.totalPrice(findUser()));
         return "result_page";
@@ -375,7 +379,7 @@ public class MyController {
 
     @RequestMapping("/result_page")
     public String result(Model model) {
-        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("items", deviceService.totalItems(findUser()));
         model.addAttribute("orders", deviceService.listOrders(findUser()));
         model.addAttribute("total", deviceService.totalPrice(findUser()));
         return "result_page";
@@ -384,7 +388,7 @@ public class MyController {
     @RequestMapping(value = "/order_add_page", method = RequestMethod.GET)
     public String order(Model model) {
 
-        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("items", deviceService.totalItems(findUser()));
         model.addAttribute("carts", deviceService.listCarts(findUser()));
 
         return "order_add_page";
@@ -393,7 +397,7 @@ public class MyController {
     @RequestMapping(value = "/cart/delete/{id}")
     public String deleteCart(@PathVariable int id, Model model) {
         deviceService.deleteCart(id);
-        model.addAttribute("items", deviceService.items(findUser()));
+        model.addAttribute("items", deviceService.totalItems(findUser()));
         model.addAttribute("carts", deviceService.listCarts(findUser()));
         model.addAttribute("total", deviceService.totalPrice(findUser()));
         return "cart_add_page";
@@ -404,10 +408,27 @@ public class MyController {
     @RequestMapping(value = "/photo/{id}/{n}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<byte[]> onPhoto(@PathVariable int id, @PathVariable int n) {
-        Device d = deviceService.findDevice(id);
+        Device d = deviceService.findDeviceById(id);
+
 
         List<Photo> photos = deviceService.getPhotos(d);
+
         Photo photo = photos.get(n);
+
+
+        return ResponseEntity.ok(photo.getBody());
+    }
+
+    @RequestMapping(value = "/randomphoto/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<byte[]> rnPhoto(@PathVariable int id) {
+
+        Type type = deviceService.findType(id);
+        List<Device> devices = deviceService.listDevices(type);
+        Random random = new Random();
+        Device device = devices.get(random.nextInt(devices.size()));
+        List<Photo> photos = deviceService.getPhotos(device);
+        Photo photo = photos.get(0);
 
         return ResponseEntity.ok(photo.getBody());
     }

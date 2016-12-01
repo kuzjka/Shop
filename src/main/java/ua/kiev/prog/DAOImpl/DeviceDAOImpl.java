@@ -2,6 +2,7 @@ package ua.kiev.prog.DAOImpl;
 
 import org.springframework.stereotype.Repository;
 import ua.kiev.prog.Classes.Cart;
+import ua.kiev.prog.Classes.Type;
 import ua.kiev.prog.Classes.User;
 import ua.kiev.prog.DAO.DeviceDAO;
 import ua.kiev.prog.Classes.Device;
@@ -34,13 +35,20 @@ public class DeviceDAOImpl implements DeviceDAO {
         entityManager.remove(d);
     }
 
+    public List<Device> list() {
+        Query query;
+
+        query = entityManager.createQuery("SELECT d FROM Device d", Device.class);
+        return query.getResultList();
+    }
+
     @Override
     public List<Device> manufacturerFilter(String type, List<String> manufacturers) {
         Query query;
         if (manufacturers.size() > 0) {
             query = entityManager.createQuery("select d from Device d where d.type.name=:type " +
                     "and d.manufacturer in(:manufacturers)", Device.class);
-        query.setParameter("type", type);
+            query.setParameter("type", type);
             query.setParameter("manufacturers", manufacturers);
         } else {
             query = entityManager.createQuery("select d from Device d where d.type.name=:type", Device.class);
@@ -51,22 +59,17 @@ public class DeviceDAOImpl implements DeviceDAO {
 
 
     @Override
-    public List<Device> typeFilter(String typeName) {
+    public List<Device> typeFilter(Type type) {
         Query query;
 
-        if (typeName.equals("all")) {
-            query = entityManager.createQuery("SELECT d FROM Device d", Device.class);
+        query = entityManager.createQuery("SELECT d FROM Device d  WHERE d.type = :type", Device.class);
+        query.setParameter("type", type);
 
-        } else {
-            query = entityManager.createQuery("SELECT d FROM Device d  WHERE d.type.name = :typeName", Device.class);
-            query.setParameter("typeName", typeName);
-        }
-
-        return (List<Device>) query.getResultList();
+        return query.getResultList();
     }
 
     @Override
-    public List<Device> list(String type, String pattern) {
+    public List<Device> patternFilter(String type, String pattern) {
         if (type.equals("all")) {
             Query query = entityManager.createQuery("SELECT d FROM Device d " +
                     " where d.name LIKE :pattern", Device.class);
@@ -82,41 +85,42 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     @Override
-    public Device findOne(int id) {
+    public Device findDevice1(int id) {
 
         Query query = entityManager.createQuery("select d from Device d where d.id=:id", Device.class);
         query.setParameter("id", id);
-        Device d = (Device) query.getSingleResult();
-
-        return d;
+        return (Device) query.getSingleResult();
     }
 
     @Override
-    public Device findDevice(String name) {
+    public Device findDevice2(String name) {
+
         Query query = entityManager.createQuery("select d from Device d where d.name=:name", Device.class);
         query.setParameter("name", name);
         return (Device) query.getSingleResult();
     }
+
+
     @Override
-    public int items(User user) {
+    public int totalItems(User user) {
         Query query = entityManager.createQuery("select c from Cart c where c.user=:user", Cart.class);
         query.setParameter("user", user);
-        List<Cart> l = query.getResultList();
+        List<Cart> cartList = query.getResultList();
         int sum = 0;
-        for (Cart c : l) {
+        for (Cart c : cartList) {
             sum = sum + c.getItems();
         }
         return sum;
     }
 
     @Override
-    public int total(User user) {
+    public int totalPrice(User user) {
 
         Query query = entityManager.createQuery("select c from Cart c where c.user=:user", Cart.class);
         query.setParameter("user", user);
-        List<Cart> l = query.getResultList();
+        List<Cart> cartList = query.getResultList();
         int sum = 0;
-        for (Cart c : l) {
+        for (Cart c : cartList) {
             sum = sum + c.totalPrice();
         }
         return sum;

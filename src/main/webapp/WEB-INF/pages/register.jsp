@@ -6,41 +6,34 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <style type="text/css">
-
-        .navbar-fixed-top {
+    <style>
+        .navbar-static-top {
             color: white;
-            background-color: deepskyblue;
+            background-color: black;
         }
 
         .navbar-header a.navbar-brand {
             color: white;
-            background-color: deepskyblue;
+            background-color: black;
         }
 
         ul.navbar-nav a.default {
             color: white;
-            background-color: deepskyblue;
+            background-color: black;
         }
 
         ul.navbar-nav a.active {
-            color: deepskyblue;
-            background-color: white;
-        }
-
-        ul.navbar-nav a:hover:not(.active) {
-            color: deepskyblue;
-            background-color: white;
-        }
-
-        .btn-info {
             color: white;
             background-color: deepskyblue;
         }
 
-        .table {
-            background-color: seashell;
+        ul.navbar-nav a:hover:not(.active) {
+            color: white;
+            background-color: deepskyblue;
         }
+
+
+
         .badge {
             background-color: white;
             color: deepskyblue;
@@ -48,13 +41,14 @@
     </style>
 </head>
 <body>
-<nav align="center" class="navbar navbar-default navbar-fixed-top">
-    <div align="center" class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Shop</a>
-        </div>
+<nav align="center" class="navbar navbar-default navbar-static-top">
+    <div class="container">
+
         <ul class="nav navbar-nav">
-            <li><a class="default" href="/">Home</a></li>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Shop</a>
+            </div>
+            <li><a class="active" href="/"><span class="glyphicon glyphicon-home"></span></a></li>
             <sec:authorize url="/user">
                 <li><a class="default" href="/cart_add_page">
                     <span class="glyphicon glyphicon-shopping-cart"></span>Cart
@@ -62,22 +56,28 @@
                 </li>
                 <li><a class="default" href="/result_page">Orders</a></li>
             </sec:authorize>
-            <li><a class="default" href="/photo/all">Photos</a></li>
+
             <li><a class="default" href="/admin">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a class="active" href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <sec:authorize access="!hasAuthority('USER')"> <li><a class="default" href="/user">
-                <span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
+            <li><a class="default" href="/register_page">
+                <span class="glyphicon glyphicon-user"></span> Sign Up</a>
+            </li>
+            <sec:authorize access="!hasAuthority('USER')">
+                <li><a class="default" href="/user">
+                    <span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
             </sec:authorize>
-            <sec:authorize url="/user">
+            <sec:authorize access="hasAuthority('USER')">
                 <li><a class="default" href="/logout">
                     <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </sec:authorize>
+            </li>
+        </ul>
+        </ul>
         </ul>
     </div>
 </nav>
-<div class="container" style="padding-top: 50px">
+<div class="container">
     <form role="form" action="/register" method="post">
         <div class="form-group">
             <label for="role">Role:</label>
@@ -101,7 +101,9 @@
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <div><h3>${message}</h3></div>
+    <div class="${state}">
+        <strong>${message}</strong>
+    </div>
 </div>
 
 </body>

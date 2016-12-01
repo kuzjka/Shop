@@ -21,7 +21,7 @@ public class PhotoDAOImpl implements PhotoDao {
     }
 
     @Override
-    public List<Photo> getPhotos(Device device) {
+    public List<Photo> listPhotos(Device device) {
             Query query= entityManager.createQuery("select p from Photo p where p.device =:device", Photo.class);
         query.setParameter("device", device);
         List<Photo> photos = query.getResultList();

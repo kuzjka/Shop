@@ -67,8 +67,8 @@ public class DeviceService {
     }
 
     @Transactional(readOnly = true)
-    public List<Device> listDevices(String typeName) {
-        return deviceDAO.typeFilter(typeName);
+    public List<Device> listDevices(Type type) {
+        return deviceDAO.typeFilter(type);
     }
 
 
@@ -88,27 +88,29 @@ public class DeviceService {
     }
 
     @Transactional(readOnly = true)
-    public Device findDevice(int id) {
-        return deviceDAO.findOne(id);
+    public Device findDeviceByName(String name) {
+        return deviceDAO.findDevice2(name);
     }
 
     @Transactional(readOnly = true)
-    public Device findDevice2(String name) {
-        return deviceDAO.findDevice(name);
+    public Device findDeviceById(int id) {
+        return deviceDAO.findDevice1(id);
     }
+
     @Transactional(readOnly = true)
     public List<Device> searchDevices(String type, String pattern) {
-        return deviceDAO.list(type, pattern);
+        return deviceDAO.patternFilter(type, pattern);
     }
 
+
     @Transactional(readOnly = true)
-    public int items(User user) {
-        return deviceDAO.items(user);
+    public int totalItems(User user) {
+        return deviceDAO.totalItems(user);
     }
 
     @Transactional(readOnly = true)
     public int totalPrice(User user) {
-        return deviceDAO.total(user);
+        return deviceDAO.totalPrice(user);
     }
 
     @Transactional(readOnly = true)
@@ -138,7 +140,7 @@ public class DeviceService {
 
     @Transactional
     public List<Photo> getPhotos(Device device) {
-        return photoDao.getPhotos(device);
+        return photoDao.listPhotos(device);
     }
 
     @Transactional(readOnly = true)

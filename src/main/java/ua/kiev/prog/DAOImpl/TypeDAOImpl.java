@@ -17,7 +17,7 @@ public class TypeDAOImpl implements TypeDAO {
     @Override
     public void add(Type type) {
         entityManager.persist(type);
-        }
+    }
 
     @Override
     public void delete(Type type) {
@@ -26,12 +26,15 @@ public class TypeDAOImpl implements TypeDAO {
 
     @Override
     public Type findOne(int id) {
-        return entityManager.getReference(Type.class, id);
+        Query query = entityManager.createQuery("select t from Type t where t.id=:id", Type.class);
+        query.setParameter("id", id);
+        return (Type) query.getSingleResult();
+
     }
 
     @Override
     public List<Type> list() {
         Query query = entityManager.createQuery("SELECT t FROM Type t", Type.class);
-        return (List<Type>) query.getResultList();
+        return query.getResultList();
     }
 }
