@@ -31,11 +31,19 @@
             color: white;
             background-color: deepskyblue;
         }
-
-        ul.navbar-nav a:hover:not(.active) {
+        ul.navbar-nav  a.default:hover {
             color: white;
             background-color: deepskyblue;
         }
+        ul.navbar-nav  a.active:hover {
+            color: white;
+            background-color: deepskyblue;
+        }
+        .navbar-header a.navbar-brand:hover{
+            color: white;
+            background-color: deepskyblue;
+        }
+
 
         .img-responsive {
             max-height: 120px;
@@ -46,6 +54,7 @@
             background-color: white;
             color: deepskyblue;
         }
+
     </style>
 </head>
 
@@ -57,6 +66,7 @@
                 <a class="navbar-brand" href="/">Shop</a>
             </div>
             <li><a class="active" href="/"><span class="glyphicon glyphicon-home"></span></a></li>
+
             <sec:authorize url="/user">
                 <li><a class="default" href="/cart_add_page">
                     <span class="glyphicon glyphicon-shopping-cart"></span>Cart
@@ -64,6 +74,7 @@
                 </li>
                 <li><a class="default" href="/result_page">Orders</a></li>
             </sec:authorize>
+
 
             <li><a class="default" href="/admin">Admin</a></li>
         </ul>

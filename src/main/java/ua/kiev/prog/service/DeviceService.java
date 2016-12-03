@@ -1,10 +1,10 @@
-package ua.kiev.prog.Controller;
+package ua.kiev.prog.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.kiev.prog.Classes.*;
-import ua.kiev.prog.DAO.*;
+import ua.kiev.prog.model.*;
+import ua.kiev.prog.dao.*;
 
 import java.util.List;
 
@@ -20,10 +20,7 @@ public class DeviceService {
     private OrderDAO orderDAO;
     @Autowired
     private PhotoDao photoDao;
-    @Autowired
-    private UserDAO userDAO;
-    @Autowired
-    private RoleDAO roleDAO;
+
 
     @Transactional
     public void addDevice(Device device) {
@@ -38,16 +35,6 @@ public class DeviceService {
     @Transactional
     public void addCart(Cart cart) {
         cartDAO.add(cart);
-    }
-
-    @Transactional
-    public void addUser(User user) {
-        userDAO.add(user);
-    }
-
-    @Transactional
-    public void addRole(Role role) {
-        roleDAO.add(role);
     }
 
     @Transactional
@@ -116,16 +103,6 @@ public class DeviceService {
     @Transactional(readOnly = true)
     public List<Order> listOrders(User user) {
         return orderDAO.list(user);
-    }
-
-    @Transactional(readOnly = true)
-    public User findUser(String username) {
-        return userDAO.findOne(username);
-    }
-
-    @Transactional(readOnly = true)
-    public List<User> listUsers(String username) {
-        return userDAO.list(username);
     }
 
     @Transactional

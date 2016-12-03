@@ -1,8 +1,8 @@
-package ua.kiev.prog.DAO;
+package ua.kiev.prog.dao;
 
 
-import ua.kiev.prog.Classes.Device;
-import ua.kiev.prog.Classes.Photo;
+import ua.kiev.prog.model.Device;
+import ua.kiev.prog.model.Photo;
 
 import java.util.List;
 

@@ -30,8 +30,15 @@
             color: white;
             background-color: deepskyblue;
         }
-
-        ul.navbar-nav a:hover:not(.active) {
+        ul.navbar-nav  a.default:hover {
+            color: white;
+            background-color: deepskyblue;
+        }
+        ul.navbar-nav  a.active:hover {
+            color: white;
+            background-color: deepskyblue;
+        }
+        .navbar-header a.navbar-brand:hover{
             color: white;
             background-color: deepskyblue;
         }
@@ -56,7 +63,7 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">Shop</a>
             </div>
-            <li><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li><a class="default" href="/"><span class="glyphicon glyphicon-home"></span></a></li>
             <sec:authorize url="/user">
                 <li><a class="active" href="/cart_add_page">
                     <span class="glyphicon glyphicon-shopping-cart"></span>Cart

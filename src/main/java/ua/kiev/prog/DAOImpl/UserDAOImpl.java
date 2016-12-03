@@ -1,8 +1,8 @@
-package ua.kiev.prog.DAOImpl;
+package ua.kiev.prog.daoimpl;
 
 import org.springframework.stereotype.Repository;
-import ua.kiev.prog.DAO.UserDAO;
-import ua.kiev.prog.Classes.User;
+import ua.kiev.prog.dao.UserDAO;
+import ua.kiev.prog.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

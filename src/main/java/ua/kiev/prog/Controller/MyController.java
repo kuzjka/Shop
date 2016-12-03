@@ -1,11 +1,10 @@
-package ua.kiev.prog.Controller;
+package ua.kiev.prog.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
 
-import org.springframework.security.access.method.P;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ua.kiev.prog.Classes.*;
+import ua.kiev.prog.model.*;
+import ua.kiev.prog.service.DeviceService;
+import ua.kiev.prog.service.UserService;
 
 import java.io.IOException;
 
@@ -27,11 +28,13 @@ public class MyController {
     @Autowired
     private DeviceService deviceService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(value = {"/", "/user"}, method = RequestMethod.GET)
     public String index(Model model) {
 
         model.addAttribute("types", deviceService.listTypes());
-
         model.addAttribute("carts", deviceService.listCarts(findUser()));
         model.addAttribute("items", deviceService.totalItems(findUser()));
         return "index";
@@ -200,12 +203,12 @@ public class MyController {
     public String register(@RequestParam String role, @RequestParam String username,
                            @RequestParam String password1, @RequestParam
                            String password2, Model model) {
-        List<User> users = deviceService.listUsers(username);
+        List<User> users = userService.listUsers(username);
         if (users.size() == 0 && password1.equals(password2)) {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String hashedPassword = passwordEncoder.encode(password2);
-            deviceService.addUser(new User(username, hashedPassword, true));
-            deviceService.addRole(new Role(username, role));
+            userService.addUser(new User(username, hashedPassword, true));
+            userService.addRole(new Role(username, role));
             model.addAttribute("message", "registration success!");
             model.addAttribute("state", "alert alert-success");
 
@@ -436,7 +439,7 @@ public class MyController {
     public User findUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
-        User user = deviceService.findUser(username);
+        User user = userService.findUser(username);
         return user;
     }
 

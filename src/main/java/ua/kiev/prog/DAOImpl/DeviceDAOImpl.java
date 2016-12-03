@@ -1,17 +1,15 @@
-package ua.kiev.prog.DAOImpl;
+package ua.kiev.prog.daoimpl;
 
 import org.springframework.stereotype.Repository;
-import ua.kiev.prog.Classes.Cart;
-import ua.kiev.prog.Classes.Type;
-import ua.kiev.prog.Classes.User;
-import ua.kiev.prog.DAO.DeviceDAO;
-import ua.kiev.prog.Classes.Device;
+import ua.kiev.prog.model.Cart;
+import ua.kiev.prog.model.Type;
+import ua.kiev.prog.model.User;
+import ua.kiev.prog.dao.DeviceDAO;
+import ua.kiev.prog.model.Device;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Repository

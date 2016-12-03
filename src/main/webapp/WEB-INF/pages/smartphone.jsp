@@ -31,8 +31,15 @@
             color: white;
             background-color: deepskyblue;
         }
-
-        ul.navbar-nav a:hover:not(.active) {
+        ul.navbar-nav  a.default:hover {
+            color: white;
+            background-color: deepskyblue;
+        }
+        ul.navbar-nav  a.active:hover {
+            color: white;
+            background-color: deepskyblue;
+        }
+        .navbar-header a.navbar-brand:hover{
             color: white;
             background-color: deepskyblue;
         }
@@ -154,7 +161,7 @@
 
                         <a href="/manufacturer_filter/smartphone/samsung" class="btn btn-default" id="samsung"
                            role="button"></a>
-                        <label for="samsung">Sumsung</label>
+                        <label for="samsung">Samsung</label>
                     </c:otherwise>
                 </c:choose>
                 <br/>

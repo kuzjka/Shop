@@ -1,9 +1,9 @@
-package ua.kiev.prog.DAOImpl;
+package ua.kiev.prog.daoimpl;
 
 import org.springframework.stereotype.Repository;
-import ua.kiev.prog.DAO.PhotoDao;
-import ua.kiev.prog.Classes.Device;
-import ua.kiev.prog.Classes.Photo;
+import ua.kiev.prog.dao.PhotoDao;
+import ua.kiev.prog.model.Device;
+import ua.kiev.prog.model.Photo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

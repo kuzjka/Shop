@@ -31,11 +31,20 @@
             color: white;
             background-color: deepskyblue;
         }
-
-        ul.navbar-nav a:hover:not(.active) {
+        ul.navbar-nav  a.default:hover {
             color: white;
             background-color: deepskyblue;
         }
+        ul.navbar-nav  a.active:hover {
+            color: white;
+            background-color: deepskyblue;
+        }
+        .navbar-header a.navbar-brand:hover{
+            color: white;
+            background-color: deepskyblue;
+        }
+
+
 
         .glyphicon-ok {
             color: white;
@@ -126,13 +135,13 @@
             <c:choose>
                 <c:when test="${fn:contains(r, 4)}">
 
-                    <a href="/ram_filter/desctop/4" class="btn btn-success" id="4gb" role="button">
+                    <a href="/ram_filter/desktop/4" class="btn btn-success" id="4gb" role="button">
                         <span class="glyphicon glyphicon-ok"></span></a>
                     <label for="4gb">4 GB</label>
                 </c:when>
                 <c:otherwise>
 
-                    <a href="/ram_filter/desctop/4" class="btn btn-default" id="4gb" role="button"></a>
+                    <a href="/ram_filter/desktop/4" class="btn btn-default" id="4gb" role="button"></a>
                     <label for="4gb">4 GB</label>
                 </c:otherwise>
             </c:choose>
@@ -141,14 +150,14 @@
             <c:choose>
                 <c:when test="${fn:contains(r, 8)}">
 
-                    <a href="/ram_filter/desctop/8" class="btn btn-success" id="8gb" role="button">
+                    <a href="/ram_filter/desktop/8" class="btn btn-success" id="8gb" role="button">
 
                         <span class="glyphicon glyphicon-ok"></span></a>
                     <label for="8gb">8 GB</label>
                 </c:when>
                 <c:otherwise>
 
-                    <a href="/ram_filter/desctop/8" class="btn btn-default" id="8gb" role="button"></a>
+                    <a href="/ram_filter/desktop/8" class="btn btn-default" id="8gb" role="button"></a>
                     <label for="8gb">8 GB</label>
                 </c:otherwise>
             </c:choose>
@@ -157,13 +166,13 @@
             <c:choose>
                 <c:when test="${fn:contains(r, 16)}">
 
-                    <a href="/ram_filter/desctop/16" class="btn btn-success" id="16gb" role="button">
+                    <a href="/ram_filter/desktop/16" class="btn btn-success" id="16gb" role="button">
                         <span class="glyphicon glyphicon-ok"></span></a>
                     <label for="16gb">16 GB</label>
                 </c:when>
                 <c:otherwise>
 
-                    <a href="/ram_filter/desctop/16" class="btn btn-default" id="16gb" role="button"></a>
+                    <a href="/ram_filter/desktop/16" class="btn btn-default" id="16gb" role="button"></a>
                     <label for="16gb">16 GB</label>
                 </c:otherwise>
             </c:choose>
@@ -173,12 +182,12 @@
             <c:set var="p" value="${processors}"/>
             <c:choose>
                 <c:when test="${fn:contains(p, 'i3')}">
-                    <a href="/proc_filter/desctop/i3" class="btn btn-success" id="i3" role="button">
+                    <a href="/proc_filter/desktop/i3" class="btn btn-success" id="i3" role="button">
                         <span class="glyphicon glyphicon-ok"></span></a>
                     <label for="i3">i3</label>
                 </c:when>
                 <c:otherwise>
-                    <a href="/proc_filter/desctop/i3" class="btn btn-default" id="i3" role="button"></a>
+                    <a href="/proc_filter/desktop/i3" class="btn btn-default" id="i3" role="button"></a>
                     <label for="i3">i3</label>
                 </c:otherwise>
             </c:choose>
@@ -186,13 +195,13 @@
             <br/>
             <c:choose>
                 <c:when test="${fn:contains(p, 'i5')}">
-                    <a href="/proc_filter/desctop/i5" class="btn btn-success" id="i5" role="button">
+                    <a href="/proc_filter/desktop/i5" class="btn btn-success" id="i5" role="button">
                         <span class="glyphicon glyphicon-ok">
                              </span></a>
                     <label for="i5">i5</label>
                 </c:when>
                 <c:otherwise>
-                    <a href="/proc_filter/desctop/i5" class="btn btn-default" id="i5" role="button"></a>
+                    <a href="/proc_filter/desktop/i5" class="btn btn-default" id="i5" role="button"></a>
                     <label for="i5">i5</label>
                 </c:otherwise>
             </c:choose>
@@ -200,13 +209,13 @@
             <br/>
             <c:choose>
                 <c:when test="${fn:contains(p, 'i7')}">
-                    <a href="/proc_filter/desctop/i7" class="btn btn-success" id="i7" role="button">
+                    <a href="/proc_filter/desktop/i7" class="btn btn-success" id="i7" role="button">
                         <span class="glyphicon glyphicon-ok">
                              </span></a>
                     <label for="i7">i7</label>
                 </c:when>
                 <c:otherwise>
-                    <a href="/proc_filter/desctop/i7" class="btn btn-default" id="i7" role="button"></a>
+                    <a href="/proc_filter/desktop/i7" class="btn btn-default" id="i7" role="button"></a>
                     <label for="i7">i7</label>
                 </c:otherwise>
             </c:choose>

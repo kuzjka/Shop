@@ -29,22 +29,23 @@
             color: white;
             background-color: deepskyblue;
         }
-
-        ul.navbar-nav a:hover:not(.active) {
+        ul.navbar-nav  a.default:hover {
             color: white;
             background-color: deepskyblue;
         }
+        ul.navbar-nav  a.active:hover {
+            color: white;
+            background-color: deepskyblue;
+        }
+       .navbar-header a.navbar-brand:hover{
+           color: white;
+           background-color: deepskyblue;
+       }
 
         .badge {
             background-color: white;
             color: deepskyblue;
         }
-
-        h4 {
-            text-align: center;
-        }
-
-
     </style>
 </head>
 <body>
@@ -57,11 +58,11 @@
             </div>
             <li><a class="default" href="/"><span class="glyphicon glyphicon-home"></span></a></li>
             <sec:authorize url="/user">
-                <li><a class="active" href="/cart_add_page">
+                <li><a class="default" href="/cart_add_page">
                     <span class="glyphicon glyphicon-shopping-cart"></span>Cart
                     <span class="badge">${items}</span></a>
                 </li>
-                <li><a class="default" href="/result_page">Orders</a></li>
+                <li><a class="active" href="/result_page">Orders</a></li>
             </sec:authorize>
 
             <li><a class="default" href="/admin">Admin</a></li>

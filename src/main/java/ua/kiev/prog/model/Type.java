@@ -1,6 +1,4 @@
-package ua.kiev.prog.Classes;
-
-import ua.kiev.prog.Classes.Device;
+package ua.kiev.prog.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;

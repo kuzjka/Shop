@@ -1,4 +1,4 @@
-package ua.kiev.prog.Classes;
+package ua.kiev.prog.model;
 
 import javax.persistence.*;
 

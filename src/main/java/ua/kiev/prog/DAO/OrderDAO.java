@@ -1,8 +1,8 @@
-package ua.kiev.prog.DAO;
+package ua.kiev.prog.dao;
 
 
-import ua.kiev.prog.Classes.Order;
-import ua.kiev.prog.Classes.User;
+import ua.kiev.prog.model.Order;
+import ua.kiev.prog.model.User;
 
 import java.util.List;
 

@@ -1,9 +1,6 @@
-package ua.kiev.prog.Classes;
-
-import org.springframework.web.multipart.MultipartFile;
+package ua.kiev.prog.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
