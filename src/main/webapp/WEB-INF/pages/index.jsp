@@ -31,19 +31,21 @@
             color: white;
             background-color: deepskyblue;
         }
-        ul.navbar-nav  a.default:hover {
-            color: white;
-            background-color: deepskyblue;
-        }
-        ul.navbar-nav  a.active:hover {
-            color: white;
-            background-color: deepskyblue;
-        }
-        .navbar-header a.navbar-brand:hover{
+
+        ul.navbar-nav a.default:hover {
             color: white;
             background-color: deepskyblue;
         }
 
+        ul.navbar-nav a.active:hover {
+            color: white;
+            background-color: deepskyblue;
+        }
+
+        .navbar-header a.navbar-brand:hover {
+            color: white;
+            background-color: deepskyblue;
+        }
 
         .img-responsive {
             max-height: 120px;
@@ -82,11 +84,11 @@
             <li><a class="default" href="/register_page">
                 <span class="glyphicon glyphicon-user"></span> Sign Up</a>
             </li>
-            <sec:authorize access="!hasAuthority('USER')">
+            <sec:authorize access="!hasAuthority('USER') and !hasAuthority('ADMIN')">
                 <li><a class="default" href="/user">
                     <span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
             </sec:authorize>
-            <sec:authorize access="hasAuthority('USER')">
+            <sec:authorize access="hasAuthority('USER') or hasAuthority('ADMIN')">
                 <li><a class="default" href="/logout">
                     <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </sec:authorize>
@@ -113,45 +115,40 @@
                             <div class="panel-heading" align="center">
                                 <a href="/type/${type.id}"><h4><b>${type.name}</b></h4></a></div>
                             <div class="panel-body">
-                                <img src="/randomphoto/${type.id}" class="img-responsive"
-                                     alt="Image"/>
+                                <a href="/type/${type.id}"><img src="/randomphoto/${type.id}" class="img-responsive"
+                                                                alt="Image"/></a>
                             </div>
 
                         </div>
                     </div>
                 </c:if>
                 <c:if test="${status2.index - status1.index == 1}">
-
                     <div class="col-sm-4">
                         <div class="panel panel-default">
                             <div class="panel-heading" align="center">
                                 <a href="/type/${type.id}"><h4><b>${type.name}</b></h4></a></div>
                             <div class="panel-body">
-                                <img src="/randomphoto/${type.id}" class="img-responsive"
-                                     alt="Image"/>
+                                <a href="/type/${type.id}"><img src="/randomphoto/${type.id}" class="img-responsive"
+                                                                alt="Image"/></a>
                             </div>
-
                         </div>
                     </div>
                 </c:if>
                 <c:if test="${status2.index - status1.index == 2}">
-
                     <div class="col-sm-4">
                         <div class="panel panel-default">
                             <div class="panel-heading" align="center">
                                 <a href="/type/${type.id}"><h4><b>${type.name}</b></h4></a></div>
                             <div class="panel-body">
-                                <img src="/randomphoto/${type.id}" class="img-responsive"
-                                     alt="Image"/>
+                                <a href="/type/${type.id}"><img src="/randomphoto/${type.id}" class="img-responsive"
+                                                                alt="Image"/></a>
                             </div>
 
                         </div>
 
                     </div>
                 </c:if>
-
             </c:forEach>
-
         </div>
     </c:forEach>
 </div>

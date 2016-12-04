@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.kiev.prog.model.Role;
 import ua.kiev.prog.model.User;
-import ua.kiev.prog.service.DeviceService;
 import ua.kiev.prog.service.UserService;
 
 import java.util.List;
@@ -17,13 +16,12 @@ import java.util.List;
 /**
  * Controller for user management
  */
+
 @Controller
 @RequestMapping("/")
 public class UserController {
-
     @Autowired
     private UserService userService;
-
 
     @RequestMapping(value = "/login_page", method = RequestMethod.GET)
     public String login(Model model, @RequestParam(required = false) String error) {
@@ -34,7 +32,6 @@ public class UserController {
         return "login_page";
     }
 
-
     @RequestMapping("/403")
     public String denied(Model model) {
         model.addAttribute("message", "Access denied");
@@ -43,7 +40,6 @@ public class UserController {
     }
 
     @RequestMapping("/register_page")
-
     public String register_page() {
         return "register";
     }
@@ -60,7 +56,6 @@ public class UserController {
             userService.addRole(new Role(username, role));
             model.addAttribute("message", "registration success!");
             model.addAttribute("state", "alert alert-success");
-
         }
         if (users.size() > 0) {
             model.addAttribute("message", "user already exists!");
@@ -70,9 +65,7 @@ public class UserController {
         if (!password1.equals(password2)) {
             model.addAttribute("message", "password are not matching");
             model.addAttribute("state", "alert alert-danger");
-
         }
-        return "register";
+        return "login_page";
     }
-
 }

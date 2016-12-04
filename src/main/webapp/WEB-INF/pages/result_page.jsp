@@ -69,11 +69,11 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a class="default" href="/register_page"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <sec:authorize access="!hasAuthority('USER')">
+            <sec:authorize access="!hasAuthority('USER') and !hasAuthority('ADMIN')">
                 <li><a class="default" href="/user">
                     <span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
             </sec:authorize>
-            <sec:authorize url="/user">
+            <sec:authorize access="hasAuthority('USER') or hasAuthority('ADMIN')">
                 <li><a class="default" href="/logout">
                     <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </sec:authorize>

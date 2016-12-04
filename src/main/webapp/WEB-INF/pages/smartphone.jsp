@@ -31,15 +31,18 @@
             color: white;
             background-color: deepskyblue;
         }
-        ul.navbar-nav  a.default:hover {
+
+        ul.navbar-nav a.default:hover {
             color: white;
             background-color: deepskyblue;
         }
-        ul.navbar-nav  a.active:hover {
+
+        ul.navbar-nav a.active:hover {
             color: white;
             background-color: deepskyblue;
         }
-        .navbar-header a.navbar-brand:hover{
+
+        .navbar-header a.navbar-brand:hover {
             color: white;
             background-color: deepskyblue;
         }
@@ -62,7 +65,6 @@
         .panel-primary a {
             color: white;
         }
-
 
     </style>
 
@@ -90,11 +92,11 @@
             <li><a class="default" href="/register_page">
                 <span class="glyphicon glyphicon-user"></span> Sign Up</a>
             </li>
-            <sec:authorize access="!hasAuthority('USER')">
+            <sec:authorize access="!hasAuthority('USER') and !hasAuthority('ADMIN')">
                 <li><a class="default" href="/user">
                     <span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
             </sec:authorize>
-            <sec:authorize access="hasAuthority('USER')">
+            <sec:authorize access="hasAuthority('USER') or hasAuthority('ADMIN')">
                 <li><a class="default" href="/logout">
                     <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </sec:authorize>
@@ -104,7 +106,6 @@
         </ul>
     </div>
 </nav>
-
 
 <div class="container-fluid">
     <div class="raw">
@@ -182,22 +183,21 @@
                 </c:choose>
             </div>
         </c:if>
-
-
         <c:forEach items="${devices}" var="device" varStatus="status2">
         <c:if test="${status2.index - status1.index == 0}">
 
             <div class="col-sm-3">
                 <div class="panel panel-primary">
                     <div class="panel-heading" align="center">
-                        <h4><b>${device.name}</b></h4></div>
+                        <a href="/onedevice/${device.id}"><h4><b>${device.name}</b></h4></a></div>
                     <div class="panel-body">
-                        <img src="/photo/${device.id}/0" style="max-height: 120px; width: auto" float="left"
-                             alt="Image"/>
-                        <sec:authorize access="!hasAuthority('USER')">
+                        <a href="/onedevice/${device.id}"><img src="/photo/${device.id}/0"
+                                                               style="max-height: 120px; width: auto" float="left"
+                                                               alt="Image"/></a>
+                        <sec:authorize access="!hasAuthority('USER') and !hasAuthority('ADMIN')">
                             login to buy online
                         </sec:authorize>
-                        <sec:authorize access="hasAuthority('USER')">
+                        <sec:authorize access="hasAuthority('USER') or hasAuthority('ADMIN')">
                             <c:choose>
                                 <c:when test="${fn:contains(cart, device)}">
                                     <a href="/cart_add_page">In cart</a></c:when>
@@ -216,14 +216,15 @@
             <div class="col-sm-3">
                 <div class="panel panel-primary">
                     <div class="panel-heading" align="center">
-                        <h4><b>${device.name}</b></h4></div>
+                        <a href="/onedevice/${device.id}"><h4><b>${device.name}</b></h4></a></div>
                     <div class="panel-body">
-                        <img src="/photo/${device.id}/0" style="max-height: 120px; width: auto" float="left"
-                             alt="Image">
-                        <sec:authorize access="!hasAuthority('USER')">
+                        <a href="/onedevice/${device.id}"><img src="/photo/${device.id}/0"
+                                                               style="max-height: 120px; width: auto" float="left"
+                                                               alt="Image"></a>
+                        <sec:authorize access="!hasAuthority('USER') and !hasAuthority('ADMIN')">
                             login to buy online
                         </sec:authorize>
-                        <sec:authorize access="hasAuthority('USER')">
+                        <sec:authorize access="hasAuthority('USER') or hasAuthority('ADMIN')">
                             <c:choose>
                                 <c:when test="${fn:contains(cart, device)}">
                                     <a href="/cart_add_page">In cart</a></c:when>
@@ -238,18 +239,18 @@
             </div>
         </c:if>
         <c:if test="${status2.index - status1.index == 2}">
-
         <div class="col-sm-3">
             <div class="panel panel-primary">
                 <div class="panel-heading" align="center">
-                    <h4><b>${device.name}</b></h4></div>
+                    <a href="/onedevice/${device.id}"><h4><b>${device.name}</b></h4></a></div>
                 <div class="panel-body">
-                    <img src="/photo/${device.id}/0" style="max-height: 120px; width: auto" float="left"
-                         alt="Image">
-                    <sec:authorize access="!hasAuthority('USER')">
+                    <a href="/onedevice/${device.id}"><img src="/photo/${device.id}/0"
+                                                           style="max-height: 120px; width: auto" float="left"
+                                                           alt="Image"></a>
+                    <sec:authorize access="!hasAuthority('USER') and !hasAuthority('ADMIN')">
                         login to buy online
                     </sec:authorize>
-                    <sec:authorize access="hasAuthority('USER')">
+                    <sec:authorize access="hasAuthority('USER') or hasAuthority('ADMIN')">
                         <c:choose>
                             <c:when test="${fn:contains(cart, device)}">
                                 <a href="/cart_add_page">In cart</a></c:when>
@@ -262,10 +263,8 @@
                     <h6><b> Price: ${device.price} grn</b></h6></div>
             </div>
         </div>
-
     </div>
     </c:if>
-
     </c:forEach>
     <div class="col-sm-1"></div>
 </div>

@@ -77,11 +77,11 @@
             <li><a class="default" href="/register_page">
                 <span class="glyphicon glyphicon-user"></span> Sign Up</a>
             </li>
-            <sec:authorize access="!hasAuthority('USER')">
+            <sec:authorize access="!hasAuthority('USER') and !hasAuthority('ADMIN')">
                 <li><a class="default" href="/user">
                     <span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
             </sec:authorize>
-            <sec:authorize access="hasAuthority('USER')">
+            <sec:authorize access="hasAuthority('USER') or hasAuthority('ADMIN')">
                 <li><a class="default" href="/logout">
                     <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </sec:authorize>
@@ -133,10 +133,10 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-<sec:authorize access="!hasAuthority('USER')">
+<sec:authorize access="!hasAuthority('USER') and !hasAuthority('ADMIN')">
     <div align="center"><h3>Login to buy online</h3></div>
 </sec:authorize>
-<sec:authorize access="hasAuthority('USER')">
+<sec:authorize access="hasAuthority('USER') or hasAuthority('ADMIN')">
     <div align="center">
         <c:choose>
             <c:when test="${fn:contains(cart, device)}">

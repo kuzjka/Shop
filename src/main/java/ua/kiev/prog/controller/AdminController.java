@@ -12,7 +12,6 @@ import ua.kiev.prog.model.Device;
 import ua.kiev.prog.model.Photo;
 import ua.kiev.prog.model.Type;
 import ua.kiev.prog.service.DeviceService;
-import ua.kiev.prog.service.UserService;
 
 import java.io.IOException;
 

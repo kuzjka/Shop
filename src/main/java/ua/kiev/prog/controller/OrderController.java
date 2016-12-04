@@ -21,10 +21,10 @@ import java.util.List;
 /**
  * Controller for order management
  */
+
 @Controller
 @RequestMapping("/")
 public class OrderController {
-
     @Autowired
     private DeviceService deviceService;
     @Autowired
@@ -63,7 +63,6 @@ public class OrderController {
         return "cart_add_page";
     }
 
-
     @RequestMapping(value = "/addorder", method = RequestMethod.POST)
     public String orderAdd(
             @RequestParam String name,
@@ -80,8 +79,6 @@ public class OrderController {
         model.addAttribute("orders", deviceService.listOrders(findUser()));
         model.addAttribute("total", deviceService.totalPrice(findUser()));
         return "result_page";
-
-
     }
 
     @RequestMapping("/result_page")
@@ -94,7 +91,6 @@ public class OrderController {
 
     @RequestMapping(value = "/order_add_page", method = RequestMethod.GET)
     public String order(Model model) {
-
         model.addAttribute("items", deviceService.totalItems(findUser()));
         model.addAttribute("carts", deviceService.listCarts(findUser()));
 
@@ -108,8 +104,6 @@ public class OrderController {
         model.addAttribute("carts", deviceService.listCarts(findUser()));
         model.addAttribute("total", deviceService.totalPrice(findUser()));
         return "cart_add_page";
-
-
     }
 
     public User findUser() {
