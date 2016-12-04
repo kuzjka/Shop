@@ -1,4 +1,4 @@
-package ua.kiev.prog.dao;
+package ua.kiev.prog.dao_;
 
 import ua.kiev.prog.model.Device;
 import ua.kiev.prog.model.Type;

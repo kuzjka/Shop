@@ -1,7 +1,7 @@
-package ua.kiev.prog.daoimpl;
+package ua.kiev.prog.dao_impl;
 
 import org.springframework.stereotype.Repository;
-import ua.kiev.prog.dao.PhotoDao;
+import ua.kiev.prog.dao_.PhotoDao;
 import ua.kiev.prog.model.Device;
 import ua.kiev.prog.model.Photo;
 

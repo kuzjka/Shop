@@ -1,10 +1,10 @@
-package ua.kiev.prog.daoimpl;
+package ua.kiev.prog.dao_impl;
 
 import org.springframework.stereotype.Repository;
 import ua.kiev.prog.model.Cart;
 import ua.kiev.prog.model.Type;
 import ua.kiev.prog.model.User;
-import ua.kiev.prog.dao.DeviceDAO;
+import ua.kiev.prog.dao_.DeviceDAO;
 import ua.kiev.prog.model.Device;
 
 import javax.persistence.EntityManager;
