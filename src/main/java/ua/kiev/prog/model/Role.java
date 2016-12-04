@@ -3,20 +3,24 @@ package ua.kiev.prog.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user_roles")
+@Table(name = "user_roles")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_role_id")
     private int id;
     private String username;
-    private  String role;
+    private String role;
 
-
-
+    /**
+     * Class constructor (default).
+     */
     public Role() {
     }
 
+    /**
+     * Class constructor with parameters.
+     */
     public Role(String username, String role) {
         this.username = username;
         this.role = role;

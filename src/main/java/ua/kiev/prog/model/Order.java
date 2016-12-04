@@ -4,25 +4,30 @@ package ua.kiev.prog.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Orders")
+@Table(name = "Orders")
 public class Order {
     @Id
     @GeneratedValue
     private int id;
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
     private String name;
     private String address;
     private String phone;
     @ManyToOne
-    @JoinColumn(name="cart_id")
-
+    @JoinColumn(name = "cart_id")
     private Cart cart;
 
+    /**
+     * Class constructor (default).
+     */
     public Order() {
     }
 
+    /**
+     * Class constructor with parameters.
+     */
     public Order(User user, String name, String address, String phone, Cart cart) {
         this.user = user;
         this.name = name;

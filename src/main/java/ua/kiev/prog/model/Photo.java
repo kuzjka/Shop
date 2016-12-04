@@ -14,9 +14,15 @@ public class Photo {
     private String name;
     private byte[]body;
 
+    /**
+     * Class constructor (default).
+     */
     public Photo() {
     }
 
+    /**
+     * Class constructor with parameters.
+     */
     public Photo(Device device, String name, byte[] body) {
         this.device = device;
         this.name = name;

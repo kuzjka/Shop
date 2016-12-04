@@ -12,7 +12,7 @@ public class Cart {
     @GeneratedValue
     private int id;
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne
     @JoinColumn(name = "device_id")
@@ -23,18 +23,26 @@ public class Cart {
     private List<Order> orders = new ArrayList();
     private int items;
 
-
-    public int totalPrice() {
-        return items * device.getPrice();
-    }
-
+    /**
+     * Class constructor (default).
+     */
     public Cart() {
     }
 
+    /**
+     * Class constructor with parameters.
+     */
     public Cart(User user, Device device, int items) {
         this.user = user;
         this.device = device;
         this.items = items;
+    }
+
+    /**
+     * Returns total price of certain amount of devices.
+     */
+    public int totalPrice() {
+        return items * device.getPrice();
     }
 
     public int getId() {

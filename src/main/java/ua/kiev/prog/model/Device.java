@@ -24,10 +24,15 @@ public class Device {
     private int ram;
     private String processor;
 
-
+    /**
+     * Class constructor (default).
+     */
     public Device() {
     }
 
+    /**
+     * Class constructor with parameters.
+     */
     public Device(Type type, String name, String manufacturer, int price, int ram, String processor) {
         this.type = type;
         this.name = name;

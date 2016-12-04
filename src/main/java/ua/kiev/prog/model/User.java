@@ -15,10 +15,15 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Cart> carts;
 
-
+    /**
+     * Class constructor (default).
+     */
     public User() {
     }
 
+    /**
+     * Class constructor with parameters.
+     */
     public User(String username, String password, boolean enabled) {
         this.username = username;
         this.password = password;

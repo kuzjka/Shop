@@ -1,3 +1,4 @@
+
 package ua.kiev.prog.model;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.util.List;
 @Entity
 @Table(name="Types")
 public class Type {
+
     @Id
     @GeneratedValue
     private int id;
@@ -15,8 +17,14 @@ public class Type {
     @OneToMany(mappedBy="type", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Device> devices = new ArrayList<Device>();
 
+    /**
+     * Class constructor (default).
+     */
     public Type() {}
 
+    /**
+     * Class constructor with parameters.
+     */
     public Type(String name) {
         this.name = name;
     }
