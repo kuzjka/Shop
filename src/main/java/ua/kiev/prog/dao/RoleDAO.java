@@ -1,4 +1,4 @@
-package ua.kiev.prog.dao_;
+package ua.kiev.prog.dao;
 
 
 import ua.kiev.prog.model.Role;

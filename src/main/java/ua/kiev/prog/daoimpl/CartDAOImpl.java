@@ -1,9 +1,9 @@
-package ua.kiev.prog.dao_impl;
+package ua.kiev.prog.daoimpl;
 
 import org.springframework.stereotype.Repository;
 import ua.kiev.prog.model.Cart;
 import ua.kiev.prog.model.User;
-import ua.kiev.prog.dao_.CartDAO;
+import ua.kiev.prog.dao.CartDAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

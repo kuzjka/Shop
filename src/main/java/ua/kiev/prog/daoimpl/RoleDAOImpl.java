@@ -1,8 +1,8 @@
-package ua.kiev.prog.dao_impl;
+package ua.kiev.prog.daoimpl;
 
 
 import org.springframework.stereotype.Repository;
-import ua.kiev.prog.dao_.RoleDAO;
+import ua.kiev.prog.dao.RoleDAO;
 import ua.kiev.prog.model.Role;
 
 import javax.persistence.EntityManager;

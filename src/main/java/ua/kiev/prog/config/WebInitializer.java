@@ -1,4 +1,4 @@
-package ua.kiev.prog.config_;
+package ua.kiev.prog.config;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;

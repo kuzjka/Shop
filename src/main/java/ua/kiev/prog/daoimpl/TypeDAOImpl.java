@@ -1,7 +1,7 @@
-package ua.kiev.prog.dao_impl;
+package ua.kiev.prog.daoimpl;
 
 import org.springframework.stereotype.Repository;
-import ua.kiev.prog.dao_.TypeDAO;
+import ua.kiev.prog.dao.TypeDAO;
 import ua.kiev.prog.model.Type;
 
 import javax.persistence.EntityManager;
