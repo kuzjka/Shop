@@ -23,12 +23,12 @@ public class CartDAOImpl implements CartDAO {
     }
 
 
-
     @Override
-    public void delete(int id){
-        Cart c=entityManager.getReference(Cart.class, id);
+    public void delete(int id) {
+        Cart c = entityManager.getReference(Cart.class, id);
         entityManager.remove(c);
     }
+
     @Override
     public List<Cart> list(User user) {
         Query query = entityManager.createQuery("SELECT c FROM Cart c where c.user=:user", Cart.class);
@@ -40,7 +40,7 @@ public class CartDAOImpl implements CartDAO {
     public Cart findOne(int id) {
 
         Query query = entityManager.createQuery("select c from Cart c where c.id=:id", Cart.class);
-        query.setParameter("id" , id);
+        query.setParameter("id", id);
 
         return (Cart) query.getSingleResult();
     }

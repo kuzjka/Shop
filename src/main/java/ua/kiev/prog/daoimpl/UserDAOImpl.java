@@ -25,16 +25,16 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User  findOne(String username) {
-      return entityManager.getReference(User.class, username);
+    public User findOne(String username) {
+        return entityManager.getReference(User.class, username);
 
     }
 
     @Override
     public List<User> list(String username) {
-        Query query= entityManager.createQuery("select u from User u where u.username=:username", User.class);
+        Query query = entityManager.createQuery("select u from User u where u.username=:username", User.class);
         query.setParameter("username", username);
-        return  query.getResultList();
+        return query.getResultList();
     }
 
 

@@ -11,6 +11,7 @@ import ua.kiev.prog.model.Role;
 import ua.kiev.prog.model.User;
 import ua.kiev.prog.service.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,11 +45,15 @@ public class UserController {
         return "register";
     }
 
+    List<User> users = new ArrayList<>();
+    String page;
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@RequestParam String role, @RequestParam String username,
                            @RequestParam String password1, @RequestParam
                            String password2, Model model) {
-        List<User> users = userService.listUsers(username);
+
+        users = userService.listUsers(username);
         if (users.size() == 0 && password1.equals(password2)) {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String hashedPassword = passwordEncoder.encode(password2);
@@ -56,16 +61,19 @@ public class UserController {
             userService.addRole(new Role(username, role));
             model.addAttribute("message", "registration success!");
             model.addAttribute("state", "alert alert-success");
+            page = "login_page";
         }
         if (users.size() > 0) {
             model.addAttribute("message", "user already exists!");
             model.addAttribute("state", "alert alert-danger");
-
+            page = "register";
         }
         if (!password1.equals(password2)) {
             model.addAttribute("message", "password are not matching");
             model.addAttribute("state", "alert alert-danger");
+            page = "register";
         }
-        return "login_page";
+        return page;
+
     }
 }
