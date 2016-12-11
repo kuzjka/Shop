@@ -45,6 +45,7 @@
     </div>
 </nav>
 <div align="center"><h2>Total price: ${total}</h2></div>
+<div class="container">
 <table class="table table-default">
     <thead>
     <tr>
@@ -65,5 +66,6 @@
         </tr>
     </c:forEach>
 </table>
+</div>
 </body>
 </html>
