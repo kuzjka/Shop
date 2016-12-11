@@ -24,8 +24,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder())
                 .usersByUsernameQuery("SELECT  username, password, enabled  FROM users WHERE username=?")
                 .authoritiesByUsernameQuery("SELECT username, role FROM user_roles WHERE username=?");
-
-
     }
 
     @Override
@@ -42,8 +40,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling().accessDeniedPage("/403")
                 .and().csrf().disable();
-
-
     }
 
     @Bean
@@ -51,6 +47,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder;
     }
-
-
 }

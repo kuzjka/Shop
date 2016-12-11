@@ -36,7 +36,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List<Device> list() {
         Query query;
 
-        query = entityManager.createQuery("SELECT d FROM Device d", Device.class);
+        query = entityManager.createQuery("select d from Device d order by d.name", Device.class);
         return query.getResultList();
     }
 
@@ -60,7 +60,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List<Device> typeFilter(Type type) {
         Query query;
 
-        query = entityManager.createQuery("SELECT d FROM Device d  WHERE d.type = :type", Device.class);
+        query = entityManager.createQuery("SELECT d FROM Device d  WHERE d.type = :type order by d.name", Device.class);
         query.setParameter("type", type);
 
         return query.getResultList();

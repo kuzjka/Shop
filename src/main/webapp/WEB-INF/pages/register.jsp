@@ -4,48 +4,10 @@
 <head>
     <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/mystyle.css" media="all"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <style>
-        .navbar-static-top {
-            color: white;
-            background-color: black;
-        }
 
-        .navbar-header a.navbar-brand {
-            color: white;
-            background-color: black;
-        }
-
-        ul.navbar-nav a.default {
-            color: white;
-            background-color: black;
-        }
-
-        ul.navbar-nav a.active {
-            color: white;
-            background-color: deepskyblue;
-        }
-        ul.navbar-nav  a.default:hover {
-            color: white;
-            background-color: deepskyblue;
-        }
-        ul.navbar-nav  a.active:hover {
-            color: white;
-            background-color: deepskyblue;
-        }
-        .navbar-header a.navbar-brand:hover{
-            color: white;
-            background-color: deepskyblue;
-        }
-
-
-
-        .badge {
-            background-color: white;
-            color: deepskyblue;
-        }
-    </style>
 </head>
 <body>
 <nav align="center" class="navbar navbar-default navbar-static-top">

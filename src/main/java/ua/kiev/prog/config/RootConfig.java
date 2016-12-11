@@ -12,6 +12,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
@@ -22,12 +23,11 @@ import javax.sql.DataSource;
 @ComponentScan("ua.kiev.prog")
 @EnableTransactionManagement
 @EnableWebMvc
-public class AppConfig {
+public class RootConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory
-            (DataSource dataSource, JpaVendorAdapter jpaVendeorAdapter)
-    {
+            (DataSource dataSource, JpaVendorAdapter jpaVendeorAdapter) {
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(dataSource);
         entityManagerFactory.setJpaVendorAdapter(jpaVendeorAdapter);
@@ -36,13 +36,12 @@ public class AppConfig {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
+    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
         return new JpaTransactionManager(emf);
     }
 
     @Bean
-    public JpaVendorAdapter jpaVendorAdapter()
-    {
+    public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setShowSql(true);
         adapter.setGenerateDdl(false);
@@ -51,13 +50,12 @@ public class AppConfig {
         return adapter;
     }
 
-    @Bean(name="dataSource")
-    public DataSource dataSource()
-    {
+    @Bean(name = "dataSource")
+    public DataSource dataSource() {
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        String host=System.getenv("OPENSHIFT_MYSQL_DB_HOST");
-        String port=System.getenv("OPENSHIFT_MYSQL_DB_PORT");
+        String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
+        String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
         String url;
         if (host == null || port == null) {
             url = "jdbc:mysql://localhost:3306/comp";
@@ -67,28 +65,15 @@ public class AppConfig {
             return ds;
         } else {
 
-         url=String.format("jdbc:mysql://%s:%s/jbossews", host, port);
+            url = String.format("jdbc:mysql://%s:%s/jbossews", host, port);
 
-        ds.setUrl(url);
+            ds.setUrl(url);
 
-        ds.setUsername("admin1WWLPVW");
-        ds.setPassword("TSpSsBFwazlV");
+            ds.setUsername("admin1WWLPVW");
+            ds.setPassword("TSpSsBFwazlV");
 
-        return ds;}
+            return ds;
+        }
     }
 
-    @Bean
-    public InternalResourceViewResolver setupViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/pages/");
-        resolver.setSuffix(".jsp");
-        resolver.setViewClass(JstlView.class);
-        resolver.setOrder(1);
-        return resolver;
-    }
-
-    @Bean
-    public CommonsMultipartResolver multipartResolver() {
-        return new CommonsMultipartResolver();
-    }
 }

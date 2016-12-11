@@ -7,64 +7,9 @@
     <title>Laptops</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/mystyle.css" media="all"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <style type="text/css">
-
-        .navbar-static-top {
-            color: white;
-            background-color: black;
-        }
-
-        .navbar-header a.navbar-brand {
-            color: white;
-            background-color: black;
-        }
-
-        ul.navbar-nav a.default {
-            color: white;
-            background-color: black;
-        }
-
-        ul.navbar-nav a.active {
-            color: white;
-            background-color: deepskyblue;
-        }
-
-        ul.navbar-nav a.default:hover {
-            color: white;
-            background-color: deepskyblue;
-        }
-
-        ul.navbar-nav a.active:hover {
-            color: white;
-            background-color: deepskyblue;
-        }
-
-        .navbar-header a.navbar-brand:hover {
-            color: white;
-            background-color: deepskyblue;
-        }
-
-        .glyphicon-ok {
-            color: white;
-            align-self: center;
-        }
-
-        .btn {
-            min-height: 36px;
-            min-width: 40px;
-        }
-
-        .badge {
-            background-color: white;
-            color: deepskyblue;
-        }
-
-        .panel-primary a {
-            color: white;
-        }
-    </style>
 
 </head>
 
@@ -230,8 +175,9 @@
                     <div class="panel-heading" align="center">
                         <a href="/onedevice/${device.id}"><h4><b>${device.name}</b></h4></a></div>
                     <div class="panel-body">
-                        <a href="/onedevice/${device.id}"><img src="/photo/${device.id}/0" style="max-height: 120px; width: auto" float="left"
-                             alt="Image"/></a>
+                        <a href="/onedevice/${device.id}"><img src="/photo/${device.id}/0"
+                                                               style="max-height: 120px; width: auto" float="left"
+                                                               alt="Image"/></a>
                         <sec:authorize access="!hasAuthority('USER') and !hasAuthority('ADMIN')">
                             login to buy online
                         </sec:authorize>
@@ -256,8 +202,9 @@
                     <div class="panel-heading" align="center">
                         <a href="/onedevice/${device.id}"><h4><b>${device.name}</b></h4></a></div>
                     <div class="panel-body">
-                        <a href="/onedevice/${device.id}"><img src="/photo/${device.id}/0" style="max-height: 120px; width: auto" float="left"
-                             alt="Image"></a>
+                        <a href="/onedevice/${device.id}"><img src="/photo/${device.id}/0"
+                                                               style="max-height: 120px; width: auto" float="left"
+                                                               alt="Image"></a>
                         <sec:authorize access="!hasAuthority('USER') and !hasAuthority('ADMIN')">
                             login to buy online
                         </sec:authorize>
@@ -282,8 +229,9 @@
                 <div class="panel-heading" align="center">
                     <a href="/onedevice/${device.id}"><h4><b>${device.name}</b></h4></a></div>
                 <div class="panel-body">
-                    <a href="/onedevice/${device.id}"><img src="/photo/${device.id}/0" style="max-height: 120px; width: auto" float="left"
-                         alt="Image"></a>
+                    <a href="/onedevice/${device.id}"><img src="/photo/${device.id}/0"
+                                                           style="max-height: 120px; width: auto" float="left"
+                                                           alt="Image"></a>
                     <sec:authorize access="!hasAuthority('USER') and !hasAuthority('ADMIN')">
                         login to buy online
                     </sec:authorize>

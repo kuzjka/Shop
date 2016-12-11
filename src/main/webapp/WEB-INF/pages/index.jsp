@@ -8,56 +8,11 @@
     <title>Title</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/mystyle.css" media="all"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <style>
-        .navbar-static-top {
-            color: white;
-            background-color: black;
-        }
 
-        .navbar-header a.navbar-brand {
-            color: white;
-            background-color: black;
-        }
-
-        ul.navbar-nav a.default {
-            color: white;
-            background-color: black;
-        }
-
-        ul.navbar-nav a.active {
-            color: white;
-            background-color: deepskyblue;
-        }
-
-        ul.navbar-nav a.default:hover {
-            color: white;
-            background-color: deepskyblue;
-        }
-
-        ul.navbar-nav a.active:hover {
-            color: white;
-            background-color: deepskyblue;
-        }
-
-        .navbar-header a.navbar-brand:hover {
-            color: white;
-            background-color: deepskyblue;
-        }
-
-        .img-responsive {
-            max-height: 120px;
-            width: auto;
-        }
-
-        .badge {
-            background-color: white;
-            color: deepskyblue;
-        }
-
-    </style>
 </head>
 
 <nav align="center" class="navbar navbar-default navbar-static-top">

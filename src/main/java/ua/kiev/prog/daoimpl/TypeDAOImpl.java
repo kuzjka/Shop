@@ -34,7 +34,7 @@ public class TypeDAOImpl implements TypeDAO {
 
     @Override
     public List<Type> list() {
-        Query query = entityManager.createQuery("SELECT t FROM Type t", Type.class);
+        Query query = entityManager.createQuery("select t from Type t order by t.name", Type.class);
         return query.getResultList();
     }
 }
