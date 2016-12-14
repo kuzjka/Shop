@@ -1,8 +1,12 @@
 package ua.kiev.prog.config;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -10,19 +14,19 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
+
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan("ua.kiev.prog")
 @EnableTransactionManagement
-@EnableWebMvc
+@ComponentScan(basePackages = {"ua.kiev.prog"},
+        excludeFilters = {
+                @Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class)
+        })
+
+
 public class RootConfig {
 
     @Bean
@@ -61,7 +65,7 @@ public class RootConfig {
             url = "jdbc:mysql://localhost:3306/comp";
             ds.setUrl(url);
             ds.setUsername("root");
-            ds.setPassword("ilovejava");
+            ds.setPassword("my_password");
             return ds;
         } else {
 
