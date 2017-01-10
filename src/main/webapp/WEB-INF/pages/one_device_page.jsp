@@ -11,12 +11,12 @@
     <link rel="stylesheet" type="text/css" href="../../css/mystyle.css" media="all"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<style>
-    .img-responsive{
-        max-height: 300px;
-        width: auto;
-    }
-</style>
+    <style>
+        .img-responsive {
+            max-height: 300px;
+            width: auto;
+        }
+    </style>
 </head>
 
 <nav align="center" class="navbar navbar-default navbar-static-top">
@@ -114,7 +114,11 @@
 </sec:authorize>
 <div align="center"><h3><b>Price:</b> ${device.price} grn</h3></div>
 <div align="center"><h3><b>Manufacturer:</b> ${device.manufacturer}</h3></div>
-<div align="center"><h3><b>RAM:</b> ${device.ram} GB</h3></div>
-<div align="center"><h3><b>Processor:</b> ${device.processor}</h3></div>
+<c:choose>
+    <c:when test="${device.ram != -1}">
+        <div align="center"><h3><b>RAM:</b> ${device.ram} GB</h3></div>
+        <div align="center"><h3><b>Processor:</b> ${device.processor}</h3></div>
+    </c:when>
+</c:choose>
 </body>
 </html>
