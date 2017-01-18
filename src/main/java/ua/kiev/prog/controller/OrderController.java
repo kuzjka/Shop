@@ -44,19 +44,20 @@ public class OrderController {
         Device device = deviceService.findDeviceById(id);
         Cart cart = new Cart(findUser(), device, 1);
         List<Cart> l = deviceService.listCarts(findUser());
-        int count = 1;
+        int count = 0;
         for (Cart c : l) {
-            if (c.getDevice().getId() == id) {
-                count = c.getItems() + n;
-                c.setItems(count);
-                if (count >= 1) {
-                    deviceService.addCart(c);
-                }
+            if (c.getDevice().equals(device)) {
+                c.setItems(c.getItems() + n);
+                deviceService.addCart(c);
+                count++;
+
+
             }
         }
-        if (count == 1 && n == 1) {
+        if (count == 0 && n == 1) {
             deviceService.addCart(cart);
         }
+
         model.addAttribute("items", deviceService.totalItems(findUser()));
         model.addAttribute("carts", deviceService.listCarts(findUser()));
         model.addAttribute("total", deviceService.totalPrice(findUser()));

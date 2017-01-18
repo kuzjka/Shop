@@ -113,6 +113,25 @@ public class Device {
     public void setProcessor(String processor) {
         this.processor = processor;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Device)) return false;
+
+        Device device = (Device) o;
+
+        if (!getName().equals(device.getName())) return false;
+        return getManufacturer().equals(device.getManufacturer());
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getName().hashCode();
+        result = 31 * result + getManufacturer().hashCode();
+        return result;
+    }
 }
 
 
