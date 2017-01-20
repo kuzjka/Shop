@@ -47,11 +47,11 @@
 </nav>
 <div class="container">
     <form action="/addorder" role="form" name="order" class="form-horizontal" method="post">
-        <h3><input type="submit" class="btn btn-success" role="button" value="Make order"></h3>
-        <input class="form-control form-type" type="text" name="name" placeholder="Name">
-        <input class="form-control form-type" type="text" name="address" placeholder="Address">
-        <input class="form-control form-type" type="text" name="phone" placeholder="Phone">
-
+        <p/>
+        <input class="form-control form-type" type="text" name="name" placeholder="Name"><p/>
+        <input class="form-control form-type" type="text" name="address" placeholder="Address"><p/>
+        <input class="form-control form-type" type="text" name="phone" placeholder="Phone"><p/>
+        <input type="submit" class="btn btn-success" role="button" value="Make order">
     </form>
 
 </div>
