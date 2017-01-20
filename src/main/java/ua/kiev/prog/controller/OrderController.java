@@ -47,7 +47,9 @@ public class OrderController {
         int count = 0;
         for (Cart c : l) {
             if (c.getDevice().equals(device)) {
+
                 c.setItems(c.getItems() + n);
+                if(c.getItems()>0)
                 deviceService.addCart(c);
                 count++;
 
