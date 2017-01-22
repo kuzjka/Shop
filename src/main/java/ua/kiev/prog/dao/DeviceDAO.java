@@ -24,7 +24,7 @@ public interface DeviceDAO {
     Device findDevice2(String name);
 
 
-    int totalItems(User user);
+    Long totalItems(User user);
 
     int totalPrice(User user);
 

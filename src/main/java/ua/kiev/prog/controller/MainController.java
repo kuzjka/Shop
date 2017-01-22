@@ -185,12 +185,13 @@ public class MainController {
 
     public User findUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
         String username = auth.getName();
         User user = userService.findUser(username);
-        return user;
+        return user;}
     }
 
-}
+
 
 
 

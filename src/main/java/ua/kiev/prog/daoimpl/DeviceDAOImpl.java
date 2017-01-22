@@ -10,6 +10,7 @@ import ua.kiev.prog.model.Device;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -100,30 +101,23 @@ public class DeviceDAOImpl implements DeviceDAO {
 
 
     @Override
-    public int totalItems(User user) {
-        Query query = entityManager.createQuery("select c from Cart c where c.user=:user", Cart.class);
+    public Long totalItems(User user) {
+
+        TypedQuery<Long> query = entityManager.createQuery("select sum(c.items) from Cart c where c.user=:user", Long.class);
         query.setParameter("user", user);
-        List<Cart> cartList = query.getResultList();
-        int sum = 0;
-        for (Cart c : cartList) {
-            sum = sum + c.getItems();
-        }
-        return sum;
+        return query.getSingleResult();
     }
 
     @Override
     public int totalPrice(User user) {
-
-        Query query = entityManager.createQuery("select c from Cart c where c.user=:user", Cart.class);
-        query.setParameter("user", user);
-        List<Cart> cartList = query.getResultList();
         int sum = 0;
-        for (Cart c : cartList) {
-            sum = sum + c.totalPrice();
+        TypedQuery<Cart> query = entityManager.createQuery("select c from Cart c where c.user=:user", Cart.class);
+        query.setParameter("user", user);
+        List<Cart>list = query.getResultList();
+        for(Cart c : list){
+            sum += c.totalPrice();
         }
-        return sum;
-
-
+        return  sum;
     }
 
     @Override

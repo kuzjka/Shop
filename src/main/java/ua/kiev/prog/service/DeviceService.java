@@ -145,7 +145,7 @@ public class DeviceService {
      * Returns number of devices in all carts created by certain user from database.
      */
     @Transactional(readOnly = true)
-    public int totalItems(User user) {
+    public Long totalItems(User user) {
         return deviceDAO.totalItems(user);
     }
 
