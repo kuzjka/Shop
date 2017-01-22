@@ -17,7 +17,7 @@ public class PhotoDAOImpl implements PhotoDao {
     private EntityManager entityManager;
     @Override
     public void add(Photo photo) {
-        entityManager.persist(photo);
+        entityManager.merge(photo);
     }
 
     @Override

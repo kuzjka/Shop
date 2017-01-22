@@ -67,7 +67,7 @@
 
                     <td>${device.processor}</td>
                     <td>${device.type.name}</td>
-                    <td><a href="/edit_device_page/${device.id}" class="btn btn-info" role="button">Edit device</a></td>
+
 
 
                 </tr>
