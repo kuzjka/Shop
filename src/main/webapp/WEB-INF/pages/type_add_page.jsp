@@ -16,6 +16,9 @@
                 <div class="form-type"><input type="text" class="form-control" name="name" placeholder="Name"></div>
                 <div class="form-type"><input type="submit" class="btn btn-primary" value="Add"></div>
             </form>
+            <div class="${state}">
+                <strong>${message}</strong>
+            </div>
         </div>
     </body>
 </html>

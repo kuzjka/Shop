@@ -17,6 +17,10 @@
         .btn-info {
             background-color: deepskyblue;
         }
+        .img-responsive{
+            width: 100px;
+            height: auto;
+        }
     </style>
 </head>
 
@@ -48,8 +52,7 @@
                 <tr>
 
                     <td><input type=checkbox id="td" name="todelete[]" value="${device.id}"></td>
-                    <td><img class="img-responsive" alt="No Photo" height="100" width="100"
-                             src="/photo/${device.id}/0"/></td>
+                    <td><img class="img-responsive" alt="No Photo" src="/photo/${device.id}/0"/></td>
                     <td>${device.name}</td>
                     <td>${device.manufacturer}</td>
                     <td>${device.price}</td>

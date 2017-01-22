@@ -17,8 +17,6 @@ public class DeviceService {
     @Autowired
     private CartDAO cartDAO;
     @Autowired
-    private OrderDAO orderDAO;
-    @Autowired
     private PhotoDao photoDao;
 
     /**
@@ -37,21 +35,6 @@ public class DeviceService {
         typeDAO.add(type);
     }
 
-    /**
-     * Adds cart to database.
-     */
-    @Transactional
-    public void addCart(Cart cart) {
-        cartDAO.add(cart);
-    }
-
-    /**
-     * Adds order to database.
-     */
-    @Transactional
-    public void addOrder(Order order) {
-        orderDAO.add(order);
-    }
 
     /**
      * Adds photo to database.
@@ -86,20 +69,21 @@ public class DeviceService {
     }
 
     /**
-     * Returns all devices of certain type from database.
+     * Returns all  devices from database.
      */
     @Transactional(readOnly = true)
-    public List<Device> listDevices(Type type) {
-        return deviceDAO.typeFilter(type);
+    public List<Device> listDevices() {
+        return deviceDAO.list();
     }
 
     /**
-     * Returns all carts created by certain user from database.
+     * Returns all devices of certain type from database.
      */
     @Transactional(readOnly = true)
-    public List<Cart> listCarts(User user) {
-        return cartDAO.list(user);
+    public List<Device> listDevicesByType(Type type) {
+        return deviceDAO.typeFilter(type);
     }
+
 
     /**
      * Returns type with  certain id from database.
@@ -141,29 +125,6 @@ public class DeviceService {
         return deviceDAO.patternFilter(type, pattern);
     }
 
-    /**
-     * Returns number of devices in all carts created by certain user from database.
-     */
-    @Transactional(readOnly = true)
-    public Long totalItems(User user) {
-        return deviceDAO.totalItems(user);
-    }
-
-    /**
-     * Returns total price of devices in all carts created by certain user from database.
-     */
-    @Transactional(readOnly = true)
-    public int totalPrice(User user) {
-        return deviceDAO.totalPrice(user);
-    }
-
-    /**
-     * Returns all orders made by certain user from database.
-     */
-    @Transactional(readOnly = true)
-    public List<Order> listOrders(User user) {
-        return orderDAO.list(user);
-    }
 
     /**
      * Returns all photos of certain device from database.

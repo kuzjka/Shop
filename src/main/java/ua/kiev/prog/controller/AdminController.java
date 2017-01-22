@@ -14,6 +14,7 @@ import ua.kiev.prog.model.Type;
 import ua.kiev.prog.service.DeviceService;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Controller for site administration
@@ -30,19 +31,20 @@ public class AdminController {
     public String index_admin(Model model) {
 
         model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices(null));
+        model.addAttribute("devices", deviceService.listDevices());
         return "index_admin";
     }
 
     @RequestMapping("/device_add_page")
 
-    public String contactAddPage(Model model) {
+    public String deviceAddPage(Model model) {
+        model.addAttribute("devices", deviceService.listDevices());
         model.addAttribute("types", deviceService.listTypes());
         return "device_add_page";
     }
 
     @RequestMapping("/type_add_page")
-    public String groupAddPage() {
+    public String typeAddPage() {
         return "type_add_page";
     }
 
@@ -55,7 +57,7 @@ public class AdminController {
             }
         }
         model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices(null));
+        model.addAttribute("devices", deviceService.listDevices());
         return "index_admin";
     }
 
@@ -76,15 +78,36 @@ public class AdminController {
 
         Device device = new Device(type, name, manufacturer, price,
                 Integer.parseInt(ram), processor);
-        deviceService.addDevice(device);
-        Device d = deviceService.findDeviceByName(name);
-        deviceService.addPhoto(new Photo(d, main_photo.getOriginalFilename(), main_photo.getBytes()));
-        deviceService.addPhoto(new Photo(d, photo2.getOriginalFilename(), photo2.getBytes()));
-        deviceService.addPhoto(new Photo(d, photo3.getOriginalFilename(), photo3.getBytes()));
-        deviceService.addPhoto(new Photo(d, photo4.getOriginalFilename(), photo4.getBytes()));
+        List<Device> list = deviceService.listDevicesByType(type);
+        int count = 0;
+        for (Device dev : list) {
+            if (dev.getName().equalsIgnoreCase(name)) {
+                count++;
+            }
+
+        }
+        if (count == 0) {
+            deviceService.addDevice(device);
+            Device d = deviceService.findDeviceByName(name);
+
+            deviceService.addPhoto(new Photo(d, main_photo.getOriginalFilename(), main_photo.getBytes()));
+
+            deviceService.addPhoto(new Photo(d, photo2.getOriginalFilename(), photo2.getBytes()));
+
+            deviceService.addPhoto(new Photo(d, photo3.getOriginalFilename(), photo3.getBytes()));
+
+            deviceService.addPhoto(new Photo(d, photo4.getOriginalFilename(), photo4.getBytes()));
 
 
-        model.addAttribute("devices", deviceService.listDevices(null));
+            model.addAttribute("devices", deviceService.listDevices());
+            return "index_admin";
+        }
+        if (count > 0) {
+            model.addAttribute("message", "such device already exists!");
+            model.addAttribute("state", "alert alert-danger");
+            return "device_add_page";
+
+        }
         return "index_admin";
     }
 
@@ -98,6 +121,7 @@ public class AdminController {
 
     @RequestMapping(value = "/edit_device/{id}", method = RequestMethod.POST)
     public String editDevice(@PathVariable int id,
+
                              @RequestParam String name,
                              @RequestParam String manufacturer,
                              @RequestParam int price,
@@ -107,7 +131,8 @@ public class AdminController {
         device.setManufacturer(manufacturer);
         device.setPrice(price);
         deviceService.addDevice(device);
-        model.addAttribute("devices", deviceService.listDevices(null));
+
+        model.addAttribute("devices", deviceService.listDevices());
         return "index_admin";
 
 
@@ -116,11 +141,22 @@ public class AdminController {
     @RequestMapping(value = "/addtype", method = RequestMethod.POST)
     public String addType(@RequestParam String name, Model model) {
 
+        List<Type> list = deviceService.listTypes();
+        Type type = new Type(name);
+        int count = 0;
+        for (Type t : list) {
+            if (t.getName().equalsIgnoreCase(name)) ;
+            count++;
+        }
+        if (count > 0) {
+            model.addAttribute("message", "such type already exists!");
+            model.addAttribute("state", "alert alert-danger");
+            return "type_add_page";
+        }
+        if (count == 0)
+            model.addAttribute("types", deviceService.listTypes());
 
-        deviceService.addType(new Type(name));
-
-        model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("devices", deviceService.listDevices(null));
+        model.addAttribute("devices", deviceService.listDevices());
         return "index_admin";
     }
 }

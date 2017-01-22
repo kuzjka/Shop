@@ -52,6 +52,8 @@ public class Type {
     public void setDevices(List<Device> devices) {
         this.devices = devices;
     }
+
+
 }
 
 

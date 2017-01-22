@@ -21,17 +21,30 @@
                 <option value="${type.id}">${type.name}</option>
             </c:forEach>
         </select>
+        <p/>
         <input class="form-control form-type" type="file" name="main_photo" placeholder="Main photo">
+        <p/>
         <input class="form-control form-type" type="file" name="photo2" placeholder="photo2">
+        <p/>
         <input class="form-control form-type" type="file" name="photo3" placeholder="photo3">
+        <p/>
         <input class="form-control form-type" type="file" name="photo4" placeholder="photo4">
+        <p/>
         <input class="form-control form-type" type="text" name="name" placeholder="Name">
+        <p/>
         <input class="form-control form-type" type="text" name="manufacturer" placeholder="Manufacturer">
+        <p/>
         <input class="form-control form-type" type="text" name="price" placeholder="Price">
+        <p/>
         <input class="form-control form-type" type="text" name="ram" placeholder="RAM">
+        <p/>
         <input class="form-control form-type" type="text" name="processor" placeholder="Processor">
+        <p/>
         <input type="submit" class="btn btn-primary" value="AddDevice">
     </form>
+    <div class="${state}">
+        <strong>${message}</strong>
+    </div>
 </div>
 
 

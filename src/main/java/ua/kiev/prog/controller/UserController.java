@@ -46,7 +46,7 @@ public class UserController {
     }
 
     List<User> users = new ArrayList<>();
-    String page;
+
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@RequestParam String role, @RequestParam String username,
@@ -61,19 +61,19 @@ public class UserController {
             userService.addRole(new Role(username, role));
             model.addAttribute("message", "registration success!");
             model.addAttribute("state", "alert alert-success");
-            page = "login_page";
+            return  "login_page";
         }
         if (users.size() > 0) {
             model.addAttribute("message", "user already exists!");
             model.addAttribute("state", "alert alert-danger");
-            page = "register";
+            return   "register";
         }
         if (!password1.equals(password2)) {
             model.addAttribute("message", "password are not matching");
             model.addAttribute("state", "alert alert-danger");
-            page = "register";
+            return  "register";
         }
-        return page;
+        return "login_page";
 
     }
 }

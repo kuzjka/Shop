@@ -7,47 +7,9 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <style type="text/css">
 
-        .navbar-fixed-top {
-            color: white;
-            background-color: deepskyblue;
-        }
 
-        .navbar-header a.navbar-brand {
-            color: white;
-            background-color: deepskyblue;
-        }
 
-        ul.navbar-nav a.default {
-            color: white;
-            background-color: deepskyblue;
-        }
-
-        ul.navbar-nav a.active {
-            color: deepskyblue;
-            background-color: white;
-        }
-
-        ul.navbar-nav a:hover:not(.active) {
-            color: deepskyblue;
-            background-color: white;
-        }
-
-        .btn-info {
-            color: white;
-            background-color: deepskyblue;
-        }
-
-        .table {
-            background-color: seashell;
-        }
-
-        .badge {
-            background-color: white;
-            color: deepskyblue;
-        }
-    </style>
 </head>
 <body>
 <div class="container" align="center">
@@ -55,9 +17,20 @@
 
     <form role="form" enctype="multipart/form-data" class="form-horizontal" action="/edit_device/${d.id}" method="post">
         <h3>Edit device</h3>
-        <input class="form-control form-type" type="text" name="name" placeholder="${d.name}">
-        <input class="form-control form-type" type="text" name="manufacturer" placeholder="${d.manufacturer}">
-        <input class="form-control form-type" type="text" name="price" placeholder="${d.price}">
+        <input class="form-control form-type" type="file" name="main_photo" placeholder="Main photo">
+        <p/>
+        <input class="form-control form-type" type="file" name="photo2" placeholder="photo2">
+        <p/>
+        <input class="form-control form-type" type="file" name="photo3" placeholder="photo3">
+        <p/>
+        <input class="form-control form-type" type="file" name="photo4" placeholder="photo4">
+        <p/>
+        <input class="form-control form-type" type="text" name="name" value="${d.name}">
+        <p/>
+        <input class="form-control form-type" type="text" name="manufacturer" value="${d.manufacturer}">
+        <p/>
+        <input class="form-control form-type" type="text" name="price" value="${d.price}">
+        <p/>
 
         <input type="submit" class="btn btn-primary" value="EditDevice">
     </form>

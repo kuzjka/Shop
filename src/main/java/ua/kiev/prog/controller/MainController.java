@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.kiev.prog.model.*;
 import ua.kiev.prog.service.DeviceService;
+import ua.kiev.prog.service.OrderService;
 import ua.kiev.prog.service.UserService;
 
 import java.util.*;
@@ -27,11 +28,14 @@ public class MainController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private OrderService orderService;
+
     @RequestMapping(value = {"/", "/user"}, method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("types", deviceService.listTypes());
-        model.addAttribute("carts", deviceService.listCarts(findUser()));
-        model.addAttribute("items", deviceService.totalItems(findUser()));
+        model.addAttribute("carts", orderService.listCarts(findUser()));
+        model.addAttribute("items", orderService.totalItems(findUser()));
         return "index";
     }
 
@@ -39,8 +43,8 @@ public class MainController {
     public String oneDevice(@PathVariable int id, Model model) {
         Device d = deviceService.findDeviceById(id);
         model.addAttribute("d", d);
-        model.addAttribute("c", deviceService.listCarts(findUser()));
-        model.addAttribute("items", deviceService.totalItems(findUser()));
+        model.addAttribute("c", orderService.listCarts(findUser()));
+        model.addAttribute("items", orderService.totalItems(findUser()));
 
         return "one_device_page";
     }
@@ -50,9 +54,9 @@ public class MainController {
                              Model model) {
         Type type = deviceService.findType(id);
 
-        model.addAttribute("devices", deviceService.listDevices(type));
-        model.addAttribute("carts", deviceService.listCarts(findUser()));
-        model.addAttribute("items", deviceService.totalItems(findUser()));
+        model.addAttribute("devices", deviceService.listDevicesByType(type));
+        model.addAttribute("carts", orderService.listCarts(findUser()));
+        model.addAttribute("items", orderService.totalItems(findUser()));
         return type.getName().toLowerCase();
     }
 
@@ -60,7 +64,7 @@ public class MainController {
     public String nameFilter(@PathVariable String type,
                              @RequestParam String name, Model model) {
         model.addAttribute("devices", deviceService.searchDevices(type, name));
-        model.addAttribute("items", deviceService.totalItems(findUser()));
+        model.addAttribute("items", orderService.totalItems(findUser()));
         if (type.equals("all")) {
             return "index";
         } else {
@@ -73,7 +77,7 @@ public class MainController {
                               @RequestParam(required = false, defaultValue = "-1") int max,
                               @RequestParam String dir, @PathVariable String type, Model model) {
         model.addAttribute("devices", deviceService.priceFilter(type, min, max, dir));
-        model.addAttribute("items", deviceService.totalItems(findUser()));
+        model.addAttribute("items", orderService.totalItems(findUser()));
 
         if (type.equals("all")) {
             return "index";
@@ -101,7 +105,7 @@ public class MainController {
         }
         model.addAttribute("rams", rams);
         model.addAttribute("processors", processors);
-        model.addAttribute("items", deviceService.totalItems(findUser()));
+        model.addAttribute("items", orderService.totalItems(findUser()));
         model.addAttribute("devices", deviceService.ramFilter(type, rams, processors));
         if (type.equals("all")) {
             return "index";
@@ -126,7 +130,7 @@ public class MainController {
 
         model.addAttribute("rams", rams);
         model.addAttribute("processors", processors);
-        model.addAttribute("items", deviceService.totalItems(findUser()));
+        model.addAttribute("items", orderService.totalItems(findUser()));
         model.addAttribute("devices", deviceService.ramFilter(type, rams, processors));
         if (type.equals("all")) {
             return "index";
@@ -147,14 +151,14 @@ public class MainController {
             manufacturers.remove(manufacturer);
         }
         model.addAttribute("manufacturers", manufacturers);
-        model.addAttribute("items", deviceService.totalItems(findUser()));
+        model.addAttribute("items", orderService.totalItems(findUser()));
         model.addAttribute("devices", deviceService.manufacturerFilter(type, manufacturers));
         return "smartphone";
     }
 
     @RequestMapping("/photo_add_page")
     public String photoAddPage(Model model) {
-        model.addAttribute("devices", deviceService.listDevices(null));
+        model.addAttribute("devices", deviceService.listDevicesByType(null));
         return "photo_add_page";
     }
 
@@ -175,7 +179,7 @@ public class MainController {
     public ResponseEntity<byte[]> rnPhoto(@PathVariable int id) {
 
         Type type = deviceService.findType(id);
-        List<Device> devices = deviceService.listDevices(type);
+        List<Device> devices = deviceService.listDevicesByType(type);
         Random random = new Random();
         Device device = devices.get(random.nextInt(devices.size()));
         List<Photo> photos = deviceService.getPhotos(device);
