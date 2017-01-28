@@ -62,28 +62,28 @@
             <c:set var="pricesort" value="${sortbyprice}"/>
             <h4><b>Desktops; Sort by name:
                 <c:choose>
-                    <c:when test="${namesort == 'ascending'}">
-                        a - z; <a href="/type/desktop/descending">z - a; </a>
+                    <c:when test="${namesort == 'asc'}">
+                        a - z; <a href="/type/desktop/desc">z - a; </a>
                     </c:when>
-                    <c:when test="${namesort == 'descending'}">
-                        <a href="/type/desktop/ascending">a - z; </a> z - a;
+                    <c:when test="${namesort == 'desc'}">
+                        <a href="/type/desktop/asc">a - z; </a> z - a;
                     </c:when>
                     <c:otherwise>
-                        <a href="/type/desktop/ascending">a - z; </a>
-                        <a href="/type/desktop/descending">z - a; </a>
+                        <a href="/type/desktop/asc">a - z; </a>
+                        <a href="/type/desktop/desc">z - a; </a>
                     </c:otherwise>
                 </c:choose>
                 Sort by price:
                 <c:choose>
-                    <c:when test="${pricesort == 'ascending'}">
-                        cheap first; <a href="/price_sorter/desktop/descending">expensive first; </a>
+                    <c:when test="${pricesort == 'asc'}">
+                        cheap first; <a href="/price_sorter/desktop/desc">expensive first; </a>
                     </c:when>
-                    <c:when test="${pricesort == 'descending'}">
-                        <a href="/price_sorter/desktop/ascending">cheap first;</a>expensive first;
+                    <c:when test="${pricesort == 'desc'}">
+                        <a href="/price_sorter/desktop/asc">cheap first;</a>expensive first;
                     </c:when>
                     <c:otherwise>
-                        <a href="/price_sorter/desktop/ascending">cheap first; </a>
-                        <a href="/price_sorter/desktop/descending">expensive first; </a>
+                        <a href="/price_sorter/desktop/asc">cheap first; </a>
+                        <a href="/price_sorter/desktop/desc">expensive first; </a>
                     </c:otherwise>
                 </c:choose></b></h4>
         </div>

@@ -68,9 +68,9 @@
                     <div class="col-sm-4">
                         <div class="panel panel-primary">
                             <div class="panel-heading" align="center">
-                                <a href="/type/${type.name}/ascending"><h4><b>${type.name}s</b></h4></a></div>
+                                <a href="/type/${type.name}/asc"><h4><b>${type.name}s</b></h4></a></div>
                             <div class="panel-body" align="center">
-                                <a href="/type/${type.name}/ascending"><img src="/randomphoto/${type.name}" class="img-responsive"
+                                <a href="/type/${type.name}/asc"><img src="/randomphoto/${type.name}" class="img-responsive"
                                                                 alt="Image"/></a>
                             </div>
 
@@ -81,9 +81,9 @@
                     <div class="col-sm-4">
                         <div class="panel panel-primary">
                             <div class="panel-heading" align="center">
-                                <a href="/type/${type.name}/ascending"><h4><b>${type.name}s</b></h4></a></div>
+                                <a href="/type/${type.name}/asc"><h4><b>${type.name}s</b></h4></a></div>
                             <div class="panel-body" align="center">
-                                <a href="/type/${type.name}/ascending"><img src="/randomphoto/${type.name}" class="img-responsive"
+                                <a href="/type/${type.name}/asc"><img src="/randomphoto/${type.name}" class="img-responsive"
                                                                 alt="Image"/></a>
                             </div>
                         </div>
@@ -93,9 +93,9 @@
                     <div class="col-sm-4">
                         <div class="panel panel-primary">
                             <div class="panel-heading" align="center">
-                                <a href="/type/${type.name}/ascending"><h4><b>${type.name}s</b></h4></a></div>
+                                <a href="/type/${type.name}/asc"><h4><b>${type.name}s</b></h4></a></div>
                             <div class="panel-body" align="center">
-                                <a href="/type/${type.name}/ascending"><img src="/randomphoto/${type.name}" class="img-responsive"
+                                <a href="/type/${type.name}/asc"><img src="/randomphoto/${type.name}" class="img-responsive"
                                                                 alt="Image"/></a>
                             </div>
 

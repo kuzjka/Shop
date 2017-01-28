@@ -159,7 +159,7 @@ public class MainController {
     public ResponseEntity<byte[]> rnPhoto(@PathVariable String name) {
 
         Type type = deviceService.findTypeByName(name);
-        List<Device> devices = deviceService.priceSorter(type.getName(), "descending");
+        List<Device> devices = deviceService.priceSorter(type.getName(), "asc");
         Random random = new Random();
         Device device = devices.get(random.nextInt(devices.size()));
         List<Photo> photos = deviceService.getPhotos(device);

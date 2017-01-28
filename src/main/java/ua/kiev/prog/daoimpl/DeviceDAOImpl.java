@@ -60,10 +60,10 @@ public class DeviceDAOImpl implements DeviceDAO {
     @Override
     public List<Device> typeFilter(String type, String dir) {
         Query query = null;
-        if (dir.equals("ascending")) {
+        if (dir.equals("asc")) {
             query = entityManager.createQuery("SELECT d FROM Device d  WHERE d.type.name = :type order by d.name", Device.class);
             query.setParameter("type", type);
-        } else if (dir.equals("descending")) {
+        } else if (dir.equals("desc")) {
             query = entityManager.createQuery("SELECT d FROM Device d  WHERE d.type.name = :type order by d.name desc ", Device.class);
             query.setParameter("type", type);
         }
@@ -166,10 +166,10 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List<Device> priceSorter(String type, String dir) {
         Query query = null;
 
-        if (dir.equals("ascending")) {
+        if (dir.equals("asc")) {
             query = entityManager.createQuery("select d from Device d where d.type.name=:type order by d.price", Device.class);
             query.setParameter("type", type);
-        } else if (dir.equals("descending")) {
+        } else if (dir.equals("desc")) {
             query = entityManager.createQuery("select d from Device d where d.type.name=:type order by d.price desc", Device.class);
             query.setParameter("type", type);
         }
