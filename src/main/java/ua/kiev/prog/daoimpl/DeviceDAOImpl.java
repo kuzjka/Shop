@@ -58,11 +58,15 @@ public class DeviceDAOImpl implements DeviceDAO {
 
 
     @Override
-    public List<Device> typeFilter(Type type) {
-        Query query;
-
-        query = entityManager.createQuery("SELECT d FROM Device d  WHERE d.type = :type order by d.name", Device.class);
-        query.setParameter("type", type);
+    public List<Device> typeFilter(String type, String dir) {
+        Query query = null;
+        if (dir.equals("ascending")) {
+            query = entityManager.createQuery("SELECT d FROM Device d  WHERE d.type.name = :type order by d.name", Device.class);
+            query.setParameter("type", type);
+        } else if (dir.equals("descending")) {
+            query = entityManager.createQuery("SELECT d FROM Device d  WHERE d.type.name = :type order by d.name desc ", Device.class);
+            query.setParameter("type", type);
+        }
 
         return query.getResultList();
     }
@@ -113,11 +117,11 @@ public class DeviceDAOImpl implements DeviceDAO {
         int sum = 0;
         TypedQuery<Cart> query = entityManager.createQuery("select c from Cart c where c.user=:user", Cart.class);
         query.setParameter("user", user);
-        List<Cart>list = query.getResultList();
-        for(Cart c : list){
+        List<Cart> list = query.getResultList();
+        for (Cart c : list) {
             sum += c.totalPrice();
         }
-        return  sum;
+        return sum;
     }
 
     @Override
@@ -158,33 +162,23 @@ public class DeviceDAOImpl implements DeviceDAO {
         return query.getResultList();
     }
 
-
     @Override
-    public List<Device> priceFilter(String type, int min, int max, String dir) {
-        Query query;
-        if (max == -1) {
-            max = Integer.MAX_VALUE;
-        }
+    public List<Device> priceSorter(String type, String dir) {
+        Query query = null;
 
-        if (dir.equals("desc")) {
-
-            query = entityManager.createQuery("select d from  Device d where" +
-                    " d.type.name=:type and d.price between" +
-                    " (:min) and (:max ) order by d.price desc ", Device.class);
+        if (dir.equals("ascending")) {
+            query = entityManager.createQuery("select d from Device d where d.type.name=:type order by d.price", Device.class);
             query.setParameter("type", type);
-            query.setParameter("min", min);
-            query.setParameter("max", max);
-        } else {
-            query = entityManager.createQuery("select d from  Device d where d.type.name=:type " +
-                    "and  d.price between (:min) and (:max )order by d.price  ", Device.class);
+        } else if (dir.equals("descending")) {
+            query = entityManager.createQuery("select d from Device d where d.type.name=:type order by d.price desc", Device.class);
             query.setParameter("type", type);
-            query.setParameter("min", min);
-            query.setParameter("max", max);
         }
-
         return query.getResultList();
     }
+
+
 }
+
 
 
 

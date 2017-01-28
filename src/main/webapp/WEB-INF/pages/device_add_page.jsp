@@ -18,7 +18,7 @@
         <select class="selectpicker form-control form-type" name="type">
 
             <c:forEach items="${types}" var="type">
-                <option value="${type.id}">${type.name}</option>
+                <option value="${type.name}">${type.name}</option>
             </c:forEach>
         </select>
         <p/>
@@ -30,11 +30,11 @@
         <p/>
         <input class="form-control form-type" type="file" name="photo4" placeholder="photo4">
         <p/>
-        <input class="form-control form-type" type="text" name="name" placeholder="Name">
+        <input class="form-control form-type" type="text" name="name" placeholder="Name (Required)">
         <p/>
-        <input class="form-control form-type" type="text" name="manufacturer" placeholder="Manufacturer">
+        <input class="form-control form-type" type="text" name="manufacturer" placeholder="Manufacturer (Required)">
         <p/>
-        <input class="form-control form-type" type="text" name="price" placeholder="Price">
+        <input class="form-control form-type" type="text" name="price" placeholder="Price (Required)">
         <p/>
         <input class="form-control form-type" type="text" name="ram" placeholder="RAM">
         <p/>

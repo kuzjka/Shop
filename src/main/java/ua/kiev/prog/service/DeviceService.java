@@ -80,25 +80,24 @@ public class DeviceService {
      * Returns all devices of certain type from database.
      */
     @Transactional(readOnly = true)
-    public List<Device> listDevicesByType(Type type) {
-        return deviceDAO.typeFilter(type);
+    public List<Device> listDevicesByType(String type, String dir) {
+        return deviceDAO.typeFilter(type, dir);
     }
-
 
     /**
      * Returns type with  certain id from database.
      */
     @Transactional(readOnly = true)
-    public Type findType(int id) {
-        return typeDAO.findOne(id);
+    public Type findTypeById(int id) {
+        return typeDAO.findOne1(id);
     }
 
     /**
-     * Returns cart with  certain id from database.
+     * Returns type with  certain name from database.
      */
     @Transactional(readOnly = true)
-    public Cart findCart(int id) {
-        return cartDAO.findOne(id);
+    public Type findTypeByName(String name) {
+        return typeDAO.findOne2(name);
     }
 
     /**
@@ -135,8 +134,8 @@ public class DeviceService {
     }
 
     @Transactional(readOnly = true)
-    public List<Device> priceFilter(String type, int min, int max, String dir) {
-        return deviceDAO.priceFilter(type, min, max, dir);
+    public List<Device> priceSorter(String type, String dir) {
+        return deviceDAO.priceSorter(type, dir);
     }
 
     /**

@@ -13,7 +13,7 @@ public interface DeviceDAO {
 
     List<Device> list();
 
-    List<Device> typeFilter(Type type);
+    List<Device> typeFilter(String type, String dir);
 
     List<Device> manufacturerFilter(String type, List<String> manufacturers);
 
@@ -30,5 +30,5 @@ public interface DeviceDAO {
 
     List<Device> ramFilter(String type, List<Integer> ram, List<String> proc);
 
-    List<Device> priceFilter(String type, int min, int max, String dir);
+    List<Device> priceSorter (String type, String dir);
 }

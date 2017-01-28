@@ -49,42 +49,46 @@ public class MainController {
         return "one_device_page";
     }
 
-    @RequestMapping(value = "/type/{id}", method = RequestMethod.GET)
-    public String nameFilter(@PathVariable int id,
+    @RequestMapping(value = "/type/{type}/{dir}", method = RequestMethod.GET)
+    public String nameFilter(@PathVariable String type, @PathVariable String dir,
                              Model model) {
-        Type type = deviceService.findType(id);
 
-        model.addAttribute("devices", deviceService.listDevicesByType(type));
+        model.addAttribute("devices", deviceService.listDevicesByType(type, dir));
+
+        if (dir.equals("ascending")) {
+
+            model.addAttribute("namedir", "descending");
+            model.addAttribute("pricedir", "ascending");
+        } else if (dir.equals("descending")) {
+            model.addAttribute("namedir", "ascending");
+            model.addAttribute("pricedir", "ascending");
+        }
         model.addAttribute("carts", orderService.listCarts(findUser()));
         model.addAttribute("items", orderService.totalItems(findUser()));
-        return type.getName().toLowerCase();
+        return type.toLowerCase();
     }
 
-    @RequestMapping(value = "/name_filter/{type}", method = RequestMethod.GET)
-    public String nameFilter(@PathVariable String type,
-                             @RequestParam String name, Model model) {
-        model.addAttribute("devices", deviceService.searchDevices(type, name));
-        model.addAttribute("items", orderService.totalItems(findUser()));
-        if (type.equals("all")) {
-            return "index";
-        } else {
-            return type;
-        }
+@RequestMapping(value = "/price_sorter/{type}/{dir}")
+        public String priceSorter(@PathVariable String type,
+                                  @PathVariable String dir,
+                                  Model model
+                                  ){
+    model.addAttribute("devices", deviceService.priceSorter(type, dir));
+
+    if(dir.equals("ascending")){
+        model.addAttribute("namedir", "ascending");
+        model.addAttribute("pricedir", "descending");
+    }else if(dir.equals("descending")){
+        model.addAttribute("namedir", "ascending");
+        model.addAttribute("pricedir", "ascending");
     }
 
-    @RequestMapping(value = "/price_filter/{type}", method = RequestMethod.GET)
-    public String priceFilter(@RequestParam(required = false, defaultValue = "0") int min,
-                              @RequestParam(required = false, defaultValue = "-1") int max,
-                              @RequestParam String dir, @PathVariable String type, Model model) {
-        model.addAttribute("devices", deviceService.priceFilter(type, min, max, dir));
-        model.addAttribute("items", orderService.totalItems(findUser()));
+    model.addAttribute("carts", orderService.listCarts(findUser()));
+    model.addAttribute("items", orderService.totalItems(findUser()));
+    return type.toLowerCase();
+}
 
-        if (type.equals("all")) {
-            return "index";
-        } else {
-            return type;
-        }
-    }
+
 
     List<Integer> rams = new ArrayList<>();
     List<String> processors = new ArrayList<>();
@@ -156,11 +160,6 @@ public class MainController {
         return "smartphone";
     }
 
-    @RequestMapping("/photo_add_page")
-    public String photoAddPage(Model model) {
-        model.addAttribute("devices", deviceService.listDevicesByType(null));
-        return "photo_add_page";
-    }
 
     @RequestMapping(value = "/photo/{id}/{n}", method = RequestMethod.GET)
     @ResponseBody
@@ -174,12 +173,12 @@ public class MainController {
         return ResponseEntity.ok(photo.getBody());
     }
 
-    @RequestMapping(value = "/randomphoto/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/randomphoto/{name}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<byte[]> rnPhoto(@PathVariable int id) {
+    public ResponseEntity<byte[]> rnPhoto(@PathVariable String name) {
 
-        Type type = deviceService.findType(id);
-        List<Device> devices = deviceService.listDevicesByType(type);
+        Type type = deviceService.findTypeByName(name);
+        List<Device> devices = deviceService.priceSorter(type.getName(), "descending");
         Random random = new Random();
         Device device = devices.get(random.nextInt(devices.size()));
         List<Photo> photos = deviceService.getPhotos(device);
@@ -192,8 +191,9 @@ public class MainController {
 
         String username = auth.getName();
         User user = userService.findUser(username);
-        return user;}
+        return user;
     }
+}
 
 
 

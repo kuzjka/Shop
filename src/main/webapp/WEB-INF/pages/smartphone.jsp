@@ -58,7 +58,13 @@
             <h3><b>Filters</b></h3>
         </div>
         <div class="col-sm-10">
-            <h3><b>Smartphones</b></h3>
+            <h4><b>Smartphones; Sort by name:
+
+                <a href="/type/smartphone/${namedir}">${namedir};</a>
+
+                Sort by price:
+                <a href = "/price_sorter/smartphone/${pricedir}">${pricedir};</a></b></h4>
+        </div>
         </div>
     </div>
 </div>

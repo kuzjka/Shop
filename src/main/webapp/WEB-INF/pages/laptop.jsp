@@ -56,7 +56,12 @@
             <h3><b>Filters</b></h3>
         </div>
         <div class="col-sm-10">
-            <h3><b>Laptops</b></h3>
+            <h4><b>Laptops; Sort by name:
+
+                <a href="/type/laptop/${namedir}">${namedir};</a>
+
+                Sort by price:
+                <a href = "/price_sorter/laptop/${pricedir}">${pricedir};</a></b></h4>
         </div>
     </div>
 </div>

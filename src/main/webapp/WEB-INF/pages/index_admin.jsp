@@ -14,11 +14,9 @@
             background-color: crimson;
         }
 
-        .btn-info {
-            background-color: deepskyblue;
-        }
+
         .img-responsive{
-            width: 100px;
+            width: 50px;
             height: auto;
         }
     </style>

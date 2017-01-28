@@ -59,7 +59,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/adddevice", method = RequestMethod.POST)
-    public String deviceAdd(@RequestParam(value = "type") int id,
+    public String deviceAdd(@RequestParam(value = "type")String typeName,
                             @RequestParam(required = false) MultipartFile main_photo,
                             @RequestParam(required = false) MultipartFile photo2,
                             @RequestParam(required = false) MultipartFile photo3,
@@ -70,15 +70,16 @@ public class AdminController {
                             @RequestParam(value = "ram", required = false, defaultValue = "-1") String ram,
                             @RequestParam(value = "processor", required = false) String processor,
                             Model model) throws IOException {
-        Type type = deviceService.findType(id);
+        Type type = deviceService.findTypeByName(typeName);
         if (name.equals(null) || manufacturer.equals(null) || price == -1) {
             model.addAttribute("message", "fill all required fields!");
             model.addAttribute("state", "alert alert-danger");
+            model.addAttribute("types", deviceService.listTypes());
             return "device_add_page";
         }
         Device device = new Device(type, name, manufacturer, price,
                 Integer.parseInt(ram), processor);
-        List<Device> list = deviceService.listDevicesByType(type);
+        List<Device> list = deviceService.listDevicesByType(typeName, "ascending");
         int count = 0;
         for (Device dev : list) {
             if (dev.getName().equalsIgnoreCase(name)) {

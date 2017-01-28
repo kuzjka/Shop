@@ -25,11 +25,18 @@ public class TypeDAOImpl implements TypeDAO {
     }
 
     @Override
-    public Type findOne(int id) {
+    public Type findOne1(int id) {
         Query query = entityManager.createQuery("select t from Type t where t.id=:id", Type.class);
         query.setParameter("id", id);
         return (Type) query.getSingleResult();
 
+    }
+
+    @Override
+    public Type findOne2(String name) {
+        Query query = entityManager.createQuery("select t from Type t where t.name=:name", Type.class);
+        query.setParameter("name", name);
+        return (Type) query.getSingleResult();
     }
 
     @Override

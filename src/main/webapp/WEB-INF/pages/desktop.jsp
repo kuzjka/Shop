@@ -55,10 +55,14 @@
 <div class="container-fluid">
     <div class="raw">
         <div class="col-sm-2">
-            <h3><b>Filters</b></h3>
+            <h4><b>Filters</b></h4>
         </div>
         <div class="col-sm-10">
-            <h3><b>Desktops</b></h3>
+            <h4><b>Desktops; Sort by name:
+                <a href="/type/desktop/${namedir}">${namedir};</a>
+
+                Sort by price:
+                <a href = "/price_sorter/desktop/${pricedir}">${pricedir};</a></b></h4>
         </div>
     </div>
 </div>
