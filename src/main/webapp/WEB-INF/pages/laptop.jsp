@@ -73,7 +73,7 @@
                 </c:choose>
                 Sort by price:
                 <c:choose>
-                    <c:when test="${pricesort == 'ascending'}">
+                    <c:when test="${pricesort == 'asc'}">
                         cheap first; <a href="/price_sorter/laptop/desc">expensive first; </a>
                     </c:when>
                     <c:when test="${pricesort == 'desc'}">
