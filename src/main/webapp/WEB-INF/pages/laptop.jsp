@@ -56,15 +56,38 @@
             <h3><b>Filters</b></h3>
         </div>
         <div class="col-sm-10">
-            <h4><b>Laptops; Sort by name:
-
-                <a href="/type/laptop/${namedir}">${namedir};</a>
-
+            <c:set var="namesort" value="${sortbyname}"/>
+            <c:set var="pricesort" value="${sortbyprice}"/>
+            <h4><b>Smartphones; Sort by name:
+                <c:choose>
+                    <c:when test="${namesort == 'ascending'}">
+                        a - z; <a href="/type/laptop/descending">z - a; </a>
+                    </c:when>
+                    <c:when test="${namesort == 'descending'}">
+                        <a href="/type/laptop/ascending">a - z; </a> z - a;
+                    </c:when>
+                    <c:otherwise>
+                        <a href="/type/laptop/ascending">a - z; </a>
+                        <a href="/type/laptop/descending">z - a; </a>
+                    </c:otherwise>
+                </c:choose>
                 Sort by price:
-                <a href = "/price_sorter/laptop/${pricedir}">${pricedir};</a></b></h4>
+                <c:choose>
+                    <c:when test="${pricesort == 'ascending'}">
+                        cheap first; <a href="/price_sorter/laptop/descending">expensive first; </a>
+                    </c:when>
+                    <c:when test="${pricesort == 'descending'}">
+                        <a href="/price_sorter/laptop/ascending">cheap first; </a>expensive first; </c:when>
+                    <c:otherwise>
+                        <a href="/price_sorter/laptop/ascending">cheap first; </a>
+                        <a href="/price_sorter/laptop/descending">expensive first; </a>
+                    </c:otherwise>
+                </c:choose></b></h4>
         </div>
     </div>
+    <br/>
 </div>
+
 <c:set var="cart" value="${carts}"/>
 <c:set var="d" value="${devices}"/>
 <c:set var="size" value="${fn:length(d)}"/>

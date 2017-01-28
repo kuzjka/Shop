@@ -58,13 +58,37 @@
             <h4><b>Filters</b></h4>
         </div>
         <div class="col-sm-10">
+            <c:set var="namesort" value="${sortbyname}"/>
+            <c:set var="pricesort" value="${sortbyprice}"/>
             <h4><b>Desktops; Sort by name:
-                <a href="/type/desktop/${namedir}">${namedir};</a>
-
+                <c:choose>
+                    <c:when test="${namesort == 'ascending'}">
+                        a - z; <a href="/type/desktop/descending">z - a; </a>
+                    </c:when>
+                    <c:when test="${namesort == 'descending'}">
+                        <a href="/type/desktop/ascending">a - z; </a> z - a;
+                    </c:when>
+                    <c:otherwise>
+                        <a href="/type/desktop/ascending">a - z; </a>
+                        <a href="/type/desktop/descending">z - a; </a>
+                    </c:otherwise>
+                </c:choose>
                 Sort by price:
-                <a href = "/price_sorter/desktop/${pricedir}">${pricedir};</a></b></h4>
+                <c:choose>
+                    <c:when test="${pricesort == 'ascending'}">
+                        cheap first; <a href="/price_sorter/desktop/descending">expensive first; </a>
+                    </c:when>
+                    <c:when test="${pricesort == 'descending'}">
+                        <a href="/price_sorter/desktop/ascending">cheap first;</a>expensive first;
+                    </c:when>
+                    <c:otherwise>
+                        <a href="/price_sorter/desktop/ascending">cheap first; </a>
+                        <a href="/price_sorter/desktop/descending">expensive first; </a>
+                    </c:otherwise>
+                </c:choose></b></h4>
         </div>
     </div>
+    <br/>
 </div>
 <c:set var="cart" value="${carts}"/>
 <c:set var="d" value="${devices}"/>
@@ -181,8 +205,9 @@
                     <div class="panel-heading" align="center">
                         <a href="/onedevice/${device.id}"><h4><b>${device.name}</b></h4></a></div>
                     <div class="panel-body">
-                        <a href="/onedevice/${device.id}"><img src="/photo/${device.id}/0" style="max-height: 120px; width: auto" float="left"
-                             alt="Image"/></a>
+                        <a href="/onedevice/${device.id}"><img src="/photo/${device.id}/0"
+                                                               style="max-height: 120px; width: auto" float="left"
+                                                               alt="Image"/></a>
                         <sec:authorize access="!hasAuthority('USER') and !hasAuthority('ADMIN')">
                             login to buy online
                         </sec:authorize>
@@ -208,8 +233,9 @@
                     <div class="panel-heading" align="center">
                         <a href="/onedevice/${device.id}"><h4><b>${device.name}</b></h4></a></div>
                     <div class="panel-body">
-                        <a href="/onedevice/${device.id}"><img src="/photo/${device.id}/0" style="max-height: 120px; width: auto" float="left"
-                             alt="Image"/></a>
+                        <a href="/onedevice/${device.id}"><img src="/photo/${device.id}/0"
+                                                               style="max-height: 120px; width: auto" float="left"
+                                                               alt="Image"/></a>
                         <sec:authorize access="!hasAuthority('USER') and !hasAuthority('ADMIN')">
                             login to buy online
                         </sec:authorize>
@@ -234,8 +260,9 @@
                     <div class="panel-heading" align="center">
                         <a href="/onedevice/${device.id}"><h4><b>${device.name}</b></h4></a></div>
                     <div class="panel-body">
-                        <a href="/onedevice/${device.id}"><img src="/photo/${device.id}/0" style="max-height: 120px; width: auto" float="left"
-                             alt="Image"/></a>
+                        <a href="/onedevice/${device.id}"><img src="/photo/${device.id}/0"
+                                                               style="max-height: 120px; width: auto" float="left"
+                                                               alt="Image"/></a>
                         <sec:authorize access="!hasAuthority('USER') and !hasAuthority('ADMIN')">
                             login to buy online
                         </sec:authorize>

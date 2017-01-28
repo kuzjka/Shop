@@ -45,50 +45,32 @@ public class MainController {
         model.addAttribute("d", d);
         model.addAttribute("c", orderService.listCarts(findUser()));
         model.addAttribute("items", orderService.totalItems(findUser()));
-
         return "one_device_page";
     }
 
     @RequestMapping(value = "/type/{type}/{dir}", method = RequestMethod.GET)
     public String nameFilter(@PathVariable String type, @PathVariable String dir,
                              Model model) {
-
         model.addAttribute("devices", deviceService.listDevicesByType(type, dir));
-
-        if (dir.equals("ascending")) {
-
-            model.addAttribute("namedir", "descending");
-            model.addAttribute("pricedir", "ascending");
-        } else if (dir.equals("descending")) {
-            model.addAttribute("namedir", "ascending");
-            model.addAttribute("pricedir", "ascending");
-        }
+        model.addAttribute("sortbyname", dir);
         model.addAttribute("carts", orderService.listCarts(findUser()));
         model.addAttribute("items", orderService.totalItems(findUser()));
         return type.toLowerCase();
     }
 
-@RequestMapping(value = "/price_sorter/{type}/{dir}")
-        public String priceSorter(@PathVariable String type,
-                                  @PathVariable String dir,
-                                  Model model
-                                  ){
-    model.addAttribute("devices", deviceService.priceSorter(type, dir));
+    @RequestMapping(value = "/price_sorter/{type}/{dir}")
+    public String priceSorter(@PathVariable String type,
+                              @PathVariable String dir,
+                              Model model
+    ) {
+        model.addAttribute("devices", deviceService.priceSorter(type, dir));
 
-    if(dir.equals("ascending")){
-        model.addAttribute("namedir", "ascending");
-        model.addAttribute("pricedir", "descending");
-    }else if(dir.equals("descending")){
-        model.addAttribute("namedir", "ascending");
-        model.addAttribute("pricedir", "ascending");
+        model.addAttribute("sortbyprice", dir);
+
+        model.addAttribute("carts", orderService.listCarts(findUser()));
+        model.addAttribute("items", orderService.totalItems(findUser()));
+        return type.toLowerCase();
     }
-
-    model.addAttribute("carts", orderService.listCarts(findUser()));
-    model.addAttribute("items", orderService.totalItems(findUser()));
-    return type.toLowerCase();
-}
-
-
 
     List<Integer> rams = new ArrayList<>();
     List<String> processors = new ArrayList<>();
@@ -100,7 +82,6 @@ public class MainController {
                             @PathVariable String sram,
                             Model model
     ) {
-
         Integer ram = Integer.parseInt(sram);
         if (!rams.contains(ram)) {
             rams.add(ram);
@@ -109,6 +90,7 @@ public class MainController {
         }
         model.addAttribute("rams", rams);
         model.addAttribute("processors", processors);
+        model.addAttribute("sortbyname", "ascending");
         model.addAttribute("items", orderService.totalItems(findUser()));
         model.addAttribute("devices", deviceService.ramFilter(type, rams, processors));
         if (type.equals("all")) {
@@ -120,20 +102,18 @@ public class MainController {
 
     @RequestMapping(value = "/proc_filter/{type}/{proc}",
             method = RequestMethod.GET)
-
     public String processorFilter(@PathVariable String type,
                                   @PathVariable String proc,
                                   Model model
     ) {
-
         if (!processors.contains(proc)) {
             processors.add(proc);
         } else {
             processors.remove(proc);
         }
-
         model.addAttribute("rams", rams);
         model.addAttribute("processors", processors);
+        model.addAttribute("sortbyname", "ascending");
         model.addAttribute("items", orderService.totalItems(findUser()));
         model.addAttribute("devices", deviceService.ramFilter(type, rams, processors));
         if (type.equals("all")) {
@@ -155,6 +135,7 @@ public class MainController {
             manufacturers.remove(manufacturer);
         }
         model.addAttribute("manufacturers", manufacturers);
+        model.addAttribute("sortbyname", "ascending");
         model.addAttribute("items", orderService.totalItems(findUser()));
         model.addAttribute("devices", deviceService.manufacturerFilter(type, manufacturers));
         return "smartphone";

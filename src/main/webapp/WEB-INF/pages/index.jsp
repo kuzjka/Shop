@@ -66,10 +66,10 @@
                 <c:if test="${status2.index - status1.index == 0}">
 
                     <div class="col-sm-4">
-                        <div class="panel panel-default">
+                        <div class="panel panel-primary">
                             <div class="panel-heading" align="center">
-                                <a href="/type/${type.name}/ascending"><h4><b>${type.name}</b></h4></a></div>
-                            <div class="panel-body">
+                                <a href="/type/${type.name}/ascending"><h4><b>${type.name}s</b></h4></a></div>
+                            <div class="panel-body" align="center">
                                 <a href="/type/${type.name}/ascending"><img src="/randomphoto/${type.name}" class="img-responsive"
                                                                 alt="Image"/></a>
                             </div>
@@ -79,10 +79,10 @@
                 </c:if>
                 <c:if test="${status2.index - status1.index == 1}">
                     <div class="col-sm-4">
-                        <div class="panel panel-default">
+                        <div class="panel panel-primary">
                             <div class="panel-heading" align="center">
-                                <a href="/type/${type.name}/ascending"><h4><b>${type.name}</b></h4></a></div>
-                            <div class="panel-body">
+                                <a href="/type/${type.name}/ascending"><h4><b>${type.name}s</b></h4></a></div>
+                            <div class="panel-body" align="center">
                                 <a href="/type/${type.name}/ascending"><img src="/randomphoto/${type.name}" class="img-responsive"
                                                                 alt="Image"/></a>
                             </div>
@@ -91,10 +91,10 @@
                 </c:if>
                 <c:if test="${status2.index - status1.index == 2}">
                     <div class="col-sm-4">
-                        <div class="panel panel-default">
+                        <div class="panel panel-primary">
                             <div class="panel-heading" align="center">
-                                <a href="/type/${type.name}/ascending"><h4><b>${type.name}</b></h4></a></div>
-                            <div class="panel-body">
+                                <a href="/type/${type.name}/ascending"><h4><b>${type.name}s</b></h4></a></div>
+                            <div class="panel-body" align="center">
                                 <a href="/type/${type.name}/ascending"><img src="/randomphoto/${type.name}" class="img-responsive"
                                                                 alt="Image"/></a>
                             </div>
