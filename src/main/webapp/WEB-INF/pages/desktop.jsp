@@ -62,28 +62,26 @@
             <c:set var="pricesort" value="${sortbyprice}"/>
             <h4><b>Desktops; Sort by name:
                 <c:choose>
-                    <c:when test="${namesort == 'asc'}">
-                        a - z; <a href="/type/desktop/desc">z - a; </a>
+                    <c:when test="${namesort == 'asc'}">a - z; <a href="/type/desktop/desc">z - a;</a>
                     </c:when>
                     <c:when test="${namesort == 'desc'}">
-                        <a href="/type/desktop/asc">a - z; </a> z - a;
-                    </c:when>
+                        <a href="/type/desktop/asc">a - z;</a> z - a;</c:when>
                     <c:otherwise>
-                        <a href="/type/desktop/asc">a - z; </a>
-                        <a href="/type/desktop/desc">z - a; </a>
+                        <a href="/type/desktop/asc">a - z;</a>
+                        <a href="/type/desktop/desc">z - a;</a>
                     </c:otherwise>
                 </c:choose>
                 Sort by price:
                 <c:choose>
                     <c:when test="${pricesort == 'asc'}">
-                        cheap first; <a href="/price_sorter/desktop/desc">expensive first; </a>
+                        cheap first; <a href="/price_sorter/desktop/desc">expensive first;</a>
                     </c:when>
                     <c:when test="${pricesort == 'desc'}">
-                        <a href="/price_sorter/desktop/asc">cheap first;</a>expensive first;
+                        <a href="/price_sorter/desktop/asc">cheap first;</a> expensive first;
                     </c:when>
                     <c:otherwise>
-                        <a href="/price_sorter/desktop/asc">cheap first; </a>
-                        <a href="/price_sorter/desktop/desc">expensive first; </a>
+                        <a href="/price_sorter/desktop/asc">cheap first;</a>
+                        <a href="/price_sorter/desktop/desc">expensive first;</a>
                     </c:otherwise>
                 </c:choose></b></h4>
         </div>

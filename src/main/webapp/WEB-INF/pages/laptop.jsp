@@ -64,8 +64,7 @@
                         a - z; <a href="/type/laptop/desc">z - a; </a>
                     </c:when>
                     <c:when test="${namesort == 'desc'}">
-                        <a href="/type/laptop/asc">a - z; </a> z - a;
-                    </c:when>
+                        <a href="/type/laptop/asc">a - z; </a>z - a; </c:when>
                     <c:otherwise>
                         <a href="/type/laptop/asc">a - z; </a>
                         <a href="/type/laptop/desc">z - a; </a>
