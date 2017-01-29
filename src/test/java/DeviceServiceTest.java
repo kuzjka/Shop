@@ -34,17 +34,13 @@ public class DeviceServiceTest {
     @Test
     public void listDevicesByTypeTest() {
         Type smartphone = new Type("Smartphone");
-        Type desktop = new Type("Desktop");
-        Device iphone7 = new Device(smartphone, "iPhone7", "Apple", 30099, -1, null);
-        Device everest_9080 = new Device(desktop, "Everest 90_80", "Everest", 25000, 8, "i7");
+        Device iphone = new Device(smartphone, "iPhone7", "Apple", 30099, -1, null);
+        Device samsung = new Device(smartphone, "Galaxy S7", "Samsung", 22999, -1, null);
         List<Device> list = new ArrayList<>();
-        list.add(iphone7);
-        list.add(everest_9080);
-
-        List<Device> typeList = new ArrayList<>();
-        typeList.add(iphone7);
-        when(dao.typeFilter(smartphone.getName(), "asc")).thenReturn(typeList);
-        Assert.assertEquals(service.listDevicesByType(smartphone.getName(), "asc"), typeList);
+        list.add(iphone);
+        list.add(samsung);
+        when(dao.typeFilter(smartphone.getName(), "asc")).thenReturn(list);
+        Assert.assertEquals(service.listDevicesByType(smartphone.getName(), "asc"), list);
         verify(dao).typeFilter(smartphone.getName(), "asc");
     }
 }
