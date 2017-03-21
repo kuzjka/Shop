@@ -12,7 +12,28 @@
     <link rel="stylesheet" type="text/css" href="../../css/mystyle.css" media="all"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
 
+
+    </style>
+    <script>
+        function showHint(str) {
+            if (str.length == 0) {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            } else {
+
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("txtHint").innerHTML = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "/ajax/" + str, true);
+                xmlhttp.send();
+            }
+        }
+    </script>
 </head>
 
 <nav align="center" class="navbar navbar-default navbar-static-top">
@@ -23,7 +44,6 @@
                 <a class="navbar-brand" href="/">Shop</a>
             </div>
             <li><a class="active" href="/"><span class="glyphicon glyphicon-home"></span></a></li>
-
             <sec:authorize url="/user">
                 <li><a class="default" href="/cart_add_page">
                     <span class="glyphicon glyphicon-shopping-cart"></span>Cart
@@ -32,9 +52,11 @@
                 <li><a class="default" href="/result_page">Orders</a></li>
             </sec:authorize>
 
-
             <li><a class="default" href="/admin">Admin</a></li>
+
+
         </ul>
+
         <ul class="nav navbar-nav navbar-right">
             <li><a class="default" href="/register_page">
                 <span class="glyphicon glyphicon-user"></span> Sign Up</a>
@@ -54,8 +76,15 @@
     </div>
 </nav>
 
+   <div align="center"><form>
 
-<p></p>
+        <p><input type="text" onkeyup="showHint(this.value)" placeholder="Search"></p>
+
+    </form>
+
+
+    <span id="txtHint">null</span></div>
+
 <c:set var="t" value="${types}"/>
 <c:set var="size" value="${fn:length(t)}"/>
 <div class="container">
@@ -70,8 +99,9 @@
                             <div class="panel-heading" align="center">
                                 <a href="/type/${type.name}/asc"><h4><b>${type.name}s</b></h4></a></div>
                             <div class="panel-body" align="center">
-                                <a href="/type/${type.name}/asc"><img src="/randomphoto/${type.name}" class="img-responsive"
-                                                                alt="Image"/></a>
+                                <a href="/type/${type.name}/asc"><img src="/randomphoto/${type.name}"
+                                                                      class="img-responsive"
+                                                                      alt="Image"/></a>
                             </div>
 
                         </div>
@@ -83,8 +113,9 @@
                             <div class="panel-heading" align="center">
                                 <a href="/type/${type.name}/asc"><h4><b>${type.name}s</b></h4></a></div>
                             <div class="panel-body" align="center">
-                                <a href="/type/${type.name}/asc"><img src="/randomphoto/${type.name}" class="img-responsive"
-                                                                alt="Image"/></a>
+                                <a href="/type/${type.name}/asc"><img src="/randomphoto/${type.name}"
+                                                                      class="img-responsive"
+                                                                      alt="Image"/></a>
                             </div>
                         </div>
                     </div>
@@ -95,8 +126,9 @@
                             <div class="panel-heading" align="center">
                                 <a href="/type/${type.name}/asc"><h4><b>${type.name}s</b></h4></a></div>
                             <div class="panel-body" align="center">
-                                <a href="/type/${type.name}/asc"><img src="/randomphoto/${type.name}" class="img-responsive"
-                                                                alt="Image"/></a>
+                                <a href="/type/${type.name}/asc"><img src="/randomphoto/${type.name}"
+                                                                      class="img-responsive"
+                                                                      alt="Image"/></a>
                             </div>
 
                         </div>

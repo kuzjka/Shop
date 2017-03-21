@@ -76,12 +76,12 @@ public class DeviceDAOImpl implements DeviceDAO {
         if (type.equals("all")) {
             Query query = entityManager.createQuery("SELECT d FROM Device d " +
                     " where d.name LIKE :pattern", Device.class);
-            query.setParameter("pattern", "%" + pattern + "%");
+            query.setParameter("pattern", pattern + "%");
             return (List<Device>) query.getResultList();
         } else {
             Query query = entityManager.createQuery("SELECT d FROM Device d " +
                     " where d.name LIKE :pattern and d.type.name=:type", Device.class);
-            query.setParameter("pattern", "%" + pattern + "%");
+            query.setParameter("pattern", pattern + "%");
             query.setParameter("type", type);
             return (List<Device>) query.getResultList();
         }

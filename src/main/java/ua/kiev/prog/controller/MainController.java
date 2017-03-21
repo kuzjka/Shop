@@ -40,12 +40,27 @@ public class MainController {
     }
 
     @RequestMapping(value = "/onedevice/{id}", method = RequestMethod.GET)
-    public String oneDevice(@PathVariable int id, Model model) {
+    public String oneDeviceById(@PathVariable int id, Model model) {
         Device d = deviceService.findDeviceById(id);
         model.addAttribute("d", d);
         model.addAttribute("c", orderService.listCarts(findUser()));
         model.addAttribute("items", orderService.totalItems(findUser()));
         return "one_device_page";
+    }
+
+
+
+    @RequestMapping(value = "/ajax/{chars}", method = RequestMethod.GET)
+    @ResponseBody
+    String getAjax(@PathVariable String chars) {
+        List<Device> list = deviceService.searchDevices("all", chars);
+        StringBuilder names = new StringBuilder();
+        for (Device device : list) {
+
+            names.append("<p><a href=" + "/onedevice/"  + device.getId() +  ">" + device.getName() + "</a></p>");
+        }
+
+        return names.toString();
     }
 
     @RequestMapping(value = "/type/{type}/{dir}", method = RequestMethod.GET)
