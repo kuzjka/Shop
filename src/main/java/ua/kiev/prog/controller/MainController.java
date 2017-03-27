@@ -49,15 +49,16 @@ public class MainController {
     }
 
 
-
     @RequestMapping(value = "/ajax/{chars}", method = RequestMethod.GET)
     @ResponseBody
     String getAjax(@PathVariable String chars) {
         List<Device> list = deviceService.searchDevices("all", chars);
         StringBuilder names = new StringBuilder();
-        for (Device device : list) {
 
-            names.append("<p><a href=" + "/onedevice/"  + device.getId() +  ">" + device.getName() + "</a></p>");
+            for(Device device : list){
+
+
+            names.append("<tr><td><b><a href=" + "/onedevice/" + device.getId() + ">" + device.getName() + "</a></b></td></tr>");
         }
 
         return names.toString();

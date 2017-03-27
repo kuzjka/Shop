@@ -50,3 +50,7 @@ ul.navbar-nav a.active:hover {
     color: white;
 }
 
+.table-bordered a:hover {
+    background-color: blue;
+    color: white;
+}

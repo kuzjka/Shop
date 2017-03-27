@@ -8,25 +8,25 @@
     <title>Title</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../../css/mystyle.css" media="all"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <style>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    </style>
     <script>
+
         function showHint(str) {
             if (str.length == 0) {
-                document.getElementById("txtHint").innerHTML = "";
+                $("#txtHint").hide();
                 return;
             } else {
 
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("txtHint").innerHTML = this.responseText;
+                        $("#txtHint").show().html(this.responseText);
+
                     }
                 };
                 xmlhttp.open("GET", "/ajax/" + str, true);
@@ -34,8 +34,10 @@
             }
         }
     </script>
-</head>
 
+
+</head>
+<body>
 <nav align="center" class="navbar navbar-default navbar-static-top">
     <div class="container">
 
@@ -76,18 +78,19 @@
     </div>
 </nav>
 
-   <div align="center"><form>
-
-        <p><input type="text" onkeyup="showHint(this.value)" placeholder="Search"></p>
-
-    </form>
-
-
-    <span id="txtHint">null</span></div>
-
-<c:set var="t" value="${types}"/>
-<c:set var="size" value="${fn:length(t)}"/>
 <div class="container">
+
+    <div class="row">
+        <label class="control-label col-sm-2" for="search">Type text for suggestions:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="search" onkeyup="showHint(this.value)" placeholder="Search"/>
+            <table class="table table-bordered" id="txtHint"></table>
+        </div>
+    </div>
+
+
+    <c:set var="t" value="${types}"/>
+    <c:set var="size" value="${fn:length(t)}"/>
     <c:forEach begin="${0}" end="${size}" step="${3}" varStatus="status1">
 
         <div class="row">
@@ -139,6 +142,7 @@
         </div>
     </c:forEach>
 </div>
-
+</div>
+</div>
 </body>
 </html>
