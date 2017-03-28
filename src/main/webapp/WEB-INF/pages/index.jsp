@@ -35,7 +35,12 @@
         }
     </script>
 
-
+<style>
+    #txtHint a:hover {
+        background-color: blue;
+        color: white;
+    }
+</style>
 </head>
 <body>
 <nav align="center" class="navbar navbar-default navbar-static-top">
@@ -81,13 +86,13 @@
 <div class="container">
 
     <div class="row">
-        <label class="control-label col-sm-2" for="search">Type text for suggestions:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="search" onkeyup="showHint(this.value)" placeholder="Search"/>
-            <table class="table table-bordered" id="txtHint"></table>
-        </div>
+        <div class="control-label col-sm-4"></div>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="search" onkeyup="showHint(this.value)" placeholder="Type text for suggestions"/>
+            <span id="txtHint"></span>
+        </div><div class="col-sm-4"></div>
     </div>
-
+<br/>
 
     <c:set var="t" value="${types}"/>
     <c:set var="size" value="${fn:length(t)}"/>

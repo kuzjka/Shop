@@ -54,13 +54,13 @@ public class MainController {
     String getAjax(@PathVariable String chars) {
         List<Device> list = deviceService.searchDevices("all", chars);
         StringBuilder names = new StringBuilder();
-
+        names.append("<table class='table table-bordered'>");
             for(Device device : list){
 
 
-            names.append("<tr><td><b><a href=" + "/onedevice/" + device.getId() + ">" + device.getName() + "</a></b></td></tr>");
+            names.append("<tr><td><b><a href=" + "/onedevice/" + device.getId() + ">" + device.getName() + "</a></b></b></td></tr>");
         }
-
+        names.append("</table>");
         return names.toString();
     }
 
