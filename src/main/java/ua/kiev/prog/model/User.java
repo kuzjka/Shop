@@ -4,30 +4,37 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     private String username;
     private String password;
-    boolean enabled;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Order> orders;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Cart> carts;
+    @ManyToMany
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
 
-    /**
-     * Class constructor (default).
-     */
     public User() {
     }
 
-    /**
-     * Class constructor with parameters.
-     */
-    public User(String username, String password, boolean enabled) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.enabled = enabled;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -46,27 +53,12 @@ public class User {
         this.password = password;
     }
 
-    public boolean isEnabled() {
-        return enabled;
+
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
-    public List<Cart> getCarts() {
-        return carts;
-    }
-
-    public void setCarts(List<Cart> carts) {
-        this.carts = carts;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }

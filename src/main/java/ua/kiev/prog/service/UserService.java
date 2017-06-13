@@ -2,27 +2,36 @@ package ua.kiev.prog.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.kiev.prog.dao.RoleDAO;
-import ua.kiev.prog.dao.UserDAO;
+import ua.kiev.prog.repository.RoleRepository;
+import ua.kiev.prog.repository.UserRepository;
 import ua.kiev.prog.model.Role;
 import ua.kiev.prog.model.User;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
+
     @Autowired
-    private UserDAO userDAO;
+    private UserRepository userRepository;
     @Autowired
-    private RoleDAO roleDAO;
+    private RoleRepository roleRepository;
 
     /**
      * Adds new user to database.
      */
     @Transactional
     public void addUser(User user) {
-        userDAO.add(user);
+        userRepository.save(user);
     }
 
     /**
@@ -30,7 +39,7 @@ public class UserService {
      */
     @Transactional
     public void addRole(Role role) {
-        roleDAO.add(role);
+        roleRepository.save(role);
     }
 
     /**
@@ -38,7 +47,7 @@ public class UserService {
      */
     @Transactional(readOnly = true)
     public User findUser(String username) {
-        return userDAO.findOne(username);
+        return userRepository.findByUsername(username);
     }
 
     /**
@@ -46,6 +55,19 @@ public class UserService {
      */
     @Transactional(readOnly = true)
     public List<User> listUsers(String username) {
-        return userDAO.list(username);
+        return (List<User>) userRepository.findByUsername(username);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        for (Role role : user.getRoles()){
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 }

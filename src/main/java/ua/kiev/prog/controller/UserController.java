@@ -48,17 +48,18 @@ public class UserController {
     List<User> users = new ArrayList<>();
 
 
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@RequestParam String role, @RequestParam String username,
                            @RequestParam String password1, @RequestParam
                            String password2, Model model) {
 
-        users = userService.listUsers(username);
-        if (users.size() == 0 && password1.equals(password2)) {
+
+        if (userService.findUser(username)!=null && password1.equals(password2)) {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String hashedPassword = passwordEncoder.encode(password2);
-            userService.addUser(new User(username, hashedPassword, true));
-            userService.addRole(new Role(username, role));
+            userService.addUser(new User(username, hashedPassword));
+            userService.addRole(new Role(role));
             model.addAttribute("message", "registration success!");
             model.addAttribute("state", "alert alert-success");
             return  "login_page";

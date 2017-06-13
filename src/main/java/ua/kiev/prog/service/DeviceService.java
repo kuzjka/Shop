@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.kiev.prog.model.*;
-import ua.kiev.prog.dao.*;
+import ua.kiev.prog.repository.*;
 
 import java.util.List;
 
 @Service
 public class DeviceService {
     @Autowired
-    private DeviceDAO deviceDAO;
+    private DeviceRepository deviceRepository;
     @Autowired
-    private TypeDAO typeDAO;
+    private TypeRepository typeRepository;
     @Autowired
-    private CartDAO cartDAO;
+    private CartRepository cartRepository;
     @Autowired
-    private PhotoDao photoDao;
+    private PhotoRepository photoRepository;
 
     /**
      * Adds device to database.
      */
     @Transactional
     public void addDevice(Device device) {
-        deviceDAO.add(device);
+        deviceRepository.save(device);
     }
 
     /**
@@ -32,7 +32,7 @@ public class DeviceService {
      */
     @Transactional
     public void addType(Type type) {
-        typeDAO.add(type);
+        typeRepository.save(type);
     }
 
 
@@ -41,7 +41,7 @@ public class DeviceService {
      */
     @Transactional
     public void addPhoto(Photo photo) {
-        photoDao.add(photo);
+        photoRepository.save(photo);
     }
 
     /**
@@ -49,7 +49,7 @@ public class DeviceService {
      */
     @Transactional
     public void deleteCart(int id) {
-        cartDAO.delete(id);
+        cartRepository.delete(id);
     }
 
     /**
@@ -57,7 +57,7 @@ public class DeviceService {
      */
     @Transactional
     public void deleteDevice(int id) {
-        deviceDAO.delete(id);
+        deviceRepository.delete(id);
     }
 
     /**
@@ -65,7 +65,7 @@ public class DeviceService {
      */
     @Transactional(readOnly = true)
     public List<Type> listTypes() {
-        return typeDAO.list();
+        return (List<Type>) typeRepository.findAll();
     }
 
     /**
@@ -73,7 +73,7 @@ public class DeviceService {
      */
     @Transactional(readOnly = true)
     public List<Device> listDevices() {
-        return deviceDAO.list();
+        return (List<Device>) deviceRepository.findAll();
     }
 
     /**
@@ -81,7 +81,13 @@ public class DeviceService {
      */
     @Transactional(readOnly = true)
     public List<Device> listDevicesByType(String type, String dir) {
-        return deviceDAO.typeFilter(type, dir);
+        List<Device>list=null;
+        if(dir.equals("asc")){
+        list= deviceRepository.findByTypeOrderByTypeNameAsc(type);}
+        else if(dir.equals("desc")){
+            list= deviceRepository.findByTypeOrderByTypeNameDesc(type);
+        }
+        return list;
     }
 
     /**
@@ -89,7 +95,7 @@ public class DeviceService {
      */
     @Transactional(readOnly = true)
     public Type findTypeById(int id) {
-        return typeDAO.findOne1(id);
+        return typeRepository.findOne(id);
     }
 
     /**
@@ -97,7 +103,7 @@ public class DeviceService {
      */
     @Transactional(readOnly = true)
     public Type findTypeByName(String name) {
-        return typeDAO.findOne2(name);
+        return typeRepository.findByName(name);
     }
 
     /**
@@ -105,7 +111,7 @@ public class DeviceService {
      */
     @Transactional(readOnly = true)
     public Device findDeviceByName(String name) {
-        return deviceDAO.findDevice2(name);
+        return deviceRepository.findByName(name);
     }
 
     /**
@@ -113,7 +119,7 @@ public class DeviceService {
      */
     @Transactional(readOnly = true)
     public Device findDeviceById(int id) {
-        return deviceDAO.findDevice1(id);
+        return deviceRepository.findOne(id);
     }
 
     /**
@@ -121,7 +127,7 @@ public class DeviceService {
      */
     @Transactional(readOnly = true)
     public List<Device> searchDevices(String type, String pattern) {
-        return deviceDAO.patternFilter(type, pattern);
+        return (List<Device>) deviceRepository.findByName(pattern);
     }
 
 
@@ -130,27 +136,34 @@ public class DeviceService {
      */
     @Transactional
     public List<Photo> getPhotos(Device device) {
-        return photoDao.listPhotos(device);
+        return photoRepository.findByDeviceId(device.getId());
     }
 
     @Transactional(readOnly = true)
     public List<Device> priceSorter(String type, String dir) {
-        return deviceDAO.priceSorter(type, dir);
+        List<Device>list=null;
+        if(dir.equals("asc")){
+            list = deviceRepository.findByTypeOrderByPriceAsc(type);
+        }
+        if(dir.equals("desc")){
+            list = deviceRepository.findByTypeOrderByPriceDesc(type);
+        }
+        return list;
     }
 
     /**
      * Returns all devices with certain amount of ram and certain type of processor.
      */
-    @Transactional(readOnly = true)
+  /*  @Transactional(readOnly = true)
     public List<Device> ramFilter(String type, List<Integer> ram, List<String> proc) {
-        return deviceDAO.ramFilter(type, ram, proc);
+        return deviceRepository
     }
 
     /**
      * Returns all devices with certain manufacturer from database.
      */
-    @Transactional(readOnly = true)
+   /* @Transactional(readOnly = true)
     public List<Device> manufacturerFilter(String type, List<String> manufacturers) {
-        return deviceDAO.manufacturerFilter(type, manufacturers);
-    }
+        return deviceRepository.manufacturerFilter(type, manufacturers);
+    } */
 }

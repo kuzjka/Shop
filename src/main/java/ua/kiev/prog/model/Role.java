@@ -1,53 +1,48 @@
 package ua.kiev.prog.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "user_roles")
+@Table(name = "user_role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_role_id")
-    private int id;
-    private String username;
-    private String role;
+    private Integer id;
+    private String name;
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
 
-    /**
-     * Class constructor (default).
-     */
     public Role() {
     }
 
-    /**
-     * Class constructor with parameters.
-     */
-    public Role(String username, String role) {
-        this.username = username;
-        this.role = role;
+    public Role(String name) {
+        this.name = name;
 
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getName() {
+        return name;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUsername() {
-        return username;
+
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
