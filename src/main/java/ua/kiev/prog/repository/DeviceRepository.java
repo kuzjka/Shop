@@ -12,8 +12,8 @@ public interface DeviceRepository extends CrudRepository<Device, Integer> {
         @Query(value = "select * from devices where name like %?1", nativeQuery = true)
         Device findByName(String name);
 
-        List<Device> findByTypeOrderByTypeNameAsc(String type);
-        List<Device> findByTypeOrderByTypeNameDesc(String type);
+        List<Device> findByTypeNameOrderByNameAsc(String type);
+        List<Device> findByTypeNameOrderByNameDesc(String type);
         List<Device> findByTypeOrderByPriceAsc(String type);
         List<Device> findByTypeOrderByPriceDesc(String type);
 

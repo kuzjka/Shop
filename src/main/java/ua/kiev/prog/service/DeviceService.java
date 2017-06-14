@@ -83,9 +83,9 @@ public class DeviceService {
     public List<Device> listDevicesByType(String type, String dir) {
         List<Device>list=null;
         if(dir.equals("asc")){
-        list= deviceRepository.findByTypeOrderByTypeNameAsc(type);}
+        list= deviceRepository.findByTypeNameOrderByNameAsc(type);}
         else if(dir.equals("desc")){
-            list= deviceRepository.findByTypeOrderByTypeNameDesc(type);
+            list= deviceRepository.findByTypeNameOrderByNameDesc(type);
         }
         return list;
     }

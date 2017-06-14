@@ -79,7 +79,7 @@ public class AdminController {
         }
         Device device = new Device(type, name, manufacturer, price,
                 Integer.parseInt(ram), processor);
-        List<Device> list = deviceService.listDevicesByType(typeName, "ascending");
+        List<Device> list = deviceService.listDevicesByType(typeName, "asc");
         int count = 0;
         for (Device dev : list) {
             if (dev.getName().equalsIgnoreCase(name)) {
