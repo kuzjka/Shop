@@ -8,9 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.kiev.prog.model.*;
+import ua.kiev.prog.security.UserService;
 import ua.kiev.prog.service.DeviceService;
 import ua.kiev.prog.service.OrderService;
-import ua.kiev.prog.service.UserService;
 
 import java.util.*;
 
@@ -187,7 +187,7 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         String username = auth.getName();
-        User user =  userService.findUser(username);
+        User user =  userService.findByUsername(username);
 
         return user;
     }

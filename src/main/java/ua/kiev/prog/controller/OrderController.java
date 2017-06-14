@@ -13,9 +13,9 @@ import ua.kiev.prog.model.Cart;
 import ua.kiev.prog.model.Device;
 import ua.kiev.prog.model.Order;
 import ua.kiev.prog.model.User;
+import ua.kiev.prog.security.UserService;
 import ua.kiev.prog.service.DeviceService;
 import ua.kiev.prog.service.OrderService;
-import ua.kiev.prog.service.UserService;
 
 import java.util.List;
 
@@ -110,7 +110,7 @@ public class OrderController {
     public User findUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
-        User user = userService.findUser(username);
+        User user = userService.findByUsername(username);
         return user;
     }
 }

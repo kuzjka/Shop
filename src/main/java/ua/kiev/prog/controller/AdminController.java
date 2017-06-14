@@ -113,6 +113,7 @@ public class AdminController {
 
         List<Type> list = deviceService.listTypes();
         Type type = new Type(name);
+        deviceService.addType(type);
         int count = 0;
         for (Type t : list) {
             if (t.getName().equalsIgnoreCase(name)) ;

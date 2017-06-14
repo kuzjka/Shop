@@ -11,6 +11,7 @@ public class User {
     private Integer id;
     private String username;
     private String password;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Order> orders;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -24,9 +25,11 @@ public class User {
     public User() {
     }
 
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+
     }
 
     public Integer getId() {

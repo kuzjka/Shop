@@ -1,7 +1,6 @@
 package ua.kiev.prog.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.kiev.prog.model.Role;
 import ua.kiev.prog.model.User;
-import ua.kiev.prog.service.UserService;
+import ua.kiev.prog.repository.RoleRepository;
+import ua.kiev.prog.security.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+
+
 
     @RequestMapping(value = "/login_page", method = RequestMethod.GET)
     public String login(Model model, @RequestParam(required = false) String error) {
@@ -55,11 +57,12 @@ public class UserController {
                            String password2, Model model) {
 
 
-        if (userService.findUser(username)!=null && password1.equals(password2)) {
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            String hashedPassword = passwordEncoder.encode(password2);
-            userService.addUser(new User(username, hashedPassword));
-            userService.addRole(new Role(role));
+        if (userService.findByUsername(username)==null && password1.equals(password2)) {
+
+
+
+            userService.save(new User(username, password2));
+
             model.addAttribute("message", "registration success!");
             model.addAttribute("state", "alert alert-success");
             return  "login_page";
