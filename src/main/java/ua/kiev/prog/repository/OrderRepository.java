@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends CrudRepository<Order, Integer> {
 
-    List<Order> findByUserId(int id);
+    List<Order> findByUser(User user);
 
 
 }

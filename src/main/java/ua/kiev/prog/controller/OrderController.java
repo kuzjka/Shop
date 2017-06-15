@@ -38,7 +38,7 @@ public class OrderController {
             Model model) {
         model.addAttribute("carts", orderService.listCarts(findUser()));
         model.addAttribute("total", orderService.totalPrice(findUser()));
-        model.addAttribute("items", orderService.totalItems());
+        model.addAttribute("items", orderService.totalItems(findUser()));
         return "cart_add_page";
     }
 
@@ -59,7 +59,7 @@ public class OrderController {
         if (count == 0 && n == 1) {
             orderService.addCart(cart);
         }
-        model.addAttribute("items", orderService.totalItems());
+        model.addAttribute("items", orderService.totalItems(findUser()));
         model.addAttribute("carts", orderService.listCarts(findUser()));
         model.addAttribute("total", orderService.totalPrice(findUser()));
         return "cart_add_page";
@@ -76,7 +76,7 @@ public class OrderController {
             Order order = new Order(findUser(), name, address, phone, c);
             orderService.addOrder(order);
         }
-        model.addAttribute("items", orderService.totalItems());
+        model.addAttribute("items", orderService.totalItems(findUser()));
         model.addAttribute("orders", orderService.listOrders(findUser()));
         model.addAttribute("total", orderService.totalPrice(findUser()));
         return "result_page";
@@ -84,7 +84,7 @@ public class OrderController {
 
     @RequestMapping("/result_page")
     public String result(Model model) {
-        model.addAttribute("items", orderService.totalItems());
+        model.addAttribute("items", orderService.totalItems(findUser()));
         model.addAttribute("orders", orderService.listOrders(findUser()));
         model.addAttribute("total", orderService.totalPrice(findUser()));
         return "result_page";
@@ -92,7 +92,7 @@ public class OrderController {
 
     @RequestMapping(value = "/order_add_page", method = RequestMethod.GET)
     public String order(Model model) {
-        model.addAttribute("items", orderService.totalItems());
+        model.addAttribute("items", orderService.totalItems(findUser()));
         model.addAttribute("carts", orderService.listCarts(findUser()));
 
         return "order_add_page";
@@ -101,7 +101,7 @@ public class OrderController {
     @RequestMapping(value = "/cart/delete/{id}")
     public String deleteCart(@PathVariable int id, Model model) {
         deviceService.deleteCart(id);
-        model.addAttribute("items", orderService.totalItems());
+        model.addAttribute("items", orderService.totalItems(findUser()));
         model.addAttribute("carts", orderService.listCarts(findUser()));
         model.addAttribute("total", orderService.totalPrice(findUser()));
         return "cart_add_page";

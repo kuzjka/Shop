@@ -143,10 +143,10 @@ public class DeviceService {
     public List<Device> priceSorter(String type, String dir) {
         List<Device>list=null;
         if(dir.equals("asc")){
-            list = deviceRepository.findByTypeOrderByPriceAsc(type);
+            list = deviceRepository.findByTypeNameOrderByPriceAsc(type);
         }
         if(dir.equals("desc")){
-            list = deviceRepository.findByTypeOrderByPriceDesc(type);
+            list = deviceRepository.findByTypeNameOrderByPriceDesc(type);
         }
         return list;
     }

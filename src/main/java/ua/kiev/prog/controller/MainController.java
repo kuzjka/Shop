@@ -34,8 +34,8 @@ public class MainController {
     @RequestMapping(value = {"/", "/user"}, method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("types", deviceService.listTypes());
-       model.addAttribute("carts", orderService.totalItems());
-        model.addAttribute("items", orderService.totalItems());
+       model.addAttribute("carts", orderService.listCarts(findUser()));
+        model.addAttribute("items", orderService.totalItems(findUser()));
         return "index";
     }
 
@@ -44,7 +44,7 @@ public class MainController {
         Device d = deviceService.findDeviceById(id);
         model.addAttribute("d", d);
         model.addAttribute("c", orderService.listCarts(findUser()));
-        model.addAttribute("items", orderService.totalItems());
+        model.addAttribute("items", orderService.totalItems(findUser()));
         return "one_device_page";
     }
 
@@ -70,7 +70,7 @@ public class MainController {
         model.addAttribute("devices", deviceService.listDevicesByType(type, dir));
         model.addAttribute("sortbyname", dir);
         model.addAttribute("carts", orderService.listCarts(findUser()));
-        model.addAttribute("items", orderService.totalItems());
+        model.addAttribute("items", orderService.totalItems(findUser()));
         return type.toLowerCase();
     }
 
@@ -79,12 +79,12 @@ public class MainController {
                               @PathVariable String dir,
                               Model model
     ) {
-       // model.addAttribute("devices", deviceService.priceSorter(type, dir));
+        model.addAttribute("devices", deviceService.priceSorter(type, dir));
 
         model.addAttribute("sortbyprice", dir);
 
         model.addAttribute("carts", orderService.listCarts(findUser()));
-        model.addAttribute("items", orderService.totalItems());
+        model.addAttribute("items", orderService.totalItems(findUser()));
         return type.toLowerCase();
     }
 
@@ -107,7 +107,7 @@ public class MainController {
         model.addAttribute("rams", rams);
         model.addAttribute("processors", processors);
         model.addAttribute("sortbyname", "ascending");
-        model.addAttribute("items", orderService.totalItems());
+        model.addAttribute("items", orderService.totalItems(findUser()));
      //   model.addAttribute("devices", deviceService.ramFilter(type, rams, processors));
         if (type.equals("all")) {
             return "index";
@@ -130,7 +130,7 @@ public class MainController {
         model.addAttribute("rams", rams);
         model.addAttribute("processors", processors);
         model.addAttribute("sortbyname", "ascending");
-        model.addAttribute("items", orderService.totalItems());
+        model.addAttribute("items", orderService.totalItems(findUser()));
        // model.addAttribute("devices", deviceService.ramFilter(type, rams, processors));
         if (type.equals("all")) {
             return "index";
@@ -152,7 +152,7 @@ public class MainController {
         }
         model.addAttribute("manufacturers", manufacturers);
         model.addAttribute("sortbyname", "ascending");
-        model.addAttribute("items", orderService.totalItems());
+        model.addAttribute("items", orderService.totalItems(findUser()));
       //  model.addAttribute("devices", deviceService.manufacturerFilter(type, manufacturers));
         return "smartphone";
     }

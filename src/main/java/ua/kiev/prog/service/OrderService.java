@@ -44,8 +44,8 @@ public class OrderService {
      * Returns number of devices in all carts created by certain user from database.
      */
     @Transactional(readOnly = true)
-    public Long totalItems() {
-        return cartRepository.count();
+    public Long totalItems(User user) {
+        return cartRepository.countByUser(user);
     }
 
     /**
@@ -54,7 +54,7 @@ public class OrderService {
     @Transactional(readOnly = true)
     public Long totalPrice(User user) {
         int sum=0;
-        List<Cart>carts=cartRepository.findByUserId(user.getId());
+        List<Cart>carts=cartRepository.findByUser(user);
         for(Cart c:carts){
             sum+=c.getItems();
         }
@@ -66,7 +66,8 @@ public class OrderService {
      */
     @Transactional(readOnly = true)
     public List<Cart> listCarts(User user) {
-        return cartRepository.findByUserId(user.getId());
+        List<Cart>carts=cartRepository.findByUser(user);
+        return carts;
     }
 
     /**
@@ -74,6 +75,6 @@ public class OrderService {
      */
     @Transactional(readOnly = true)
     public List<Order> listOrders(User user) {
-        return orderRepository.findByUserId(user.getId());
+        return orderRepository.findByUser(user);
     }
 }
