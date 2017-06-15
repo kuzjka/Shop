@@ -127,7 +127,7 @@ public class DeviceService {
      */
     @Transactional(readOnly = true)
     public List<Device> searchDevices(String type, String pattern) {
-        return (List<Device>) deviceRepository.findByName(pattern);
+        return  deviceRepository.findByNameStartingWith(pattern);
     }
 
 

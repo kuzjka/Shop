@@ -112,21 +112,24 @@ public class AdminController {
     public String addType(@RequestParam String name, Model model) {
 
         List<Type> list = deviceService.listTypes();
-        Type type = new Type(name);
-        deviceService.addType(type);
+
+
         int count = 0;
         for (Type t : list) {
-            if (t.getName().equalsIgnoreCase(name)) ;
+            if (t.getName().equalsIgnoreCase(name))
             count++;
         }
         if (count > 0) {
             model.addAttribute("message", "such type already exists!");
             model.addAttribute("state", "alert alert-danger");
-            return "type_add_page";
-        }
-        if (count == 0)
+            return "type_add_page";}
+
+        if (count == 0){
+            Type type = new Type(name);
+            deviceService.addType(type);}
             model.addAttribute("types", deviceService.listTypes());
         model.addAttribute("devices", deviceService.listDevices());
         return "index_admin";
+
     }
 }

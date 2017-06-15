@@ -16,6 +16,6 @@ public interface DeviceRepository extends CrudRepository<Device, Integer> {
         List<Device> findByTypeNameOrderByNameDesc(String type);
         List<Device> findByTypeNameOrderByPriceAsc(String type);
         List<Device> findByTypeNameOrderByPriceDesc(String type);
-
+        List<Device> findByNameStartingWith(String pattern);
 
 }
