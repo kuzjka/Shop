@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Title</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <form role="form" enctype="multipart/form-data" class="form-horizontal" action="/adddevice" method="post">
+        <h3>New device</h3>
+        <br/>
+        <select class="selectpicker form-control form-type" name="type">
+
+            <div th:each="type : ${types}">
+                <option th:value="${type.name}"><p th:text="${type.name}"/></option>
+            </div>
+
+        </select>
+        <br/>
+        <input type="file" class="form-control" name="main_photo" placeholder="Main photo"/>
+        <br/>
+        <input class="form-control" type="file" name="photo2" placeholder="photo2"/>
+        <br/>
+        <input class="form-control" type="file" name="photo3" placeholder="photo3"/>
+        <br/>
+        <input class="form-control form-type" type="file" name="photo4" placeholder="photo4"/>
+        <br/>
+        <input class="form-control" type="text" name="name" placeholder="Name (Required)"/>
+        <br/>
+        <input class="form-control" type="text" name="manufacturer" placeholder="Manufacturer (Required)"/>
+        <br/>
+        <input class="form-control" type="text" name="price" placeholder="Price (Required)"/>
+        <br/>
+        <input class="form-control" type="text" name="ram" placeholder="RAM"/>
+        <br/>
+        <input class="form-control" type="text" name="processor" placeholder="Processor"/>
+        <br/>
+        <input type="submit" class="btn btn-primary" value="AddDevice"/>
+    </form>
+    <br/>
+    <p th:text="${message}"/>
+</div>
+
+</body>
+</html>

@@ -1,8 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@ page contentType="text/html; charset = UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <head>
     <title>Title</title>
@@ -35,12 +33,12 @@
         }
     </script>
 
-<style>
-    #txtHint a:hover {
-        background-color: blue;
-        color: white;
-    }
-</style>
+    <style>
+        #txtHint a:hover {
+            background-color: blue;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 <nav align="center" class="navbar navbar-default navbar-static-top">
@@ -88,11 +86,13 @@
     <div class="row">
         <div class="control-label col-sm-4"></div>
         <div class="col-sm-4">
-            <input type="text" class="form-control" id="search" onkeyup="showHint(this.value)" placeholder="Type text for suggestions"/>
+            <input type="text" class="form-control" id="search" onkeyup="showHint(this.value)"
+                   placeholder="Type text for suggestions"/>
             <span id="txtHint"></span>
-        </div><div class="col-sm-4"></div>
+        </div>
+        <div class="col-sm-4"></div>
     </div>
-<br/>
+    <br/>
 
     <c:set var="t" value="${types}"/>
     <c:set var="size" value="${fn:length(t)}"/>

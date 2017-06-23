@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Title</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <form role="form" enctype="multipart/form-data" class="form-horizontal" action="/addtype" method="post">
+        <h3>New Type</h3>
+        <input type="text" class="form-control" name="name" placeholder="Name"/>
+        <input type="submit" class="btn btn-primary" value="Add"/>
+    </form>
+
+        <p th:text="${message}"/>
+
+</div>
+</body>
+</html>

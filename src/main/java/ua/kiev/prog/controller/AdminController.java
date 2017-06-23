@@ -67,7 +67,7 @@ public class AdminController {
                             @RequestParam(defaultValue = "null") String name,
                             @RequestParam(defaultValue = "null") String manufacturer,
                             @RequestParam(defaultValue = "-1") int price,
-                            @RequestParam(value = "ram", required = false, defaultValue = "-1") String ram,
+                            @RequestParam(value = "ram", required = false) Integer ram,
                             @RequestParam(value = "processor", required = false) String processor,
                             Model model) throws IOException {
         Type type = deviceService.findTypeByName(typeName);
@@ -78,7 +78,7 @@ public class AdminController {
             return "device_add_page";
         }
         Device device = new Device(type, name, manufacturer, price,
-                Integer.parseInt(ram), processor);
+                ram, processor);
         List<Device> list = deviceService.listDevicesByType(typeName, "asc");
         int count = 0;
         for (Device dev : list) {

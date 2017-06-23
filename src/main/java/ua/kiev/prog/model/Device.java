@@ -21,7 +21,7 @@ public class Device {
     private String name;
     private String manufacturer;
     private int price;
-    private int ram;
+    private Integer ram;
     private String processor;
 
     /**
@@ -33,7 +33,7 @@ public class Device {
     /**
      * Class constructor with parameters.
      */
-    public Device(Type type, String name, String manufacturer, int price, int ram, String processor) {
+    public Device(Type type, String name, String manufacturer, int price, Integer ram, String processor) {
         this.type = type;
         this.name = name;
         this.manufacturer = manufacturer;
@@ -98,11 +98,11 @@ public class Device {
         this.price = price;
     }
 
-    public int getRam() {
+    public Integer getRam() {
         return ram;
     }
 
-    public void setRam(int ram) {
+    public void setRam(Integer ram) {
         this.ram = ram;
     }
 
@@ -112,18 +112,6 @@ public class Device {
 
     public void setProcessor(String processor) {
         this.processor = processor;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Device)) return false;
-
-        Device device = (Device) o;
-
-        if (!getName().equals(device.getName())) return false;
-        return getManufacturer().equals(device.getManufacturer());
-
     }
 
     @Override
