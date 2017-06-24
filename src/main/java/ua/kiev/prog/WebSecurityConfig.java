@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/user").authenticated()
+                .antMatchers("/user").hasAuthority("USER")
                 .antMatchers("/cart_add_page", "/order_add_page").hasAuthority("USER")
                 .antMatchers("/admin").hasAuthority("ADMIN")
                 .and().formLogin().loginPage("/login_page").failureUrl("/login_page?error")

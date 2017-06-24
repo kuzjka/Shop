@@ -26,10 +26,10 @@ public class User {
     }
 
 
-    public User(String username, String password) {
+    public User(String username, String password, List<Role> roles) {
         this.username = username;
         this.password = password;
-
+        this.roles = roles;
     }
 
     public Integer getId() {

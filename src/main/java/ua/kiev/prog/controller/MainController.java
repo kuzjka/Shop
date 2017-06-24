@@ -34,6 +34,12 @@ public class MainController {
     @RequestMapping(value = {"/", "/user"}, method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("types", deviceService.listTypes());
+        if(findUser()==null){
+        model.addAttribute("user", " Log in");}
+        else{
+            model.addAttribute("user", findUser().getUsername());
+        }
+
        model.addAttribute("carts", orderService.listCarts(findUser()));
         model.addAttribute("items", orderService.totalItems(findUser()));
         return "index";
@@ -188,6 +194,7 @@ public class MainController {
 
         String username = auth.getName();
         User user =  userService.findByUsername(username);
+
 
         return user;
     }

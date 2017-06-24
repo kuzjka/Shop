@@ -25,7 +25,6 @@ public class UserController {
     private UserService userService;
 
 
-
     @RequestMapping(value = "/login_page", method = RequestMethod.GET)
     public String login(Model model, @RequestParam(required = false) String error) {
         if (error != null) {
@@ -48,7 +47,7 @@ public class UserController {
     }
 
     List<User> users = new ArrayList<>();
-
+    List<Role> roles = new ArrayList<>();
 
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -57,25 +56,30 @@ public class UserController {
                            String password2, Model model) {
 
 
-        if (userService.findByUsername(username)==null && password1.equals(password2)) {
+        if (userService.findByUsername(username) == null && password1.equals(password2)) {
 
-
-
-            userService.save(new User(username, password2));
+            if (userService.findRole(role) == null) {
+                userService.saveRole(new Role(role));
+                roles.add(userService.findRole(role));
+                userService.save(new User(username, password2, roles));
+            } else {
+                roles.add(userService.findRole(role));
+                userService.save(new User(username, password2, roles));
+            }
 
             model.addAttribute("message", "registration success!");
             model.addAttribute("state", "alert alert-success");
-            return  "login_page";
+            return "login_page";
         }
         if (users.size() > 0) {
             model.addAttribute("message", "user already exists!");
             model.addAttribute("state", "alert alert-danger");
-            return   "register";
+            return "register";
         }
         if (!password1.equals(password2)) {
             model.addAttribute("message", "password are not matching");
             model.addAttribute("state", "alert alert-danger");
-            return  "register";
+            return "register";
         }
         return "login_page";
 
