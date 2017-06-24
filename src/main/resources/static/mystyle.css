@@ -49,7 +49,10 @@ ul.navbar-nav a.active:hover {
 .panel-primary a {
     color: white;
 }
+.panel-body{
+    min-height: 150px;
 
+}
 .table-bordered a:hover {
     background-color: blue;
     color: white;

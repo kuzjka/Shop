@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Title</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .btn-danger {
+            background-color: crimson;
+        }
+
+        .img-responsive {
+            width: 50px;
+            height: auto;
+        }
+    </style>
+</head>
+
+
+<div align="center" class="container">
+    <h3>Devices List</h3>
+    <div class="btn-group">
+        <a href="/" class="btn btn-primary" role="button">Home</a>
+        <a href="/device_add_page" class="btn btn-primary" role="button">Add device</a>
+        <a href="/type_add_page" class="btn btn-primary" role="button">Add type</a>
+    </div>
+
+    <form action="/device/delete" method="get">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td><input type="submit" class="btn btn-danger" value="Delete"/></td>
+
+                <td><b>Photo</b></td>
+                <td><b>Name</b></td>
+                <td><b>Manufacturer</b></td>
+                <td><b>Price, grn</b></td>
+                <td><b>Ram, GB</b></td>
+                <td><b>Processor</b></td>
+                <td><b>Type</b></td>
+            </tr>
+            </thead>
+            <tr th:each="device : ${devices}">
+
+
+                <td><input type="checkbox" id="td" name="todelete[]" th:value="${device.id}"/></td>
+                <td><img class="img-responsive" alt="No Photo" th:src="@{/photo/{id}/0(id=${device.id})}"/></td>
+                <td th:text="${device.name}"/>
+                <td th:text="${device.manufacturer}"/>
+                <td th:text="${device.price}"/>
+                <td th:text="${device.ram}"/>
+                <td th:text="${device.processor}"/>
+                <td th:text="${device.type.name}"/>
+
+
+            </tr>
+
+
+        </table>
+    </form>
+</div>
+</html>

@@ -9,12 +9,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="/mystyle.css" media="all"/>
 </head>
 <body>
 
 
-
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
 
@@ -22,9 +22,9 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Shop</a></li>
-                <li><a href="/">Products</a></li>
-                <li><a href="/admin">Admin</a></li>
+                <li><a href="/" class="active">Shop</a></li>
+
+                <li><a href="/admin" class="default">Admin</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -32,10 +32,28 @@
                     <span class="glyphicon glyphicon-user"></span> Sign Up</a>
                 </li>
 
-                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                <li><a href="#" class="default"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
             </ul>
         </div>
     </div>
 </nav>
+<div class="container">
+<div class="row">
+    <div class="col-sm-4" th:each="type : ${types}">
+        <div class="panel panel-primary">
+            <div class="panel-heading" align="center">
+                <a th:href="@{/type/{type}/{dir}(type=${type.name}, dir='asc')}">
+                    <h4 th:text="${type.name}"/>
+                </a></div>
+            <div class="panel-body" align="center">
+                <a th:href="@{/type/{type}/{dir}(type=${type.name}, dir='asc')}"><img
+                        th:src="@{/randomphoto/{name}(name=${type.name})}"
+                        class="img-responsive"
+                        alt="Image"/></a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 </body>
 </html>
