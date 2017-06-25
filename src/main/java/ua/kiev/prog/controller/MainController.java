@@ -34,24 +34,29 @@ public class MainController {
     @RequestMapping(value = {"/", "/user"}, method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("types", deviceService.listTypes());
-        if(findUser()==null){
-        model.addAttribute("user", " Log in");}
-        else{
-            model.addAttribute("user", findUser().getUsername());
+        if (findUser() == null) {
+            model.addAttribute("user", " Log in");
+        } else {
+            model.addAttribute("user", " " + findUser().getUsername());
         }
 
-       model.addAttribute("carts", orderService.listCarts(findUser()));
+        model.addAttribute("carts", orderService.listCarts(findUser()));
         model.addAttribute("items", orderService.totalItems(findUser()));
         return "index";
     }
 
-    @RequestMapping(value = "/onedevice/{id}", method = RequestMethod.GET)
-    public String oneDeviceById(@PathVariable int id, Model model) {
-        Device d = deviceService.findDeviceById(id);
-        model.addAttribute("d", d);
+    @RequestMapping(value = "/onedevice/{deviceId}", method = RequestMethod.GET)
+    public String oneDeviceById(@PathVariable int deviceId, Model model) {
+        Device d = deviceService.findDeviceById(deviceId);
+        model.addAttribute("device", d);
+        if (findUser() == null) {
+            model.addAttribute("user", " Log in");
+        } else {
+            model.addAttribute("user", " " + findUser().getUsername());
+        }
         model.addAttribute("c", orderService.listCarts(findUser()));
         model.addAttribute("items", orderService.totalItems(findUser()));
-        return "one_device_page";
+        return "one_device";
     }
 
 
@@ -61,7 +66,7 @@ public class MainController {
         List<Device> list = deviceService.searchDevices("all", chars);
         StringBuilder names = new StringBuilder();
         names.append("<table class='table table-bordered'>");
-            for(Device device : list){
+        for (Device device : list) {
 
 
             names.append("<tr><td><b><a href=" + "/onedevice/" + device.getId() + ">" + device.getName() + "</a></b></b></td></tr>");
@@ -70,14 +75,21 @@ public class MainController {
         return names.toString();
     }
 
-    @RequestMapping(value = "/type/{type}/{dir}", method = RequestMethod.GET)
-    public String nameFilter(@PathVariable String type, @PathVariable String dir,
+    @RequestMapping(value = "/type/{typeId}/{dir}", method = RequestMethod.GET)
+    public String nameFilter(@PathVariable int typeId, @PathVariable String dir,
                              Model model) {
+        Type type = deviceService.findTypeById(typeId);
+        model.addAttribute("type", type);
         model.addAttribute("devices", deviceService.listDevicesByType(type, dir));
+        if (findUser() == null) {
+            model.addAttribute("user", " Log in");
+        } else {
+            model.addAttribute("user", " " + findUser().getUsername());
+        }
         model.addAttribute("sortbyname", dir);
         model.addAttribute("carts", orderService.listCarts(findUser()));
         model.addAttribute("items", orderService.totalItems(findUser()));
-        return type.toLowerCase();
+        return "device";
     }
 
     @RequestMapping(value = "/price_sorter/{type}/{dir}")
@@ -114,7 +126,7 @@ public class MainController {
         model.addAttribute("processors", processors);
         model.addAttribute("sortbyname", "ascending");
         model.addAttribute("items", orderService.totalItems(findUser()));
-     //   model.addAttribute("devices", deviceService.ramFilter(type, rams, processors));
+        //   model.addAttribute("devices", deviceService.ramFilter(type, rams, processors));
         if (type.equals("all")) {
             return "index";
         } else {
@@ -137,7 +149,7 @@ public class MainController {
         model.addAttribute("processors", processors);
         model.addAttribute("sortbyname", "ascending");
         model.addAttribute("items", orderService.totalItems(findUser()));
-       // model.addAttribute("devices", deviceService.ramFilter(type, rams, processors));
+        // model.addAttribute("devices", deviceService.ramFilter(type, rams, processors));
         if (type.equals("all")) {
             return "index";
         } else {
@@ -159,15 +171,15 @@ public class MainController {
         model.addAttribute("manufacturers", manufacturers);
         model.addAttribute("sortbyname", "ascending");
         model.addAttribute("items", orderService.totalItems(findUser()));
-      //  model.addAttribute("devices", deviceService.manufacturerFilter(type, manufacturers));
+        //  model.addAttribute("devices", deviceService.manufacturerFilter(type, manufacturers));
         return "smartphone";
     }
 
 
-    @RequestMapping(value = "/photo/{id}/{n}", method = RequestMethod.GET)
+    @RequestMapping(value = "/photo/{deviceId}/{n}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<byte[]> onPhoto(@PathVariable int id, @PathVariable int n) {
-        Device d = deviceService.findDeviceById(id);
+    public ResponseEntity<byte[]> onPhoto(@PathVariable int deviceId, @PathVariable int n) {
+        Device d = deviceService.findDeviceById(deviceId);
 
         List<Photo> photos = deviceService.getPhotos(d);
 
@@ -176,12 +188,12 @@ public class MainController {
         return ResponseEntity.ok(photo.getBody());
     }
 
-    @RequestMapping(value = "/randomphoto/{name}", method = RequestMethod.GET)
+    @RequestMapping(value = "/randomphoto/{typeId}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<byte[]> rnPhoto(@PathVariable String name) {
+    public ResponseEntity<byte[]> rnPhoto(@PathVariable int typeId) {
 
-        Type type = deviceService.findTypeByName(name);
-        List<Device> devices = deviceService.priceSorter(type.getName(), "asc");
+        Type type = deviceService.findTypeById(typeId);
+        List<Device> devices = deviceService.listDevicesByType(type, "asc");
         Random random = new Random();
         Device device = devices.get(random.nextInt(devices.size()));
         List<Photo> photos = deviceService.getPhotos(device);
@@ -193,7 +205,7 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         String username = auth.getName();
-        User user =  userService.findByUsername(username);
+        User user = userService.findByUsername(username);
 
 
         return user;

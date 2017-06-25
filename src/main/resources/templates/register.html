@@ -8,8 +8,41 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/mystyle.css" media="all"/>
 </head>
 <body>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+
+            <a class="navbar-brand" href="/">Computer Shop</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="/" class="default">Home</a></li>
+
+                <li><a href="/admin" class="default">Admin</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="active" href="/register_page">
+                    <span class="glyphicon glyphicon-user"></span> Sign Up</a>
+                </li>
+
+
+                <li><a class="default" href="/user">
+                    <span class="glyphicon glyphicon-log-in"/><span th:text="${user}"/></a>
+                </li>
+
+
+
+                <li><a class="default" href="/logout">
+                    <span class="glyphicon glyphicon-log-out"/> Log Out</a></li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container">
     <form role="form" action="/register" method="post">
         <div class="form-group">

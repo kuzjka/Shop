@@ -80,12 +80,12 @@ public class DeviceService {
      * Returns all devices of certain type from database.
      */
     @Transactional(readOnly = true)
-    public List<Device> listDevicesByType(String type, String dir) {
+    public List<Device> listDevicesByType(Type type, String dir) {
         List<Device>list=null;
         if(dir.equals("asc")){
-        list= deviceRepository.findByTypeNameOrderByNameAsc(type);}
+        list= deviceRepository.findByTypeOrderByNameAsc(type);}
         else if(dir.equals("desc")){
-            list= deviceRepository.findByTypeNameOrderByNameDesc(type);
+            list= deviceRepository.findByTypeOrderByNameDesc(type);
         }
         return list;
     }
@@ -98,13 +98,7 @@ public class DeviceService {
         return typeRepository.findOne(id);
     }
 
-    /**
-     * Returns type with  certain name from database.
-     */
-    @Transactional(readOnly = true)
-    public Type findTypeByName(String name) {
-        return typeRepository.findByName(name);
-    }
+
 
     /**
      * Returns device with certain name from database.

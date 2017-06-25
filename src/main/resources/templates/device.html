@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <title>index</title>
+
+    <title>Device</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -9,38 +11,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/mystyle.css" media="all"/>
-    <script>
-
-        function showHint(str) {
-            if (str.length == 0) {
-                $("#txtHint").hide();
-                return;
-            } else {
-
-                var xmlhttp = new XMLHttpRequest();
-
-                xmlhttp.onreadystatechange = function () {
-                    if (this.status == 200) {
-                        $("#txtHint").show().html(this.responseText);
-
-                    }
-                };
-                xmlhttp.open("GET", "/ajax/" + str, true);
-                xmlhttp.send();
-            }
-        }
-    </script>
-
-    <style>
-        #txtHint a:hover {
-            background-color: blue;
-            color: white;
-        }
-    </style>
 </head>
 <body>
-
-
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -66,34 +38,26 @@
 
 
 
-                    <li><a class="default" href="/logout">
-                        <span class="glyphicon glyphicon-log-out"/> Log Out</a></li>
+                <li><a class="default" href="/logout">
+                    <span class="glyphicon glyphicon-log-out"/> Log Out</a></li>
 
             </ul>
         </div>
     </div>
 </nav>
+<div align="center"><h2 th:text="${type.name}"><b>Name: </b></h2></div>
+<br/>
 <div class="container">
     <div class="row">
-        <div class="control-label col-sm-4"></div>
-        <div class="col-sm-4">
-            <input type="text" class="form-control" id="search" onkeyup="showHint(this.value)"
-                   placeholder="Type text for suggestions"/>
-            <span id="txtHint"></span>
-        </div>
-        <div class="col-sm-4"></div>
-    </div>
-    <br/>
-    <div class="row">
-        <div class="col-sm-4" th:each="type : ${types}">
+        <div class="col-sm-4" th:each="device : ${devices}">
             <div class="panel panel-primary">
                 <div class="panel-heading" align="center">
-                    <a th:href="@{/type/{typeId}/asc(typeId=${type.id})}">
-                        <h4 th:text="${type.name}"/>
+                    <a th:href="@{/onedevice/{deviceId}(deviceId=${device.id})}">
+                        <h4 th:text="${device.name}"/>
                     </a></div>
                 <div class="panel-body" align="center">
-                    <a th:href="@{/type/{typeId}/asc(typeId=${type.id})}"><img
-                            th:src="@{/randomphoto/{name}(name=${type.id})}"
+                    <a th:href="@{/onedevice/{deviceId}(deviceId=${device.id})}"><img
+                            th:src="@{/photo/{deviceId}/0(deviceId=${device.id})}"
                             class="img-responsive"
                             alt="Image"/></a>
                 </div>

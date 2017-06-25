@@ -17,7 +17,7 @@
         <select class="selectpicker form-control form-type" name="type">
 
             <div th:each="type : ${types}">
-                <option th:value="${type.name}"><p th:text="${type.name}"/></option>
+                <option th:value="${type.id}"><p th:text="${type.name}"/></option>
             </div>
 
         </select>

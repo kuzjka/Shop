@@ -3,7 +3,6 @@ package ua.kiev.prog.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,7 +58,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/adddevice", method = RequestMethod.POST)
-    public String deviceAdd(@RequestParam(value = "type")String typeName,
+    public String deviceAdd(@RequestParam(value = "type")int typeId,
                             @RequestParam(required = false) MultipartFile main_photo,
                             @RequestParam(required = false) MultipartFile photo2,
                             @RequestParam(required = false) MultipartFile photo3,
@@ -70,7 +69,7 @@ public class AdminController {
                             @RequestParam(value = "ram", required = false) Integer ram,
                             @RequestParam(value = "processor", required = false) String processor,
                             Model model) throws IOException {
-        Type type = deviceService.findTypeByName(typeName);
+        Type type = deviceService.findTypeById(typeId);
         if (name.equals(null) || manufacturer.equals(null) || price == -1) {
             model.addAttribute("message", "fill all required fields!");
             model.addAttribute("state", "alert alert-danger");
@@ -79,7 +78,8 @@ public class AdminController {
         }
         Device device = new Device(type, name, manufacturer, price,
                 ram, processor);
-        List<Device> list = deviceService.listDevicesByType(typeName, "asc");
+
+        List<Device> list = deviceService.listDevicesByType(type, "asc");
         int count = 0;
         for (Device dev : list) {
             if (dev.getName().equalsIgnoreCase(name)) {
