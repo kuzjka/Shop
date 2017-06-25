@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface CartRepository extends CrudRepository<Cart, Integer> {
     List<Cart> findByUser(User user);
-    Long countByUser(User user);
+
 
 
 

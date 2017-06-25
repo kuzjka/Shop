@@ -45,7 +45,12 @@ public class OrderService {
      */
     @Transactional(readOnly = true)
     public Long totalItems(User user) {
-        return cartRepository.countByUser(user);
+            long sum = 0;
+            List<Cart> carts =   cartRepository.findByUser(user);
+            for(Cart c : carts){
+                sum+=c.getItems();
+            }
+        return  sum;
     }
 
     /**
@@ -53,12 +58,12 @@ public class OrderService {
      */
     @Transactional(readOnly = true)
     public Long totalPrice(User user) {
-        int sum=0;
+        long sum=0;
         List<Cart>carts=cartRepository.findByUser(user);
         for(Cart c:carts){
-            sum+=c.getItems();
+            sum+=c.totalPrice();
         }
-        return Long.valueOf(sum);
+        return sum;
     }
 
     /**

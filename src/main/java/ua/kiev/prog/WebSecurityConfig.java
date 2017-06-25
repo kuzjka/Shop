@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/user").hasAuthority("USER")
-                .antMatchers("/cart_add_page", "/order_add_page").hasAuthority("USER")
+                .antMatchers("/to-cart/**", "/order_page").hasAuthority("USER")
                 .antMatchers("/admin").hasAuthority("ADMIN")
                 .and().formLogin().loginPage("/login_page").failureUrl("/login_page?error")
                 .usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/")

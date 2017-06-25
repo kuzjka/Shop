@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <title>Device</title>
+    <title>result</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -23,6 +23,10 @@
                 <li><a href="/" class="active">Home</a></li>
 
                 <li><a href="/admin" class="default">Admin</a></li>
+                <li><a class="default" href="/cart_page">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Cart
+                    <span class="badge" th:text="${items}"/></a>
+                </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -36,6 +40,7 @@
                 </li>
 
 
+
                 <li><a class="default" href="/logout">
                     <span class="glyphicon glyphicon-log-out"/> Log Out</a></li>
 
@@ -43,29 +48,28 @@
         </div>
     </div>
 </nav>
-<div align="center"><h2 th:text="${type.name}"><b>Name: </b></h2></div>
-<br/>
+<div align="center"><h2 th:text="${'Total price' + total}"/></div>
 <div class="container">
-    <div class="row">
-        <div class="col-sm-4" th:each="device : ${devices}">
-            <div class="panel panel-primary">
-                <div class="panel-heading" align="center">
-                    <a th:href="@{/onedevice/{deviceId}(deviceId=${device.id})}">
-                        <h4 th:text="${device.name}"/>
-                    </a></div>
-                <div class="panel-body" align="center">
-                    <a th:href="@{/onedevice/{deviceId}(deviceId=${device.id})}"><img
-                            th:src="@{/photo/{deviceId}/0(deviceId=${device.id})}"
-                            class="img-responsive"
-                            alt="Image"/></a>
-                </div>
-                <div class="panel-footer" align="center">
-                    <h5 th:text="${device.price + 'grn'}"/><a th:href="@{/to-cart/{deviceId}/1(deviceId=${device.id})}"
-                                                              class="btn btn-success" role="button">To
-                    cart</a></div>
-            </div>
-        </div>
-    </div>
+    <table class="table table-default">
+        <thead>
+        <tr>
+            <td><b>Name</b></td>
+            <td><b>Address</b></td>
+            <td><b>Phone</b></td>
+            <td><b>Device</b></td>
+            <td><b>Items</b></td>
+        </tr>
+        </thead>
+
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.name}"/>
+                <td th:text="${order.address}"/>
+                <td th:text="${order.phone}"/>
+                <td th:text="${order.cart.device.name}"/>
+                <td th:text="${order.cart.items}"/>
+            </tr>
+
+    </table>
 </div>
 </body>
 </html>

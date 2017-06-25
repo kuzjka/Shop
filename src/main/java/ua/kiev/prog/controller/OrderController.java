@@ -42,9 +42,9 @@ public class OrderController {
         return "cart_add_page";
     }
 
-    @RequestMapping(value = "/tocart/{id}/{n}", method = RequestMethod.GET)
-    public String toCart(@PathVariable int id, @PathVariable int n, Model model) {
-        Device device = deviceService.findDeviceById(id);
+    @RequestMapping(value = "/to-cart/{deviceId}/{n}", method = RequestMethod.GET)
+    public String toCart(@PathVariable int deviceId, @PathVariable int n, Model model) {
+        Device device = deviceService.findDeviceById(deviceId);
         Cart cart = new Cart(findUser(), device, 1);
         List<Cart> l = orderService.listCarts(findUser());
         int count = 0;
@@ -59,13 +59,18 @@ public class OrderController {
         if (count == 0 && n == 1) {
             orderService.addCart(cart);
         }
+        if (findUser() == null) {
+            model.addAttribute("user", " Log in");
+        } else {
+            model.addAttribute("user", " " + findUser().getUsername());
+        }
         model.addAttribute("items", orderService.totalItems(findUser()));
         model.addAttribute("carts", orderService.listCarts(findUser()));
         model.addAttribute("total", orderService.totalPrice(findUser()));
-        return "cart_add_page";
+        return "cart_page";
     }
 
-    @RequestMapping(value = "/addorder", method = RequestMethod.POST)
+    @RequestMapping(value = "/add-order", method = RequestMethod.POST)
     public String orderAdd(
             @RequestParam String name,
             @RequestParam String address,
@@ -90,21 +95,21 @@ public class OrderController {
         return "result_page";
     }
 
-    @RequestMapping(value = "/order_add_page", method = RequestMethod.GET)
+    @RequestMapping(value = "/order_page", method = RequestMethod.GET)
     public String order(Model model) {
         model.addAttribute("items", orderService.totalItems(findUser()));
         model.addAttribute("carts", orderService.listCarts(findUser()));
 
-        return "order_add_page";
+        return "order_page";
     }
 
-    @RequestMapping(value = "/cart/delete/{id}")
-    public String deleteCart(@PathVariable int id, Model model) {
-        deviceService.deleteCart(id);
+    @RequestMapping(value = "/cart/delete/{cartId}")
+    public String deleteCart(@PathVariable int cartId, Model model) {
+        deviceService.deleteCart(cartId);
         model.addAttribute("items", orderService.totalItems(findUser()));
         model.addAttribute("carts", orderService.listCarts(findUser()));
         model.addAttribute("total", orderService.totalPrice(findUser()));
-        return "cart_add_page";
+        return "cart_page";
     }
 
     public User findUser() {

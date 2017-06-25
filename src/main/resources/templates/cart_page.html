@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Cart page</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/mystyle.css" media="all"/>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Computer Shop</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/admin" class="default">Admin</a></li>
+                <li><a class="active" href="/cart_add_page">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Cart
+                    <span class="badge" th:text="${items}"/></a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="default" href="/register_page">
+                    <span class="glyphicon glyphicon-user"></span> Sign Up</a>
+                </li>
+                <li><a class="default" href="/user">
+                    <span class="glyphicon glyphicon-log-in"/><span th:text="${user}"/></a>
+                </li>
+
+                <li><a class="default" href="/logout">
+                    <span class="glyphicon glyphicon-log-out"/> Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<h3 align="center" th:text="${'Total price:' + total}"></h3>
+<div class="container-fluid">
+    <table class="table table-default">
+        <thead>
+        <tr>
+            <td><b>Delete</b></td>
+            <td><b>Photo</b></td>
+            <td><b>Device</b></td>
+            <td><b>Manufacturer</b></td>
+            <td><b>Price, grn</b></td>
+            <td><b>Items</b></td>
+            <td><b>Make Order</b></td>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+
+            <tr th:each="cart : ${carts}">
+                <td> <a th:href="@{/cart/delete/{cartId}(cartId=${cart.id})}" class="btn btn-danger" role="button">Delete from
+                    cart</a></td>
+                <td><img class="img-responsive" alt="No photo"
+                         th:src="@{/photo/{deviceId}/0(deviceId=${cart.device.id})}"/></td>
+                <td th:text="${cart.device.name}"/>
+                <td th:text="${cart.device.manufacturer}"/>
+                <td th:text="${cart.device.price}"/>
+                <td><a th:href="@{/to-cart/{deviceId}/-1(deviceId=${cart.device.id})}">- </a><span th:text="${cart.items}"/>
+                    <a th:href="@{/to-cart/{deviceId}/1(deviceId=${cart.device.id})}">+</a></td>
+                <td><a href="/order_page" class="btn btn-info" role="button">Make Order</a></td>
+            </tr>
+
+
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
